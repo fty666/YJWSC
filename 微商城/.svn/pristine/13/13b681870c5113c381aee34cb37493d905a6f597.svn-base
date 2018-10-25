@@ -1,0 +1,42 @@
+.wai{
+  height: 130rpx;
+}
+.flex{
+  display: flex;
+}
+.name{
+  margin-left: 40rpx;
+  margin-top: 45rpx;
+  color: #363636;
+}
+.value{
+  /* margin-left: 80rpx; */
+  margin-top: 40rpx;
+  font-size:30rpx;
+  color: black;
+  width: 450rpx;
+}
+.xia{
+  width: 98%;
+  margin-left: 30rpx; 
+  height: 3rpx;
+  background: #ddd;
+}
+.man{
+  margin-left: 200rpx;
+  margin-top: 35rpx;
+}
+.woman{
+  margin-left: 60rpx;
+  margin-top: 35rpx;
+}
+
+.keep{
+  width: 85%;
+  height: 100rpx;
+  background: #FFC94B;
+  margin-left: 60rpx;
+  margin-top: 50rpx;
+  text-align: center;
+  line-height: 90rpx;
+}

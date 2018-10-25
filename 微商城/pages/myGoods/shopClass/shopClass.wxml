@@ -1,0 +1,21 @@
+<block wx:if="{{is_load}}">
+    <view class="glo_load_view">
+        <text class="iconfont icon-loading animated infinite rotate mr5"></text>
+        <text>正在努力加载</text>
+    </view>
+</block>
+<block wx:else>
+    <view class='allpage'>
+        <view>
+            <block wx:for="{{shop_class}}" wx:key="{{index}}">
+                <view class='cate'  style="height:{{px2rpxHeight*80}}px;">
+                    <input bindblur='editClass' class='cate-input' data-classid='{{item.foodClassId}}' value='{{item.className}}'  style="width:{{px2rpxWidth*600}}px;height:{{px2rpxHeight*80}}px;"/>
+                    <view bindtap='delClass' class='del-cate' data-classid='{{item.foodClassId}}' data-index="{{index}}" style="width:{{px2rpxWidth*100}}px;height:{{px2rpxHeight*80}}px;">删除</view>
+                </view>
+            </block>
+        </view>
+        <view class='add-cate' style="height:{{px2rpxHeight*100}}px;">
+            <view bindtap='addClass' class='sub' style="height:{{px2rpxHeight*100}}px;">添加分类</view>
+       </view>
+    </view>
+</block>

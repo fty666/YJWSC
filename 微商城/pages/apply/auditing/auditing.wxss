@@ -1,0 +1,22 @@
+/* pages/apply/auditing/auditing.wxss */
+.auditing{
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+.auditing-img{
+    position: absolute;
+    top: 0;
+    left: 0;
+}
+.audit-text{
+    font-size: 30rpx;
+    color: #666;
+}
+.goshopping{
+    position: absolute;
+    bottom: 100rpx;
+    right: 100rpx;
+}

@@ -1,0 +1,129 @@
+<!-- <block wx:if="{{glo_is_load}}">
+  <view class="glo_load_view">
+    <text class="iconfont icon-loading animated infinite rotate mr5"></text>
+    <text>正在努力加载</text>
+  </view>
+</block> -->
+<!-- <block wx:else> -->
+
+<view style='height:2200rpx'>
+  <!--送货地址  -->
+  <view class='wai1'>
+    <!--送货地址信息  -->
+    <view class='flex'>
+      <view>
+        <image src='../../../images/gps.png' class='add'></image>
+      </view>
+      <view class='ainfo'>
+        <view class='address'>融汇大厦8楼</view>
+        <view class='user'>金刚狼 先生 18878712442</view>
+      </view>
+      <view class='more'> <text class="iconfont icon-youjiantou"></text>  </view>
+    </view>
+    <view class='xia'></view>
+    <view class='flex'>
+      <view>
+        <image src='../../../images/time.png' class='time'></image>
+      </view>
+      <view class='font'>立即送出</view>
+      <view class='font1'>大约11:18送达</view>
+    </view>
+  </view>
+
+  <!--商家自配  -->
+  <view class='flex wai2'>
+    <view>
+      <image src='' class='logo'></image>
+    </view>
+    <view class='sname'>肯德基外卖</view>
+    <view class='zi'>商家自配</view>
+  </view>
+
+  <!--商品详情  -->
+  <view class='wai3'>
+    <view>
+      <image class='picture'></image>
+    </view>
+    <view class='oinfo'>
+      <view class='good'>香辣鸡腿堡T</view>
+      <view class='goods'>X2</view>
+    </view>
+    <view class='money'>￥36</view>
+  </view>
+
+  <!--具体费用  -->
+  <view class='wai4'>
+    <view class='flex'>
+      <view class='bao'>包装费</view>
+      <view class='fei'>￥0</view>
+    </view>
+    <view class='flex'>
+      <view class='bao'>配送费</view>
+      <view class='fei'>￥9</view>
+    </view>
+    <view class='xia2'></view>
+
+    <view class='flex'>
+      <view class='bao'>美团红包</view>
+      <view class='fei2'>暂无可用 <text class="iconfont icon-youjiantou"></text> </view>
+    </view>
+    <view class='flex'>
+      <view class='bao'>商家代金券</view>
+      <view class='fei2'>暂无可用 <text class="iconfont icon-youjiantou"></text>  </view>
+    </view>
+    <view class='xia2'></view>
+
+    <view class='flex'>
+      <view class='subtotal'>小计</view>
+      <view class='subtotals'>￥45</view>
+    </view>
+
+
+
+  </view>
+
+  <!--号码保护  -->
+  <view class='wai5 flex'>
+    <view class='sinfo'>
+      <view class='tel'>号码保护</view>
+      <view class='tels'>对商家，骑手隐藏您的手机号，保护您的隐藏</view>
+    </view>
+    <view class='an'>
+      <switch name="switch" />
+    </view>
+  </view>
+
+  <!--支付方式  -->
+  <view class='wai6'>
+    <view class='flex'>
+      <view class='pays'>支付方式</view>
+      <view class='pay'>在线支付</view>
+    </view>
+    <view class='xia'></view>
+    <view class='flex'>
+      <view class='pays'>备注</view>
+      <view class='pay'>口味偏好等要求 <text class="iconfont icon-youjiantou"></text> </view>
+    </view>
+    <view class='xia'></view>
+    <view class='flex'>
+      <view class='pays'>餐具数量</view>
+      <!--选择餐具  -->
+      <picker bindchange="bindPickerChange" value="{{index}}" range="{{array}}">
+        <view class="picker pay">
+          数量：{{array[index]}}
+        </view>
+      </picker>
+    </view>
+  </view>
+
+  <view class='wechat'>微信支付</view>
+
+  <!-- </block> -->
+  <!-- <block wx:else>
+      <navigator class='no-order' url="/pages/shop/mall/mall">
+        <view>您还没有相关的订单</view>
+        <view>可以去看看有哪些想买的</view>
+      </navigator>
+    </block> -->
+
+</view>

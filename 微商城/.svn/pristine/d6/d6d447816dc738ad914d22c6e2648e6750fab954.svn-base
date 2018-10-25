@@ -1,0 +1,144 @@
+.callImage {
+    width: 22px;
+    height: 13px;
+    margin-left: 12px;
+    margin-top: 7px;
+    float: left;
+}
+
+.settingLabel {
+    color: white;
+    text-align: right;
+    font-size: 14px;
+    margin-right: 12px;
+    /*margin-top: -10px;*/
+    float: right;
+}
+
+.cell {
+    width: 100%;
+    height: 44px;
+    background-color: white;
+    line-height: 44px;
+}
+
+.cellIndicator {
+    width: 7px;
+    height: 13px;
+    float: right;
+    margin-right: 12px;
+    margin-top: 15.5px;
+}
+
+.lineSpace {
+    width: 100%;
+    height: 1px;
+    background-color: #e0e0e0;
+    margin-top: -1px;
+    float: left;
+}
+
+.cellImage {
+    width: 21px;
+    height: 21px;
+    margin-left: 12px;
+    margin-top: 11.5px;
+    float: left;
+}
+
+.cellTitle {
+    margin-left: 10px;
+    font-size: 14px;
+    color: #545454;
+    float: left;
+}
+
+/* .cellContent {
+    text-align: right;
+    margin-right: 12px;
+    float: right;
+    font-size: 14px;
+    /* line-height: 
+    color: #999999
+} */
+
+.cellInput {
+    width: 500rpx;
+    height: 100%;
+    padding-left: 40rpx;
+    box-sizing: border-box;
+    font-size: 30rpx;
+    /* border: 1px solid red; */
+}
+
+.warn {
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+    padding: 20rpx 20rpx;
+    box-sizing: border-box;
+    color: red;
+}
+
+.warn-img {
+    width: 48rpx;
+    height: 48rpx;
+    margin-right: 20rpx;
+}
+
+.cell-code {
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+    border-bottom: 2rpx solid #ccc;
+}
+
+.code {
+    margin-left: 50rpx;
+    width: 300rpx;
+    /* border: 1rpx solid red; */
+}
+
+/*弹窗  */
+.showmodel{
+    position: fixed;
+    top:0;
+    left: 0;
+    z-index: 9999;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    height: 1200rpx;
+    font-size: 30rpx;
+    border: 1rpx solid red;
+    background: rgba(0, 0, 0, 0.5)
+}
+.model-each{
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+    width: 100%;
+    height: 80rpx;
+    padding: 0 20rpx;
+    color: #fff;
+    background-color: #ccc; 
+}
+.model-input{
+    margin-left: 20rpx; 
+}
+.model-code{
+    padding-left: 80rpx;
+    box-sizing: border-box;
+}
+.model-input2{
+    width: 320rpx;
+}
+.model-btn{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding-bottom: 20rpx;
+    box-sizing: border-box; 
+}

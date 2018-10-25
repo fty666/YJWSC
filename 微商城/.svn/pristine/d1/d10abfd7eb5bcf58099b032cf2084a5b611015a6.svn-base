@@ -1,0 +1,72 @@
+<block wx:if="{{is_load}}">
+    <view class="glo_load_view">
+        <text class="iconfont icon-loading animated infinite rotate mr5"></text>
+        <text>正在努力加载</text>
+    </view>
+</block>
+<block wx:else>
+    <view class='allpage'>
+        <view class='header'>
+            <view class='location' bindtap='chooseAddress'>
+                <view>
+                    <text class="iconfont icon-location"></text>
+                </view>
+                <view class='location-addr'>{{location.addressComponent.province}}</view>
+                <view>
+                    <text class="iconfont icon-youjiantou"></text>
+                </view>
+            </view>
+            <view class='search ml10'>
+                <input class='search-input' placeholder='请输入收货地址'></input>
+                <view class='search-icon'>
+                    <text class="iconfont icon-search"></text>
+                </view>
+            </view>
+        </view>
+        <view class='content'>
+            <scroll-view scroll-y>
+                <view class='again'>
+                    <view>{{location.pois[0].name}}</view>
+                    <view bindtap='againLocation' class='again-text'>
+                        <text class="iconfont icon-add"></text>
+                        <text class='ml10'>重新定位</text>
+                    </view>
+                </view>
+                <block wx:if="{{address}}">
+                    <view class='myaddress'>
+                        <view class='myaddress-title'>
+                            <view>
+                                <text class="iconfont icon-homefill"></text> </view>
+                            <view class='ml10'>我的收货地址</view>
+                        </view>
+                        <block wx:for="{{adress}}" wx:for-item="{{address}}" wx:key="{{address.id}}">
+                            <view class='myaddress-list'>
+                                <view class='myaddress-each' catchtap='getAddr' data-addr='{{address.area_detail}}' data-addid='{{address.id}}'>
+                                    <view class='addr-addr'>{{address.area_path + address.area_detail}}</view>
+                                    <view class='addr-people'>
+                                         <view>{{address.addr_receiver}}</view> 
+                                        <view>{{address.addr_mobile}}</view>
+                                    </view>
+                                </view>
+                            </view>
+                        </block>
+                    </view>
+                </block>
+                <view class='myaddress'>
+                    <view class='myaddress-title'>
+                        <view>
+                            <text class="iconfont icon-locationfill"></text> </view>
+                        <view class='ml10'>附近地址</view>
+                    </view>
+                    <block wx:for="{{location.pois}}" wx:for-item="near" wx:key="{{near.id}}">
+                        <view class='myaddress-list' catchtap='getAddr' data-addr='{{near.name}}'>
+                            <view class='myaddress-each'>
+                                <view class='addr-addr'>{{near.name}}</view>
+                            </view>
+                        </view>
+                    </block>
+                </view>
+            </scroll-view>
+        </view>
+    </view>
+</block>

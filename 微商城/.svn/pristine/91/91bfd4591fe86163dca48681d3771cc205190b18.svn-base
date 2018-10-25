@@ -1,0 +1,372 @@
+/*店铺logo  */
+page{
+  background: #fff;
+}
+
+.wai1{
+  display: flex;
+  background: #333;
+}
+
+.logo {
+  width: 190rpx;
+  height: 190rpx;
+  margin-left: 30rpx;
+}
+
+.font {
+  width: 470rpx;
+  height: 90rpx;
+  font-size: 25rpx;
+  margin-left: 25rpx;
+  margin-top: 10rpx;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  color: white;
+}
+
+.gonggao{
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.zhe {
+  width: 40rpx;
+  height: 40rpx;
+  margin-left: 25rpx;
+}
+
+.more {
+  margin-left: 150rpx;
+}
+
+/*公告  */
+
+.font1 {
+  width: 110rpx;
+  height: 110rpx;
+  margin-left: 50rpx;
+  line-height: 100rpx;
+}
+
+.xia {
+  height: 4rpx;
+  background: #ddd;
+}
+
+/*评价  */
+
+/*评分  */
+
+.comment {
+  display: flex;
+  width: 100%;
+  height: 170rpx;
+}
+
+.shops {
+  width: 20%;
+  margin-left: 50rpx;
+}
+
+.tast {
+  width: 35%;
+  margin-left: 50rpx;
+}
+
+.pei {
+  width: 20%;
+  margin-left: 50rpx;
+}
+
+.test {
+  margin-top: 15rpx;
+  font-size: 50rpx;
+  margin-left: 30rpx;
+  color: gold;
+}
+
+.test2 {
+  margin-top: 15rpx;
+  font-size: 50rpx;
+  margin-left: 55rpx;
+  color: #9d9d9d;
+}
+
+.font3 {
+  font-size: 33rpx;
+  color: #9d9d9d;
+  margin-left: 12rpx;
+  margin-top: 10rpx;
+}
+
+.font4 {
+  font-size: 30rpx;
+  color: #9d9d9d;
+  margin-top: 25rpx;
+}
+
+.xing {
+  width: 100rpx;
+  height: 30rpx;
+  margin-top: 25rpx;
+  margin-left: 20rpx;
+}
+
+.font5 {
+  font-size: 30rpx;
+  color: gold;
+  margin-top: 25rpx;
+  margin-left: 20rpx;
+}
+
+/*评价数量  */
+
+.many {
+  height: 300rpx;
+  width: 100%;
+  display: flex;
+  flex-wrap: wrap;
+}
+
+.math {
+  width: 200rpx;
+  height: 50rpx;
+  text-align: center;
+  margin-left: 30rpx;
+  border: 1rpx solid black;
+  font-size: 24rpx;
+  line-height: 45rpx;
+  margin-top: 20rpx;
+}
+
+.math1 {
+  width: 180rpx;
+  height: 50rpx;
+  text-align: center;
+  margin-left: 30rpx;
+  border: 1rpx solid black;
+  font-size: 24rpx;
+  line-height: 45rpx;
+  margin-top: -85rpx;
+}
+
+/*具体评价  */
+
+.ju {
+  width: 100%;
+  height: 350rpx;
+}
+
+.info {
+  display: flex;
+  width: 100%;
+  height: 100rpx;
+}
+
+.photo {
+  width: 160rpx;
+  height: 160rpx;
+  margin-left: 10rpx;
+  margin-top: 8rpx;
+}
+
+.name {
+  font-size: 30rpx;
+  margin-left: 25rpx;
+  margin-top: 15rpx;
+  width: 200rpx;
+}
+
+.wu {
+  width: 100rpx;
+  height: 30rpx;
+  margin-top: 10rpx;
+  margin-left: 25rpx;
+}
+
+.time {
+  font-size: 26rpx;
+  margin-left: 370rpx;
+  color: #ddd;
+  margin-top: 30rpx;
+}
+
+.detail {
+  font-size: 30rpx;
+  margin-left: 200rpx;
+  margin-top: 10rpx;
+  height: 200rpx;
+  width: 500rpx;
+}
+
+/*商家  */
+
+.wai {
+  width: 100%;
+  height: 80rpx;
+  display: flex;
+}
+
+/*地址图标  */
+
+.address {
+  width: 50rpx;
+  height: 50rpx;
+  margin-left: 20rpx;
+  margin-top: 15rpx;
+}
+
+.add {
+  margin-left: 20rpx;
+  font-size: 30rpx;
+  line-height: 75rpx;
+}
+
+/*电话图标  */
+
+.tel {
+  width: 50rpx;
+  height: 50rpx;
+  margin-left: 350rpx;
+  margin-top: 15rpx;
+}
+
+.xia2 {
+  height: 10rpx;
+  width: 100%;
+  background: #ddd;
+}
+
+/*美团专送  */
+
+.zhuan {
+  display: flex;
+  flex-direction: column;
+}
+
+.font2 {
+  margin-left: 30rpx;
+  font-size: 25rpx;
+}
+
+/*菜单  */
+.hots{
+  width: 50rpx;
+  height: 50rpx;
+  margin-top: 10rpx;
+  margin-left: 50rpx;
+}
+.hot{
+  line-height: 90rpx;
+  margin-left: 15rpx;
+}
+.hot2{
+  line-height: 80rpx;
+  margin-left: 60rpx;
+  color: #ddd;
+
+}
+
+.classs{
+  background: #ddd;
+  width: 200rpx;
+  height: 100rpx;
+  line-height: 95rpx;
+  text-align: center
+}
+
+.goods{
+  margin-left: 20rpx;
+  background: white;
+  width: 70%;
+}
+
+.flex2{
+  display: flex;
+  flex-direction: column;
+  margin-left: 20rpx; 
+}
+
+.del{
+  font-size: 30rpx;
+  color: black;
+}
+
+.del1{
+  font-size: 25rpx;
+  color: #9d9d9d;
+  letter-spacing: 3rpx;
+}
+.del2{
+  font-size: 30rpx;
+  color: red;
+}
+.jia{
+  width: 50rpx;
+  height: 50rpx;
+  margin-left: 15rpx;
+}
+.jian{
+  width: 50rpx;
+  height: 50rpx;
+  margin-left: 100rpx;
+}
+.txt{
+    width: 10rpx;
+    height: 30rpx;
+    margin-left: 15rpx;
+    text-align: center;
+}
+/*结算  */
+.go{
+  width: 100%;
+  height: 140rpx;
+  position: fixed;
+  z-index: 9999;
+  background: #676262;
+  margin-top: 70rpx;
+  display: flex;
+}
+
+.jie{
+  width: 80rpx;
+  height: 80rpx;
+  margin-left: 50rpx;
+}
+.fpay{
+  margin-left: 80rpx;
+  line-height: 35rpx;
+  color: white;
+  letter-spacing: 5rpx;  
+  font-size: 25rpx;
+  width: 200rpx;
+
+}
+
+.shu{
+    display: flex;
+    flex-direction: column;
+}
+
+.fay1{
+    margin-left: 95rpx;
+  line-height: 70rpx;
+  color: red;
+  letter-spacing: 5rpx;  
+  font-size: 40rpx;
+  width: 220rpx;
+
+}
+
+.fpay2{
+  margin-left: 90rpx;
+  line-height: 150rpx;
+  color: white;
+  letter-spacing: 5rpx;  
+  font-size: 33rpx;
+  background: #333333;
+  width: 210rpx;
+  text-align: center;
+}

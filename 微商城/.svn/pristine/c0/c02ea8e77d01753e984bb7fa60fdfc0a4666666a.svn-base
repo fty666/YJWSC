@@ -1,0 +1,28 @@
+<view>
+    <!--广告轮播图  -->
+    <view>
+        <swiper indicator-dots="true" autoplay="true" interval="5000" style='width:100%;' duration="500">
+            <block wx:for="{{imgUrls}}" wx:key="index">
+                <swiper-item>
+                    <image src="{{item}}" class="img" />
+                </swiper-item>
+            </block>
+        </swiper>
+    </view>
+    <!--商家类别  -->
+    <view class='seller'>
+        <scroll-view scroll-y>
+            <view class='seller2'>
+            <view class='shop' wx:for="{{shop}}" wx:key="{{item.groupId}}" data-gid="{{item.groupId}}" catchtap='shops'>
+                <view>
+                    <image src='{{upload_file_url+item.img}}' class='gimg'></image>
+                </view>
+                <view class='font'>{{item.groupName}}</view>
+            </view>
+            </view>
+        </scroll-view>
+    </view>
+</view>
+<view class='jianju2'></view>
+<import src="../../../template/template.wxml" />
+<template is="tabBar" data="{{tabBar:bindData.tabBar}}" />

@@ -1,0 +1,84 @@
+<view class="container">
+  <view class="profile-info" style="height:{{px2rpxHeight*280}}px;">
+    <!-- <button wx:if="{{!hasUserInfo && canIUse}}" open-type="getUserInfo" bindgetuserinfo="getUserInfo"> 获取头像昵称 </button>
+        <block wx:else> -->
+    <image class="avatar" src="{{upload_file_url+uinfo.photo}}" style="width:{{px2rpxWidth*148}}px;height:{{px2rpxWidth*148}}px;"></image>
+    <view class="info" style="height:{{px2rpxHeight*85}}px;">
+      <!-- <text class="name" style="height:{{px2rpxHeight*45}}px;">{{userInfo.nickName}}</text> -->
+      <text class="level" style="height:{{px2rpxHeight*30}}px;">{{uinfo.user_name}}</text>
+    </view>
+    <!-- </block> -->
+  </view>
+
+  <view class="user-menu">
+    <view class="item" style="height:{{px2rpxHeight*187.5}}px;">
+      <navigator url="/pages/user/order/order" class="a">
+        <image class="myicon" src="../../../images/order.png" style="width:{{px2rpxWidth*54}}px;height:{{px2rpxWidth*54}}px;"></image>
+        <text class="txt" style="height:{{px2rpxHeight*24}}px;">我的订单</text>
+      </navigator>
+    </view>
+    <view class="item" style="height:{{px2rpxHeight*187.5}}px;">
+      <view class="a" catchtap='fave'>
+        <image class="myicon" src="../../../images/coupon.png" style="width:{{px2rpxWidth*54}}px;height:{{px2rpxWidth*54}}px;"></image>
+        <text class="txt" style="height:{{px2rpxHeight*24}}px;">优惠券</text>
+      </view>
+    </view>
+    <!-- <view class="item no-border">
+            <navigator url="url" class="a">
+                <image class="myicon" src="../../../images/gift.png"  style="width:{{px2rpxWidth*54}}px;height:{{px2rpxWidth*54}}px;"></image>
+                <text class="txt" style="height:{{px2rpxHeight*24}}px;">礼品卡</text>
+            </navigator>
+        </view> -->
+    <view class="item" style="height:{{px2rpxHeight*187.5}}px;">
+      <navigator url="/pages/user/collect/collect" class="a">
+        <image class="myicon" src="../../../images/collection.png" style="width:{{px2rpxWidth*54}}px;height:{{px2rpxWidth*54}}px;"></image>
+        <text class="txt" style="height:{{px2rpxHeight*24}}px;">我的收藏</text>
+      </navigator>
+    </view>
+    <!-- <view class="item" style="height:{{px2rpxHeight*187.5}}px;">
+            <navigator url="/pages/ucenter/footprint/footprint" class="a">
+                <image class="myicon" src="../../../images/footer.png"  style="width:{{px2rpxWidth*54}}px;height:{{px2rpxWidth*54}}px;"></image>
+                <text class="txt" style="height:{{px2rpxHeight*24}}px;">我的足迹</text>
+            </navigator>
+        </view> -->
+    <!-- <view class="item no-border" style="height:{{px2rpxHeight*187.5}}px;">
+            <navigator url="url" class="a">
+                <image class="myicon" src="../../../images/member.png" style="width:{{px2rpxWidth*54}}px;height:{{px2rpxWidth*54}}px;"></image>
+                <text class="txt" style="height:{{px2rpxHeight*24}}px;">会员福利</text>
+            </navigator>
+        </view> -->
+    <view class="item" style="height:{{px2rpxHeight*187.5}}px;">
+      <navigator url="../address/address" class="a">
+        <image class="myicon" src="../../../images/address.png" style="width:{{px2rpxWidth*54}}px;height:{{px2rpxWidth*54}}px;"></image>
+        <text class="txt" style="height:{{px2rpxHeight*24}}px;">地址管理</text>
+      </navigator>
+    </view>
+    <view class="item" style="height:{{px2rpxHeight*187.5}}px;">
+      <navigator url="/pages/user/usersinfo/userinfo" class="a">
+        <image class="myicon" src="../../../images/safe.png" style="width:{{px2rpxWidth*54}}px;height:{{px2rpxWidth*54}}px;"></image>
+        <text class="txt" style="height:{{px2rpxHeight*24}}px;">用户信息</text>
+      </navigator>
+    </view>
+    <!-- <view class="item no-border" style="height:{{px2rpxHeight*187.5}}px;">
+            <navigator url="url" class="a">
+                <image class="myicon" src="../../../images/connect.png" style="width:{{px2rpxWidth*54}}px;height:{{px2rpxWidth*54}}px;"></image>
+                <text class="txt" style="height:{{px2rpxHeight*24}}px;">联系客服</text>
+            </navigator>
+        </view>
+        <view class="item item-bottom" style="height:{{px2rpxHeight*187.5}}px;">
+            <navigator url="url" class="a">
+               <image class="myicon" src="../../../images/help.png" style="width:{{px2rpxWidth*54}}px;height:{{px2rpxWidth*54}}px;"></image>
+                <text class="txt" style="height:{{px2rpxHeight*24}}px;">帮助中心</text>
+            </navigator>
+        </view>
+        <view class="item item-bottom" style="height:{{px2rpxHeight*187.5}}px;">
+            <navigator url="/pages/user/feedback/feedback" class="a">
+               <image class="myicon" src="../../../images/opinion.png" style="width:{{px2rpxWidth*54}}px;height:{{px2rpxWidth*54}}px;"></image>
+                <text class="txt" style="height:{{px2rpxHeight*24}}px;">意见反馈</text>
+            </navigator>
+        </view> -->
+  </view>
+  <import src="../../../template/template.wxml" />
+  <template is="tabBar" data="{{tabBar:bindData.tabBar}}" />
+  <!-- <view class="logout" bindtap="exitLogin" style="height:{{px2rpxHeight*101}}px;">退出登录</view> -->
+</view>

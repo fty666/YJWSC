@@ -1,0 +1,148 @@
+page {
+  background: #f4f4f4;
+}
+
+/*外卖小哥  */
+
+.flex {
+  display: flex;
+}
+
+.wai {
+  height: 500rpx;
+  width: 90%;
+  margin-left: 40rpx;
+  background: #fff;
+  margin-top: 25rpx;
+}
+
+.user {
+  height: 180rpx;
+  display: flex;
+}
+
+.photo {
+  width: 100rpx;
+  height: 100rpx;
+  margin-left: 45rpx;
+  border-radius: 50%;
+  margin-top: 40rpx;
+}
+
+.info {
+  display: flex;
+  flex-direction: column;
+}
+
+.name {
+  margin-left: 30rpx;
+  margin-top: 50rpx;
+  font-size: 40rpx;
+}
+
+.time {
+  margin-left: 30rpx;
+  line-height: 45rpx;
+  font-size: 25rpx;
+}
+
+.xia {
+  height: 2rpx;
+  width: 94%;
+  margin-left: 20rpx;
+  background: #ddd;
+}
+
+.pei {
+  margin-left: 270rpx;
+  line-height: 120rpx;
+  font-size: 30rpx;
+  color: #ddd;
+  letter-spacing: 8rpx;
+}
+
+.xing1 {
+  width: 80rpx;
+  height: 80rpx;
+  margin-left: 105rpx;
+}
+
+.xing {
+  width: 80rpx;
+  height: 80rpx;
+  margin-left: 20rpx;
+  /* margin-top: 30rpx; */
+}
+
+.xia2 {
+  height: 10rpx;
+  background: #ddd;
+}
+
+.wai2 {
+  width: 90%;
+  margin-left: 40rpx;
+  margin-top: 50rpx;
+  background: #fff;
+}
+
+.shops {
+  margin-top: 65rpx;
+  margin-left: 30rpx;
+  font-size: 40rpx;
+}
+
+.text {
+  width: 90%;
+  height: 250rpx;
+  margin-left: 30rpx;
+  border: 2rpx solid #ddd;
+  margin-top: 25rpx;
+  font-size: 30rpx;
+}
+
+.font {
+  margin-top: 50rpx;
+  margin-left: 30rpx;
+  font-size: 35rpx;
+  color: black;
+  width: 250rpx;
+}
+
+.zan {
+  margin-left: 140rpx;
+  margin-top: 50rpx;
+  width: 100rpx;
+  height: 50rpx;
+  border: 2rpx solid #ddd;
+  border-radius: 13rpx;
+  font-size: 35rpx;
+  text-align: center;
+}
+
+.cai {
+  margin-left: 30rpx;
+  margin-top: 50rpx;
+  width: 100rpx;
+  height: 50rpx;
+  border: 2rpx solid #ddd;
+  border-radius: 13rpx;
+  font-size: 35rpx;
+  text-align: center;
+}
+
+.pcai{
+  width: 40rpx;
+  height: 40rpx;
+}
+.sub{
+  width: 60%;
+  height: 80rpx;
+  border-radius: 50rpx;
+  background: #ddd;
+  text-align: center;
+  color: white;
+  margin-left: 130rpx;
+  line-height: 80rpx;
+  margin-top: 80rpx;
+}

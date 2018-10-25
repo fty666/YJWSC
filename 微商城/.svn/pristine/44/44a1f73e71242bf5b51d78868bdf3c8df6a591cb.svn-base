@@ -1,0 +1,63 @@
+<!-- <import src="/template/template.wxml"/> -->
+<!-- <template is="selectNav" data="{{selectNav}}"/>   -->
+<!-- <view class="section">
+    <view class="section__title">营业额</view> 
+</view> -->
+<!-- <view class="swiper-tab"> -->
+    <!-- <block wx:for="{{swipertab}}" wx:key="sptab">
+        <view class="swiper-tab-list {{currtab == item.index ? 'on' : ''}}" data-current="{{item.index}}" bindtap="tabSwitch">{{item.name}}</view>
+    </block> -->
+    <!-- <view class=''> -->
+        <!-- <picker mode="date" value="{{year}}" start="{{start}}" end="{{end}}" fields="year" bindchange="monthChange"> -->
+        <!-- <picker mode="date" value="{{year}}" fields="year" bindchange="monthChange">
+            <view class="picker">
+                {{year}}年每月营业额 
+            </view>
+        </picker> -->
+    <!-- </view> -->
+    <!-- <view> -->
+         <!-- <picker mode="date" value="{{month}}" start="{{start}}" end="{{end}}" fields="month" bindchange="dayChange"> -->
+         <!-- <picker mode="date" value="{{month}}"  fields="month" bindchange="dayChange">
+            <view class="picker">
+                {{month}}月每天营业额
+            </view>
+        </picker> -->
+    <!-- </view> -->
+<!-- </view> -->
+   
+<!-- <view class="title">
+    <text>营业额图</text>
+</view> -->
+<!-- <scroll-view  scroll-x="true"> -->
+    <!-- <view style='width:100%;height:100%;'> -->
+        <!-- <canvas class="canvas" canvas-id="barGraph"></canvas> -->
+        <!-- <canvas canvas-id="lineCanvas" disable-scroll="true" class="canvas" bindtouchstart="touchHandler" bindtouchmove="moveHandler" bindtouchend="touchEndHandler"></canvas> -->
+    <!-- </view> -->
+<!-- </scroll-view>  -->
+<view class='nav'>
+    <picker mode="date" value="{{month}}" fields="month" start="{{start}}" end="{{end}}" bindchange="dayChange">
+        <view class="nav-each {{currentNav == 'month' ? 'nav-active' : ''}} ">
+            {{month}}月每天营业额
+        </view>
+    </picker>
+    <picker mode="date" value="{{year}}"  fields="year"  start="{{start}}" end="{{end}}" bindchange="monthChange">
+        <view class="nav-each {{currentNav == 'year' ? 'nav-active' : ''}}">
+            {{year}}年每月营业额 
+        </view>
+    </picker>
+</view>
+
+<view class='content'>
+    <scroll-view scroll-y="true">
+        <view class="table">
+            <view class="tr">
+                <view class="th">日期</view>
+                <view class="th">金额</view>
+            </view>
+            <view class="tr" wx:for="{{Range}}">
+                <view class='td'> {{Range[index]}} </view> 
+                <view class="td"> {{Money[index]}} </view>
+            </view>
+        </view>
+    </scroll-view>
+</view>

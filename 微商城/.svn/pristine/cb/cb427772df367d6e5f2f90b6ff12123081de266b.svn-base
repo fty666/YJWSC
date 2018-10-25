@@ -1,0 +1,35 @@
+<view class='p10'>
+    <view class="flex-jsc flex-dirc bb pb10">
+        <view>{{express_name}}</view>
+        <view>{{express_number}}</view>
+    </view>
+    <view class='p10'>
+        <block wx:if="{{!express_error}}" wx:for="{{express}}">
+            <view class='flex-jss'>
+                <view class='button-wx-wrap'>
+                    <view class="w10 h10 br border  {{index == 0 ? 'bg-ff7800' : '' }}"></view>
+                </view>
+                <view class='w325 ml10'>
+                    <view class="f15 {{index == 0 ? 'color-ff7800' : '' }}">
+                        {{item.context}}
+                    </view>
+                    <view class='f12 color-aaa'>{{item.ftime}}</view>
+                </view>
+            </view>
+            <view class='w1 h50 ml5 border' hidden="{{ index == express_num-1 ? true : false}}"></view>
+        </block>
+        <block wx:if="{{express_error}}">
+            <view class='flex-jss'>
+                <view class='button-wx-wrap'>
+                    <view class="w10 h10 br border bg-ff7800"></view>
+                </view>
+                <view class='w325 ml10'>
+                    <view class="f15 color-ff7800">
+                        {{express_error}}
+                    </view>
+                    <view class='f12 color-aaa'>{{item.ftime}}</view>
+                </view>
+            </view>
+        </block>
+    </view>
+</view>

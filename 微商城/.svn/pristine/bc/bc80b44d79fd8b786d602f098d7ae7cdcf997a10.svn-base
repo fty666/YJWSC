@@ -1,0 +1,63 @@
+.cate{
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+    width: 100%;
+    height: 80rpx;
+    margin-bottom: 30rpx;
+    padding: 30rpx 20rpx;
+    box-sizing: border-box;
+    font-size: 32rpx;
+    /* border: 1rpx solid red; */
+}
+.cate-input{
+    width: 600rpx;
+    height: 80rpx;
+    padding-left:10rpx;
+    box-sizing: border-box; 
+    border: 1rpx solid #ccc;
+    margin-left: 15rpx;
+}
+.del-cate{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100rpx;
+    height: 80rpx;
+    color: #fff;
+    border: 1rpx solid #ccc;
+    border-left:0rpx;
+    background-color: #DF0029;
+}
+.del-cate:active{
+    background-color: red;
+}
+.add-cate{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    height: 100rpx;
+    padding: 0 20rpx;
+    /* border: 1rpx solid #ccc; */
+}
+.sub{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    height: 100rpx;
+    font-size: 35rpx;
+    color: #fff;
+    background-color: #3399ff;
+}
+.sub:active{
+    background-color: #3366ff;
+}
+
+/*满减活动提示格式  */
+.layout{
+    margin-left: 20rpx;
+    color: red;
+    
+}

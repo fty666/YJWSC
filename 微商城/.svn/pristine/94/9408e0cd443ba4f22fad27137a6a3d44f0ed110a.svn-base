@@ -1,0 +1,75 @@
+<block wx:if="{{glo_is_load}}">
+    <view class="glo_load_view">
+        <text class="iconfont icon-loading animated infinite rotate mr5"></text>
+        <text>正在努力加载</text>
+    </view>
+</block>
+<block wx:else>
+    <!--商家信息  -->
+    <!-- <view class='shops'>
+    <view class='logo'>
+      <image src='{{shopinfo.logo}}' class='height:100rpx;width:100rpx;'></image>
+    </view>
+    <view class='info'>
+      <view class='gname'>{{shopinfo.ShopName}}</view>
+      <view class='gname'>{{shopinfo.shop_detail}}</view>
+      <view class='gname'>地址：{{shopinfo.shop_addr}}</view>
+    </view>
+  </view> -->
+    <!--mallcate.wxml-->
+    <view class="cate flex flexC">
+        <view class="search">
+            <view class="search-box sflex">
+                <input class="sub search-input" type="text" placeholder="请搜索商品" bindblur="inputBlur" confirm-type="search" bindconfirm="goods_search_bind" />
+                <button size="mini" class="search-btn">
+                    <icon type="search" size="18" />
+                </button>
+            </view>
+
+            <!--轮播图  -->
+            <view>
+                <swiper indicator-dots="true" autoplay="true" interval="5000" style='width:100%;' duration="500">
+                    <block wx:for="{{imgUrls}}" wx:key="index">
+                        <swiper-item>
+                            <image src="{{item}}" class="img" />
+                        </swiper-item>
+                    </block>
+                </swiper>
+            </view>
+        </view>
+        <view class='manjian'>
+            <image class='manjian-img ' src='/images/jian.png'></image>
+            <view class='manjian-text f12 ml5'>满{{full}}减{{reductionPrice}}</view>
+        </view>
+        <view class="cate-box sub">
+            <scroll-view scroll-y="true" class="sidebar tc gridXt">
+                <view class="cate-name {{listId=='' ?'cate-name-active':''}} gridXb" bindtap="erery">全部</view>
+                <block wx:for="{{sarray}}" wx:key="{{item.groupId}}">
+                    <view class="cate-name {{listId==item.classId?'cate-name-active':''}} gridXb" bindtap="cate_item_bind" data-cid="{{item.classId}}" id="{{item.classId}}">{{item.className}}</view>
+                </block>
+            </scroll-view>
+            <view class='showgoods'>
+                <scroll-view scroll-y="true" class="cate-con" scroll-into-view="{{classifyViewed}}">
+                    <view class=" flex">
+                        <block wx:for="{{goods}}" wx:key="{{titem.goodsId}}" wx:for-item="titem">
+                            <view class="cate-item flex1" bindtap="mall_list_bind" id="{{titem.goodsId}}">
+                                <image src="{{upload_file_url+titem.img}}" style='width:200rpx;height:200rpx;' mode="aspectFill"></image>
+                                <view class="ml10">
+                                    <view class="cate-txt">{{titem.goodsName}}</view>
+                                    <view class="cate-txt">￥{{titem.price}}</view>
+                                    <block wx:if="{{titem.discount}}">
+                                        <view class="cate-txt">折扣 {{titem.discount}}</view>
+                                    </block>                                    
+                                    <view class="cate-txt">销量{{titem.sales_num}}</view>
+                                </view>
+                            </view>
+                        </block>
+                    </view>
+                    <!--list end-->
+
+                </scroll-view>
+            </view>
+        </view>
+    </view>
+    <!--tips-->
+</block>

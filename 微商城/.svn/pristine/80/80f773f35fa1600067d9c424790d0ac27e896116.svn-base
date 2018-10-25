@@ -1,0 +1,6 @@
+<view class='auditing'>
+    <image class='auditing-img' src="/images/auditing.png"></image>
+    <image class='audit-img' src="/images/audit.png"></image>
+    <view class='audit-text'>您的店铺正在审核中,请耐心等候...</view>
+    <view bindtap='goShopping' class='goshopping button button-raised button-primary button-rounded button-wx-small'>前去购物</view>
+</view>

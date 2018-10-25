@@ -1,0 +1,58 @@
+<view calss="page">
+  <form bindsubmit="formSubmit">
+    <view class='head'>
+      <view class='tui'>售后情况</view>
+      <view class='number'>
+        <radio-group name="radio">
+          <label>
+            <radio value="1" checked="" />换货
+          </label>
+          <label>
+            <radio value="2" checked="" />退货
+          </label>
+        </radio-group>
+      </view>
+    </view>
+    <view class='xia' style="height:{{px2rpxHeight*2}}px;"></view>
+    <view class='head' style="height:{{px2rpxHeight*100}}px;">
+      <view class='tui'>订单编号</view>
+      <view class='number' name="number">{{oid}}</view>
+    </view>
+    <view class='xia' style="height:{{px2rpxHeight*2}}px;"></view>
+
+    <view class='xia2'></view>
+
+    <view class='tell' style="height:{{px2rpxHeight*100}}px;">选择原因</view>
+    <view class='cause' style="height:{{px2rpxHeight*400}}px;">
+      <checkbox-group name="checkbox">
+        <view>
+          <label>
+            <checkbox value="质量问题" />质量问题</label>
+        </view>
+        <view>
+          <label>
+            <checkbox value="物流速度太慢" />物流速度太慢</label>
+        </view>
+        <view>
+          <label>
+            <checkbox value="不想要了" />不想要了</label>
+        </view>
+        <view>
+          <label><checkbox value="其他原因" />其他原因</label>
+        </view>
+        </checkbox-group>
+    </view>
+    <view class='xia' style="height:{{px2rpxHeight*2}}px;"></view>
+    <view class='tell' style="height:{{px2rpxHeight*100}}px;">有话要说</view>
+    <view class="section" style="height:{{px2rpxHeight*200}}px;">
+      <textarea bindblur="bindTextAreaBlur" auto-height placeholder="填写您要退货的详细原因,最多120个字符" style='margin-top:20rpx;margin-left:50rpx;' />
+    </view>
+
+    <view>
+      <button formType="submit" class='ti' bindtap='ti' style="height:{{px2rpxHeight*100}}px;">提交申请</button>
+    </view>
+  </form>
+  <view class='font2'>
+    <text> 提示：申请提交72小时内商家会做出处理，请耐心等待，若商家超过时间未处理请致电商家 </text>
+  </view>
+</view>

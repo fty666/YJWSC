@@ -1,0 +1,50 @@
+<view class="exchange-goods" style="height:{{px2rpxHeight*160}}px;">
+    <view class="exchange-goods-point" style="width:{{px2rpxWidth*130}}px;height:{{px2rpxHeight*160}}px;">
+        <view><text class="iconfont icon-xingjiline"></text></view>
+        <view class='exchange-goods-point-text'>申请换货</view>
+    </view>
+    <view class="line" style="width:{{px2rpxWidth*100}}px;height:{{px2rpxHeight*1}}px;"></view>
+    <view class="exchange-goods-point" style="width:{{px2rpxWidth*130}}px;height:{{px2rpxHeight*160}}px;">
+        <view><text class="iconfont  {{(exchage_status != 3) ? 'icon-xingjifull': 'icon-xingjiline'}}"></text> </view>
+        <view>换货中</view>
+    </view>
+    <view class="line" style="width:{{px2rpxWidth*100}}px;height:{{px2rpxHeight*1}}px;"></view>
+     <view class="exchange-goods-point" style="width:{{px2rpxWidth*130}}px;height:{{px2rpxHeight*160}}px;">
+        <view><text class="iconfont {{(exchage_status == 3) ? 'icon-xingjifull': 'icon-xingjiline'}}"></text></view>
+        <view>换货完成</view>
+    </view>
+</view> 
+<view class='goods'>
+    <view class='text1'>订单详情</view>
+    <view class="test2">订单号：{{exchange.order_uuid}}</view>
+    <view class="test2">订单生成时间：{{exchange.createTime}}</view>
+    <!-- <view class="test2">支付方式：{{}}</view> -->
+</view>
+<view class="goods">
+    <view class="text1">商品详情</view>
+    <block wx:for="{{exchange.goods}}" wx:key="{{item.goodsId}}">
+        <view style='margin-bottom:20rpx;'>
+            <view class="info">
+                <image class='info-img'  style="width:{{px2rpxWidth*150}}px;height:{{px2rpxWidth*150}}px;"/>
+                <view class="info-text">
+                    <view>{{item.goods_name}}</view>
+                    <view style='color:red;'>价格¥{{item.goods_price}}</view>
+                    <view>数量{{item.num}}</view>
+                    <view><text>颜色分类</text><text>尺寸</text></view>
+                </view> 
+            </view>
+            <view class="test2" style='border-top:1rpx solid #ccc;border-bottom:0rpx'>申请时间：{{item.replyTime}}</view>
+            <view class="test2" style='padding-top:0'>换货原因：{{item.reason}}</view>
+            <view class='jianju'></view>
+        </view>
+    </block>
+</view>
+<!-- <view class='goods'>
+    <view class='text1'>换货详情</view>
+    <view class="test2">申请时间：{{exchange.replyTime}}</view>
+    <!-- <view class="test2">物流单号</view>
+    <view class="test2">换货原因：{{exchange.reason}}</view>
+</view> -->
+<view class='m10'>  
+    <button type='primary' bindtap='agreeExchange'>同意换货</button>
+</view> 

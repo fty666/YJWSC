@@ -1,0 +1,153 @@
+<block wx:if="{{is_load}}">
+    <view class="glo_load_view">
+        <text class="iconfont icon-loading animated infinite rotate mr5"></text>
+        <text>正在努力加载</text>
+    </view>
+</block>
+<block wx:else>
+
+    <view>
+        <!--搜索  -->
+        <view>
+            <view class="border">
+                <view>
+                    <image src='../../../images/sou.png' class='sou'></image>
+                </view>
+                <view>
+                    <input placeholder='请输入商家或商家名称' class='inpt'></input>
+                </view>
+            </view>
+        </view>
+
+        <!-- 店铺分类   -->
+        <!-- <view>
+      <view class='place'>
+        <scroll-view scroll-x style='width:100%;height:100%;'>
+          <view class='class-each'>
+            <block wx:for="{{[1,2,3,4,5,6]}}" wx:key="{{index}}">
+              <view class='list'>
+                快餐便当
+              </view>
+            </block>
+          </view>
+        </scroll-view>
+      </view>
+    </view> -->
+
+        <!--店铺销量按钮  -->
+        <view class='depict'>
+            <view class='btn' bindtap='show'>综合排序
+                <text class="iconfont icon-youjiantou"></text> </view>
+            <view class='btn'>销量最高</view>
+            <view class='btn'>速度最快</view>
+            <view class='btn' bindtap='select'>筛选</view>
+        </view>
+        <view class='xia'></view>
+
+        <!--综合排序  -->
+        <view class='sort' wx:if="{{sorts}}">
+            <view class='pai1'>综合排序</view>
+            <view class='xia'></view>
+            <view class='pai1'>距离最近</view>
+            <view class='xia'></view>
+            <view class='pai1'>评分最高</view>
+            <view class='xia'></view>
+            <view class='pai1'>起送价最低</view>
+            <view class='xia'></view>
+            <view class='pai1'>配送费最低</view>
+            <view class='xia'></view>
+            <view class='pai1'>人均高到低</view>
+            <view class='xia'></view>
+            <view class='pai1'>人均高到高</view>
+            <view class='xia'></view>
+        </view>
+
+        <!--筛选  -->
+        <view class='dress' wx:if="{{selects}}">
+            <view class='shops'>商家特色(可多选)</view>
+            <view class='tese'>
+                <view class='te'>美团专送</view>
+                <view class='te'>点评最高</view>
+                <view class='te'>品牌商家</view>
+                <view class='te'>免配送费</view>
+                <view class='te'>货到付款</view>
+            </view>
+
+            <view class='ren'>人均价</view>
+            <view class='tese'>
+                <view class='te'>美团专送</view>
+                <view class='te'>点评最高</view>
+                <view class='te'>品牌商家</view>
+            </view>
+
+            <view style='display:flex;'>
+                <view class='rest'>清空</view>
+                <view class='sub'>完成</view>
+            </view>
+        </view>
+
+        <!--促销按钮  -->
+        <view class='depict'>
+            <view class='btn1'>满减优惠</view>
+            <view class='btn1'>点评高分</view>
+            <view class='btn1'>新商家</view>
+            <view class='btn1'>美团专送</view>
+        </view>
+
+        <block wx:if="{{has_data}}">
+            <!--店铺列表  -->
+            <view class='shopinfo'>
+                <!--店铺logo  -->
+                <view>
+                    <image class='logos'></image>
+                </view>
+                <!--店铺信息  -->
+                <view class='info'>
+                    <!--店名  -->
+                    <view>天津第三大街</view>
+                    <!--月售  -->
+                    <view>
+                        <image src='' class='hao'></image>
+                        <text decode='true' class='font1'>4.8&nbsp;&nbsp;月售:3288&nbsp;&nbsp;&nbsp;&nbsp;30分钟&nbsp;&nbsp;|&nbsp;&nbsp;2.9km</text>
+                    </view>
+
+                    <!--起送配送  -->
+                    <view style='display:flex'>
+                        <view class='font2'>起送￥0 | </view>
+                        <view class='font2'>配送:￥9 | </view>
+                        <view class='font2'>人均:￥36 </view>
+                    </view>
+
+                    <!--减折扣  -->
+                    <view class='cu'>
+                        <view>
+                            <image src='' class='agio'></image>
+                        </view>
+                        <view class='font3'>满59减9</view>
+                        <view class="first" bindtap='one'>^</view>
+                    </view>
+                    <view class='cu2'>
+                        <view>
+                            <image src='' class='agio'></image>
+                        </view>
+                        <view class='font3'>折扣商品4.76折起</view>
+                    </view>
+                    <view wx:if="{{forder}}">
+                        <view class='cu3'>
+                            <view>
+                                <image src='' class='agio'></image>
+                            </view>
+                            <view class='font3'>折扣商品4.76折起</view>
+                        </view>
+                    </view>
+                </view>
+            </view>
+        </block>
+        <block wx:else>
+            <navigator class='no-order' url="/pages/shop/mall/mall">
+                <view>您还没有相关的订单</view>
+                <view>可以去看看有哪些想买的</view>
+            </navigator>
+        </block>
+    </view>
+</block>

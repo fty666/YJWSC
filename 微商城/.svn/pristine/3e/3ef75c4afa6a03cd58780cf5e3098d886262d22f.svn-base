@@ -1,0 +1,43 @@
+<form bindsubmit="editShopInfo">
+    <view class="cell">
+        <image class="cellImage" src="/images/shop.png"></image>
+        <text class="cellTitle" data-source="{{ infor }}">商家名称</text>
+        <!-- <text class="cellContent">老码头火锅</text> -->
+        <input  class="cellInput" name="ShopName" value='{{shopInfo.ShopName}}' />
+        <label class="lineSpace"></label>
+    </view>
+    <!-- <view class="cell">
+        <image class="cellImage" src="/images/zuoji.png"></image>
+        <text class="cellTitle" data-source="{{ infor }}">商家座机</text>
+        <!-- <text class="cellContent">028-1234567</text>
+        <input  class="cellInput" name="" value='{{shopInfo.mobile}}' />
+        <label class="lineSpace"></label>
+    </view> -->
+    <view class="cell">
+        <image class="cellImage" src="/images/phone.png"></image>
+        <text class="cellTitle" data-source="{{ infor }}">商家手机</text>
+        <!-- <text class="cellContent">12345678912</text> -->
+        <input  class="cellInput" name="mobile" type="number" value='{{shopInfo.mobile}}' />
+        <label class="lineSpace"></label>
+    </view>
+    <view class="cell">
+        <image class="cellImage" src="/images/address.png"></image>
+        <text class="cellTitle" data-source="{{ infor }}">商家地址</text>
+        <!-- <text class="cellContent">天府三街新希望国际B</text> -->
+        <input  class="cellInput" name="shop_addr" value='{{shopInfo.shop_addr}}' />
+        
+        <label class="lineSpace"></label>
+    </view>
+    <!-- <view class="cell">
+        <image class="cellImage" src="/images/bangding.png"></image>
+        <text class="cellTitle" data-source="{{ infor }}">绑定账户</text>
+        <!-- <text class="cellContent">成都银行 ************1231</text>
+        <input  class="cellInput" value='{{shopInfo.ShopName}}' />
+        <label class="lineSpace"></label>
+    </view> -->
+    <view class="warn">
+        <image class="warn-img" src="/images/waring.png"></image>
+         <text class="cellContent">请谨慎修改商店信息</text> 
+    </view>
+    <button type="primary" formType="submit" class='mt15'>修改</button>
+</form>

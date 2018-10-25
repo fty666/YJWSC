@@ -1,0 +1,40 @@
+.flex-jsc{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.flex-jss{
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+}
+.flex-dirc{
+    flex-direction: column;
+}
+.bb{
+    border-bottom:1rpx solid #ccc;
+}
+.w24{width: 48rpx;}
+.w200{width:400rpx;}
+.w300{width: 600rpx;}
+.w350{width: 700rpx;}
+.h24{height: 48rpx;}
+
+.br{
+    border-radius: 50%;
+}
+.border{
+    border:1rpx solid #ccc;
+}
+.bg-ff7800{
+    background-color: #ff7800;
+}
+.color-ff7800{
+    color:#ff7800;
+}
+.color-aaa{
+    color: #aaa;
+}
+.color-ccc{
+    color:#ccc;
+}

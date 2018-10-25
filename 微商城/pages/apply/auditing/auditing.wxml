@@ -1,0 +1,6 @@
+<view class='auditing' style="width:{{px2rpxWidth*750}}px;height:{{px2rpxHeight*1205}}px;">
+    <image class='auditing-img' src="/images/auditing.png" style="width:{{px2rpxWidth*150}}px;height:{{px2rpxWidth*150}}px;"></image>
+    <image class='audit-img' src="/images/audit.png" style="width:{{px2rpxWidth*500}}px;height:{{px2rpxWidth*500}}px;"></image>
+    <view class='audit-text'>您的店铺正在审核中,请耐心等候...</view>
+    <view bindtap='goShopping' class='goshopping button button-raised button-primary button-rounded button-wx-small'>前去购物</view>
+</view>

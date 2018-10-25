@@ -1,0 +1,195 @@
+<view class="content">
+    <scroll-view scroll-y style='width:100%;height:100%'>
+        <form bindsubmit="formSubmit">
+            <view>
+                <!-- <view>上架新商品</view> -->
+                <!-- <view>添加套餐</view> -->
+            </view>
+            <view hidden='{{newGoods}}'>
+                <view>
+                    <!-- <view class="big-title">商品关键信息</view> -->
+                    <view class="info">
+                        <view class="info-each">
+                            <view class='sm-title'>商品分类</view>
+                            <view class='sm-content'>
+                                <radio-group name="classId" class="radio-group" bindchange="radioChange">
+                                    <block wx:for="{{category}}" wx:key="{{item.classId}}">
+                                        <view class='sm-content-text'>
+                                            <radio value="{{item.classId}}" />{{item.className}}</view>
+                                    </block>
+                                </radio-group>
+                            </view>
+                            <!-- <view class='sm-content sm-content2'>
+                                <radio-group class="radio-group" bindchange="radioChange">
+                                    <block wx:for="{{[1,2,3,4,5,6]}}">
+                                        <view class='sm-content-text2'><radio value="1" />123</view>
+                                    </block>
+                                </radio-group>
+                            </view> -->
+                            <view style='clear:both'></view>
+                        </view>
+                    </view>
+                </view>
+                <view>
+                    <!-- <view class='big-title'>商品详细信息</view> -->
+                    <view class='info'>
+                        <view class="info-each">
+                            <view class='sm-title'>商品名称</view>
+                            <view class='sm-content'>
+                                <input name="goodsName" placeholder='请输入商品名称' />
+                            </view>
+                        </view>
+                        <view class="info-each">
+                            <view class='sm-title'>价格</view>
+                            <view class='sm-content'>
+                                <input name="price" placeholder='请输入价格' />
+                            </view>
+                        </view>
+                        <view class="info-each">
+                            <view class='sm-title'>折扣</view>
+                            <view class='sm-content'>
+                                <input name="discount" placeholder='请输入折扣:0.1-9.9' />
+                            </view>
+                        </view>
+                        <!-- <view class="info-each">
+                            <view class='sm-title'>库存</view>
+                            <view class='sm-content'>
+                                <input name="stock" placeholder='请输入库存数量' />
+                            </view>
+                        </view> -->
+                        <view class="info-each">
+                            <view class='sm-title'>描述</view>
+                            <view class='sm-content'>
+                                <textarea name="goodsDetails" placeholder='请输入商品描述'></textarea>
+                            </view>
+                        </view>
+                        <block wx:if="{{shop_info.groupId == 1}}">
+                            
+                        </block>
+                        <block wx:else>
+                            <view class="info-each">
+                                <view class='sm-title'>商品规格</view>
+                                <view class='sm-content spec'>
+                                    <view class="spec-each">
+                                        <view>颜色
+                                            <text class="iconfont icon-add ml10 f15 bor" data-spec="color_spec" bindtap='spec'></text>
+                                        </view>
+                                        <block wx:for="{{goods_spec.color_spec}}" wx:key="{{item}}">
+                                            <view class='spec-input'>
+                                                <input class='br5' data-spec='color_spec' data-index='{{index}}' bindinput='specInput' value='{{goods_spec_value.color_spec_value[index] ? goods_spec_value.color_spec_value[index] : ""}}' />
+                                                <text class="iconfont icon-close" data-index='{{index}}' data-spec='color_spec' bindtap='cancleInput'></text>
+                                            </view>
+                                        </block>
+                                    </view>
+                                    <view class="spec-each">
+                                        <view>尺码
+                                            <text class="iconfont icon-add ml10 f15 bor" data-spec='size_spec' bindtap='spec'></text> </view>
+                                        <block wx:for="{{goods_spec.size_spec}}" wx:key="{{item}}">
+                                            <view class='spec-input'>
+                                                <input data-spec='size_spec' data-index='{{index}}' bindinput='specInput' value='{{goods_spec_value.size_spec_value[index] ? goods_spec_value.size_spec_value[index] : ""}}' />
+                                                <text class="iconfont icon-close " data-index='{{index}}' data-spec='size_spec' bindtap='cancleInput'></text>
+                                            </view>
+                                        </block>
+
+                                    </view>
+                                    <view class="spec-each">
+                                        <view>容量
+                                            <text class="iconfont icon-add ml10 f15 bor" data-spec='capacity_spec' bindtap='spec'></text> </view>
+                                        <block wx:for="{{goods_spec.capacity_spec}}" wx:key="{{item}}">
+                                            <view class='spec-input'>
+                                                <input data-spec='capacity_spec' data-index='{{index}}' bindinput='specInput' value='{{goods_spec_value.capacity_spec_value[index] ? goods_spec_value.capacity_spec_value[index] : ""}}' />
+                                                <text class="iconfont icon-close " data-index='{{index}}' data-spec='capacity_spec' bindtap='cancleInput'></text>
+                                            </view>
+                                        </block>
+
+                                    </view>
+                                    <view class="spec-each">
+                                        <view>类型
+                                            <text class="iconfont icon-add ml10 f15 bor" data-spec='type_spec' bindtap='spec'></text> </view>
+                                        <block wx:for="{{goods_spec.type_spec}}" wx:key="{{item}}">
+                                            <view class='spec-input'>
+                                                <input data-spec='type_spec' data-index='{{index}}' bindinput='specInput' value='{{goods_spec_value.type_spec_value[index] ? goods_spec_value.type_spec_value[index] : ""}}' />
+                                                <text class="iconfont icon-close" data-index='{{index}}' data-spec='type_spec' bindtap='cancleInput'></text>
+                                            </view>
+                                        </block>
+
+                                    </view>
+                                    <view class="spec-each">
+                                        <view>口味
+                                            <text class="iconfont icon-add ml10 f15 bor" data-spec='taste_spec' bindtap='spec'></text> </view>
+                                        <block wx:for="{{goods_spec.taste_spec}}" wx:key="{{item}}">
+                                            <view class='spec-input'>
+                                                <input data-spec='taste_spec' data-index='{{index}}' bindinput='specInput' value='{{goods_spec_value.taste_spec_value[index] ? goods_spec_value.taste_spec_value[index] : ""}}' />
+                                                <text class="iconfont icon-close" data-index='{{index}}' data-spec='taste_spec' bindtap='cancleInput'></text>
+                                            </view>
+                                        </block>
+                                    </view>
+                                </view>
+                            </view>
+                        </block>
+                        <!-- <view class="info-each">
+                            <view class='sm-title'>套餐</view>
+                            <view class='sm-content'>
+                                <textarea name="goodsDetails" placeholder='请输入商品套餐'></textarea>
+                            </view>
+                        </view> -->
+                        <view class="info-each">
+                            <view class='sm-title'>商品列表图片</view>
+                            <view class='sm-content'>
+                                <block wx:for="{{list_img}}" wx:key="{{item.index}}">
+                                    <view class='img list-img'>
+                                        <image src="{{aliyunUrl + item}}" />
+                                        <view catchtap='cancleImg' data-status='1' data-index='{{index}}' class='cancle-img'>x</view>
+                                    </view>
+                                </block>
+                                <image catchtap='addlistImg' wx:if="{{list_img_hidden}}" src="/images/addimage.png" />
+                            </view>
+                        </view>
+                        <view class="info-each">
+                            <view class='sm-title'>轮播图</view>
+                            <view class='sm-content'>
+                                <!-- <block wx:if="{{swiper_img_hidden}}"> -->
+                                <block wx:for="{{swiper_img}}" wx:key="{{item.index}}">
+                                    <!-- <block wx:for="{{[1,2,3]}}" wx:key="{{item.index}}"> -->
+                                    <view class="img swiper-img">
+                                        <image src="{{aliyunUrl + item}}" />
+                                        <view catchtap='cancleImg' data-status='2' data-index='{{index}}' class='cancle-img'>x</view>
+                                        <view class='sort'>
+                                            <input value='{{index}}' data-sort="{{item}}" data-index="{{index}}" bindblur="swiperSort" placeholder='排序' />
+                                        </view>
+                                    </view>
+                                </block>
+                                <!-- </block> -->
+                                <image catchtap='addswiperImg' wx:if='{{swiper_img_hidden}}' src="/images/addimage.png" />
+                            </view>
+                        </view>
+                        <view class="info-each">
+                            <view class='sm-title'>商品详细信息图片</view>
+                            <view class='sm-content'>
+                                <!-- <blcok wx:if="{{goodsDetail_img_hidden}}"> -->
+                                <block wx:for="{{goodsDetail_img}}" wx:key="{{item.index}}">
+                                    <!-- <block wx:for="{{[1,2,3]}}" wx:key="{{item.index}}">  -->
+                                    <view class="img detail-img">
+                                        <image src="{{aliyunUrl + item}}" />
+                                        <view catchtap='cancleImg' data-status='3' data-index='{{index}}' class='cancle-img'>x</view>
+                                        <view class='sort'>
+                                            <input value='{{index}}' data-sort="{{item}}" data-index="{{index}}" bindblur="detailSort" placeholder='排序' />
+                                        </view>
+                                    </view>
+                                </block>
+                                <!-- </block> -->
+                                <image catchtap='addgoodsDetailImg' wx:if='{{goodsDetail_img_hidden}}' src="/images/addimage.png" />
+                            </view>
+                        </view>
+                    </view>
+                </view>
+            </view>
+            <view hidden='{{groupGoods}}'>
+
+            </view>
+            <view style='padding:20rpx;box-sizing:boeder-box;'>
+                <button form-type="submit" type="primary">提交</button>
+            </view>
+        </form>
+    </scroll-view>
+</view>

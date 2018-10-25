@@ -1,0 +1,68 @@
+<view>
+  <view class="jl"></view>
+  <!--距离顶部  -->
+  <view class="from">
+    <form bindsubmit="formSubmit" bindreset="formReset">
+
+      <!--头像设置  -->
+      <view class="section">
+        <view class="file">头像</view>
+        <view class="picture" bindtap='immediate_sales'>
+          <image src="{{upload_file_url+userinfo.photo}}" style='width:140rpx;height:140rpx;'></image>
+        </view>
+      </view>
+
+      <!--距离设置  -->
+      <view style="clear:both;"></view>
+      <view class="kuandu"></view>
+
+      <!--昵称  -->
+      <view class="section">
+        <view class="nechen">用户呢称</view>
+        <view class="shezhi">
+          <input name="nickName" bindblur="names" placeholder="{{userinfo.user_name}}  " />
+        </view>
+        <view style="clear:both;"></view>
+      </view>
+
+      <!--距离设置  -->
+      <view style="clear:both;"></view>
+      <view class="kuandu"></view>
+
+      <!--昵称  -->
+      <view class="section">
+        <view class="nechen">用户电话</view>
+        <view class="shezhi">
+          <input name="telephone" bindblur="phones" placeholder="{{userinfo.telephone}}  " />
+        </view>
+        <view style="clear:both;"></view>
+      </view>
+
+      <!--距离设置  -->
+      <view style="clear:both;"></view>
+      <view class="kuandu"></view>
+
+      <!--头像提交页面  -->
+      <view hidden="{{immediate_sale_hidden}}">
+        <view bindtap='cancel_sale' class="covering-layer"></view>
+        <view class="immediate-sales">
+          <view class="pai" bindtap='photo'>拍摄</view>
+          <view class='xia'></view>
+          <view class="ben" bindtap='local'>本地选择</view>
+          <view class='xia2'></view>
+          <view class='esc' catchtap='cancel_sale'>取消</view>
+        </view>
+      </view>
+
+    </form>
+  </view>
+  
+  <!--地址管理  -->
+  <view>
+    <label>
+      <navigator url="/pages/user/index/index">
+        <button class='butt' type='warn' bindtap='bttns'>修改完成</button>
+      </navigator>
+    </label>
+  </view>
+</view>

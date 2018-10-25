@@ -1,0 +1,53 @@
+/* pages/test.wxss */
+
+.input-row label {
+  display: inline-block;
+  line-height: 60rpx;
+}
+
+.input-row label:nth-child(n+5) {
+  margin-top: 20rpx;
+}
+
+.input-group {
+  background: #fff;
+}
+
+.input-row {
+  padding: 16rpx 30rpx;
+}
+
+.input-row textarea {
+  padding: 14rpx 0 0;
+  height: 160rpx;
+}
+
+.input-row input {
+  height: 30px;
+}
+
+view.input-static {
+  width: 100%;
+  position: absolute;
+  padding-right: 10px;
+  left: 0;
+}
+
+view.input-static picker:not(:first-child) {
+  margin-left: 10rpx;
+}
+
+view.input-static [mode="date"], view.input-static [mode="date"] {
+  height: 30px;
+  text-align: right;
+}
+
+view.input-static [mode="date"] {
+  width: 80px;
+  max-width: 80px;
+}
+
+view.input-static [mode="time"] {
+  width: 40px;
+  max-width: 40px;
+}

@@ -1,0 +1,280 @@
+const app = getApp()
+const utilFunctions = require('../../../utils/functionData.js');
+const URLData = require('../../../utils/data.js');
+const calculate = require('../../../utils/calculate.js');
+Page({
+
+    data: {
+        this_order_id: 0,
+        // 商品总价
+        sums: "",
+        // 商品信息
+        orderinfo: [],
+        // 收货地址
+        address: [],
+        submitIsLoading: false,
+        buttonIsDisabled: false,
+        glo_is_load: true,
+        addId: ""
+    },
+
+    /**
+     *页面监听数据加载事件，获取订单详情 
+     */
+    onLoad: function (options) {
+        // console.log(options)
+        // 传过来的收货地址ID
+        let addids = options.addressId
+        this.setData({
+            addId: addids
+        })
+        if (addids) {
+            this.oneadd()
+        } else {
+            this.moadd()
+        }
+        var that = this
+        // 获取购物车数据
+        var carts = wx.getStorageSync('lists')
+        var nums = wx.getStorageSync('nums')
+        // console.log(carts)
+        that.setData({
+            orderinfo: carts,
+            sums: nums
+        })
+    },
+
+    /**
+     *查看默认地址 
+     **/
+    moadd: function () {
+        // 收货地址
+        function maddress(res) {
+            // console.log(res)
+            this.setData({
+                address: res,
+                addid: res.id
+            })
+        }
+        utilFunctions.getAddrByDefault(maddress, this)
+    },
+
+
+
+    /**
+     * 查看单个地址
+     */
+    oneadd: function () {
+        let that = this
+        function addinfo(res) {
+            // console.log(res)
+            this.setData({
+                address: res,
+                addid: res.id
+            })
+        }
+        utilFunctions.getAddrById(addinfo, that.data.addId, this)
+    },
+
+    /**
+     *修改默认地址 
+     */
+    aupdata: function () {
+        wx: wx.navigateTo({
+            url: '/pages/user/address/address'
+        })
+    },
+
+
+    //开始支付
+    pay_confirmOrder: function () {
+        // console.log(this.data.orderinfo)
+        // 添加订单参数
+        let total_money = '';
+        let real_money = '';
+        let addr_id = '';
+        let goodsId = '';
+        let num = '';
+        let price = '';
+        let carts_price = '';
+        let status = 2;
+        let color = '';
+        let size = '';
+        let typee = '';
+        let volume = '';
+        let taste = '';
+        let psums = '';
+        let shopcode = '';
+        let ShopTotalPrice = this.getShopTotalPrice();
+        // console.log(ShopTotalPrice);
+        // 商品详情
+        let order = this.data.orderinfo;
+        let orderLen = order.length;
+        for (let i = 0; i < orderLen; i++) {
+            for (let k in ShopTotalPrice) {
+                if (order[i].shop_code == k) {
+                    total_money += String(ShopTotalPrice[k]) + ','
+                }
+            }
+            real_money = total_money;
+            goodsId += order[i].goods_id + ',';
+            num += order[i].num + ','
+            price += order[i].price + ','
+            carts_price += String(calculate.calcMul(order[i].num, order[i].price)) + ',';
+            console.log(order[i].color)
+            if (typeof (order[i].color) == 'undefined' || order[i].color == null || order[i].color == '' || order[i].color == undefined) {
+                order[i].color = '@';
+                // console.log(order[i].color = '');
+            }
+            color += order[i].color + ',';
+            if (typeof (order[i].size) == 'undefined' || order[i].size == null || order[i].size == '' || order[i].size == undefined) {
+                order[i].size = '@';
+                // console.log(order[i].size = '');
+            }
+            size += order[i].size + ',';
+            if (typeof (order[i].type) == 'undefined' || order[i].type == null || order[i].type == '' || order[i].type == undefined) {
+                order[i].type = '@';
+            }
+            typee += order[i].type + ',';
+            if (typeof (order[i].volume) == 'undefined' || order[i].volume == null || order[i].volume == '' || order[i].volume == undefined) {
+                order[i].volume = '@';
+            }
+            volume += order[i].volume + ',';
+            console.log(order[i].taste)
+            if (typeof (order[i].taste) == 'undefined' || order[i].taste == null || order[i].taste == '' || order[i].taste == undefined) {
+                order[i].taste = '@';
+            }
+            taste += order[i].taste + ',';
+            shopcode += order[i].shop_code + ',';
+        }
+        console.log(shopcode)
+        let that = this
+        //生成订单函数和
+        function orders(res) {
+            // console.log(res)
+            wx.redirectTo({
+                url: '/pages/user/pay_success/pay_success?addid=' + that.data.addid + '&totalPrice=' + that.data.sums,
+            })
+        }
+        utilFunctions.insertOrder(goodsId, num, price, carts_price, color, size, typee, volume, taste, total_money, real_money, that.data.addid, status, shopcode, orders, this)
+    },
+
+    // 判断一个订单里有几个商店
+    getShopQuantity: function () {
+        let orders = this.data.orderinfo;
+        let shop = [];
+        let orderLen = orders.length;
+        for (let i = 0; i < orderLen; i++) {
+            if (shop.indexOf(orders[i].shop_code) == -1) {
+                shop.push(orders[i].shop_code);
+            }
+        }
+        return shop;
+    },
+
+    // 计算每个商店的总价钱
+    getShopTotalPrice: function () {
+        let shop = this.getShopQuantity();
+        let shopLen = shop.length;
+        let orders = this.data.orderinfo;
+        let orderLen = orders.length;
+        let shopTotalPrice = {}; // 每个商店里的商品的总价格
+        for (let i = 0; i < shopLen; i++) {
+            shopTotalPrice[shop[i]] = '0.00';
+            for (let j = 0; j < orderLen; j++) {
+                if (shop[i] == orders[j].shop_code) {
+                    // 计算单个商品的总价钱
+                    let goodsTotalPrice = calculate.calcMul(orders[j].num, orders[j].price);
+                    // 计算单个商店的总价钱
+                    shopTotalPrice[shop[i]] = calculate.calcAdd(goodsTotalPrice, shopTotalPrice[shop[i]]);
+                }
+            }
+        }
+        return shopTotalPrice;
+    },
+
+    initgetOrderInfoData: function (data) {
+        var that = this
+        if (data.code == 1) {
+            that.setData({
+                oinfo: data.info,
+                glo_is_load: false
+            })
+        } else if (data.code == 2) {
+            wx.showModal({
+                title: '提示',
+                content: '登陆超时，将重新获取用户信息',
+                showCancel: false,
+                success: function (res) {
+                    app.getNewToken(function (token) {
+                        that.setData({
+                            local_global_token: token
+                        })
+                        _function.getOrderInfo(wx.getStorageSync("utoken"), that.data.this_order_id, that.initgetOrderInfoData, this)
+                    })
+                }
+            })
+        } else if (data.code == 5) {
+            wx.showModal({
+                title: '提示',
+                content: data.info,
+                showCancel: false
+            })
+            return false;
+        }
+    },
+
+
+    initMakeOrderPayData: function (data) {
+        var that = this
+        that.setData({
+            buttonIsDisabled: false,
+            submitIsLoading: false
+        })
+        if (data.code == 1) {
+            wx.requestPayment({
+                'timeStamp': data.info.timeStamp,
+                'nonceStr': data.info.nonceStr,
+                'package': data.info.package,
+                'signType': 'MD5',
+                'paySign': data.info.paySign,
+                'success': function (res) {
+
+                },
+                'fail': function (res) {
+
+                },
+                'complete': function () {
+                    that.setData({
+                        disabled: false
+                    })
+                    //支付完成 跳转订单列表
+                    wx.redirectTo({
+                        url: '../../user/order/list/index'
+                    })
+                }
+            })
+        } else if (data.code == 2) {
+            wx.showModal({
+                title: '提示',
+                content: '登陆超时，将重新获取用户信息',
+                showCancel: false,
+                success: function (res) {
+                    app.getNewToken(function (token) {
+                        that.setData({
+                            local_global_token: token
+                        })
+                        _function.getOrderInfo(wx.getStorageSync("utoken"), that.data.this_order_id, that.initgetOrderInfoData, this)
+                    })
+                }
+            })
+        } else if (data.code == 5) {
+            wx.showModal({
+                title: '提示',
+                content: data.info,
+                showCancel: false
+            })
+            return false;
+        }
+    }
+});

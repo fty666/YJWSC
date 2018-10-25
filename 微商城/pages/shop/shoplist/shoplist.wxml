@@ -1,0 +1,119 @@
+<block wx:if="{{glo_is_load}}">
+  <view class="glo_load_view">
+    <text class="iconfont icon-loading animated infinite rotate mr5"></text>
+    <text>正在努力加载</text>
+  </view>
+</block>
+<block wx:else>
+  <!--商家信息  -->
+  <!-- <view class='shops' style="height:{{px2rpxHeight*80}}px;">
+    <view class='logo' style="width:{{px2rpxWidth*300}}px;height:{{px2rpxHeight*50}}px;">
+      <image src='{{shopinfo.logo}}' class='height:100rpx;width:100rpx;'></image>
+    </view>
+    <view class='info'>
+      <view class='gname'>{{shopinfo.ShopName}}</view>
+      <view class='gname'>{{shopinfo.shop_detail}}</view>
+      <view class='gname'>地址：{{shopinfo.shop_addr}}</view>
+    </view>
+  </view> -->
+  <!--mallcate.wxml-->
+  <view class="cate flex flexC">
+    <view class="search">
+      <view class="search-box sflex">
+        <input class="sub search-input" type="text" placeholder="{{place}}" bindblur="inputBlur" confirm-type="search" bindconfirm="goods_search_bind" />
+        <button size="mini" class="search-btn">
+          <icon type="search" size="18" />
+        </button>
+      </view>
+    </view>
+    <!--轮播图  -->
+    <view style="width:{{px2rpxWidth*750}}px;height:{{px2rpxHeight*300}}px;">
+      <swiper indicator-dots="true" autoplay="true" interval="5000" style='width:100%;height:100%' duration="500">
+        <!-- <block wx:for="{{imgUrls}}" wx:key="index"> -->
+        <swiper-item>
+          <image src="https://zuoanzac.oss-cn-beijing.aliyuncs.com/12.jpg" style="width:100%;height:100%;" />
+        </swiper-item>
+        <swiper-item>
+          <image src="https://zuoanzac.oss-cn-beijing.aliyuncs.com/11.jpg" style="width:100%;height:100%;" />
+        </swiper-item>
+        <!-- </block> -->
+      </swiper>
+    </view>
+
+    <!--满赠活动  -->
+    <view class='manjian' style='height:52rpx;'>
+      <view>
+        <image class='manjian-img ' src='/images/jian.png' style="width:{{px2rpxWidth*30}}px;height:{{px2rpxHeight*30}}px;"></image>
+      </view>
+      <!-- <view class='manjian-text f12 ml5'> -->
+      <swiper autoplay="true" interval="2000">
+        <block wx:for="{{gift}}" wx:for-item="gift" wx:key="{{gift.reductionId}}">
+          <swiper-item>
+            <view style='width:600rpx;height:50rpx;display:inline-block;text-align:left;color:red;margin-top:14rpx;margin-left:13rpx;'>满{{gift.full}}赠{{gift.goodsName}}X{{gift.nums}};</view>
+          </swiper-item>
+        </block>
+      </swiper>
+      <!-- </view> -->
+    </view>
+
+    <!--满减活动  -->
+    <view class='manjian' style='height:52rpx;'>
+      <image class='manjian-img ' src='/images/jian.png' style="width:{{px2rpxWidth*30}}px;height:{{px2rpxHeight*30}}px;"></image>
+      <!-- <view class='manjian-text f12 ml5'> -->
+      <swiper autoplay="true" interval="2000">
+        <block wx:for="{{shopinfo.reduction}}" wx:for-item="reduction" wx:key="{{reduction.reductionId}}">
+          <swiper-item>
+            <view style='width:600rpx;height:50rpx;display:inline-block;text-align:left;color:red;margin-left:13rpx;'>满{{reduction.full}}减{{reduction.reductionPrice}};</view>
+          </swiper-item>
+        </block>
+      </swiper>
+      <!-- </view> -->
+    </view>
+
+
+
+    <navigator url="/pages/myGoods/getCoupon/getCoupon?shop_code={{shop_code}}">
+      <view class='manjian'>
+        <image class='manjian-img ' src='/images/happy.png' style="width:{{px2rpxWidth*30}}px;height:{{px2rpxHeight*30}}px;"></image>
+        <view class='manjian-text f12 ml5'>领取优惠券</view>
+      </view>
+    </navigator>
+
+
+    <view class="cate-box sub">
+      <scroll-view scroll-y="true" class="sidebar tc gridXt" style="width:{{px2rpxWidth*160}}px;">
+        <view class="cate-name {{listId=='' ?'cate-name-active':''}} gridXb" bindtap="erery">全部</view>
+        <block wx:for="{{sarray}}" wx:key="{{item.groupId}}">
+          <view class="cate-name {{listId==item.classId?'cate-name-active':''}} gridXb" bindtap="cate_item_bind" data-cid="{{item.classId}}" id="{{item.classId}}">{{item.className}}</view>
+        </block>
+      </scroll-view>
+      <view class='showgoods' style="height:{{px2rpxHeight*690}}px;">
+        <scroll-view scroll-y="true" class="cate-con" scroll-into-view="{{classifyViewed}}" bindscrolltoupper='scrollToUpper' bindscrolltolower='scrollToLower'>
+          <view class=" flex">
+            <block wx:if="{{have}}">
+              <view class='has'>没有该商品</view>
+            </block>
+            <block wx:else>
+              <block wx:for="{{goods}}" wx:key="{{titem.goodsId}}" wx:for-item="titem">
+                <view class="cate-item flex1" bindtap="mall_list_bind" id="{{titem.goodsId}}" style="height:{{px2rpxHeight*200}}px;">
+                  <image src="{{upload_file_url+titem.img}}" style="width:{{px2rpxWidth*180}}px;height:{{px2rpxHeight*180}}px;margin:5px;" mode="aspectFill"></image>
+                  <view class="ml10">
+                    <view class="cate-txt" style="width:{{px2rpxWidth*300}}px;">{{titem.goodsName}}</view>
+                    <view class="cate-txt" style="width:{{px2rpxWidth*300}}px;">￥{{titem.price}}</view>
+                    <block wx:if="{{titem.discount}}">
+                      <view class="cate-txt" style="width:{{px2rpxWidth*300}}px;">折扣 {{titem.discount}}</view>
+                    </block>
+                    <view class="cate-txt" style="width:{{px2rpxWidth*300}}px;">销量{{titem.sales_num}}</view>
+                  </view>
+                </view>
+              </block>
+            </block>
+          </view>
+          <!--list end-->
+
+        </scroll-view>
+      </view>
+    </view>
+  </view>
+  <!--tips-->
+</block>

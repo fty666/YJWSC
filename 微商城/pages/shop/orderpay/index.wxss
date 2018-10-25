@@ -1,0 +1,46 @@
+.font {
+  font-size: 35rpx;
+  color: black;
+}
+
+.font1 {
+  font-size: 28rpx;
+  color: black;
+}
+
+.shop {
+  color: black;
+  font-size: 35rpx;
+}
+
+.fav {
+  display: flex;
+}
+
+.cu {
+  margin-left: 20rpx;
+  color: red;
+}
+
+.xia {
+  width: 100%;
+  background: white;
+}
+
+.favour{
+  font-size: 25rpx;
+  color: #ddd;
+}
+
+.favour1{
+  font-size: 40rpx;
+  color: red;
+}
+.coupon{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+/* .lef{
+  margin-right: 40rpx;
+} */

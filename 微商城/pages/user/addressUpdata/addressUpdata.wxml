@@ -1,0 +1,30 @@
+<view class="add-address">
+  <form bindsubmit="formSubmit">
+    <view class="add-form">
+      <view class="form-item" style="height:{{px2rpxHeight*116}}px;">
+        <input class="input" bindinput="bindinputName" placeholder="姓名" name="addr_receiver" value="{{addinfo.addr_receiver}}" auto-focus style="height:{{px2rpxHeight*44}}px;"/>
+      </view>
+      <view class="form-item" style="height:{{px2rpxHeight*116}}px;">
+        <input class="input" bindinput="bindinputMobile" name="addr_mobile" value="{{addinfo.addr_mobile}}" placeholder="手机号码" style="height:{{px2rpxHeight*44}}px;"/>
+      </view>
+
+      <view class="form-item" style="height:{{px2rpxHeight*116}}px;">
+        <picker mode="region" bindchange="bindRegionChange" value="{{region}}" custom-item="{{customItem}}">
+          <view class="picker">
+            <input name="area_path"  bindinput="bindinputCity" disabled='true' placeholder="省份、城市、区县" class='text' value='{{city}}' />
+          </view>
+        </picker>
+      </view>
+
+      <view class="form-item" style="height:{{px2rpxHeight*116}}px;">
+        <input class="input" bindinput="bindinputInfo" name="area_detail" value="{{addinfo.area_detail}}" placeholder="详细地址, 如街道、楼盘号等" style="height:{{px2rpxHeight*44}}px;"/>
+      </view>
+    </view>
+
+    <view class="btns" style="height:{{px2rpxHeight*100}}px;">
+      <button class="cannel" bindtap="cancelAddress" style="height:{{px2rpxHeight*100}}px;">取消</button>
+      <button class="save" fromType="submit" bindtap="saveAddress" style="height:{{px2rpxHeight*100}}px;">保存</button>
+    </view>
+  </form>
+</view>
+<view class="bg-mask" bindtap="cancelSelectRegion" wx:if="{{openSelectRegion}}"></view>

@@ -1,0 +1,47 @@
+<view class='contents'>
+    <scroll-view scroll-y>
+        <block wx:for="{{order.goods}}" wx:key="{{item.goodsId}}" wx:for-item="goods">
+            <view class='each'>
+                <view class='description'>
+                    <image class='desc-img' src="{{aliyunUrl + goods.img}}" />
+                    <!-- <view class='each-text'>描述相符</view> -->
+                    <view class='each-text'>我的评价</view>
+                    <block wx:for="{{start}}" wx:key="{{index}}">
+                        <view catchtap='getStart' class='desc-xing' data-index="{{index}}" data-goodsid="{{goods.goodsId}}" data-commenttype='description'>
+                            <text class="iconfont  {{ key[goods.goodsId] > index ? 'icon-xingjifull' : 'icon-xingjiline'}}"></text> 
+                        </view>
+                    </block>
+                </view>
+                <view class='say'>
+                    <textarea bindinput="commentDetail" data-goodsid="{{goods.goodsId}}" data-commenttype='description' placeholder='分享你的购买心得'></textarea>
+                </view>
+                <view class='each-img'>
+                    <block wx:for="{{commentImg[goods.goodsId]}}" wx:key="{{index}}" wx:for-item="img">
+                        <view class='img-cancle'>
+                            <image class='add-img' src="{{aliyunUrl + img}}" />
+                            <view data-index='{{index}}' data-goodsid="{{goods.goodsId}}" catchtap='cancleImg' class="button button-circle button-wx-tiny cancle">X</view>
+                        </view>
+                    </block>
+                    <block wx:if="{{commentImg[goods.goodsId].length < 4 || commentImg[goods.goodsId] == undefined || commentImg[goods.goodsId] == '' ||  commentImg[goods.goodsId] == null}}">
+                        <image catchtap='addImg' class='add-img ml15' data-goodsid="{{goods.goodsId}}" src="/images/addimage.png" data-commenttype='description' />
+                    </block>
+                </view>
+            </view>
+        </block>
+        <!-- <view class='service'>
+            <view class='each-text'>服务态度</view>
+            <block wx:for="{{5}}" wx:key="{{index}}">
+                <view class='desc-xing mt25' data-index="{{index}}"><text class="iconfont icon-xingjiline"></text> </view>
+            </block>
+        </view>
+        <view class='service mb10 pt0 mb50'>
+            <view class='each-text'>物流速度</view>
+            <block wx:for="{{5}}" wx:key="{{index}}">
+                <view class='desc-xing mt25' data-index="{{index}}"><text class="iconfont icon-xingjiline"></text> </view>
+            </block>
+        </view> -->
+    </scroll-view>
+    <view class='btn'>
+        <button type='primary' catchtap='commitComment'>提交评价</button>
+    </view>
+</view>

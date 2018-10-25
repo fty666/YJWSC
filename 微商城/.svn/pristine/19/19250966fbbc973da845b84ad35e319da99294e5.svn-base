@@ -1,0 +1,169 @@
+<block wx:if="{{is_load}}">
+    <view class="glo_load_view">
+        <text class="iconfont icon-loading animated infinite rotate mr5"></text>
+        <text>正在努力加载</text>
+    </view>
+</block>
+<block wx:else>
+    <view class='allpage'>
+        <scroll-view scroll-y>
+            <view class='header'>
+                <view class='location' bindtap='chooseAddress'>
+                    <view>
+                        <text class="iconfont icon-location"></text>
+                    </view>
+                    <view class='location-addr'>{{locationName}}</view>
+                    <view>
+                        <text class="iconfont icon-youjiantou"></text>
+                    </view>
+                </view>
+                <view class='search ml10'>
+                    <input class='search-input' placeholder='寿司'></input>
+                    <view class='search-icon'>
+                        <text class="iconfont icon-search"></text>
+                    </view>
+                </view>
+            </view>
+            <!-- <view class='nav'>
+                <swiper indicator-dots="true" indicator-active-color='#ffc827'>
+                    <swiper-item>
+                        <view class='nav-each'>
+                            <view catchtap='mallIndex' class='nav-item'>
+                                <image class='nav-img'></image>
+                                <view class='f14'>网站首页</view>
+                            </view>
+                            <block wx:for="{{7}}" wx:key="{{index}}">
+                                <view class='nav-item'>
+                                    <image class='nav-img'></image>
+                                    <view class='f14'>美食</view>
+                                </view>
+                            </block>
+                        </view>
+                    </swiper-item>
+                    <swiper-item>
+                        <view class='nav-each'>
+                            <block wx:for="{{8}}" wx:key="{{index}}">
+                                <view class='nav-item'>
+                                    <image class='nav-img'></image>
+                                    <view class='f14'>超市</view>
+                                </view>
+                            </block>
+                        </view>
+                    </swiper-item>
+                </swiper>
+            </view> -->
+            <!-- <view class='adv'>
+                <image src='' class='adv-img'></image>
+            </view> -->
+            <!-- <view class='adv'>
+                <image src='' class='adv-img'></image>
+            </view> -->
+            <view>
+                <view class='near'>
+                    <view class='near-line'></view>
+                    <view class='near-shop'>为你优选</view>
+                    <view class='near-line'></view>
+                </view>
+                <view class='guanggao'>
+                    <block wx:for="{{6}}">
+                        <image src='../../../images/888.jpg' class='guanggao-img'></image>
+                    </block>
+                </view>
+            </view>
+            <view class='near'>
+                <view class='near-line'></view>
+                <view class='near-shop'>优质商家</view>
+                <view class='near-line'></view>
+            </view>
+            <view class='select'>
+                <!-- <view class='select-each'>
+                    <view class='select-text'> 综合排序</view>
+                    <text class="iconfont icon-unfold ml5"></text>
+                </view> -->
+                <view bindtap='requirementSelect' data-select='all' class="select-each {{select == 'all' ? 'select-active' : ''}}">
+                    <view class='select-text'>全部</view>
+                </view>
+                <view bindtap='requirementSelect' data-select='saleNum' class="select-each {{select == 'saleNum' ? 'select-active' : ''}}">
+                    <view class='select-text '>销量最高</view>
+                </view>
+                <!-- <view class='select-each'>
+                    <view class='select-text'>速度最快</view>
+                </view> -->
+                <!-- <view class='select-each'>
+                    <view class='select-text'>筛选</view>
+                </view> -->
+                <view bindtap='requirementSelect' data-select='reduction' class="select-each {{select == 'reduction' ? 'select-active' : ''}}">
+                    <view class='select-text'>满减优惠</view>
+                </view>
+                <view bindtap='requirementSelect' data-select='createTime' class="select-each {{select == 'createTime' ? 'select-active' : ''}}">
+                    <view class='select-text'>新商家</view>
+                </view>
+            </view>
+            <!-- <view class='select2'>
+                <view class='select2-each'>首单立减</view>
+                <view class='select2-each select2-active'>满减优惠</view>
+                <view class='select2-each'>新商家</view>
+                <view class='select2-each'>美团专送</view>
+            </view> -->
+            <view class='contents'>
+                <block wx:if="{{has_data}}">
+                    <scroll-view scroll-y bindscrolltoupper='scrollToUpper' bindscrolltolower='scrollToLower'>
+                        <view class='shop'>
+                            <block wx:for="{{shop}}" wx:for-item="shop" wx:key="{{shop.shopId}}">
+                                <view class='shop-each' catchtap='goToShop' data-shop_code='{{shop.shop_code}}'>
+                                    <image class='shop-img' src='{{uploadFileUrl + shop.logo}}'></image>
+                                    <view class='shop-text'>
+                                        <view class='shop-name'>{{shop.ShopName}}</view>
+                                        <!-- <view class='shop-comment'>
+                                            <view class='shop-comment-left'>
+                                                <block wx:for="{{5}}" wx:key="{{index}}">
+                                                    <text class="iconfont icon-favorfill f10"></text>
+                                                </block>
+                                                <view>4.9</view>
+                                                <view>月售1222</view>
+                                            </view>
+                                            <view class='shop-comment-right'>40分钟 | 908米</view>
+                                        </view> -->
+                                        <view class='shop-comment'>
+                                            <view class='shop-comment-left'>
+                                                <view class='qisong'>起送 ¥{{shop.initialMoney}}</view>
+                                                <view class='qisong'>配送 ¥{{shop.transMoney}}</view>
+                                                <view class='qisong'>人均 ¥{{shop.avgMoney}}</view>
+                                            </view>
+                                        </view>
+                                        <view class='shop-tag'>
+                                            <!-- <view class='shop-tag-each'>
+                                                <image class='shop-tag-img' src='/images/shou.png'></image>
+                                                <view class='shop-tag-text'>新用户立减14元</view>
+                                            </view> -->
+                                            <view class='shop-tag-each'>
+                                                <image class='shop-tag-img' src='/images/jian.png'></image>
+                                                <view class='shop-tag-text'>
+                                                    <block wx:for="{{shop.reduction}}" wx:for-item='reduction' wx:key="{{reduction.reductionId}}">
+                                                        满{{reduction.full}}减{{reduction.reductionPrice}};
+                                                    </block>
+                                                </view>
+                                            </view>
+                                            <!-- <view class='shop-tag-icon'>
+                                                <text class="iconfont icon-unfold"></text>
+                                            </view> -->
+                                        </view>
+                                    </view>
+                                </view>
+                            </block>
+                        </view>
+                    </scroll-view>
+                </block>
+                <block wx:else>
+                    <navigator class='no-data' url="/pages/shop/mall/mall">
+                        <view>您还没有相关的订单</view>
+                        <view>可以去看看有哪些想买的</view>
+                    </navigator>
+                </block>
+            </view>
+        </scroll-view>
+    </view>
+    <!--自定义tarBar  -->
+    <import src="../../../template/template.wxml" />
+    <template is="tabBar" data="{{tabBar:bindData.tabBar}}" />
+</block>

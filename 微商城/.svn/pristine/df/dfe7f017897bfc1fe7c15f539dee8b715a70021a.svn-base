@@ -1,0 +1,99 @@
+.xia2 {
+  height: 15rpx;
+  background: #ddd;
+}
+
+.wai {
+  height: 200rpx;
+  display: flex;
+}
+
+.photo {
+  width: 120rpx;
+  height: 120rpx;
+  margin-left: 30rpx;
+  margin-top: 50rpx;
+}
+
+.shops {
+  font-size: 35rpx;
+  margin-top: 90rpx;
+  margin-left: 25rpx;
+}
+
+.order {
+  margin-left: 190rpx;
+  font-size: 35rpx;
+  margin-top: 90rpx;
+  color: #9d9d9d;
+}
+
+.xia {
+  height: 3rpx;
+  background: #ddd;
+  width: 95%;
+  margin-left: 20rpx;
+  margin-top: 5rpx;
+}
+
+/*商品  */
+
+.pay {
+  margin-left: 310rpx;
+  font-size: 35rpx;
+  margin-top: 40rpx;
+  color: #9d9d9d;
+}
+
+.money {
+  font-size: 35rpx;
+  margin-top: 40rpx;
+  color: black;
+}
+
+.sinfo {
+  display: flex;
+}
+
+.name {
+  margin-top: 30rpx;
+  margin-left: 80rpx;
+  font-size: 30rpx;
+  color: #9d9d9d;
+}
+
+.many {
+  margin-top: 30rpx;
+  margin-left: 400rpx;
+  font-size: 30rpx;
+  color: #9d9d9d;
+}
+
+/*再来一单  */
+
+.wai3 {
+  height: 150rpx;
+  display: flex;
+}
+
+.recur {
+  width: 200rpx;
+  height: 80rpx;
+  border: 1rpx solid #ddd;
+  text-align: center;
+  margin-top: 40rpx;
+  margin-left: 236rpx;
+  font-size: 30rpx;
+  line-height: 80rpx;
+}
+
+.go {
+  width: 200rpx;
+  height: 80rpx;
+  text-align: center;
+  margin-top: 40rpx;
+  margin-left: 30rpx;
+  background: yellow;
+  font-size: 30rpx;
+  line-height: 80rpx;
+}

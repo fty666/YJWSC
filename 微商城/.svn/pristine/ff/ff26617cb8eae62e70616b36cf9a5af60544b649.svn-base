@@ -1,0 +1,119 @@
+<block wx:if="{{glo_is_load}}">
+    <view class="glo_load_view">
+        <text class="iconfont icon-loading animated infinite rotate mr5"></text>
+        <text>正在努力加载</text>
+    </view>
+</block>
+<block wx:else>
+    <view class="container">
+        <view class="nav">
+            <!-- <view class="nav-each {{ status == -1 ? 'nav-active' : ''}}" bindtap='complete'  data-status='{{all_order}}'> -->
+            <view class="nav-each {{ status == all_order ? 'nav-active' : ''}}" bindtap='selectStatus' data-status='{{all_order}}'>
+                <text>全部</text>
+            </view>
+            <!-- <view class="nav-each {{ status == 1 ? 'nav-active' : ''}}" bindtap='send' data-status='{{pending_payment}}'> -->
+            <view class="nav-each {{ status == pending_payment ? 'nav-active' : ''}}" bindtap='selectStatus' data-status='{{pending_payment}}'>
+                <text>待付款</text>
+            </view>
+            <!-- <view class="nav-each {{ status == 2 ? 'nav-active' : ''}}" bindtap='send' data-status='{{to_be_shipped}}'> -->
+            <view class="nav-each {{ status == to_be_shipped ? 'nav-active' : ''}}" bindtap='selectStatus' data-status='{{to_be_shipped}}'>
+                <text>待发货</text>
+            </view>
+            <!-- <view class="nav-each {{ status == 3 ? 'nav-active' : ''}}" bindtap='delver' data-status="{{to_be_received}}"> -->
+            <view class="nav-each {{ status == to_be_received ? 'nav-active' : ''}}" bindtap='selectStatus' data-status="{{to_be_received}}">
+                <text>待收货</text>
+            </view>
+            <!-- <view class="nav-each {{ status == 4 ? 'nav-active' : ''}}" bindtap='assess' data-status='{{to_be_evaluated}}'> -->
+            <view class="nav-each {{ status == to_be_evaluated ? 'nav-active' : ''}}" bindtap='selectStatus' data-status='{{to_be_evaluated}}'>
+                <text>待评价</text>
+            </view>
+        </view>
+
+        <view class='info'>
+            <block wx:if="{{hasData}}">
+                <scroll-view scroll-y bindscrolltolower="scrollToLower">
+                    <!-- <view class="orders" wx:for="{{orderList}}" wx:key="{{item.id}}"> -->
+                    <view class="orders" wx:for="{{orders}}" wx:key="{{item.order_mainid}}">
+                        <view class="order">
+                            <!-- <navigator url="../orderDetail/orderDetail?id={{item.order_uuid}}" class="order"> -->
+                            <view class="h" catchtap='goOrderDetail' data-order_uuid='{{item.order_uuid}}'>
+                                <view class="l">订单编号：{{item.order_uuid}}</view>
+                                <view class="r">
+                                    <view wx:if="{{item.status== 1}}"> 未付款 </view>
+                                    <view wx:elif="{{item.status== 2}}"> 待发货 </view>
+                                    <view wx:elif="{{item.status== 3}}"> 待收货 </view>
+                                    <view wx:elif="{{item.status== 4}}"> 交易完成 </view>
+                                    <view wx:elif="{{item.status== 5}}"> 交易完成 </view>
+                                    <view wx:elif="{{item.status== 6}}"> 换货中 </view>
+                                    <view wx:else="{{item.status== 7}}"> 退货中 </view>
+                                </view>
+                            </view>
+                            <!-- <view class="goods" wx:for="{{item.goods}}" wx:for-item="titem" wx:key="{{titem.goodsId}}"> -->
+                            <view class="goods" wx:for="{{item.goods}}" wx:for-item="goods" wx:key="{{goods.goodsId}}">
+                                <view class="img">
+                                    <image src="{{upload_file_url+goods.img}}"></image>
+                                </view>
+                                <view class="info">
+                                    <text class="name">{{goods.goods_name}}</text>
+                                    <text class="number">共{{goods.num}}件商品</text>
+                                </view>
+                                <view class="status"></view>
+                            </view>
+                            <view class="b">
+                                <view class="l">实付：￥{{item.sumPrice}}</view>
+                                <view class="d">日期：{{item.createTime}}</view>
+                                <view class="r">
+                                    <!-- 待付款  -->
+                                    <block wx:if="{{item.status == pending_payment}}">
+                                        <view class='button button button-caution button-rounded button-wx-small ml10' data-order-index="{{index}}" data-uid="{{item.order_uuid}}" catchtap="payOrder">去付款</view>
+                                    </block>
+
+                                    <!-- 待发货  -->
+                                    <block wx:if="{{item.status == to_be_shipped}}">
+                                        <view catchtap='remindSendGoods' data-order_uuid='{{item.order_uuid}}' data-order_mainid='{{item.order_mainid}}' class='button button button-action button-rounded button-wx-small ml10'>提醒发货</view>
+                                    </block>
+
+                                    <!-- 待收货  -->
+                                    <block wx:if="{{item.status == to_be_received}}">
+                                        <view catchtap='showExpress' data-order_uuid='{{item.order_uuid}}' data-order_mainid='{{item.order_mainid}}' class='button button button-rounded button-wx-small ml10' style='background-color:#fff;'>查看物流</view>
+                                        <view catchtap='receiveGoods' data-index="{{index}}" data-order_uuid='{{item.order_uuid}}' data-order_mainid='{{item.order_mainid}}' class='button button button-primary button-rounded button-wx-small ml10'>确认收货</view>
+                                    </block>
+
+                                    <!-- 待评价  -->
+                                    <block wx:if="{{item.status == to_be_evaluated}}">
+                                        <view catchtap='showExpress' data-order_uuid='{{item.order_uuid}}' data-order_mainid='{{item.order_mainid}}' class='button button button-rounded button-wx-small ml10' style='background-color:#fff;'>查看物流</view>
+                                        <view catchtap='goComment' data-order-index="{{index}}" data-order_uuid='{{item.order_uuid}}' data-order_mainid='{{item.order_mainid}}' class='button button button-primary button-rounded button-wx-small ml10'>去评价</view>
+                                        <!-- <view catchtap='afterSale' data-order-index="{{index}}" data-order_uuid='{{item.order_uuid}}' data-order_mainid='{{item.order_mainid}}' class='button button-rounded button-wx-small ml10'>申请售后</view> -->
+                                    </block>
+
+                                    <!-- 评价完成  -->
+                                    <block wx:if="{{item.status == accomplish}}">
+                                        <view catchtap='showExpress' data-order_uuid='{{item.order_uuid}}' data-order_mainid='{{item.order_mainid}}' class='button button button-rounded button-wx-small ml10' style='background-color:#fff;'>查看物流</view>
+                                        <!-- <view catchtap='afterSale' data-order-index="{{index}}" data-order_uuid='{{item.order_uuid}}' data-order_mainid='{{item.order_mainid}}' class='button button-rounded button-wx-small ml10'>申请售后</view> -->
+                                        <view catchtap='deleteOrder' data-order_uuid='{{item.order_uuid}}' data-order_mainid='{{item.order_mainid}}' data-order-index="{{index}}" class='button button-caution button-rounded button-wx-small ml10'>删除订单</view>
+                                    </block>
+
+                                    <!-- <button class="btn" data-order-index="{{index}}" data-uid="{{item.order_uuid}}" catchtap="payOrder" wx:if="{{item.status==1}}">去付款</button> -->
+                                    <!-- <navigator url='/pages/user/orderDetail/orderDetail?id={{item.order_uuid}}'>
+                                        <button class="btn" data-order-index="{{index}}" type='primary' wx:if="{{item.status==4}}">申请售后</button>
+                                    </navigator> -->
+                                    <!-- <navigator url='/pages/user/orderDetail/orderDetail?id={{item.order_uuid}}'>
+                                        <button class="btn" data-order-index="{{index}}" wx:if="{{item.status==4 || item.status==5}}">评价商品</button>
+                                    </navigator> -->
+                                </view>
+                            </view>
+                        </view>
+                    </view>
+                </scroll-view>
+            </block>
+            <block wx:else>
+                <navigator class='no-order' url="/pages/shop/mall/mall">
+                    <view>您还没有相关的订单</view>
+                    <view>可以去看看有哪些想买的</view>
+                </navigator>
+            </block>
+        </view>
+
+    </view>
+</block>
+

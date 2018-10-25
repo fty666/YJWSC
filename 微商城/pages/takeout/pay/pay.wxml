@@ -1,0 +1,105 @@
+<block wx:if="{{is_load}}">
+  <view class="glo_load_view">
+    <text class="iconfont icon-loading animated infinite rotate mr5"></text>
+    <text>正在努力加载</text>
+  </view>
+</block>
+<block wx:else>
+  <view>
+    <!--送货地址  -->
+    <view class='wai1' style="height:{{px2rpxHeight*300}}px;">
+      <!--送货地址信息  -->
+      <view class='flex addr'>
+        <view>
+          <image src='../../../images/gps.png' class='add' style="width:{{px2rpxWidth*50}}px;height:{{px2rpxWidth*50}}px;"></image>
+        </view>
+        <block wx:if="{{address}}">
+          <view class='ainfo' style='width:{{px2rpxWidth*800}}px;height:{{px2rpxWidth*150}}px;'>
+            <view class='address' style='width:100%;'>{{address.area_detail}}</view>
+            <view class='user'>{{address.addr_receiver}} {{address.addr_mobile}}</view>
+          </view>
+        </block>
+        <block wx:else>
+          <view class='ainfo'>
+            <view class='address'></view>
+            <view class='user c666' style='font-size:36rpx'>
+              <text class="iconfont icon-add"></text> 添加地址</view>
+          </view>
+        </block>
+        <view class='more' catchtap='goToAddress' style='width:{{px2rpxWidth*150}}px'>
+          <text class="iconfont icon-youjiantou"></text>
+        </view>
+      </view>
+      <view class='xia' style="height:{{px2rpxHeight*2}}px;"></view>
+    </view>
+
+    <!--商家自配  -->
+    <view class='flex wai2' style="height:{{px2rpxHeight*130}}px;">
+      <view>
+        <image src='{{aliyunUrl + shop_info.logo}}' class='logo' style="width:{{px2rpxWidth*80}}px;height:{{px2rpxWidth*80}}px;"></image>
+      </view>
+      <view class='sname'>{{shop_info.ShopName}}</view>
+    </view>
+
+    <!--商品详情  -->
+    <block wx:for="{{goods_list}}" wx:for-item="goods" wx:key="{{goods.id}}">
+      <view class='wai3' style='border-bottom:1px solid #ddd;'>
+        <view>
+          <image src='{{aliyunUrl+goods.img}}' class='picture' style="width:{{px2rpxWidth*175}}px;height:{{px2rpxWidth*180}}px;margin-top:{{px2rpxHeight*50}}px;"></image>
+        </view>
+        <view class='oinfo'>
+          <view class='good' style="width:{{px2rpxWidth*200}}px;">{{goods.goods_name}}</view>
+          <view class='goods'>X{{goods.num}}</view>
+        </view>
+        <view class='money f18' style='margin-left:105rpx'>￥{{goods.discountPrice}}</view>
+      </view>
+    </block>
+    <!--具体费用  -->
+    <view class='wai4' style="height:{{px2rpxHeight*590}}px;">
+      <view class='flex'>
+        <view class='bao' style="width:{{px2rpxWidth*180}}px;">配送费</view>
+        <view class='fei'>￥{{userMoney}}</view>
+      </view>
+      <view class='xia2'></view>
+
+      <view class='flex'>
+        <view class='bao' style="width:{{px2rpxWidth*180}}px;">满减优惠</view>
+        <view class='fei3' style='color:red;'>-￥{{full_subtraction}}</view>
+      </view>
+      <view class='xia2'></view>
+      <view class='flex'>
+        <view class='bao' style="width:{{px2rpxWidth*180}}px;">商家代金券</view>
+        <view class='fei2' catchtap='goToCoupon'>{{coupon == '' ? '选择优惠券' : '满'+coupon.conditions+'减'+coupon.couponPrice}}
+          <text class="iconfont icon-youjiantou" catchtap='goToCoupon'></text>
+        </view>
+      </view>
+      <view class='xia2'></view>
+
+      <view class='flex'>
+        <view class='subtotal'>小计</view>
+        <view class='subtotals'>￥{{totalPrice}}</view>
+      </view>
+    </view>
+
+
+
+    <!--支付方式  -->
+    <view class='wai6'>
+      <view class='msg' style="height:{{px2rpxHeight*150}}px;">
+        <view class='msg-text1'>备注</view>
+        <textarea class='msg-text2' bindinput="msg" placeholder='口味偏好等' style="width:{{px2rpxWidth*580}}px;height:{{px2rpxHeight*150}}px;"></textarea>
+      </view>
+      <view class='tableware'>
+        <view>餐具数量</view>
+        <!--选择餐具  -->
+        <picker class='picker' bindchange="getTableware" value="{{tableware}}" range="{{tablewareArr}}">
+          <view>
+            数量：{{tableware}}
+          </view>
+        </picker>
+      </view>
+    </view>
+
+    <view class='wechat' bindtap='pay' style="height:{{px2rpxHeight*100}}px;">支付</view>
+  </view>
+</block>

@@ -1,0 +1,59 @@
+<!-- <block wx:if="{{glo_is_load}}">
+  <view class="glo_load_view">
+    <text class="iconfont icon-loading animated infinite rotate mr5"></text>
+    <text>正在努力加载</text>
+  </view>
+</block> -->
+<!-- <block wx:else> -->
+<view>
+  <form bindsubmit="formSubmit" bindreset="formReset">
+    <view class='flex wai'>
+      <view class="name">联系人：</view>
+      <view class='value'>
+        <input placeholder="请填写收货人的姓名" placeholder-style="color:#939393"></input>
+      </view>
+    </view>
+    <view class='xia'></view>
+
+    <view class='flex wai'>
+      <radio-group class="radio-group" bindchange="radioChange">
+        <radio value="{{item.name}}" class='man' />男士
+        <radio value="{{item.name}}" class='woman' />女士
+      </radio-group>
+    </view>
+    <view class='xia'></view>
+
+    <view class='flex wai'>
+      <view class="name">手机号：</view>
+      <view class='value'>
+        <input name="phone" placeholder="请填写收货人的手机号" placeholder-style="color:#939393"></input>
+      </view>
+    </view>
+    <view class='xia'></view>
+
+    <view class='flex wai'>
+      <view class="name">收货地址：</view>
+      <view class='value'>
+        <input name="phone" placeholder="点击选择" placeholder-style="color:#939393"></input>
+      </view>
+    </view>
+    <view class='xia'></view>
+
+    <view class='flex wai'>
+      <view class="name">门牌号：</view>
+      <view class='value'>
+        <input name="phone" placeholder="详细地址，例：16号楼301室" placeholder-style="color:#939393"></input>
+      </view>
+    </view>
+    <view class='xia'></view>
+
+    <view class='keep'>保存地址</view>
+  </form>
+  <!-- </block> -->
+  <!-- <block wx:else>
+      <navigator class='no-order' url="/pages/shop/mall/mall">
+        <view>您还没有相关的订单</view>
+        <view>可以去看看有哪些想买的</view>
+      </navigator>
+    </block> -->
+</view>

@@ -1,0 +1,236 @@
+/* mallcart.wxss */
+
+/* 基本框架样式 */
+
+ .cate-con,.sidebar {
+  overflow: hidden;
+  overflow-y: auto;
+  -webkit-oveflow-scrolling: touch;
+}
+
+page {
+  width: 100%;
+  height: 100%;
+}
+
+.cate {
+  height: 100%;
+  width: 100%;
+  overflow: hidden;
+}
+
+.search {
+  width: 100%;
+  /* height: 90rpx; */
+  z-index: 9;
+  background: -webkit-linear-gradient(top, rgba(0, 0, 0, 0.1), rgba(0, 0, 0, 0));
+  background: linear-gradient(top, rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0));
+  position: relative;
+  z-index: 1;
+  box-shadow: 0 0 15rpx rgba(0, 0, 0, 0.1);
+}
+
+/*轮播图图片  */
+.img{
+  width: 750rpx;
+  height: 500rpx;
+}
+.search-box {
+  background: #fff;
+  border-radius: 6rpx;
+  width: 100%;
+}
+
+.search-input {
+  height: 80rpx;
+  width: 400rpx;
+  /* padding: 0 20rpx; */
+  text-align: right;
+  vertical-align: top;
+  margin-top: -9rpx;
+}
+
+button.search-btn {
+  background: none;
+  padding: 0 1em;
+  margin-top: -9rpx;
+}
+
+button.search-btn icon {
+  vertical-align: top;
+  margin-top: 22rpx;
+}
+
+.search-btn::after {
+  display: none;
+}
+
+.cate-box {
+  overflow: hidden;
+  padding-left: 160rpx;
+  position: relative;
+}
+
+.sidebar {
+  position: absolute;
+  left: 0;
+  top: 0;
+  bottom: 0;
+  width: 160rpx;
+  background: #fff;
+}
+
+.cate-name {
+  line-height: 92rpx;
+  position: relative;
+}
+
+.cate-name-active::after {
+  content: "";
+  display: block;
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  border-left: 2px solid;
+}
+
+.cate-con {
+  width: 100%;
+  height: 100%;
+  /* border: 1rpx solid red; */
+}
+
+.cate-tit {
+  margin-left: 16rpx;
+  color: #6a6a6a;
+  height: 92rpx;
+  line-height: 92rpx;
+}
+
+.cate-list {
+  margin: 0 16rpx;
+  background: #fff;
+  padding: 30rpx 10rpx;
+}
+
+.cate-item {
+  width: 33.33333%;
+  height: 200rpx;
+  float: left;
+}
+
+/* .cate-item:nth-child(n+4) {
+  margin-top: 16rpx;
+} */
+
+.cate-imgbox {
+  padding-bottom: 70%;
+  width: 70%;
+  margin: 0 15%;
+  position: relative;
+}
+
+.cate-img {
+  position: absolute;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+}
+
+.cate-txt {
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+  /* margin: 10rpx 0 0; */
+  width: 300rpx;
+}
+
+/*绿色*/
+
+.cate-name-active {
+  color: #09bb07;
+}
+
+.cate-name-active::after {
+  border-left-color: #09bb07;
+}
+
+
+.sflex {
+  display: flex;
+   flex-direction: row; 
+  width: 100%;
+  height: 100%;
+  padding: 10rpx 10rpx 20rpx 10rpx;
+  box-sizing: border-box; 
+  /* background-color: #fff; */
+  
+}
+
+
+.flex {
+  display: flex;
+  flex-direction: column; 
+  padding: 10rpx 10rpx 20rpx 10rpx;
+  box-sizing: border-box; 
+  /* background-color: #fff; */
+}
+
+.flex1 {
+  display: flex;
+  justify-content: flex-start;
+  width: 100%;
+  height: 200rpx;
+   margin-bottom: 20rpx; 
+  background-color: #fff;
+  /* clear: both; */
+   /* border: 1px solid red;   */
+}
+
+/*店铺信息  */
+.shops{
+  width: 100%;
+  height: 80rpx;
+  display: flex;
+}
+.logo{
+  width:300rpx;
+  height: 50rpx;
+  border: 1rpx solid red;
+}
+.info{
+   flex-direction:column;
+}
+.gname{
+  font-size: 20rpx;
+  color: red;
+  margin-left: 80rpx;
+  margin-top: 15rpx;
+}
+.cate-each{
+  height:200rpx; 
+}
+.showgoods{
+  width: 100%;
+  height: 770rpx;
+}
+.manjian{
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+    padding: 0 10rpx;
+    background-color: #fff;
+}
+.manjian-img{
+    width: 30rpx;
+    height: 30rpx;
+}
+
+/*判断是否存在商品  */
+.has{
+    font-size: 35rpx;
+    text-align: center;
+    margin-top: 150rpx;
+}

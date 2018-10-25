@@ -1,0 +1,101 @@
+<view class="container">
+    <view class="myHeader">
+        <view class="topSet">
+            <image class="callImage" src="/images/kefu.png" bindtap="callKeHu"></image>
+            <label class="settingLabel" bindtap="setEvent" hidden='{{level == 3}}'>设置</label>
+        </view>
+        <image catchtap='editProfile' class="portr" src="{{shopInfo.logo ? (aliyunUrl + shopInfo.logo) : '/images/logo.png'}}"></image>
+        <text class="nickName">{{shopInfo.ShopName}}</text>
+        <!-- <image class="aixin" src="/images/aixin.png"></image> -->
+        <!-- <text class="welfare_val">公益值 168</text> -->
+    </view>
+
+    <dl class="menu  {{ isHidden===true ? hide:noHid }} ">
+        <dd>
+            <ul>
+                <!-- <li bindtap="modifyPassword">修改密码</li> -->
+                <li bindtap="editShopInfo">修改信息</li>
+                <!-- <li bindtap="directionsForUse">使用说明</li> -->
+                <!-- <li bindtap="feedBack">反馈意见</li> -->
+                <!-- <li bindtap="loginOut">退出登录</li> -->
+            </ul>
+        </dd>
+    </dl>
+    <view style='width:100%;height:640rpx;'>
+        <scroll-view scroll-y style='width:100%;height:100%'>
+            <view class="cell mt15 mb5" catchtap='showMoney'>
+                <image class="cellImage" src="/images/wallet.png"></image>
+                <text class="cellTitle" data-source="{{ infor }}">我的钱包</text>
+                <image class="cellIndicator" src="/images/next.png"></image>
+                <text class="cellContent">{{shopInfo.account ? shopInfo.account : '0.00' }}元</text>
+                <label class="lineSpace"></label>
+            </view>
+
+            <view class="cell">
+                <image class="cellImage" src="/images/shop.png"></image>
+                <text class="cellTitle">商家名称</text>
+                <text class="cellContent">{{shopInfo.ShopName}}</text>
+                <label class="lineSpace"></label>
+            </view>
+            <!-- <view class="cell">
+                <image class="cellImage" src="/images/zuoji.png"></image>
+                <text class="cellTitle">商家座机</text>
+                <text class="cellContent">{{shopInfo.shop_addr}}</text>
+                <label class="lineSpace"></label>
+            </view> -->
+            <view class="cell">
+                <image class="cellImage" src="/images/phone.png"></image>
+                <text class="cellTitle">商家手机</text>
+                <text class="cellContent">{{shopInfo.mobile}}</text>
+                <label class="lineSpace"></label>
+            </view>
+            <view class="cell">
+                <image class="cellImage" src="/images/address2.png"></image>
+                <text class="cellTitle">商家地址</text>
+                <text class="cellContent">{{shopInfo.shop_addr}}</text>
+                <label class="lineSpace"></label>
+            </view>
+            <view class="cell" catchtap='goCoupon'>
+                <image class="cellImage" src="/images/youhuiquan.png"></image>
+                <text class="cellTitle">优惠券</text>
+                <text class="cellContent"></text>
+                <label class="lineSpace"></label>
+            </view>
+            <view class="cell" catchtap='showBankCard'>
+                <image class="cellImage" src="/images/bangding.png"></image>
+                <text class="cellTitle">绑定账户</text>
+                <text class="cellContent">{{card.bank}} {{card.card_no}}</text>
+                <label class="lineSpace"></label>
+            </view>
+            <!-- <view class="cell" catchtap='showUserCollection'>
+                <image class="cellImage" src="/images/shoucang.png"></image>
+                <text class="cellTitle" >用户收藏</text>
+                <text class="cellContent">查看收藏我的用户</text>
+                <label class="lineSpace"></label>
+            </view> -->
+            <block wx:if="{{level == '2'}}">
+                <view class="cell" catchtap='perfectInformation'>
+                    <image class="cellImage" src="/images/shop2.png"></image>
+                    <text class="cellTitle">完善店铺信息</text>
+                    <text class="cellContent"></text>
+                    <label class="lineSpace"></label>
+                </view>
+            </block>
+            <view class="cell" catchtap='goShopping'>
+                <image class="cellImage" src="/images/shopping.png"></image>
+                <text class="cellTitle">前去购物</text>
+                <text class="cellContent"></text>
+                <label class="lineSpace"></label>
+            </view>
+        </scroll-view>
+    </view>
+    <!-- <view class='info'>
+    <view class='info-each'>
+        <view class='info-each1'>完善店铺信息才能开店</view>
+        <view class='info-each2 ' catchtap='perfectInformation'>点我完善信息</view>
+    </view>
+</view> -->
+
+</view>
+<import src="../../template/template.wxml" />
+<template is="tabBar" data="{{tabBar:bindData.tabBar}}" />

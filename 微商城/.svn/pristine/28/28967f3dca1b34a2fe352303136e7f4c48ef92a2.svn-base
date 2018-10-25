@@ -1,0 +1,52 @@
+<view class="add-address">
+    <form bindsubmit="formSubmit">
+        <view class="add-form">
+            <view class="form-item">
+                <input class="input" bindinput="bindinputName" placeholder="姓名" name="addr_receiver" data-value="{{address.name}}" auto-focus/>
+            </view>
+            <view class="form-item">
+                <input class="input" bindinput="bindinputMobile" name="addr_mobile" data-value="{{address.mobile}}" placeholder="手机号码" />
+            </view>
+
+            <view class="form-item" >
+                <picker mode="region" bindchange="bindRegionChange" value="{{region}}" custom-item="{{customItem}}">
+                    <view class="picker">
+                        <input name="area_path" bindinput="bindinputCity" placeholder="省份、城市、区县" class='text' value='{{city}}' />
+                    </view>
+                </picker>
+            </view>
+
+            <view class="form-item">
+                <text class="iconfont icon-location" catchtap='location'></text>
+                <input class="input ml10" bindinput="bindinputInfo" name="area_detail" value='{{address.area_detail}}' placeholder="详细地址, 如街道、楼盘号等" />
+            </view>
+            <block wx:if="{{location}}">
+                <view class='myaddress'>
+                    <scroll-view scroll-y>
+                        <!-- <view class='myaddress-title'>
+                    <view>
+                        <text class="iconfont icon-locationfill"></text> </view>
+                    <view class='ml10'>附近地址</view>
+                </view> -->
+                        <block wx:for="{{location}}" wx:for-item="near" wx:key="{{near.id}}">
+                            <view class='myaddress-list' catchtap='getLocation' data-locationname='{{near.name}}' data-titude='{{near.location}}'>
+                                <view class='myaddress-each'>
+                                    <view class='addr-addr'>{{near.name}}</view>
+                                </view>
+                            </view>
+                        </block>
+                    </scroll-view>
+                </view>
+            </block>
+            <view class="form-default">
+                <text bindtap="bindIsDefault" class="default-input {{address.is_default == 1 ? 'selected' : ''}}">设为默认地址</text>
+            </view>
+        </view>
+
+        <view class="btns">
+            <button class="cannel" bindtap="cancelAddress">取消</button>
+            <button class="save" fromType="submit" bindtap="saveAddress">保存</button>
+        </view>
+    </form>
+</view>
+<view class="bg-mask" bindtap="cancelSelectRegion" wx:if="{{openSelectRegion}}"></view>

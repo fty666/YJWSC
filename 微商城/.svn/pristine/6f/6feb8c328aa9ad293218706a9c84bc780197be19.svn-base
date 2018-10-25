@@ -1,0 +1,89 @@
+<!-- <block wx:if="{{glo_is_load}}">
+  <view class="glo_load_view">
+    <text class="iconfont icon-loading animated infinite rotate mr5"></text>
+    <text>正在努力加载</text>
+  </view>
+</block> -->
+<!-- <block wx:else> -->
+
+<view>
+  <view>
+    <view class='xia2'></view>
+    <!--订单  -->
+    <view class='wai'>
+      <view>
+        <image src='' class='photo'></image>
+      </view>
+      <view class='shops'>肉夹馍</view>
+      <view class='order'>订单已完成</view>
+    </view>
+    <view class='xia'></view>
+
+    <view class='wai2'>
+      <view class='sinfo'>
+        <view class='name'>纯瘦肉夹馍</view>
+        <view class='many'>X1</view>
+      </view>
+
+      <view class='sinfo'>
+        <view class='name'>纯瘦肉夹馍</view>
+        <view class='many'>X1</view>
+      </view>
+
+      <view style='display:flex'>
+        <view class='pay'>共2件商品，实付</view>
+        <view class='money'>￥25.5</view>
+      </view>
+    </view>
+    <view class='xia'></view>
+    <view class='wai3'>
+      <view class='recur'>再来一单</view>
+      <view class='go'>去评论</view>
+    </view>
+    <view class='xia2'></view>
+  </view>
+
+  <view>
+    <view class='xia2'></view>
+    <!--订单  -->
+    <view class='wai'>
+      <view>
+        <image src='' class='photo'></image>
+      </view>
+      <view class='shops'>肉夹馍</view>
+      <view class='order'>订单已完成</view>
+    </view>
+    <view class='xia'></view>
+
+    <view class='wai2'>
+      <view class='sinfo'>
+        <view class='name'>纯瘦肉夹馍</view>
+        <view class='many'>X1</view>
+      </view>
+
+      <view class='sinfo'>
+        <view class='name'>纯瘦肉夹馍</view>
+        <view class='many'>X1</view>
+      </view>
+
+      <view style='display:flex'>
+        <view class='pay'>共2件商品，实付</view>
+        <view class='money'>￥25.5</view>
+      </view>
+    </view>
+    <view class='xia'></view>
+    <view class='wai3'>
+      <view class='recur'>再来一单</view>
+      <view class='go'>去评论</view>
+    </view>
+    <view class='xia2'></view>
+  </view>
+
+  <!-- </block> -->
+  <!-- <block wx:else>
+      <navigator class='no-order' url="/pages/shop/mall/mall">
+        <view>您还没有相关的订单</view>
+        <view>可以去看看有哪些想买的</view>
+      </navigator>
+    </block> -->
+</view>

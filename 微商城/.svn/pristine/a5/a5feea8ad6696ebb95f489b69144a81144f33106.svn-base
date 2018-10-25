@@ -1,0 +1,39 @@
+<block wx:if="{{glo_is_load}}">
+    <view class="glo_load_view">
+        <text class="iconfont icon-loading animated infinite rotate mr5"></text>
+        <text>正在努力加载</text>
+    </view>
+</block>
+<block wx:else>
+    <view class='contents'>
+        <block wx:if="{{hasData}}">
+            <scroll-view scroll-y>
+                <block wx:for="{{card}}" wx:key="{{item.card_no}}"> 
+                    <view class="card">
+                        <view catchtap='setCardDefault' data-cid='{{item.cid}}' class="moren {{item.is_default ? 'active' : ''}}"></view>
+                        <view catchtap='selectBankCard' data-cid="{{item.cid}}">
+                            <view class='mt15'>{{item.bank}}</view>
+                            <view class='card-num'>
+                                {{item.card_no}}
+                            </view>
+                        </view>
+                        <view class='btn'>
+                            <view catchtap='unbindBankCard' data-cid='{{item.cid}}'  class="button button-caution button-rounded button-wx-tiny">解绑                 </view>
+                        </view>
+                    </view>
+                </block>
+            </scroll-view>
+        </block>
+        <block wx:else>
+            <view class='no-data'>
+                <view>您还没有银行卡</view>
+                <view bindtap='addCard'>赶快去添加吧</view>
+            </view>
+        </block>
+    </view>
+
+    <view class='add' bindtap='addCard'>
+        <text class="iconfont icon-add"></text> 
+        <view class='ml10'>添加银行卡</view>
+    </view>
+</block>

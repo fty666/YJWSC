@@ -1,0 +1,101 @@
+<!-- <block wx:if="{{glo_is_load}}">
+  <view class="glo_load_view">
+    <text class="iconfont icon-loading animated infinite rotate mr5"></text>
+    <text>正在努力加载</text>
+  </view>
+</block> -->
+<!-- <block wx:else> -->
+
+<view>
+  <!--外卖专员  -->
+  <view class='wai' style="height:{{px2rpxHeight*500}}px;">
+    <view class='user' style="height:{{px2rpxHeight*180}}px;">
+      <view>
+        <image src='../../../images/qishou.png' class='photo' style="width:{{px2rpxWidth*100}}px;height:{{px2rpxWidth*100}}px;"></image>
+      </view>
+      <view>
+        <view class='name'>骑手评分</view>
+        <!-- <view class='time'>7月1日18:35 左右送达</view> -->
+      </view>
+    </view>
+    <view class='xia' style="height:{{px2rpxHeight*2}}px;"></view>
+
+    <view>
+      <view class='pei'>为配送打分</view>
+
+      <view class='flex'>
+        <view class='lef'>
+          <block wx:for="{{rider}}" wx:for-item="rider" wx:key="{{index}}">
+            <view class='star' data-index='{{index}}' catchtap='riders'>
+              <text class="iconfont {{index >= rider_grade? 'icon-favor' : 'icon-favorfill'}} "></text>
+            </view>
+          </block>
+        </view>
+      </view>
+
+    </view>
+  </view>
+  <!--商品评价  -->
+  <form bindsubmit="formSubmit" bindreset="formReset">
+    <view class='wai2'>
+      <block wx:for="{{orderInfo}}" wx:key="{{index}}">
+        <view class='user' style="height:{{px2rpxHeight*180}}px;">
+          <view>
+            <image src='{{uploadFileUrl+item.logo}}' class='photo' style="width:{{px2rpxWidth*100}}px;height:{{px2rpxWidth*100}}px;"></image>
+          </view>
+          <view class='shops'>{{item.shopName}}</view>
+        </view>
+        <view class='xia' style="height:{{px2rpxHeight*2}}px;"></view>
+        <!--为商家打分  -->
+        <view>
+          <view class='pei'>为商家打分</view>
+          <view class='flex'>
+            <view class='lef'>
+              <block wx:for="{{star}}" wx:for-item="star" wx:key="{{index}}">
+                <view class='star' data-index='{{index}}' catchtap='high'>
+                  <text class="iconfont {{star >= shop_grade? 'icon-favor' : 'icon-favorfill'}} "></text>
+                </view>
+              </block>
+            </view>
+          </view>
+        </view>
+        <!--评价  -->
+        <view class='text' style="height:{{px2rpxHeight*250}}px;">
+          <textarea bindblur="bindTextAreaBlur" name="text" auto-height placeholder="写出您对商家的评价吧~" placeholder-style="margin-left:30rpx;line-height:25rpx;"></textarea>
+        </view>
+
+        <view class='files'>
+          <view>
+            <image src='../../../images/file.png' catchtap='files' class='file' style="width:{{px2rpxWidth*150}}px;height:{{px2rpxWidth*150}}px;"></image>
+          </view>
+          <view wx:for="{{img}}" wx:for-item="imgs" wx:key="{{index}}">
+            <image src='{{uploadFileUrl+imgs}}' class='file' style="width:{{px2rpxWidth*150}}px;height:{{px2rpxWidth*150}}px;"></image>
+          </view>
+        </view>
+
+        <!--具体商品评价  -->
+        <block wx:for="{{item.goods}}" wx:for-item="good" wx:key="{{index}}">
+          <view class='flex'>
+            <view class='font' style="width:{{px2rpxWidth*250}}px;">{{good.goods_name}}</view>
+            <view class='zan' catchtap='zanCai' data-gid='{{good.goodsId}}' data-inde='{{index}}' data-type='zan' style="width:{{px2rpxWidth*100}}px;height:{{px2rpxHeight*50}}px;">
+              <text class='iconfont  icon-heart {{comments[good.goodsId] == 5 ? "reds" : "" }} '>赞</text>
+            </view>
+            <view class='cai' catchtap='zanCai' data-gid='{{good.goodsId}}' data-inde="{{index}}" data-type='cai' style="width:{{px2rpxWidth*100}}px;height:{{px2rpxHeight*50}}px;">
+              <text class='iconfont icon-heart {{comments[good.goodsId] == 1 ? "reds" : "" }}'>踩</text>
+            </view>
+          </view>
+        </block>
+      </block>
+    </view>
+    <view class='sub' style="height:{{px2rpxHeight*80}}px;">
+      <button formType="submit" type="primary">提交</button>
+    </view>
+  </form>
+  <!-- </block> -->
+  <!-- <block wx:else>
+      <navigator class='no-order' url="/pages/shop/mall/mall">
+        <view>您还没有相关的订单</view>
+        <view>可以去看看有哪些想买的</view>
+      </navigator>
+    </block> -->
+</view>

@@ -1,0 +1,132 @@
+<!-- <block wx:if="{{glo_is_load}}">
+  <view class="glo_load_view">
+    <text class="iconfont icon-loading animated infinite rotate mr5"></text>
+    <text>正在努力加载</text>
+  </view>
+</block> -->
+<!-- <block wx:else> -->
+
+<view style='height:2000rpx;'>
+    <!--订单完成  -->
+    <view>
+        <view class='finsh'>订单完成
+            <text class="iconfont icon-youjiantou"></text> </view>
+        <view class='font1'>感谢您对本商城的信任，期待再次光临</view>
+        <view style='display:flex'>
+            <navigator url='/pages/takeout/index/index'>
+                <view class='resu'>再来一单</view>
+            </navigator>
+            <!-- <view class='go'>评价</view> -->
+        </view>
+        <view class='xia'></view>
+        <!--外卖专员  -->
+        <view class='flex wai2'>
+            <view>
+                <view class='font'>外卖小哥</view>
+                <view class='flex'>
+                    <view>
+                        <image src='' class='xing'></image>
+                    </view>
+                    <view class='font2'>4.9</view>
+                </view>
+            </view>
+            <view>
+                <image src='../../../images/tel.png' class='tel'></image>
+            </view>
+        </view>
+        <view class='xia2'></view>
+    </view>
+
+    <!--商品详情  -->
+    <view>
+        <!--店铺信息  -->
+        <view class='flex shop'>
+            <view>
+                <image src='{{uploadFileUrl+orderinfo.logo}}' class='logo'></image>
+            </view>
+            <view class='name'>{{orderinfo.shopName}}</view>
+            <view class='gos'>
+                <text class="iconfont icon-appreciate"></text> </view>
+        </view>
+        <!--订单详情  -->
+        <block wx:for="{{orderinfo.goods}}" wx:key="{{index}}" wx:for-item='ginfo'>
+            <view class='flex info'>
+                <view>
+                    <image src='{{uploadFileUrl+ginfo.img}}' class='photo'></image>
+                </view>
+                <view>
+                    <view class='sname'>{{ginfo.goods_name}}</view>
+                    <view class='smany'>X{{ginfo.num}}</view>
+                </view>
+                <view class='money'>￥{{ginfo.goodsPrice}}</view>
+            </view>
+        </block>
+        <view style='height:10rpx;'></view>
+    </view>
+    
+    <view class='flex'>
+        <view class='he'>配送费</view>
+        <view class='pei'>￥{{orderinfo.transMoney}}</view>
+    </view>
+    <view class='xia3'></view>
+    <view class='flex'>
+        <view class='come'>共计:￥{{orderinfo.sumPrice}}</view>
+        <view class='fact'>实付:￥{{orderinfo.real_money}}</view>
+    </view>
+    <view class='xia3'></view>
+    <view class='flex'>
+        <view>
+            <image src='../../../images/tel.png' class='tel1'></image>
+        </view>
+        <view class='touch' bindtap='calling'>联系商家</view>
+    </view>
+    <view class='xia2'></view>
+
+    <!--配送地址  -->
+    <view class='add'>
+        <view class='flex'>
+            <view class='data'>配送时间</view>
+            <view class='once'>立即配送</view>
+        </view>
+
+        <view class='flex'>
+            <view class='data'>配送地址</view>
+            <view>
+                <view class='once'>{{orderinfo.area_path}} {{orderinfo.area_detail}}</view>
+                <view class='once'>{{orderinfo.addr_receiver}} {{orderinfo.addr_mobile}}</view>
+            </view>
+        </view>
+        <view class='flex'>
+            <view class='data'>配送服务</view>
+            <view class='once'>美团专送，提高品质服务</view>
+        </view>
+    </view>
+    <view class='xia2'></view>
+
+    <!--订单号  -->
+    <view class='orderin'>
+        <view class='flex'>
+            <view class='data'>订单号码</view>
+            <view class='once'>{{orderinfo.order_uuid}}</view>
+        </view>
+
+        <view class='flex'>
+            <view class='data'>订单时间</view>
+            <view class='once'>{{orderinfo.createTime}}</view>
+        </view>
+
+        <view class='flex'>
+            <view class='data'>支付方式</view>
+            <view class='once'>在线实付</view>
+        </view>
+    </view>
+
+    <!-- </block> -->
+    <!-- <block wx:else>
+      <navigator class='no-order' url="/pages/shop/mall/mall">
+        <view>您还没有相关的订单</view>
+        <view>可以去看看有哪些想买的</view>
+      </navigator>
+    </block> -->
+
+</view>

@@ -1,0 +1,51 @@
+<block wx:if="{{glo_is_load}}">
+    <view class="glo_load_view">
+        <text class="iconfont icon-loading animated infinite rotate mr5"></text>
+        <text>正在努力加载</text>
+    </view>
+</block>
+<block wx:else>
+    <!--mallcate.wxml-->
+    <view class="cate flex flexC">
+
+        <!-- <view class="search">
+    <view class="search-box flex">
+        <input class="sub search-input" type="text" placeholder="请搜索商品" confirm-type="search" bindconfirm="goods_search_bind"/>
+        <button size="mini" class="search-btn"><icon type="search" size="18" /></button>
+    </view>
+  </view> -->
+
+        <view>
+            <!-- <scroll-view scroll-y="true" class="sidebar tc gridXt">
+        <block wx:for="{{carray}}" wx:key="{{item.groupId}}">
+          <view class="cate-name {{this_cate_id==item.groupId?'cate-name-active':''}} gridXb" bindtap="cate_item_bind" data-cid="{{item.groupId}}" id="{{item.groupId}}">{{item.groupName}}</view>
+        </block>
+      </scroll-view>  -->
+
+            <!-- <scroll-view scroll-y="true" class="cate-con" scroll-into-view="{{classifyViewed}}" bindscroll="onCateScroll"> -->
+            <view class="flex">
+                <block wx:for="{{shops}}" wx:key="{{item.shopId}}" wx:for-item="titem">
+                    <view class="cate-item flex1  mb10" bindtap="mall_list_bind" data-id="{{titem.groupId}}" data-shop_code="{{titem.shop_code}}">
+                        <view class="cate-imgbox">
+                            <image src="{{ upload_file_url+titem.logo}}" style='width:200rpx;height:200rpx;' class="cate-img" mode="aspectFill"></image>
+                        </view>
+                        <view class='shops'>
+                            <view class="sinfo">{{titem.ShopName}}</view>
+                            <view class="sinfo">{{titem.shop_detail}}</view>
+                        </view>
+
+                        <view class='mll'>
+                            <button type='warn' catchtap='show' data-shop_code="{{titem.shop_code}}" style='font-size:22rpx;margin-left:20rpx;'>收藏</button>
+                        </view>
+                    </view>
+                </block>
+            </view>
+            <!--list end-->
+
+            <!-- </scroll-view> -->
+
+        </view>
+
+    </view>
+
+</block>

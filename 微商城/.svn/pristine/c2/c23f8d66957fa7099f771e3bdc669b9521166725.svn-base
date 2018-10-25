@@ -1,0 +1,124 @@
+page{
+    background-color: #fff;
+}
+.header {
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+    width: 100%;
+    height: 110rpx;
+    padding: 0 20rpx;
+    box-sizing: border-box;
+    border-bottom: 1rpx solid #ccc; 
+}
+
+.location {
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+    min-width: 170rpx;
+    max-width:290rpx;
+    height: 70rpx;
+     /* border: 1rpx solid red;  */
+}
+
+.location-addr {
+    width: 100%;
+    max-width:200rpx;  
+    height: 100%;
+    font-size: 28rpx;
+    line-height: 70rpx;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    /* border: 1rpx solid red;   */
+}
+
+.search{
+    position: relative;
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+    width: 100%;
+    height: 70rpx;
+    
+}
+.search-input{
+    position: absolute;
+    top: 0;
+    left: 0;
+    z-index:5rpx;
+    width: 100%;
+    height: 70rpx;
+    padding-left:70rpx;
+    box-sizing: border-box;
+    color: #333; 
+    border-radius: 10rpx 10rpx 10rpx 10rpx;
+    background-color: #e0e0e0;
+}
+
+.search-icon{
+    position: absolute;
+    top: 0;
+    left: 0rpx;
+    z-index:10rpx;
+    width: 80rpx;
+    height: 70rpx;
+    text-align: center;
+    line-height: 70rpx;
+     /* border: 1rpx solid red;  */
+}
+
+.content{
+    width: 100%;
+    height: 1080rpx;
+    /* border: 1rpx solid red; */
+}
+.again{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width:100%;
+    height: 100rpx;
+    padding: 0 20rpx;
+    border-bottom:1rpx solid #ccc;
+    font-size:33rpx; 
+}
+.again-text{
+    font-size: 26rpx;
+    color: orange;
+}
+.myaddress{
+    display: flex;
+    flex-direction: column;
+    padding-top: 50rpx;
+    box-sizing: border-box;   
+}
+.myaddress-title{
+    display: flex;
+    justify-content: flex-start;
+    padding-left:20rpx;
+    box-sizing: border-box; 
+}
+.myaddress-list{
+    margin-top: 20rpx;
+    padding:0 20rpx 0 70rpx;
+    box-sizing: border-box; 
+}
+.myaddress-each{
+    display: flex;
+    flex-direction: column;
+    padding-bottom:20rpx;
+    box-sizing: border-box; 
+    border-bottom: 1rpx solid #ccc;
+}
+.addr-addr{
+    width: 100%;
+}
+.addr-people{
+    width: 300rpx;
+    display: flex;
+    justify-content: space-between;
+    font-size: 24rpx;
+    color: #aaa;
+}

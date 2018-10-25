@@ -1,0 +1,48 @@
+/* pages/user/assess/assess.wxss */
+.section{
+  width:100%;
+  height:300rpx;
+  border:1rpx solid #ddd;
+  background: white;
+}
+.photo{
+  width: 100%;
+  height: 35rpx;
+}
+.font{
+  color: red;
+  font-size: 30rpx;
+}
+
+/**index.wxss**/
+.star-image{
+  position: absolute;
+  top: 400rpx;
+  width: 100rpx;
+  height: 100rpx;
+  src: "../../images/normal.png";
+}
+.item{
+  position: absolute;
+  top: 50rpx;
+  width: 75rpx;
+  height: 150rpx;
+}
+
+.bts{
+  width:100%;
+  height: 100rpx;
+  margin-top: 170rpx;
+}
+
+.file{
+width: 150rpx;
+height: 150rpx;
+margin-top:160rpx; 
+}
+
+.files{
+  display: flex;
+ flex-wrap:nowrap;
+}
+

@@ -1,0 +1,40 @@
+.form-each {
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+  width: 100%;
+  padding-left: 20rpx;
+  border-bottom: 1px solid #ccc;
+}
+
+.label {
+  text-align: right;
+  line-height: 100rpx;
+}
+
+input {
+  width: 100%;
+  padding: 0 20rpx;
+}
+
+.btn {
+  padding: 0 20rpx;
+  box-sizing: border-box;
+}
+
+.img {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  width: 100%;
+  padding: 20rpx;
+  box-sizing: border-box;
+}
+
+.img-scroll {
+  width: 100%;
+}
+
+.img image {
+  margin-bottom: 20rpx;
+}

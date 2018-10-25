@@ -1,0 +1,42 @@
+<view class="dispalyFlex container">
+    <view class="dispalyFlex view1" style="flex-item">
+        <image class="moneyImge" src="/images/yue.png"></image>
+        <label class="font-size14 balance magrgin-top10">钱包余额</label>
+        <view class="dispalyFlex balanceShow">
+            <label class="balanceValue magrgin-top10">{{ shopInfo.account }}</label>
+            <label class="font-size14 yuan">元</label>
+        </view>
+    </view>
+    <view class="view2 magrgin-top10" style="flex-item">
+        <view class="height35">
+            <!-- <image class="tixianImage margin-left12" src="/images/tixian.png"></image> -->
+            <label class="font-size16 tixianNote normalColor">提现至</label>
+        </view>
+        <label class="floatLeft lineSpace"></label>
+        <view class="height44" bindtap='changeBankCard'>
+            <label class="font-size12 floatLeft margin-left12 normalColor">银行卡</label>
+            <label class="font-size14 floatRight bankCard margin-right12">{{card.bank}} {{card.card_no}}</label>
+        </view>
+        <label class="floatLeft lineSpace"></label>
+        <!-- <view class="height44">
+            <label class="font-size12 floatLeft margin-left12 normalColor">持卡人姓名:</label>
+            <!-- <label class="font-size12 floatRight margin-right12 normalColor"></label>
+            <input  class="font-size14 normalColor floatRight margin-right12 magrgin-top10" placeholder-style="color:#ccc;" type="number" placeholder="请输入该卡对应的持卡人姓名" bindblur='ownerInput'/>
+        </view>
+        <label class="floatLeft lineSpace"></label> -->
+        <view class="height44">
+            <label class="font-size12 floatLeft margin-left12 normalColor">提现金额</label>
+            <label class="font-size12 floatRight margin-right12 normalColor">元</label>
+            <input value="{{ deposit }}" class="font-size14 normalColor floatRight margin-right10 magrgin-top10" placeholder-style="color:#ccc;" type="number" placeholder="请输入提现金额" bindblur="withdrawPrice" />
+        </view>
+        <label class="floatLeft lineSpace"></label>
+        <view class="height35">
+            <label class="font-size12 floatLeft margin-left12 balance">可提现金额<text class='ml10'>{{ shopInfo.pay_account ? shopInfo.pay_account : '0.00'}} 元</text></label>
+            <label class="font-size12 floatRight margin-right12 allDeposit" bindtap="allDeposit">全部提现</label>
+        </view>
+    </view>
+    <view class="view3" style="flex-item">
+        <button class="depositBtn" type="primary"  bindtap='extract'>提现</button>
+        <button class="showDeatailBtn magrgin-top10 normalColor" bindtap='showDetail'>查看明细</button>
+    </view>
+</view>

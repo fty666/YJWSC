@@ -1,0 +1,33 @@
+.shop-each{
+    width: 100%;
+    padding: 20rpx;
+    box-sizing: border-box;
+    /* border: 1px solid red; */
+}
+.each-input{
+    width: 600rpx;
+    height: 70rpx;
+    margin-left: 30rpx; 
+    padding-left:10rpx;
+    box-sizing: border-box; 
+    border: 1rpx solid #ccc;
+}
+.each-radio{
+    margin-left: 30rpx; 
+}
+.each-textarea{
+    width: 600rpx;
+    height: 100rpx;
+    margin-left: 30rpx; 
+    padding:10rpx;
+    box-sizing: border-box; 
+    border: 1rpx solid #ccc;
+}
+.each-img{
+    width: 700rpx;
+    height: 400rpx;
+}
+.logo{
+    width: 300rpx;
+    height: 300rpx;
+}

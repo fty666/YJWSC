@@ -1,0 +1,39 @@
+/* pages/user/assess/assess.wxss */
+.section{
+  width:100%;
+  border:1rpx solid #ddd;
+  background: white;
+}
+.photo{
+  width: 100%;
+}
+.font{
+  color: red;
+  font-size: 30rpx;
+}
+
+/**index.wxss**/
+.star-image{
+  position: absolute;
+  top: 400rpx;
+  src: "../../images/normal.png";
+}
+.item{
+  position: absolute;
+  top: 50rpx;
+}
+
+.bts{
+  width:100%;
+  margin-top: 170rpx;
+}
+
+.file{
+margin-top:160rpx; 
+}
+
+.files{
+  display: flex;
+ flex-wrap:nowrap;
+}
+

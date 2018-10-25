@@ -1,0 +1,274 @@
+<block wx:if="{{glo_is_load}}">
+    <view class="glo_load_view">
+        <text class="iconfont icon-loading animated infinite rotate mr5"></text>
+        <text>正在努力加载</text>
+    </view>
+</block>
+<block wx:else>
+
+    <view style='position:relative'>
+        <!--店铺详情  -->
+        <view class='wai1'>
+            <view>
+                <image src='' class='logo'></image>
+            </view>
+            <view>
+                <view>
+                    <text decode='true' class='font'>起送 ￥0 &nbsp;|&nbsp; 30分钟 &nbsp;|&nbsp; 2.9km</text>
+                </view>
+                <view class='font'>公告：哈哈哈哈啊哈哈嗯嗯嫩嗯嗯嗯啊啊啊啊啊啊啊啊哈哈哈啊</view>
+
+                <view style='display:flex'>
+                    <view>
+                        <image src='' class='zhe'></image>
+                    </view>
+                    <view class='font'>折扣商品4.76折起</view>
+                    <view class='more'>
+                        <text class="iconfont icon-youjiantou"></text> </view>
+                </view>
+
+            </view>
+        </view>
+
+        <!--选择按钮  -->
+        <view style='display:flex'>
+            <view class='font1' catchtap='menu'>菜单</view>
+            <view class='font1' catchtap='ping'>评价</view>
+            <view class='font1' catchtap='shop'>商家</view>
+        </view>
+        <view class='xia'></view>
+
+        <!--菜单  -->
+        <view wx:if="{{assess==0}}">
+            <view class='flex'>
+                <view>
+                    <image src='../../../images/hot.png' class='hots'></image>
+                </view>
+                <view class='hot'>热销</view>
+                <view class='hot2'>热销</view>
+            </view>
+
+            <view class='flex'>
+                <view>
+                    <scroll-view scrolly-y style='height:100%;'>
+                        <view class='classs'>主食类</view>
+                        <view class='classs'>汤类</view>
+                        <view class='classs'>粥类</view>
+                    </scroll-view>
+                </view>
+
+                <view class='goods'>
+                    <scroll-view scrolly-y style='height:100%;'>
+                        <view class='flex'>
+                            <view>
+                                <image src='' class='photo'></image>
+                            </view>
+                            <view class='flex2'>
+                                <view class='del'>标准肉夹馍</view>
+                                <view class='del1'>标准的纯瘦肉和馍组成</view>
+                                <view class='del1'>月售55</view>
+                                <view class='flex'>
+                                    <view class='del2'>￥7</view>
+                                    <view class='jia'>
+                                        <image src='../../../images/jia.png' class='jia'></image>
+                                    </view>
+                                </view>
+                            </view>
+                        </view>
+
+                        <view class='flex'>
+                            <view>
+                                <image src='' class='photo'></image>
+                            </view>
+                            <view class='flex2'>
+                                <view class='del'>标准肉夹馍</view>
+                                <view class='del1'>标准的纯瘦肉和馍组成</view>
+                                <view class='del1'>月售55</view>
+                                <view class='flex'>
+                                    <view class='del2'>￥7</view>
+                                    <view class='jia'>
+                                        <image src='../../../images/jia.png' class='jia'></image>
+                                    </view>
+                                </view>
+                            </view>
+                        </view>
+
+                        <view class='flex'>
+                            <view>
+                                <image src='' class='photo'></image>
+                            </view>
+                            <view class='flex2'>
+                                <view class='del'>标准肉夹馍</view>
+                                <view class='del1'>标准的纯瘦肉和馍组成</view>
+                                <view class='del1'>月售55</view>
+                                <view class='flex'>
+                                    <view class='del2'>￥7</view>
+                                    <view class='jia'>
+                                        <image src='../../../images/jia.png' class='jia'></image>
+                                    </view>
+                                </view>
+                            </view>
+                        </view>
+                    </scroll-view>
+                </view>
+            </view>
+
+        </view>
+        <!--菜单完  -->
+
+        <!--商家  -->
+        <view wx:if="{{assess==1}}">
+            <view>
+                <view class='wai'>
+                    <view>
+                        <image src='../../../images/gps.png' class='address'></image>
+                    </view>
+                    <view class='add'>天津开发区乐购</view>
+                    <view>
+                        <image src='../../../images/phone.png' class='tel'></image>
+                    </view>
+                </view>
+            </view>
+            <view class='xia2'></view>
+
+            <view>
+                <view class='wai'>
+                    <view>
+                        <image src='../../../images/safe.png' class='address'></image>
+                    </view>
+                    <view class='add'>查看食品档案</view>
+                </view>
+            </view>
+            <view class='xia2'></view>
+
+            <view>
+                <view class='wai'>
+                    <view>
+                        <image src='../../../images/wps.png' class='address'></image>
+                    </view>
+                    <view class='add'>配送服务</view>
+                    <view class='zhuan'>
+                        <view class='font2'>美团专送</view>
+                        <view class='font2'>送货快</view>
+                    </view>
+                </view>
+            </view>
+            <view class='xia2'></view>
+
+            <view>
+                <view class='wai'>
+                    <view>
+                        <image src='../../../images/time.png' class='address'></image>
+                    </view>
+                    <view class='add'>配送时间：09:00-20:00</view>
+                </view>
+            </view>
+            <view class='xia2'></view>
+
+            <view>
+                <view class='wai'>
+                    <view>
+                        <image src='' class='address'></image>
+                    </view>
+                    <view class='add'>新用户立减14元(在线支付专享)</view>
+                </view>
+            </view>
+            <view class='xia2'></view>
+        </view>
+        <!--商家完  -->
+
+
+        <!--评价  -->
+        <view wx:if="{{assess==2}}">
+            <!--评分表  -->
+            <view class="comment">
+                <view class='shops'>
+                    <view class='test'>5.9</view>
+                    <view class='font3'>商家评分</view>
+                </view>
+
+                <view class='tast'>
+                    <view style='display:flex;'>
+                        <view class='font4'>口味</view>
+                        <view>
+                            <image src='' class='xing'></image>
+                        </view>
+                        <view class='font5'>4.9</view>
+                    </view>
+
+                    <view style='display:flex'>
+                        <view class='font4'>包装</view>
+                        <view>
+                            <image src='' class='xing'></image>
+                        </view>
+                        <view class='font5'>4.9</view>
+                    </view>
+                </view>
+
+                <view class='pei'>
+                    <view class='test2'>5</view>
+                    <view class='font3'>配送评分</view>
+                </view>
+            </view>
+            <view class='xia2'></view>
+
+            <!--评价数量  -->
+            <view class='many'>
+                <view class='math'>全部评价(999+)</view>
+                <view class='math'>有图评价(92)</view>
+                <view class='math'>好评(6124)</view>
+                <view class='math1'>差评(24)</view>
+                <view class='math1'>服务好(124)</view>
+                <view class='math1'>满意(6124)</view>
+            </view>
+            <view class='xia2'></view>
+
+            <!-- 具体评价 -->
+            <view class='ju'>
+                <view class='info'>
+                    <view>
+                        <image src='' class='photo'></image>
+                    </view>
+                    <view style='display:flex;flex-direction:column'>
+                        <view class='name'>匿名用户</view>
+                        <view>
+                            <image src='' class='wu'></image>
+                        </view>
+                    </view>
+                    <view class='time'>2018.7.3</view>
+                </view>
+                <view class='detail'>哈哈哈哈哈哈哈哈啊哈哈哈哈哈哈哈哈哈</view>
+                <view class='xia'></view>
+            </view>
+
+            <view class='ju'>
+                <view class='info'>
+                    <view>
+                        <image src='' class='photo'></image>
+                    </view>
+                    <view style='display:flex;flex-direction:column'>
+                        <view class='name'>匿名用户</view>
+                        <view>
+                            <image src='' class='wu'></image>
+                        </view>
+                    </view>
+                    <view class='time'>2018.7.3</view>
+                </view>
+                <view class='detail'>哈哈哈哈哈哈哈哈啊哈哈哈哈哈哈哈哈哈</view>
+            </view>
+
+        </view>
+        <!--评价完  -->
+
+    </view>
+
+    <!--去接算  -->
+    <view class='go'>
+        <view>
+            <image src="" class='jie'></image>
+        </view>
+        <view class='fpay'>另需配送费￥3.5</view>
+        <view class='fpay2'>20元起送</view>
+    </view>
+
+</block>

@@ -1,0 +1,169 @@
+page {
+  background: #f4f4f4;
+}
+
+/*外卖小哥  */
+
+.flex {
+  display: flex;
+}
+
+.wai {
+  width: 90%;
+  margin-left: 40rpx;
+  background: #fff;
+  margin-top: 25rpx;
+}
+
+.user {
+  display: flex;
+}
+
+.photo {
+  margin-left: 45rpx;
+  border-radius: 50%;
+  margin-top: 40rpx;
+}
+
+.info {
+  display: flex;
+  flex-direction: column;
+}
+
+.name {
+  margin-left: 30rpx;
+  margin-top: 50rpx;
+  font-size: 40rpx;
+}
+
+.time {
+  margin-left: 30rpx;
+  line-height: 45rpx;
+  font-size: 25rpx;
+}
+
+.xia {
+  width: 94%;
+  margin-left: 20rpx;
+  background: #ddd;
+}
+
+.pei {
+  margin-left: 270rpx;
+  line-height: 120rpx;
+  font-size: 30rpx;
+  color: #ddd;
+  letter-spacing: 8rpx;
+}
+
+.xing1 {
+  margin-left: 105rpx;
+}
+
+.xing {
+  width: 80rpx;
+  height: 80rpx;
+  margin-left: 20rpx;
+}
+.icon-favor{
+ font-size: 70rpx;
+ margin-left: 30rpx;
+ line-height: 50rpx;
+}
+.icon-favorfill{
+ font-size: 70rpx;
+ margin-left: 30rpx;
+ line-height: 50rpx; 
+}
+.lef{
+    margin-left: 80rpx;
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+}
+
+.star{
+     display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.xia2 {
+  height: 10rpx;
+  background: #ddd;
+}
+
+.wai2 {
+  width: 90%;
+  margin-left: 40rpx;
+  margin-top: 50rpx;
+  background: #fff;
+}
+
+.shops {
+  margin-top: 65rpx;
+  margin-left: 30rpx;
+  font-size: 40rpx;
+}
+
+.text {
+  width: 90%;
+  margin-left: 30rpx;
+  border: 2rpx solid #ddd;
+  margin-top: 25rpx;
+  font-size: 30rpx;
+}
+
+.font {
+  margin-top: 50rpx;
+  margin-left: 30rpx;
+  font-size: 35rpx;
+  color: black;
+}
+
+.zan {
+  margin-left: 140rpx;
+  margin-top: 50rpx;
+  border: 2rpx solid #ddd;
+  border-radius: 13rpx;
+  font-size: 35rpx;
+  text-align: center;
+}
+
+.cai {
+  margin-left: 30rpx;
+  margin-top: 50rpx;
+  border: 2rpx solid #ddd;
+  border-radius: 13rpx;
+  font-size: 35rpx;
+  text-align: center;
+}
+
+.pcai{
+  width: 40rpx;
+  height: 40rpx;
+}
+.sub{
+  width: 90%;
+  border-radius: 50rpx;
+  background: #ddd;
+  text-align: center;
+  color: white;
+  margin-left: 40rpx;
+  line-height: 80rpx;
+  margin-top: 80rpx;
+}
+
+.file{
+/* width: 150rpx;
+height: 150rpx; */
+margin-top:50rpx; 
+}
+
+.files{
+  display: flex;
+ flex-wrap:nowrap;
+}
+
+.reds{
+    color: red;
+}

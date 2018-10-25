@@ -1,0 +1,182 @@
+<!--   <button wx:if="{{!hasUserInfo && canIUse}}" open-type="getUserInfo" bindgetuserinfo="getUserInfoBtn"> 获取头像昵称 </button>  
+<block wx:else> -->
+<block wx:if="{{glo_is_load}}">
+  <view class="glo_load_view">
+    <text class="iconfont icon-loading animated infinite rotate mr5"></text>
+    <text>正在努力加载</text>
+  </view>
+</block>
+<block wx:else>
+  <!--mall.wxml-->
+  <view class="search flex">
+    <!-- <text class="iconfont icon-saoyisao" bindtap="shop_saoma_bind" ></text> -->
+    <view class="search-box sub">
+      <view class="flex">
+        <input class="sub search-input" type="text" placeholder="请输入店铺名称" bindblur="inputBlur" confirm-type="search" bindconfirm="goods_search_bind" style="height:{{px2rpxheight*64}}px;margin-top:3px;" />
+        <button size="mini" class="search-btn">
+          <icon type="search" size="18" />
+        </button>
+      </view>
+    </view>
+  </view>
+  <!--home swiper start-->
+  <view class="swiper">
+    <swiper indicator-dots="true" autoplay="true" circular="true" indicator-color="rgba(0,0,0,0.5)" indicator-active-color="#ffffff" current="0" interval="3000" duration="600" class="swiper-box">
+      <!-- <block wx:for="{{[1,2,3]}}" wx:key="{{index}}"> -->
+      <swiper-item>
+        <image src="https://zuoanzac.oss-cn-beijing.aliyuncs.com/1.jpg" bindtap="swiper_top_bind" data-url="{{item.url}}" class="swiper-img" mode="aspectFill" />
+      </swiper-item>
+      <swiper-item>
+        <image src="https://zuoanzac.oss-cn-beijing.aliyuncs.com/2.jpg" bindtap="swiper_top_bind" data-url="{{item.url}}" class="swiper-img" mode="aspectFill" />
+      </swiper-item>
+      <!-- </block> -->
+    </swiper>
+  </view>
+  <!--home swiper end-->
+  <!--店铺分类  -->
+  <view class="menu tc clearfix" style="height:{{px2rpxHeight*390}}px">
+    <view class='shop' wx:for="{{group}}" wx:key="{{item.groupId}}" data-gid='{{item.groupId}}' bindtap='sgroup'>
+      <view class='list' style="width:{{px2rpxWidth*100}}px;height:{{px2rpxHeight*100}}px;">
+        <view>
+          <block wx:if="{{item.img}}">
+            <image src='{{upload_file_url+item.img}}' class='gimg' style="width:{{px2rpxWidth*100}}px;height:{{px2rpxWidth*100}}px;"></image>
+          </block>
+          <block wx:else style="width:{{px2rpxWidth*100}}px;height:{{px2rpxHeight*100}}px;">
+            <image src='../../../images/logo.png' class='gimg' style="width:{{px2rpxWidth*100}}px;height:{{px2rpxWidth*100}}px;"></image>
+          </block>
+        </view>
+        <view class='font' style="width:{{px2rpxWidth*150}}px;">{{item.groupName}}</view>
+      </view>
+    </view>
+    <view class='shop' catchtap='more'>
+      <view class='list' style="width:{{px2rpxWidth*100}}px;height:{{px2rpxHeight*100}}px;">
+        <view>
+          <image src='/images/more.png' class='gimg' style="width:{{px2rpxWidth*100}}px;height:{{px2rpxWidth*100}}px;"></image>
+        </view>
+        <view class='font' style="width:{{px2rpxWidth*150}}px;">更多</view>
+      </view>
+    </view>
+  </view>
+
+
+  <!--领取优惠券 start-->
+  <block wx:if="{{index_data.index_quan_list!=null}}">
+    <view class="card-tit mt10 gridXb">
+      <text class="iconfont icon-ticket" style="width:{{px2rpxWidth*62}}px;height:{{px2rpxHeight*62}}px"></text>专享优惠券
+    </view>
+
+    <view class="card clearfix">
+      <block wx:for="{{index_data.index_quan_list}}">
+        <view class="card-item" bindtap="go_quan_info_bind" id="{{item.id}}">
+          <view class="flex card-info">
+            <view class="card-count sub">
+              <view class="cards">
+                <view class="card-counts gridXb f24">￥{{item.q_dai_jiner}}</view>
+                <view class="card-tips">{{item.q_name}}</view>
+              </view>
+            </view>
+            <view class="card-txt">
+              <view class="card-txt-box" style="width:{{px2rpxWidth*28}}px">立即领取</view>
+            </view>
+          </view>
+        </view>
+      </block>
+    </view>
+  </block>
+  <!--领取优惠券 end-->
+  <!--home top start-->
+
+
+  <view class="home-tit gridXb tc f16">
+    <text class="iconfont icon-appreciatefill"></text> 店家推荐
+  </view>
+  <view class="home-rec" style="width:{{px2rpxWidth*750}}px;height:{{px2rpxHeight*250}}px">
+    <scroll-view scroll-x style="width: 100%;height:100%;">
+      <view class='recommend'>
+        <block wx:for="{{[1,2,3,4,5,6,7,8]}}" wx:key="{{index}}">
+          <view class="rec-item" bindtap="detail" id="{{item.id}}">
+            <image src="{{upload_file_url}}user-herder1531276593.jpg" class="shopimg" mode="aspectFill" style="width:{{px2rpxWidth*240}}px;height:{{px2rpxHeight*240}}px;"></image>
+          </view>
+        </block>
+      </view>
+    </scroll-view>
+  </view>
+  <!--home top start-->
+
+  <!--home hot start-->
+  <view class="home-tit home-tit2 gridXb tc f16">
+    <text class="iconfont icon-hotfill"></text> 热品推荐
+  </view>
+
+  <view class='home-rec2' style="height:{{px2rpxHeight*1100}}px;">
+    <scroll-view scroll-y style="width: 100%;height:100%;">
+      <block wx:for="{{takeout}}" wx:for-item="shop" wx:key="{{shop.shopId}}">
+        <view class="shop-each {{shop.is_sale==0?'stops':''}} " catchtap='goToShop' data-shop_code='{{shop.shop_code}}' data-salse='{{shop.is_sale}}' style='height:180rpx;'>
+          <image class='shop-img' src='{{upload_file_url + shop.logo}}' style="width:{{px2rpxWidth*170}}px;height:{{px2rpxWidth*170}}px;"></image>
+          <view class='shop-text'>
+            <view class='shop-name'>{{shop.ShopName}}</view>
+            <view class='shop-comment' style="width:{{px2rpxWidth*470}}px;height:{{px2rpxHeight*50}}px;">
+              <view class='shop-comment-left'>
+                <view class='qisong' style="width:{{px2rpxWidth*150}}px;">起送 ¥{{shop.initialMoney}}</view>
+                <view class='qisong' style="width:{{px2rpxWidth*150}}px;">人均 ¥{{shop.avgMoney}}</view>
+              </view>
+            </view>
+            <view class='shop-tag'>
+              <view class='shop-tag-each'>
+                <image class='shop-tag-img' src='/images/jian.png' style="width:{{px2rpxWidth*30}}px;height:{{px2rpxWidth*30}}px;"></image>
+                <view class='shop-tag-text' style="width:{{px2rpxWidth*400}}px;">
+                  <block wx:for="{{shop.reduction}}" wx:for-item='reduction' wx:key="{{reduction.reductionId}}">
+                    满{{reduction.full}}减{{reduction.reductionPrice}};
+                  </block>
+                </view>
+              </view>
+            </view>
+          </view>
+        </view>
+      </block>
+    </scroll-view>
+  </view>
+
+
+  <!-- 
+    <view class="home-rec">
+        <scroll-view scroll-x style="width: 100%;height:100%;">
+            <view class='recommend'>
+                <block wx:for="{{[1,2,3,4,5,6,7,8]}}" wx:key="{{index}}">
+                    <view class="rec-item" bindtap="detail" id="{{item.id}}" style="width:{{px2rpxWidth*250}}px;height:{{px2rpxHeight*250}}px">
+                        <image src="{{upload_file_url}}11.jpg" class="shopimg" mode="aspectFill" style="width:{{px2rpxWidth*240}}px;height:{{px2rpxHeight*240}}px;"></image>
+                    </view>
+                </block>
+            </view>
+        </scroll-view>
+    </view> -->
+  <!--home hot start-->
+
+  <!--home list start-->
+  <!-- <view class="goods-tit tc f16">
+        <text class="iconfont icon-heart-full-copy"></text> 新品上架
+    </view> -->
+
+  <!-- <view class="home-rec">
+        <scroll-view scroll-x style="width: 100%;height:100%;">
+            <view class='recommend'>
+                <block wx:for="{{[1,2,3,4,5,6,7,8]}}" wx:key="{{index}}">
+                    <view class="rec-item" bindtap="detail" id="{{item.id}}">
+                        <image src="{{upload_file_url}}201807051028529378.png" class="shopimg" mode="aspectFill" style="width:{{px2rpxWidth*240}}px;height:{{px2rpxHeight*240}}px;"></image>
+                    </view>
+                </block>
+            </view>
+        </scroll-view>
+    </view> -->
+  <!--home list end-->
+
+  <!--tips-->
+  <!-- <view class="tips-foot tc f12">
+        不要扯了，已经扯到底了
+    </view> -->
+  <view class='jianju2'></view>
+  <import src="../../../template/template.wxml" />
+  <template is="tabBar" data="{{tabBar:bindData.tabBar}}" />
+
+</block>
+<!-- </block> -->

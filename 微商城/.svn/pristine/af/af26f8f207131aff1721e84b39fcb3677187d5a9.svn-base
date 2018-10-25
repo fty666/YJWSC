@@ -1,0 +1,93 @@
+.page{
+  background: #ffffff;
+}
+/*退货原因  */
+.head{
+  width: 100%;
+  height: 100rpx;
+  display: flex;
+  line-height: 100rpx;
+}
+
+.tui{
+  margin-left:30rpx;
+  font-size: 35rpx;
+  color: #010101;
+}
+
+.number{
+  margin-left: 200rpx;
+  font-size: 35rpx;
+  color: #e1e1e1;
+}
+
+/*下划线  */
+.xia{
+  width: 100%;
+  height: 2rpx;
+  background: #ddd;
+}
+
+.xia2{
+  padding: 0rpx 20rpx;
+  box-sizing: border-box;
+}
+
+
+/* 具体原因 */
+.cause{
+  width:100%;
+  height: 400rpx;
+  line-height: 80rpx;
+  padding-left: 90rpx;
+  color: #b1b1b1;
+  border-bottom: 1px dashed #ddd;
+}
+
+.text{
+  margin-left: 30rpx;
+}
+
+/*有话要说  */
+.tell{
+  width: 100%;
+  height: 100rpx;
+  margin-left: 30rpx;
+  line-height: 80rpx;
+  font-size: 35rpx;
+  color: #010101;
+}
+
+.section{
+  width:80%;
+  height: 200rpx;
+  margin-left:100rpx;
+  border: 1px solid #ddd; 
+}
+
+.place{
+  margin-top:20rpx;
+  margin-left: 20rpx; 
+}
+
+.ti{
+  width:80%;
+  height: 100rpx;
+  margin-top: 120rpx;
+  margin-left: 100rpx;
+  border: 2rpx solid;
+  border-radius: 50rpx ;
+  background: #c7c1c1;
+  text-align: center;
+  line-height: 100rpx;
+  font-size: 37rpx;
+  color: white;
+  letter-spacing:5rpx;
+}
+.font2{
+  width:80%;
+  margin-left: 120rpx;
+  font-size: 25rpx;
+  color: black;
+  margin-top: 20rpx;
+}

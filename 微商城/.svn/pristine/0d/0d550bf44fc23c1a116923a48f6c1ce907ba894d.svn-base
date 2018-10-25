@@ -1,0 +1,31 @@
+.shop-each{
+    width: 750rpx;
+    /* height: 150rpx;  */
+    padding: 20rpx 20rpx 0 20rpx;
+    box-sizing: border-box;
+    /* border: 1px solid red; */
+}
+.each2{
+    width: 600rpx;
+    height: 70rpx;
+    margin-left: 45rpx;
+    padding: 0 20rpx;
+    box-sizing: border-box; 
+    border: 1rpx solid #ccc;
+}
+.tel{
+    width: 380rpx;
+}
+.send{
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+}
+.h35{
+    height:68rpx;
+    display: flex; 
+    align-items: center;
+}
+
+
+

@@ -1,0 +1,38 @@
+<form bindsubmit="openShop">
+    <!-- <view class='shop-each'>
+        <view class='each1'>*店铺类型</view>
+        <radio-group class="radio-group" bindchange="radioChange">
+            <label class="radio">
+                <radio value="1" checked="{{item.checked}}" />商城
+            </label>
+            <label class="radio">
+                <radio value="2" checked="{{item.checked}}" />外卖
+            </label>
+        </radio-group>
+    </view> -->
+    <view class='shop-each'>
+        <view class='each1'>*姓名</view>
+        <input class='each2' name="owner" placeholder='请输入您的姓名'></input>
+    </view>
+    <view class='shop-each'>
+        <view class='each1'>*店铺名称</view>
+        <input class='each2' name="shop_name" placeholder='请输入您的店铺名称'></input>
+    </view>
+    <view class='shop-each'>
+        <view class='each1'>*手机号</view>
+        <input bindinput="getTel" class='each2' name="mobile" placeholder='请输入您的电话号码'></input>
+    </view>
+    <view class='shop-each'>
+        <view class='each1'>*验证码</view>
+        <view class='send'>
+            <input class='each2 tel' name="smsCode" placeholder='请输入您接收的验证码'></input>
+            <button catchtap='sendCode' disabled="{{disabled}}" data-mobile="{{tel}}" class='ml10 h35 button button-primary button-rounded button-wx-small'>{{send_code}}</button>
+        </view>
+    </view>
+
+    <view class='shop-each mt10'>
+        <button formType="submit" type="primary">提交</button>
+    </view>
+</form>
+<import src="../../../template/template.wxml" />
+<template is="tabBar" data="{{tabBar:bindData.tabBar}}" />

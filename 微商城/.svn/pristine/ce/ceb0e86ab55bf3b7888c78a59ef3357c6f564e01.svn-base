@@ -1,0 +1,99 @@
+<!-- <block wx:if="{{glo_is_load}}">
+  <view class="glo_load_view">
+    <text class="iconfont icon-loading animated infinite rotate mr5"></text>
+    <text>正在努力加载</text>
+  </view>
+</block> -->
+<!-- <block wx:else> -->
+
+<view style='height:1800rpx;'>
+  <!--外卖专员  -->
+  <view class='wai'>
+    <view class='user'>
+      <view>
+        <image src='' class='photo'></image>
+      </view>
+      <view>
+        <view class='name'>葫芦娃</view>
+        <view class='time'>7月1日18:35 左右送达</view>
+      </view>
+    </view>
+    <view class='xia'></view>
+
+    <view>
+      <view class='pei'>为配送打分</view>
+      <view class='flex'>
+        <view>
+          <image src='' class='xing1'></image>
+        </view>
+        <view>
+          <image src='' class='xing'></image>
+        </view>
+        <view>
+          <image src='' class='xing'></image>
+        </view>
+        <view>
+          <image src='' class='xing'></image>
+        </view>
+        <view>
+          <image src='' class='xing'></image>
+        </view>
+      </view>
+    </view>
+  </view>
+  <!--商品评价  -->
+  <view class='wai2'>
+    <view class='user'>
+      <view>
+        <image src='' class='photo'></image>
+      </view>
+      <view class='shops'>陕西肉夹馍</view>
+    </view>
+    <view class='xia'></view>
+    <!--为商家打分  -->
+    <view>
+      <view class='pei'>为商家打分</view>
+      <view class='flex'>
+        <view>
+          <image src='' class='xing1'></image>
+        </view>
+        <view>
+          <image src='' class='xing'></image>
+        </view>
+        <view>
+          <image src='' class='xing'></image>
+        </view>
+        <view>
+          <image src='' class='xing'></image>
+        </view>
+        <view>
+          <image src='' class='xing'></image>
+        </view>
+      </view>
+    </view>
+    <!--评价  -->
+    <view class='text'>
+      <textarea bindblur="bindTextAreaBlur" auto-height placeholder="写出您对商家的评价吧~" placeholder-style="margin-left:30rpx;line-height:25rpx;" />
+    </view>
+    <!--具体商品评价  -->
+    <view class='flex'>
+      <view class='font'>纯瘦肉夹馍</view>
+      <view class='zan'> <text class="iconfont icon-appreciate"></text> 赞</view>
+      <view class='cai'> <image src='../../../images/cai.png' class='pcai'></image>踩</view>
+    </view>
+    <view class='flex'>
+      <view class='font'>纯瘦肉夹馍</view>
+      <view class='zan'><text class="iconfont icon-appreciate"></text> 赞</view>
+      <view class='cai'><image src='../../../images/cai.png' class='pcai'></image> 踩</view>
+    </view> 
+  </view>
+  <view class='sub'>提交</view>
+
+  <!-- </block> -->
+  <!-- <block wx:else>
+      <navigator class='no-order' url="/pages/shop/mall/mall">
+        <view>您还没有相关的订单</view>
+        <view>可以去看看有哪些想买的</view>
+      </navigator>
+    </block> -->
+</view>

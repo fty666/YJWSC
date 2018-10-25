@@ -1,0 +1,60 @@
+<block wx:if="{{is_load}}">
+  <view class="glo_load_view">
+    <text class="iconfont icon-loading animated infinite rotate mr5"></text>
+    <text>正在努力加载</text>
+  </view>
+</block>
+<block wx:else>
+  <view class='box' style="height:{{px2rpxHeight*1100}}px;">
+    <block wx:if="{{has_data}}">
+      <scroll-view scroll-y bindscrolltoupper="scrollToUpper" bindscrolltolower="ScrollToLower">
+
+        <view wx:for="{{orderinfo}}" wx:key="{{index}}">
+          <view class='xia2'></view>
+          <!--订单  -->
+          <view class='wai' catchtap='oinfo' data-oids='{{item.order_uuid}}' style="height:{{px2rpxHeight*200}}px;">
+            <view>
+              <image src='{{uploadFileUrl+item.logo}}' class='photo' style="width:{{px2rpxWidth*120}}px;height:{{px2rpxWidth*120}}px;"></image>
+            </view>
+            <view class='shops'>{{item.shop_name}}</view>
+            <view class='order'>订单已完成</view>
+          </view>
+          <view class='xia' style="height:{{px2rpxHeight*3}}px;"></view>
+
+          <view class='wai2' wx:for="{{item.goods}}" wx:for-item="good" wx:key="{{good.goodsId}}">
+            <view class='sinfo'>
+              <view class='name'>{{good.goods_name}}</view>
+              <view class='many'>X{{good.num}}</view>
+            </view>
+          </view>
+          <view style='display:flex'>
+            <view class='pay'>共{{item.goods.length}}件商品，实付</view>
+            <view class='money'>￥{{item.real_money}}</view>
+          </view>
+          <view style='margin-left:{{px2rpxWidth*320}}px'>{{item.createTime}}</view>
+          <view class='xia' style="height:{{px2rpxHeight*3}}px;margin-top:15rpx;"></view>
+          <view class='wai3' style="height:{{px2rpxHeight*150}}px;">
+            <view class='recur' catchtap='again' data-shop_code='{{item.shop_code}}' style="width:{{px2rpxWidth*200}}px;height:{{px2rpxHeight*80}}px;margin-left:160rpx;margin-top:40rpx;">再来一单</view>
+            <!-- <block wx:if="{{item.status == 3}}">
+                            <view class='go' data-oid='{{item.order_uuid}}' catchtap='goMap'>查看路线</view>
+                        </block> -->
+            <block wx:if="{{item.status == 4}}">
+              <view class='go' style='margin-left:50rpx;' data-oid='{{item.order_uuid}}' catchtap='comment' style="width:{{px2rpxWidth*200}}px;height:{{px2rpxHeight*80}}px;">去评论</view>
+            </block>
+          </view>
+          <view class='xia2'></view>
+        </view>
+      </scroll-view>
+    </block>
+    <block wx:else>
+      <navigator class='no-data' url="/pages/takeout/index/index">
+        <view>您还没有相关的订单</view>
+        <view>可以去看看有哪些想买的</view>
+      </navigator>
+    </block>
+  </view>
+  <!--自定义tarBar -->
+  <import src="../../../template/template.wxml" />
+  <template is="tabBar" data="{{tabBar:bindData.tabBar}}" />
+
+</block>

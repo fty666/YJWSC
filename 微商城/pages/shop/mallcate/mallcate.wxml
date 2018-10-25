@@ -1,0 +1,45 @@
+<block wx:if="{{glo_is_load}}">
+  <view class="glo_load_view">
+    <text class="iconfont icon-loading animated infinite rotate mr5"></text>
+    <text>正在努力加载</text>
+  </view>
+</block>
+<block wx:else>
+  <!--mallcate.wxml-->
+  <view class="cate flex flexC">
+    <block wx:if="{{have}}">
+      <view class='has'>没有该店铺</view>
+    </block>
+    <block wx:else>
+      <view style='width:100%;height:2200rpx;'>
+        <!--加载数据  -->
+        <scroll-view scroll-y bindscrolltoupper='scrollToUpper' bindscrolltolower='scrollToLower'>
+          <view class="flex">
+            <block wx:for="{{shops}}" wx:key="{{item.shopId}}" wx:for-item="titem">
+              <view class="cate-item flex1  mb10" bindtap="mall_list_bind" data-id="{{titem.groupId}}" data-shop_code="{{titem.shop_code}}" style="height:{{px2rpxHeight*200}}px;">
+                <view class="cate-imgbox">
+                  <image src="{{ upload_file_url+titem.logo}}" style='width:{{px2rpxHeight*200}}px;height:{{px2rpxHeight*200}}px;' class="cate-img" mode="aspectFill"></image>
+                </view>
+                <view class='shops' style="width:{{px2rpxWidth*150}}px;">
+                  <view class="sinfo" style="width:{{px2rpxWidth*195}}px;">{{titem.ShopName}}</view>
+                  <view class="sinfodetail" style="width:{{px2rpxWidth*260}}px;">{{titem.shop_detail}}</view>
+                </view>
+                <block wx:if="{{titem.iscollect==1}}">
+                  <view class='mll'>
+                    <button type='warn' data-shop_code="{{titem.shop_code}}" style='font-size:22rpx;margin-left:20rpx;'>已收藏</button>
+                  </view>
+                </block>
+                <block wx:else>
+                  <view class='mll'>
+                    <button type='warn' catchtap='show' data-shop_code="{{titem.shop_code}}" style='font-size:22rpx;margin-left:20rpx;'>收藏</button>
+                  </view>
+                </block>
+              </view>
+            </block>
+          </view>
+          <!--list end-->
+        </scroll-view>
+      </view>
+    </block>
+  </view>
+</block>

@@ -1,0 +1,36 @@
+.font{
+  font-size: 35rpx;
+  color: black;
+}
+.font1{
+  font-size: 28rpx;
+  color: black;
+}
+.img{
+  width:50rpx;
+  height:50rpx;
+}
+
+.shop{
+  color: black;
+  font-size: 35rpx;
+}
+
+.fav{
+  display: flex;
+}
+
+.cu{
+  margin-left: 20rpx;
+  color: pink;
+}
+
+.favour{
+  font-size: 25rpx;
+  color: #ddd;
+}
+
+.favour1{
+  font-size: 40rpx;
+  color: red;
+}

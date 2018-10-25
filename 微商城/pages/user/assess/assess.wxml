@@ -1,0 +1,31 @@
+<!--pages/user/assess/assess.wxml-->
+<view>
+  <view>
+    <image src='../../../images/line.png' class='photo'style="height:{{px2rpxHeight*35}}px;"></image>
+  </view>
+  <form bindsubmit="formSubmit" bindreset="formReset">
+    <view class="section" style="height:{{px2rpxHeight*300}}px;">
+      <textarea bindblur="bindTextAreaBlur" name="ping" auto-height placeholder="请输入您对商品的评价，最多不超过200个字" />
+    </view>
+    <!--五星评价  -->
+    <!--index.wxml-->
+    <view>
+      <view class='font'>点击进行五星好评</view>
+      <block wx:for="{{stars}}" wx:key="unique">
+         <image class="star-image" style="left: {{item*150}}rpx" src="{{key >item ?selectedSrc:normalSrc}}" style="width:{{px2rpxWidth*100}}px;height:{{px2rpxHeight*100}}px;">
+          <view class="item" data-key="{{item+1}}" bindtap="selectLeft"style="left:0rpx;width:{{px2rpxWidth*75}}px;height:{{px2rpxHeight*150}}px;"></view>
+          <view class="item" data-key="{{item+1}}" bindtap="selectRight"style="left:75rpx;width:{{px2rpxWidth*75}}px;height:{{px2rpxHeight*150}}px;"></view>
+        </image> 
+      </block>
+    </view>
+    <view class='files'>
+      <view>
+        <image src='../../../images/file.png' catchtap='files' class='file'></image>
+      </view>
+      <view wx:for="{{img}}" wx:key="{{index}}">
+        <image src='{{item}}' class='file' style="width:{{px2rpxWidth*150}}px;height:{{px2rpxWidth*150}}px;"></image>
+      </view>
+    </view>
+    <button class='bts' formType="submit" bindtap='ass' type="warn" style="height:{{px2rpxHeight*100}}px;">提交</button>
+  </form>
+</view>

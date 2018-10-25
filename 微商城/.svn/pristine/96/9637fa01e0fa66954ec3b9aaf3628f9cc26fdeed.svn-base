@@ -1,0 +1,81 @@
+<!-- <block wx:if="{{glo_is_load}}">
+    <view class="glo_load_view">
+        <text class="iconfont icon-loading animated infinite rotate mr5"></text><text>正在努力加载</text>
+    </view>
+</block> -->
+<!-- <block wx:else> -->
+<view class="weui-form-preview">
+    <view class="weui-form-preview__hd">
+        <view class="weui-form-preview__item">
+            <view class="weui-form-preview__label font">订单总价</view>
+            <view class="weui-form-preview__value_in-hd font">¥{{sums}}</view>
+            <view class="weui-form-preview__value_in-hd font">
+                <text class='favour' decode='ture'>优惠：￥{{favour}}&nbsp;&nbsp;&nbsp;</text>
+                <text class='favour1'> 实付：￥{{pocket}}</text>
+            </view>
+        </view>
+    </view>
+    <view class="weui-form-preview__bd">
+        <view class="weui-form-preview__item">
+            <view class="weui-form-preview__label font">默认收货地址</view>
+            <view class="weui-form-preview__value font">
+                <image src='../../../images/updata.png' class='img' bindtap='aupdata'></image>
+            </view>
+        </view>
+    </view>
+    <view class="weui-form-preview__bd">
+        <view class="weui-form-preview__item">
+            <view class="weui-form-preview__label font1">收货人信息</view>
+            <view class="weui-form-preview__value font1">
+                {{address.addr_receiver}} {{address.addr_mobile}}
+            </view>
+            <view class="weui-form-preview__label font1">收货地址</view>
+            <view class="weui-form-preview__value font1">
+                {{address.area_path}} {{address.area_detail}}
+            </view>
+        </view>
+    </view>
+
+</view>
+
+<view class="weui-panel weui-panel_access">
+    <!-- <view style='flex'>
+    <view class="weui-panel__hd">订单信息</view>
+    <view>纠缠店铺</view>
+  </view> -->
+
+    <view class="weui-panel__bd">
+        <view class="weui-media-box weui-media-box_text">
+            <view class="weui-media-box__desc shop">
+                <text class="iconfont icon-shop"></text> {{firstinfo.shop_name}}</view>
+        </view>
+
+        <view class="weui-media-box weui-media-box_text">
+            <view class="weui-media-box__desc">商品名称：{{firstinfo.goodsName}}</view>
+        </view>
+        <view class="weui-media-box weui-media-box_text">
+            <view class="weui-media-box__desc">商品信息：{{firstinfo.goodsDetails}}</view>
+        </view>
+        <view class="weui-media-box weui-media-box_text">
+            <view class="weui-media-box__desc">数量*价格{{gnum}} x ￥{{firstinfo.price}}</view>
+        </view>
+
+        <view class="weui-media-box weui-media-box_text " data-shop_code='{{firstinfo.shopCode}}' catchtap='favourable'>
+            <view class="weui-media-box__desc coupon">优惠劵：满{{coupon.conditions}}减{{price}}
+                <text class="iconfont icon-youjiantou lef"></text>
+            </view>
+        </view>
+
+        <view class="weui-media-box weui-media-box_text fav">
+            <view class="weui-media-box__desc cu" wx:for="{{firstinfo.reduction}}" wx:index="{{index}}" wx:for-item="fulls">
+                满{{fulls.full}}减{{fulls.reductionPrice}}
+            </view>
+        </view>
+
+    </view>
+</view>
+
+<view class="weui-panel weui-panel_access">
+    <button class="weui-btn" type="primary" bindtap="pay_confirmOrder" loading="{{submitIsLoading}}" disabled="{{buttonIsDisabled}}">在线支付</button>
+</view>
+<!-- </block> -->

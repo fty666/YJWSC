@@ -1,0 +1,41 @@
+<!-- <block wx:if="{{glo_is_load}}">
+  <view class="glo_load_view">
+    <text class="iconfont icon-loading animated infinite rotate mr5"></text>
+    <text>正在努力加载</text>
+  </view>
+</block> -->
+<!-- <block wx:else> -->
+
+<view style='position:relative'>
+  <view class='xia'></view>
+  <!--地址信息  -->
+  <view class='wai'>
+    <view class='info'>
+      <view class='add'>融汇大厦 8楼808研究中心</view>
+      <view class='user'>大娃 先生 1997412155</view>
+    </view>
+    <view>
+      <image src='../../../images/updata.png' class='picture'></image>
+    </view>
+  </view>
+  <view class='xia'></view>
+
+  <!-- </block> -->
+  <!-- <block wx:else>
+      <navigator class='no-order' url="/pages/shop/mall/mall">
+        <view>您还没有相关的订单</view>
+        <view>可以去看看有哪些想买的</view>
+      </navigator>
+    </block> -->
+</view>
+<navigator url='/pages/takeout/insertAdd/insertAdd'>
+<view class='zen'>
+  <view class='xia2'></view>
+  <view class='flex'>
+    <view>
+      <image src="../../../images/jia.png" class='jia'></image>
+    </view>
+    <view class='insert'>新建收货地址</view>
+  </view>
+</view>
+</navigator>

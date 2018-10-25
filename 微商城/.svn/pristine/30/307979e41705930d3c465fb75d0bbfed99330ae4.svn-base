@@ -1,0 +1,261 @@
+<block wx:if="{{is_load}}">
+    <view class="glo_load_view">
+        <text class="iconfont icon-loading animated infinite rotate mr5"></text>
+        <text>正在努力加载</text>
+    </view>
+</block>
+<block wx:else>
+    <view style='position:relative'>
+        <view style='position:relative'>
+            <!--店铺详情  -->
+            <view class='wai1'>
+                <view>
+                    <image src='{{aliyunUrl + shop_info.logo}}' class='logo'></image>
+                </view>
+                <view>
+                    <view>
+                        <!-- <text decode='true' class='font'>起送 ￥{{shop_info.initialMoney}} &nbsp;|&nbsp; 30分钟 &nbsp;|&nbsp; 2.9km</text> -->
+                        <text decode='true' class='font'>起送 ￥{{shop_info.initialMoney}}</text>
+                    </view>
+                    <!-- <view class='font gonggao'>关于：{{shop_info.shop_detail}}</view>  -->
+
+                    <view style='display:flex'>
+                        <!-- <view>
+                            <image src='' class='zhe'></image>
+                        </view> -->
+                        <view class='font'>
+                            <block wx:for="{{shop_info.reduction}}" wx:for-item="reduction" wx:key="{{reduction.reductionId}}">满{{reduction.full}}减{{reduction.reductionPrice}};</block>
+                        </view>
+                        <view class='more'>
+                            <text class="iconfont icon-youjiantou"></text> </view>
+                    </view>
+                </view>
+            </view>
+
+            <!--选择按钮  -->
+            <view class='nav'>
+                <view class='font1 {{nav_type == "menu" ? "font1-active" : ""}}' data-navtype='menu' bindtap='nav'>菜单</view>
+                <view class='font1 {{nav_type == "comment" ? "font1-active" : ""}}' data-navtype='comment' bindtap='nav'>评价</view>
+                <view class='font1 {{nav_type == "seller" ? "font1-active" : ""}}' data-navtype='seller' bindtap='nav'>商家</view>
+            </view>
+            <view class='xia'></view>
+
+            <!--菜单  -->
+            <view wx:if="{{nav_type== 'menu'}}">
+                <view class='flex'>
+                    <view class='menu-each'>
+                        <scroll-view scroll-y>
+                            <view class='menu-cate {{menu_cate == -1 ? "menu-cate-active" : "" }}' catchtap='menuCate' data-index='-1' data-classid='-1'>
+                                <view>
+                                    <image src='../../../images/hot.png' class='hots'></image>
+                                </view>
+                                <view class='hot'>热销</view>
+                            </view>
+                            <block wx:for="{{shop_class}}" wx:for-item="cla" wx:key="{{cla.classId}}">
+                                <view class='menu-cate {{menu_cate == cla.classId ? "menu-cate-active" : "" }}' catchtap='menuCate' data-index='{{index}}' data-classid='{{cla.classId}}'>{{cla.className}}</view>
+                            </block>
+                        </scroll-view>
+                    </view>
+
+                    <view class='goods'>
+                        <scroll-view scroll-y bindscrolltoupper='scrollToUpper' bindscrolltolower='scrollToLower'>
+                            <block wx:for="{{goods_list}}" wx:for-item="goods" wx:key="{{goods.id}}">
+                                <view class='flex' catchtap='xinfo' data-gsid='{{goods.id}}'>
+                                    <view>
+                                        <image src='{{aliyunUrl + goods.img}}' class='photo1'></image>
+                                    </view>
+                                    <view class='flex2'>
+                                        <view class='del over_hidden'>{{goods.goods_name}}</view>
+                                        <view class='del1 over_hidden'>{{goods.goods_details}}</view>
+                                        <view class='del1'>月售{{goods.sales_num}}</view>
+                                        <view class='flex' style='position:relative'>
+                                            <block wx:if="{{goods.discount > 0}}" wx:key="{{goods.id}}">
+                                                <view class='del2'>￥{{goods.discountPrice}}
+                                                    <text class='original'>¥{{goods.price}}</text>
+                                                </view>
+                                            </block>
+                                            <block wx:else>
+                                                <view class='del2'>￥{{goods.price}} </view>
+                                            </block>
+                                            <view class='goods-num'>
+                                                <view class='minus'>
+                                                    <image class='minus-img' src='../../../images/jiang.png' hidden='{{goods.num == 0 ? true : false}}' catchtap='changCartNum' data-goodsid='{{goods.id}}' data-type='minus'></image>
+                                                </view>
+                                                <view class='goods-num-text'>{{goods.num}}</view>
+                                                <view class='increase'>
+                                                    <image class='increase-img' src='../../../images/jia.png' catchtap='changCartNum' data-goodsid='{{goods.id}}' data-type='add'></image>
+                                                </view>
+                                            </view>
+                                            <!-- <view class='spec'>
+                                                <view>选规格</view>              
+                                            </view>  -->
+                                        </view>
+                                    </view>
+                                </view>
+                            </block>
+                        </scroll-view>
+                    </view>
+                </view>
+
+
+
+            </view>
+            <!--菜单完  -->
+
+            <!--商家  -->
+            <view wx:if="{{nav_type== 'seller'}}">
+                <view>
+                    <view class='wai'>
+                        <view>
+                            <image src='../../../images/gps.png' class='address'></image>
+                        </view>
+                        <view class='add'>{{shop_info.shop_addr}}</view>
+                        <view>
+                            <image src='../../../images/phone.png' class='tel'></image>
+                        </view>
+                    </view>
+                </view>
+                <view class='xia2'></view>
+                <view>
+                    <view class='wai'>
+                        <view>
+                            <image src='/images/jian.png' class='address'></image>
+                        </view>
+                        <view class='add'>
+                            <block wx:for="{{shop_info.reduction}}" wx:for-item="reduction" wx:key="{{reduction.reductionId}}">满{{reduction.full}}减{{reduction.reductionPrice}};</block>
+                        </view>
+                    </view>
+                </view>
+                <view class='xia2'></view>
+            </view>
+            <!--商家完  -->
+
+
+            <!--评价  -->
+            <view wx:if="{{nav_type== 'comment'}}">
+
+
+                <!-- 具体评价 -->
+                <block wx:for="{{comment}}" wx:for-item="com" wx:key="{{index}}">
+                    <view class='ju'>
+                        <view class='info'>
+                            <view>
+                                <image src='{{aliyunUrl+com.logo}}' class='photo'></image>
+                            </view>
+                            <view style='display:flex;flex-direction:column'>
+                                <view class='name'>{{com.userName}}</view>
+                                <view class='wu'>
+                                    <block wx:for="{{shows}}" wx:for-item="shows" wx:key="{{index}}">
+                                        <block wx:if="{{com.shopGrade>index}}">
+                                            <text class="iconfont icon-favorfill"></text>
+                                        </block>
+                                        <block wx:else>
+                                            <text class="iconfont icon-favor"></text>
+                                        </block>
+                                    </block>
+                                </view>
+                            </view>
+                            <view class='time'>{{com.createTime}}</view>
+                        </view>
+                        <view class='detail'>{{com.shopDetail}}</view>
+                        <view class='ass'>
+                            <block wx:for="{{com.shopImg}}" wx:for-item="pimg" wx:key="{{index}}">
+                                <view>
+                                    <image src='{{aliyunUrl+pimg}}' class='pimg'></image>
+                                </view>
+                            </block>
+                        </view>
+                        <view class='xia'></view>
+                    </view>
+                </block>
+            </view>
+            <!--评价完  -->
+        </view>
+
+
+        <!--购物车start  -->
+        <view class='showmodel' wx:if="{{cart_hidden}}">
+            <view class='cart-all'>
+                <view class='empty-cart' catchtap='emptyCart'>
+                    <view class='empty-cart-reduction'>
+                        <block wx:for="{{shop_info.reduction}}" wx:for-item="reduction" wx:key="{{reduction.reductionId}}">满{{reduction.full}}减{{reduction.reductionPrice}};</block>
+                    </view>
+                    <view class='empty-cart-text'>
+                        <text class="iconfont icon-delete"></text>
+                        <view>清空购物车</view>
+                    </view>
+                </view>
+                <block wx:for="{{cart.goods}}" wx:for-item="cart_goods" wx:key="{{cart_goods.id}}">
+                    <view class='cart'>
+                        <view class='cart-name'>{{cart_goods.goods_name}}</view>
+                        <view class='cart-price'>¥{{cart_goods.discountPrice}}</view>
+                        <view class='goods-num' style='bottom:30rpx'>
+                            <view class='minus'>
+                                <image class='minus-img' src='../../../images/jiang.png' hidden='{{cart_goods.num == 0 ? true : false}}' catchtap='changCartNum' data-goodsid='{{cart_goods.id}}' data-type='minus'></image>
+                            </view>
+                            <view class='goods-num-text'>{{cart_goods.num}}</view>
+                            <view class='increase'>
+                                <image class='increase-img' src='../../../images/jia.png' catchtap='changCartNum' data-goodsid='{{cart_goods.id}}' data-type='add'></image>
+                            </view>
+                        </view>
+                    </view>
+                </block>
+            </view>
+        </view>
+        <!--购物车end  -->
+
+        <!--去结算  -->
+        <view class='go'>
+            <view>
+                <block wx:if="{{total_price == '0.00'}}">
+                    <image src="/images/takeout_cart.png" class='jie' catchtap='showCart'></image>
+                </block>
+                <block wx:else>
+                    <image src="/images/takeout_cart_active.png" class='jie' catchtap='showCart'></image>
+                </block>
+            </view>
+            <view class='shu'>
+                <view class='fay1'>总价:{{total_price}}</view>
+                <view class='fpay'>另需配送费￥{{shop_info.transMoney}}</view>
+            </view>
+            <block wx:if="{{ is_pei }}">
+                <view class='fpay2'>还需{{pei}}元起送</view>
+            </block>
+            <block wx:elif="{{!is_pei}}">
+                <view class='fpay2' style='background-color:orange' catchtap='goToCount'>去结算</view>
+            </block>
+        </view>
+    </view>
+    <!--详情弹窗  -->
+    <block wx:if="{{ginfo}}">
+        <view class='goods-detail'>
+            <view class='bg'>
+                <!--详情图片  -->
+                <view>
+                    <image src='{{aliyunUrl + goods.img}}' class='ximg'></image>
+                </view>
+                <!--商品名  -->
+                <view class='fon'>{{shopinfo.goods_name}}</view>
+                <view class='fon1'>
+                    <text>销售{{shopinfo.sales_num}}</text>
+                </view>
+                <!--折扣  -->
+                <view class='zhe'>
+                    <view class='fon2'>{{shopinfo.discount}}折 限{{shopinfo.maxnum}}份</view>
+                    <view class='fon2'>力荐</view>
+                </view>
+                <!--详情  -->
+                <view class='fon3'>配菜：{{shopinfo.goods_details}}</view>
+
+                <!-- 价格 -->
+                <view class='but'>
+                    <view class='fon5'>￥13.89</view>
+                    <view class='fon4'>￥{{shopinfo.price}}</view>
+                </view>
+                <view catchtap='close'>
+                    <text class="iconfont icon-roundclose"></text>
+                </view>
+            </view>
+        </view>
+    </block>
+</block>

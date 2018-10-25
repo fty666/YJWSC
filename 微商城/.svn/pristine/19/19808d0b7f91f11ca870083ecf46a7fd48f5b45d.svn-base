@@ -1,0 +1,64 @@
+page{
+  background: #F4F4F4;
+}
+.wai{
+  height: 250rpx;
+  background: #FFD161;
+}
+.flex{
+  display: flex;
+
+}
+.photo{
+  margin-top: 50rpx;
+  margin-left: 45rpx;
+  width: 115rpx;
+  height: 115rpx;
+  border-radius: 50%;
+}
+.user{
+  display: flex;
+  flex-direction: column;
+}
+.name{
+  margin-top: 50rpx;
+  margin-left: 25rpx;
+}
+.tel{
+  margin-top: 20rpx;
+  margin-left: 25rpx;
+  font-size: 35rpx;
+}
+
+/*美团信息  */
+.wai2{
+  height: 130rpx;
+  margin-top: 25rpx;
+  background: white;
+}
+.logo{
+  width: 50rpx;
+  height: 50rpx;
+  margin-top: 40rpx;
+  margin-left: 30rpx;
+}
+.font{
+  margin-top: 45rpx;
+  margin-left: 30rpx;
+  font-size: 30rpx;
+}
+.font2{
+  margin-left: 400rpx;
+  margin-top: 45rpx;
+}
+
+.wai3{
+  height: 130rpx;
+  margin-top: 5rpx;
+  background: white;
+}
+.font3{
+  margin-left: 50rpx;
+  margin-top: 45rpx;
+  font-size: 30rpx;
+}

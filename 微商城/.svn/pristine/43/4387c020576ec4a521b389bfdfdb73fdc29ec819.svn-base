@@ -1,0 +1,76 @@
+page{
+    background-color: #f0f0f0;
+}
+.exchange-goods{
+    width: 100%;
+    height: 160rpx;
+    display: flex;
+    justify-content: space-around;
+    padding: 0 50rpx;
+    box-sizing: border-box;
+    background-color: #fff; 
+}
+.exchange-goods-point{
+    display: flex; 
+    flex-direction: column;
+    justify-content: center; 
+    align-items: center; 
+    width: 130rpx;
+    height: 160rpx;
+    /* border:1rpx solid red; */
+}
+.line{
+    width: 100rpx;
+    height: 1rpx;
+    margin-top: 60rpx;
+    border:1rpx solid #ddd;
+}
+.goods{
+    margin-top:20rpx;
+    /* padding: 20rpx;
+    box-sizing: border-box; */
+    background-color: #fff;
+}
+.text1{
+    width: 100%;
+    /* height: 60rpx; */
+    padding: 20rpx;
+    box-sizing: border-box;
+    font-size: 30rpx;
+    border-bottom: 1rpx solid #ccc;
+}
+.info{
+    display: flex;
+    justify-content: flex-start;
+    width: 100%;
+    /* height: 175rpx; */
+    padding: 20rpx;
+    box-sizing: border-box;
+}
+.info-img{
+    width: 180rpx;
+    height: 180rpx;
+}
+.info-text{
+    margin-left:20rpx;
+    font-size: 25rpx; 
+}
+.test2{
+     padding-left: 20rpx; 
+    box-sizing: border-box;
+    font-size: 25rpx;
+    color: #999;
+    /* border-bottom:1rpx solid #ccc; */
+}
+.returninfo{
+    margin-top:0; 
+}
+.guige{
+    display: flex;
+    justify-content: space-around;
+    flex-direction: row;
+}
+.yesno{
+    display: flex;
+    justify-content: space-around;
+}

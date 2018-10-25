@@ -1,0 +1,39 @@
+<form bindsubmit="addBankCard" class='form'>
+  <view class='form-each' style="height:{{px2rpxHeight*100}}px;">
+    <label class='label' style="width:{{px2rpxWidth*150}}px;height:{{px2rpxHeight*100}}px;">姓名：</label>
+    <input name="owner" placeholder='请输入您的姓名' style="height:{{px2rpxHeight*80}}px;" />
+  </view>
+  <view class='form-each' style="height:{{px2rpxHeight*100}}px;">
+    <label class='label' style="width:{{px2rpxWidth*150}}px;height:{{px2rpxHeight*100}}px;">手机：</label>
+    <input name="mobile" type='number' placeholder='请输入您的手机号' style="height:{{px2rpxHeight*80}}px;" />
+  </view>
+  <view class='form-each' style="height:{{px2rpxHeight*100}}px;">
+    <label class='label' style="width:{{px2rpxWidth*150}}px;height:{{px2rpxHeight*100}}px;">身份证：</label>
+    <input name="ID_card" type='text' placeholder='请输入您的身份证号' style="height:{{px2rpxHeight*80}}px;" />
+  </view>
+  <view class='form-each' style="height:{{px2rpxHeight*100}}px;">
+    <label class='label' style="width:{{px2rpxWidth*150}}px;height:{{px2rpxHeight*100}}px;">银行卡：</label>
+    <input name="card_no" type='number' placeholder='请输入您的银行卡号' style="height:{{px2rpxHeight*80}}px;" />
+  </view>
+  <view class='form-each' style="height:{{px2rpxHeight*100}}px;">请选择开户行：{{bank}}</view>
+  <scroll-view scroll-y class='img-scroll' style="height:{{px2rpxHeight*580}}px;">
+    <view class='img' style="height:{{px2rpxHeight*580}}px;">
+      <image catchtap='selectBank' data-bank="中国农业银行" src="/images/bank/ABC.png" style="width:{{px2rpxWidth*340}}px;height:{{px2rpxWidth*136}}px;" />
+      <image catchtap='selectBank' data-bank="交通银行" src="/images/bank/BCM.png" style="width:{{px2rpxWidth*340}}px;height:{{px2rpxWidth*136}}px;" />
+      <image catchtap='selectBank' data-bank="中国银行" src="/images/bank/BOC.png" style="width:{{px2rpxWidth*340}}px;height:{{px2rpxWidth*136}}px;" />
+      <image catchtap='selectBank' data-bank="中国建设银行" src="/images/bank/CCB.png" style="width:{{px2rpxWidth*340}}px;height:{{px2rpxWidth*136}}px;" />
+      <image catchtap='selectBank' data-bank="中国光大银行" src="/images/bank/CEB.png" style="width:{{px2rpxWidth*340}}px;height:{{px2rpxWidth*136}}px;" />
+      <image catchtap='selectBank' data-bank="中信银行" src="/images/bank/CITICIB.png" style="width:{{px2rpxWidth*340}}px;height:{{px2rpxWidth*136}}px;" />
+      <image catchtap='selectBank' data-bank="招商银行" src="/images/bank/CMB.png" style="width:{{px2rpxWidth*340}}px;height:{{px2rpxWidth*136}}px;" />
+      <image catchtap='selectBank' data-bank="中国民生银行" src="/images/bank/CMBC.png" style="width:{{px2rpxWidth*340}}px;height:{{px2rpxWidth*136}}px;" />
+      <image catchtap='selectBank' data-bank="华夏银行" src="/images/bank/HB.png" style="width:{{px2rpxWidth*340}}px;height:{{px2rpxWidth*136}}px;" />
+      <image catchtap='selectBank' data-bank="海口联合农商银行" src="/images/bank/HK.png" style="width:{{px2rpxWidth*340}}px;height:{{px2rpxWidth*136}}px;" />
+      <image catchtap='selectBank' data-bank="中国工商银行" src="/images/bank/ICBC.png" style="width:{{px2rpxWidth*340}}px;height:{{px2rpxWidth*136}}px;" />
+      <image catchtap='selectBank' data-bank="中国平安银行" src="/images/bank/PABC.png" style="width:{{px2rpxWidth*340}}px;height:{{px2rpxWidth*136}}px;" />
+      <image catchtap='selectBank' data-bank="浦发银行" src="/images/bank/SPDB.png" style="width:{{px2rpxWidth*340}}px;height:{{px2rpxWidth*136}}px;" />
+    </view>
+  </scroll-view>
+  <view class='btn'>
+    <button type='primary' formType="submit" class='mt10 '>提交</button>
+  </view>
+</form>

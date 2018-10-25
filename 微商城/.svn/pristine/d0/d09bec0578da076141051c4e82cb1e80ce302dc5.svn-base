@@ -1,0 +1,23 @@
+.mycontainer{
+    width: 100%;
+    height: 1200rpx;
+    padding: 20rpx;
+    box-sizing: border-box;
+    /* border:1rpx solid red; */
+}
+.box{
+    display: flex;
+    justify-content: flex-start;
+    padding-bottom:20rpx;
+    box-sizing: border-box; 
+    border-bottom: 1rpx solid #ccc;
+}
+.box-img{
+    width: 150rpx;
+    height: 150rpx;
+}
+.box-text{
+    display: flex;
+    flex-direction: column;
+    margin-left: 20rpx;
+}

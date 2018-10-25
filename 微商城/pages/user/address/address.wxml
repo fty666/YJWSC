@@ -1,0 +1,35 @@
+<view class="container">
+  <view class="address-list" wx:if="{{ addressList.length > 0 }}">
+    <view class="item" wx:for="{{addressList}}" wx:key="{{item.id}}" bindtap="addressUpdate" data-addressid="{{item.id}}" data-index='{{index}}' style="height:{{px2rpxHeight* 156.55}}px;">
+      <view class='l c'>
+        <!--class="default"  -->
+        <view style="width:90rpx;">
+          <radio catchtap='defaults' data-id="{{item.id}}" value="{{item.name}}" checked="{{item.is_default==1? true : '' }}" />{{item.value}}
+        </view>
+        <view wx:if="{{item.is_default==1}}">默认</view>
+      </view>
+      <view class="l" style="width:{{px2rpxWidth*100}}px;height:{{px2rpxHeight*80}}px;">
+        <view class="name" style="width:{{px2rpxWidth*125}}px;height:{{px2rpxHeight*43}}px;">{{item.addr_receiver}}</view>
+      </view>
+      <view class="c1" style="width:{{px2rpxWidth*450}}px;">
+
+        <view class="address" style="height:{{px2rpxHeight*37}}px;">{{item.area_path}}</view>
+        <view class="mobile">{{item.area_detail}}</view>
+        <view class="mobile" style="height:{{px2rpxHeight*29}}px;">{{item.addr_mobile}}</view>
+      </view>
+      <view class="r" style="width:{{px2rpxWidth*52}}px;" catchtap='updatas' data-addr_id="{{item.id}}">
+        <!-- <navigator url='/pages/user/addressUpdata/addressUpdata?addr_id={{item.id}}'> -->
+        <image data-address-id="{{item.id}}" class="del"  src="../../../images/updata.png" style="width:{{px2rpxWidth*52}}px;height:{{px2rpxHeight*52}}px;"></image>
+        <!-- </navigator> -->
+      </view>
+      <view class="r1" style="width:{{px2rpxWidth*52}}px;margin-left:20rpx;">
+        <image catchtap="deleteAddress" data-address-id="{{item.id}}" class="del" src="../../../images/del-address.png" style="width:{{px2rpxWidth*52}}px;height:{{px2rpxHeight*52}}px;"></image>
+      </view>
+    </view>
+  </view>
+  <view class="empty-view" wx:if="{{ addressList.length <= 0 }}">
+    <image class="icon" src="http://yanxuan.nosdn.127.net/hxm/yanxuan-wap/p/20161201/style/img/icon-normal/noAddress-26d570cefa.png" style="width:{{px2rpxWidth*258}}px;height:{{px2rpxHeight*248}}px;"></image>
+    <text class="text">还没有收货地址，快点去创建吧</text>
+  </view>
+  <view class="add-address" bindtap="addressAddOrUpdate" data-address-id="0" style="height:{{px2rpxHeight*99}}px;">新建</view>
+</view>

@@ -1,0 +1,18 @@
+<view class="content">
+    <view class="pay-success">
+        <image class="pay-success-img" src="/images/zhifuchenggong.png" />
+        <view class="pay-success-text">支付成功</view>
+        <view class="order-info-font2">您的包裹正在整装待发</view>
+        
+    </view>
+     <view class="order-info">
+        <view class="order-info-font1 f28">订单信息</view>
+        <view>收货人：{{address.addr_receiver}}</view>
+        <view>收货地址： {{ address.area_path + address.area_detail}}</view>
+        <view>总价：¥{{totalPrice}}</view>
+    </view> 
+    <view class='btn'>
+        <view catchtap='backFirstPage' class='btn1'>返回首页</view>
+        <view bindtap='viewOrder' class="btn2">查看订单</view>
+    </view>
+</view>

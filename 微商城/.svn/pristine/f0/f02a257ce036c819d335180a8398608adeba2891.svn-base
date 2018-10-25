@@ -1,0 +1,69 @@
+<form bindsubmit="apply">
+<view class='shop-each'>
+        <view class='each-name'>店铺分类</view>
+        <view class='each-radio'>
+            <radio-group name="groupId" class="radio-group" bindchange="radioChange">
+                <label class="radio" wx:for="{{group}}" wx:for-item="group" wx:key="{{group.groupId}}">
+                    <radio value="{{group.groupId}}" />{{group.groupName}}
+                </label>
+            </radio-group>
+        </view>
+    </view>
+    <view class='shop-each'>
+        <view class='each-name'>店铺名称</view>
+        <input value='{{shopInfo.ShopName}}' class='each-input' disabled='true'></input>
+    </view>
+    <view class='shop-each'>
+        <view class='each-name'>店铺logo</view>
+        <image bindtap='addImgLogo' class='logo' src="{{logo ? aliyunUrl+logo : '/images/logo.png'}}"></image>
+    </view>
+    <block wx:if="{{change_takeout}}">
+        <view class='shop-each'>
+            <view class='each-name'>起送价格</view>
+            <input name="initialMoney" class='each-input' placeholder='请填写起送价格'></input>
+        </view>
+        <view class='shop-each'>
+            <view class='each-name'>配送价格</view>
+            <input name="transMoney" class='each-input' placeholder='请填写配送价格'></input>
+        </view>
+        <!-- <view class='shop-each'>
+            <view class='each-name'>人均消费</view>
+            <input name="avgMoney" class='each-input' placeholder='请填写人均消费'></input>
+        </view> -->
+        <view class='shop-each'>
+            <view class='each-name' catchtap='location'><text class="iconfont icon-location mr5"></text> 店铺定位</view>
+            <input value='{{locationName.desc}}' class='each-input' placeholder='请点击店铺定位' disabled='true'></input>
+        </view>
+    </block>
+    <view class='shop-each'>
+        <view class='each-name'>店铺标签</view>
+        <textarea name="shop_tip" class='each-textarea' placeholder='用于买家搜索,请简洁突出展示本店铺特色'></textarea>
+    </view>
+
+    <view class='shop-each'>
+        <view class='each-name'>店铺简介</view>
+        <textarea name="shop_detail" class='each-textarea' placeholder='请输入您的店铺简介'></textarea>
+    </view>
+
+    <view class='shop-each'>
+        <view class='each-name'>店铺地址</view>
+        <textarea name="shop_addr" class='each-textarea' placeholder='请输入您店铺所在的地区'></textarea>
+    </view>
+
+    <!-- <view class='shop-each'>
+        <view class='each-name'>运营人姓名</view>
+        <input name="owner" class='each-input' placeholder='请填写店铺运营人姓名'></input>
+    </view> -->
+    <view class='shop-each'>
+        <view class='each-name'>身份证号</view>
+        <input name="ID_card" class='each-input' placeholder='请填写运营人身份证号'></input>
+    </view>
+
+    <view class='shop-each'>
+        <view class='each-name'>身份证照片</view>
+        <image bindtap='addImg' class='each-img' src="{{ID_img ? aliyunUrl+ID_img : '/images/IDzheng.png'}}"></image>
+    </view>
+    <view class='shop-each'>
+        <button type="primary" formType="submit">提交</button>
+    </view>
+</form>

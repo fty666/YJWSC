@@ -1,0 +1,94 @@
+<!-- <block wx:if="{{glo_is_load}}">
+    <view class="glo_load_view">
+        <text class="iconfont icon-loading animated infinite rotate mr5"></text><text>正在努力加载</text>
+    </view>
+</block> -->
+<!-- <block wx:else> -->
+<view class="weui-form-preview">
+    <view class="weui-form-preview__hd">
+        <view class="weui-form-preview__item">
+            <view class="weui-form-preview__label font">订单总价</view>
+            <view class="weui-form-preview__value_in-hd font">共计：¥ {{sums}}
+            </view>
+            <view class="weui-form-preview__value_in-hd font">
+                <text class='favour' decode='ture'>优惠：￥{{favour}}&nbsp;&nbsp;&nbsp;</text>
+                <text class='favour1'> 实付：￥{{pocket}}</text>
+            </view>
+
+        </view>
+    </view>
+    <view class="weui-form-preview__bd">
+        <view class="weui-form-preview__item">
+            <view class="weui-form-preview__label font">收货地址</view>
+            <view class="weui-form-preview__value font">
+                <image src='../../../images/updata.png' class='img' bindtap='aupdata'></image>
+            </view>
+        </view>
+    </view>
+    <view class="weui-form-preview__bd">
+        <block wx:if="{{address.length > 0}}">
+            <view class="weui-form-preview__item">
+                <view class="weui-form-preview__label font1">收货人信息</view>
+                <view class="weui-form-preview__value font1">
+                    {{address.addr_receiver}} {{address.addr_mobile}}
+                </view>
+                <view class="weui-form-preview__label font1">收货地址</view>
+                <view class="weui-form-preview__value font1">
+                    {{address.area_path}} {{address.area_detail}}
+                </view>
+            </view>
+        </block>
+        <block wx:else>
+            <view class="weui-form-preview__item" bindtap='aupdata'>
+                您还没有地址，请去添加地址
+            </view>
+        </block>
+    </view>
+</view>
+
+<view style='width:100%;height:780rpx;'>
+    <scroll-view scroll-y>
+        <view class="weui-panel weui-panel_access" wx:for="{{orderinfo}}" wx:key="{{index}}">
+            <view class="weui-panel__hd shop">
+                <text class="iconfont icon-shop"></text> {{item.shop_name}}</view>
+            <view class="weui-panel__bd" wx:for="{{item.goods}}" wx:for-item="good" wx:key="{{index}}">
+                <view class="weui-media-box weui-media-box_text">
+                    <view class="weui-media-box__desc">商品名称：{{good.goods_name}}</view>
+                </view>
+                <view class="weui-media-box weui-media-box_text">
+                    <view class="weui-media-box__desc">商品信息：{{good.goods_details}}</view>
+                </view>
+                <view class="weui-media-box weui-media-box_text">
+                    <view class="weui-media-box__desc">
+                        商品规格：
+                        <block wx:if="{{item.color}}">{{good.color}}*</block>
+                        <block wx:if="{{item.size}}">{{good.size}}*</block>
+                        <block wx:if="{{item.type}}">{{good.type}}*</block>
+                        <block wx:if="{{item.taste}}">{{good.taste}}*</block>
+                        <block wx:if="{{item.volume}}">{{good.volume}}</block>
+                    </view>
+                </view>
+                <view class="weui-media-box weui-media-box_text">
+                    <view class="weui-media-box__desc">数量*价格：{{good.num}} x ￥{{good.price}}</view>
+                </view>
+            </view>
+            <view class='xia'></view>
+
+            <view class="weui-media-box weui-media-box_text" data-uid='{{item.user_id}}' catchtap='favourable'>
+                <view class="weui-media-box__desc">优惠劵：
+                    <text class="iconfont icon-youjiantou lef"></text> </view>
+            </view>
+
+            <view class="weui-media-box weui-media-box_text fav">
+                <view class="weui-media-box__desc cu " wx:for="{{item.reduction}}" wx:key="index" wx:for-item="fulls">
+                    <view>满{{fulls.full}}减{{fulls.reductionPrice}}</view>
+                </view>
+            </view>
+
+        </view>
+    </scroll-view>
+</view>
+<view class="weui-panel weui-panel_access">
+    <button class="weui-btn" type="primary" bindtap="pay_confirmOrder" loading="{{submitIsLoading}}" disabled="{{buttonIsDisabled}}">在线支付</button>
+</view>
+<!-- </block> -->

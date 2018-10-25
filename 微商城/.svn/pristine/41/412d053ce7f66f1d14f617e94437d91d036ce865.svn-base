@@ -1,0 +1,117 @@
+<block wx:if="{{glo_is_load}}">
+    <view class="glo_load_view">
+        <text class="iconfont icon-loading animated infinite rotate mr5"></text>
+        <text>正在努力加载</text>
+    </view>
+</block>
+<block wx:else>
+    <view class="top-tab flexItem flex-tab">
+        <view class="toptab flex-item {{currentNavtab==idx ? 'active' : ''}}" wx:for="{{navTab}}" wx:for-index="idx" wx:for-item="itemName" wx:key="{{index}}" data-idx="{{idx}}" bindtap="switchTab">
+            {{itemName}}
+        </view>
+    </view>
+
+    <!--搜索 start  -->
+    <view class="search flex">
+        <!-- <text class="iconfont icon-saoyisao" bindtap="shop_saoma_bind"></text> -->
+        <view class="search-box sub">
+            <view class="flex">
+                <input class="sub search-input" type="text" placeholder="搜索订单号" confirm-type="search" value='' bindblur="blurValue" bindconfirm="oederSearch" />
+                <button catchtap='oederSearch' size="mini" class="search-btn">
+                    <icon type="search" size="18" />
+                </button>
+            </view>
+        </view>
+    </view>
+    <!--搜索 end  -->
+
+    <!-- <view class="tab_con flexItem rowStyle {{currentNavtab==0 ? 'list_active0' : ''}} {{currentNavtab==1 ? 'list_active1' : ''}} {{currentNavtab==2 ? 'list_active2' : ''}} {{currentNavtab==3 ? 'list_active3' : ''}} {{currentNavtab==4 ? 'list_active4' : ''}}"> -->
+    <view class="tab_con flexItem rowStyle">
+        <view class="view1 width20">
+            <scroll-view class="tableView" scroll-y wx:if="{{hasData}}" bindscrolltolower="scrollToLower" bindscrolltoupper="scrollToUpper" scroll-top="{{scrollTop}}" scroll-with-animation="true">
+                <block wx:for="{{ order }}" wx:for-item="order" wx:key="{{index}}">
+                    <view class="flexItem rowStyle tableViewCellHeader marginTop10" data-order_uuid='{{order.order_uuid}}' catchtap='orderDetail'>
+                        <image class="orderImage marginLeft12" src="/images/dingdan.png"></image>
+                        <label class="color54 fontSize12">订单编号: {{ order.order_uuid }}</label>
+                    </view>
+                    <view class="flexItem rowStyle tableViewCellHeader" style='border-bottom: solid #ccc 1px;' data-order_uuid='{{order.order_uuid}}' catchtap='orderDetail'>
+                        <label class="color54 fontSize12 ml10">
+                            <text class="iconfont icon-iconfontcolor36"></text> 订单时间: {{order.createTime}}</label>
+                    </view>
+                    <view class="flexItem rowStyle  personInfo">
+                        <view class="flexItem rowStyle marginLeft12 centers">
+                            <!-- <image class="userHeader" src="{{ url }}"></image> -->
+                            <label class="color54 fontSize12">收货人：{{ order.addr_receiver }}</label>
+                        </view>
+                        <view class="flexItem rowStyle marginRight12 centers" catchtap="callEvent">
+                            <image class="call" src="/images/call.png"></image>
+                            <label class="color54 fontSize12">{{order.addr_mobile}}</label>
+                        </view>
+                    </view>
+                    <view class="flexItem columnStyle tableViewCell" data-order_uuid='{{order.order_uuid}}' catchtap='orderDetail'>
+                        <block wx:for="{{order.goods}}" wx:for-item="goods" wx:key="{{goods.goodsId}}">
+                            <view class="order-each">
+                                <image class="goods-img" src='{{uploadFileUrl + goods.img}}' />
+                                <view class="goods-right">
+                                    <view class="goods-name">{{goods.goods_name}}</view>
+                                    <view class="goods-price">¥{{goods.goodsPrice}}
+                                        <!-- <text class='ml10'>优惠：¥</text> -->
+                                    </view>
+                                    <view>数量：{{goods.num}}</view>
+                                    <view>金额：¥{{goods.sum}}</view>
+                                </view>
+                            </view>
+                        </block>
+                    </view>
+                    <view class="flexItem rowStyle orderStatus" catchtap="">
+                        <view>运费：¥0.00</view>
+                        <view>总计：¥{{order.sumPrice}}</view>
+                        <block wx:if="{{order.status == 1}}">
+                            <view class="statusText">
+                                <text class="iconfont icon-recharge"></text>买家未付款</view>
+                        </block>
+                        <block wx:elif="{{order.status == 2}}">
+                            <view class="statusText">
+                                <text class="iconfont icon-waimai"></text>等待发货</view>
+                            <view catchtap='sendGoods' data-order_mainid='{{order.order_mainid}}' data-order_uuid='{{order.order_uuid}}' data-status='{{order.status}}' data-index='{{index}}' class='button button button-primary button-rounded button-wx-small ml10'>
+                                发货
+                            </view>
+                        </block>
+                        <block wx:elif="{{order.status == 3}}">
+                            <view class="statusText">
+                                <text class="iconfont icon-yemianwuneirong"></text>等待收货</view>
+                            <view catchtap='checkLogistics' data-order_uuid='{{order.order_uuid}}' class='button button button-primary button-rounded button-wx-small ml10'>
+                                查看物流
+                            </view>
+                        </block>
+                        <block wx:elif="{{order.status == 4}}">
+                            <view class="statusText">
+                                <text class="iconfont icon-text"></text>等待评价</view>
+                        </block>
+                        <block wx:elif="{{order.status == 5}}">
+                            <view class="statusText">
+                                <text class="iconfont icon-check"></text>订单完成</view>
+                        </block>
+                        <block wx:elif="{{order.status == 6}}">
+                            <view class="statusText">
+                                <text class="iconfont icon-waimai"></text>换货</view>
+                            <view catchtap='exchangeGoods' data-order_uuid='{{order.order_uuid}}' class='button button button-highlight button-rounded button-wx-small ml10'>换货详情</view>
+                        </block>
+                        <block wx:elif="{{order.status == 7}}">
+                            <view class="statusText">
+                                <text class="iconfont icon-waimai"></text>退货</view>
+                            <view catchtap='returnGoods' data-order_uuid='{{order.order_uuid}}' class='button button button-caution button-rounded button-wx-small ml10'>退货详情</view>
+                        </block>
+                    </view>
+                </block>
+            </scroll-view>
+        </view>
+    </view>
+    <!--back top-->
+    <view class="backtop" bindtap="goTop" wx:if="{{floorstatus}}">
+        <text class="iconfont icon-fold"></text>
+    </view>
+
+    <import src="../../template/template.wxml" />
+    <template is="tabBar" data="{{tabBar:bindData.tabBar}}" />
+</block>

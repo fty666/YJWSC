@@ -1,0 +1,74 @@
+<view class="container" wx:for="{{orderInfo}}" wx:key="{{item.order_uuid}}">
+  <view class="order-info">
+    <view class="item-a">下单时间：{{item.createTime}}</view>
+    <view class="item-b">订单编号：{{item.order_uuid}}</view>
+    <view class="item-c">
+      <view class="l">实付：
+        <text class="cost">￥{{item.sumPrice}}</text>
+      </view>
+      <view class="r" wx:if="{{item.status==1}}">
+        <view class="btn" bindtap="cancelOrder" data-maid='{{item.order_mainid}}'>取消订单</view>
+        <view class="btn active" bindtap="payOrder">去付款</view>
+      </view>
+      <view class="r" wx:elif="{{item.status== 2}}"> 待发货 </view>
+      <view class="r" wx:elif="{{item.status== 3}}"> 待收货 </view>
+      <view class="r" wx:elif="{{item.status== 4}}"> 交易完成 </view>
+      <view class="r" wx:elif="{{item.status== 5}}"> 交易完成 </view>
+      <view class="r" wx:elif="{{item.status== 6}}"> 换货中 </view>
+      <view class="r" wx:else="{{item.status== 7}}"> 退货中 </view>
+    </view>
+  </view>
+
+  <view class="order-goods" wx:for="{{item.goods}}" wx:for-item="titem" wx:key="{{titem.goodsId}}">
+    <view class="h">
+      <view class="label">商品信息</view>
+      <view class="status">{{orderInfo.order_status_text}}</view>
+    </view>
+    <view class="goods">
+      <view class="item">
+        <view class="img">
+          <image src="{{upload_file_url+titem.img}}"></image>
+        </view>
+        <view class="info">
+          <view class="t">
+            <text class="name">{{titem.goods_name}}</text>
+          </view>
+          <view class="attr">单件:x{{titem.num}}</view>
+          <view class="attr">总额:￥{{titem.sum}}</view>
+        </view>
+        <view class='show' wx:if="{{item.status==5 || item.status==4}}">
+          <navigator url='/pages/user/service/service?oid={{item.order_uuid}}&gid={{titem.goodsId}}&sum={{titem.sum}}&num={{titem.num}}'>
+            <button type='primary' class='sbtn'>申请售后</button>
+          </navigator>
+        </view>
+        <view class='show' wx:if="{{item.status==4}}">
+          <navigator url='/pages/user/assess/assess?gid={{titem.goodsId}}&mainid={{item.order_mainid}}'>
+            <button type='primary' class='sbtn'>商品评价</button>
+          </navigator>
+        </view>
+      </view>
+    </view>
+  </view>
+
+  <!-- <view class="order-bottom">
+    <view class="address">
+      <view class="t">
+        <text class="name">{{item.goods_details}}</text>
+      </view>
+    </view>
+    <view class="total">
+      <view class="t">
+        <text class="label">商品合计：</text>
+        <text class="txt">￥{{item.real_money}}</text>
+      </view>
+      <view class="t">
+        <text class="label">运费：</text>
+        <text class="txt">￥{{orderInfo.freight_price}}</text>
+      </view>
+    </view>
+    <view class="pay-fee">
+      <text class="label">实付：</text>
+      <text class="txt">￥{{item.real_money}}</text>
+    </view>
+  </view> -->
+</view>

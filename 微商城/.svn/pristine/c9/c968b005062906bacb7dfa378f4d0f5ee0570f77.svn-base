@@ -1,0 +1,248 @@
+page {
+  background: #f4f4f4;
+}
+
+.flex {
+  display: flex;
+}
+
+.wai1 {
+  width: 90%;
+  height: 300rpx;
+  margin-top: 30rpx;
+  margin-left: 30rpx;
+  background: #fff;
+}
+
+.add {
+  width: 50rpx;
+  height: 50rpx;
+  margin-top: 80rpx;
+  margin-left: 30rpx;
+}
+
+.ainfo {
+  display: flex;
+  flex-direction: column;
+}
+
+.address {
+  margin-left: 30rpx;
+  margin-top: 55rpx;
+  font-size: 35rpx;
+}
+
+.user {
+  margin-left: 30rpx;
+  margin-top: 15rpx;
+  font-size: 30rpx;
+  color: #ddd;
+}
+
+.more {
+  margin-left: 120rpx;
+  margin-top: 80rpx;
+}
+
+.xia {
+  height: 2rpx;
+  margin-left: 35rpx;
+  width: 90%;
+  background: #ddd;
+  margin-top: 40rpx;
+}
+
+.time {
+  width: 50rpx;
+  height: 50rpx;
+  margin-top: 25rpx;
+  margin-left: 30rpx;
+}
+
+.font {
+  margin-left: 30rpx;
+  margin-top: 29rpx;
+  font-size: 35rpx;
+}
+
+.font1 {
+  margin-left: 30rpx;
+  margin-top: 30rpx;
+  font-size: 28rpx;
+  color: blue;
+}
+
+/*店家自送  */
+
+.wai2 {
+  height: 130rpx;
+  width: 90%;
+  margin-left: 30rpx;
+  background: #fff;
+  margin-top: 30rpx;
+}
+
+.logo {
+  width: 80rpx;
+  height: 80rpx;
+  margin-left: 30rpx;
+  margin-top: 30rpx;
+  border-radius: 50%;
+}
+
+.sname {
+  margin-left: 30rpx;
+  margin-top: 50rpx;
+  font-size: 35rpx;
+  color: #ddd;
+  letter-spacing: 5rpx;
+}
+
+.zi {
+  width: 133rpx;
+  height: 40rpx;
+  border: 1rpx solid black;
+  text-align: center;
+  margin-left: 170rpx;
+  font-size: 28rpx;
+  margin-top: 45rpx;
+}
+
+.wai3 {
+  height: 200rpx;
+  width: 100%;
+  display: flex;
+}
+
+.picture {
+  width: 100rpx;
+  height: 100rpx;
+  margin-left: 50rpx;
+  margin-top: 50rpx;
+}
+
+.good {
+  margin-left: 50rpx;
+  margin-top: 50rpx;
+  color: #333;
+}
+
+.goods {
+  margin-left: 50rpx;
+  margin-top: 10rpx;
+  color: #ddd;
+  font-size: 30rpx;
+}
+
+.money {
+  margin-left: 190rpx;
+  margin-top: 50rpx;
+  color: #333;
+}
+
+/*具体费用  */
+
+.wai4 {
+  width: 90%;
+  height: 590rpx;
+  margin-left: 35rpx;
+  background: #fff;
+}
+
+.bao {
+  width: 180rpx;
+  margin-top: 50rpx;
+  margin-left: 30rpx;
+  font-size: 35rpx;
+}
+
+.fei {
+  margin-left: 370rpx;
+  margin-top: 50rpx;
+  font-size: 35rpx;
+}
+
+.fei2 {
+  margin-left: 265rpx;
+  margin-top: 50rpx;
+  font-size: 33rpx;
+  color: #ddd;
+}
+
+.xia2 {
+  width: 90%;
+  border: 3rpx dashed #ddd;
+  margin-top: 45rpx;
+  margin-left: 30rpx;
+}
+
+.subtotal {
+  margin-left: 430rpx;
+  margin-top: 30rpx;
+  font-size: 35rpx;
+}
+
+.subtotals {
+  margin-left: 20rpx;
+  margin-top: 30rpx;
+  color: red;
+  font-size: 35rpx;
+}
+
+/*电话保护  */
+.wai5{
+  width: 90%;
+  height: 180rpx;
+  margin-left: 30rpx;
+  margin-top: 30rpx;
+  background: #fff;
+}
+
+.tel{
+  margin-top: 45rpx;
+  margin-left: 20rpx;
+  font-size: 35rpx;
+}
+.tels{
+  width: 540rpx;
+  margin-left: 20rpx;
+  margin-top: 20rpx;
+  font-size: 25rpx;
+  color: #ddd;
+}
+.an{
+  margin-top: 55rpx;
+}
+
+/*支付方式  */
+.wai6{
+  height: 400rpx;
+  width: 90%;
+  margin-left: 30rpx;
+  background: #fff;
+  margin-top: 30rpx;
+}
+.pays{
+  /* width: 150rpx; */
+  margin-top: 50rpx;
+  margin-left: 30rpx;
+  font-size: 35rpx;
+}
+.pay{
+  margin-left: 300rpx;
+  margin-top: 50rpx;
+  font-size:33rpx; 
+  color: #ddd;
+}
+
+.wechat{
+  width: 100%;
+  height:100rpx;
+  text-align: center;
+  background: green;
+  color: white;
+  line-height: 92rpx;
+  /* margin-left: 100rpx; */
+  letter-spacing: 5rpx;
+  margin-top: 50rpx;
+}

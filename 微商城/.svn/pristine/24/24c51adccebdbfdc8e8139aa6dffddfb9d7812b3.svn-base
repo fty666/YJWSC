@@ -1,0 +1,130 @@
+/*背景顔色  */
+page{
+  background: #ddd;
+}
+
+/*距离顶部的距离  */
+.jl{
+  height: 30rpx;
+  width: 100%;
+}
+
+/* 表单设计 */
+
+/*距离  */
+.kuandu{
+  height: 5rpx;
+  background: #ddd;
+}
+
+/*from页面  */
+.from{
+  height: 520rpx;
+  width:100%;
+  background: white;
+}
+
+/*头像设置  */
+.file{
+  width: 30%;
+  line-height: 200rpx;
+  float: left; 
+  margin-left: 50rpx;
+}
+/*头像图片设置  */
+.picture{
+  width: 140rpx;
+  height: 140rpx;
+  float: right; 
+  margin-right: 180rpx;
+  margin-top: 30rpx;
+  border: 1px solid black;
+  border-radius: 50%;
+  overflow:hidden;
+}
+/*呢称设置  */
+.nechen{
+  width: 20%;
+  line-height: 100rpx;
+  float: left;
+  margin-left: 50rpx;
+
+}
+/*地址管理  */
+.address{
+  width: 100%;
+  line-height: 100rpx;
+  float: left;
+  margin-left: 50rpx;
+}
+
+/*设置  */
+.shezhi{
+  width: 500rpx;
+  line-height: 200rpx; 
+  font-size: 25rpx;
+  float: right;
+  margin-top: 10px;
+}
+
+/*遮盖层  */
+.covering-layer{
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color:#bbb;
+    opacity: 0.5; 
+    z-index: 8888; 
+}
+
+.immediate-sales{
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    z-index: 9999;
+    width: 100%;
+    height:300rpx;
+    padding: 20rpx;
+    font-size: 30rpx;
+    background-color: #fff; 
+}
+
+/*拍摄  */
+.pai{
+  height: 80rpx;
+  width: 100%;
+  text-align: center;
+  font-size: 30rpx;
+}
+.ben{
+  height: 100rpx;
+  width: 100%;
+  line-height: 80rpx;
+  text-align: center;
+  font-size: 30rpx;
+}
+.xia{
+  height: 5rpx;
+  background: #ddd;
+}
+.esc{
+  margin-top: 30rpx;
+  height: 80rpx;
+  width: 100%;
+  text-align: center;
+  font-size: 30rpx;
+}
+.xia2{
+  height: 26rpx;
+  width: 100%;
+  background: #ddd;
+}
+
+/*修改完成  */
+.butt{
+  width:100%;
+  height:100rpx;
+  margin-top: 30rpx;
+}

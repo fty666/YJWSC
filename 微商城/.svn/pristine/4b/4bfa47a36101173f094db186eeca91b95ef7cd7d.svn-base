@@ -1,0 +1,104 @@
+<block wx:if="{{validate}}">
+    <view class='showmodel'>
+        <view class='model-each'>
+            <view>绑定手机号</view>
+            <input class='model-input' bindinput="validateTel" type="number" placeholder='请输入绑定的手机号' />
+        </view>
+        <view class='model-each model-code'>
+            <text>验证码</text>
+            <input class="model-input model-input2" bindinput="validateTel" type="number" value='' placeholder='请输入验证码' />
+            <button catchtap='sendCode' disabled="{{disabled}}" class='button button-primary button-rounded button-wx-small '>{{send_code}}</button>
+        </view>
+        <view class='model-each model-btn'>
+            <view catchtap='validateTelCode' class='button button-highlight button-rounded '>验证</view>
+        </view>
+    </view>
+</block>
+<form bindsubmit="editShopInfo">
+    <view class="cell">
+        <!-- <image class="cellImage" src="/images/shop.png"></image> -->
+        <text class="cellTitle" data-source="{{ infor }}">商家名称</text>
+        <!-- <text class="cellContent">老码头火锅</text> -->
+        <!-- <input class="cellInput" bindinput='editShop_name' name="ShopName" value='{{shopInfo.ShopName}}' /> -->
+        <input class="cellInput" bindinput='editShop_name' name="ShopName" />
+        <label class="lineSpace"></label>
+    </view>
+    <!-- <view class="cell">
+        <image class="cellImage" src="/images/zuoji.png"></image>
+        <text class="cellTitle" data-source="{{ infor }}">商家座机</text>
+        <!-- <text class="cellContent">028-1234567</text>
+        <input  class="cellInput" name="" value='{{shopInfo.mobile}}' />
+        <label class="lineSpace"></label>
+    </view> -->
+    <view class="cell">
+        <!-- <image class="cellImage" src="/images/phone.png"></image> -->
+        <text class="cellTitle" data-source="{{ infor }}">商家手机</text>
+        <!-- <text class="cellContent">12345678912</text> -->
+        <!-- <input bindinput="getTel" class="cellInput" name="mobile" type="number" value='{{shopInfo.mobile}}' /> -->
+        <input bindinput="getTel" class="cellInput" name="mobile" type="number" />
+        <label class="lineSpace"></label>
+    </view>
+    <view class="cell cell-code">
+        <!-- <image class="cellImage" src="/images/phone.png"></image> -->
+        <text class="cellTitle">验证码</text>
+        <input class="code" name="smsCode" type="number" value='' placeholder='请输入验证码' />
+        <button catchtap='sendCode' disabled="{{disabled}}" class='button button-primary button-rounded button-wx-small ml30'>{{send_code}}</button>
+    </view>
+    <view class="cell">
+        <!-- <image class="cellImage" src="/images/address.png"></image> -->
+        <text class="cellTitle" data-source="{{ infor }}">商家地址 <text class="iconfont icon-location" catchtap='location'></text></text>
+        <!-- <text class="cellContent">天府三街新希望国际B</text> -->
+        <!-- <input class="cellInput" name="shop_addr" value='{{shopInfo.shop_addr}}' /> -->
+        <input class="cellInput" name="shop_addr" />
+        <label class="lineSpace"></label>
+    </view>
+    <view class="cell">
+        <!-- <image class="cellImage" src="/images/address.png"></image> -->
+        <text class="cellTitle" data-source="{{ infor }}">店铺详情</text>
+        <!-- <text class="cellContent">天府三街新希望国际B</text> -->
+        <!-- <input class="cellInput" name="shop_detail" value='{{shopInfo.shop_detail}}' /> -->
+        <input class="cellInput" name="shop_detail" />
+        <label class="lineSpace"></label>
+    </view>
+
+    <view class="cell">
+        <!-- <image class="cellImage" src="/images/address.png"></image> -->
+        <text class="cellTitle" data-source="{{ infor }}">店铺标签</text>
+        <!-- <text class="cellContent">天府三街新希望国际B</text> -->
+        <!-- <input class="cellInput" name="shop_tip" value='{{shopInfo.shop_tip}}' /> -->
+        <input class="cellInput" name="shop_tip" />
+        <label class="lineSpace"></label>
+    </view>
+
+    <block wx:if="{{shopIndo.groupId == 1}}">
+        <view class="cell">
+            <!-- <image class="cellImage" src="/images/address.png"></image> -->
+            <text class="cellTitle" data-source="{{ infor }}">起送价格</text>
+            <!-- <text class="cellContent">天府三街新希望国际B</text> -->
+            <!-- <input class="cellInput" name="initialMoney" value='{{shopInfo.initialMoney}}' /> -->
+            <input class="cellInput" name="initialMoney" />
+            <label class="lineSpace"></label>
+        </view>
+        <view class="cell">
+            <!-- <image class="cellImage" src="/images/address.png"></image> -->
+            <text class="cellTitle" data-source="{{ infor }}">配送价格</text>
+            <!-- <text class="cellContent">天府三街新希望国际B</text> -->
+            <!-- <input class="cellInput" name="transMoney" value='{{shopInfo.transMoney}}' /> -->
+            <input class="cellInput" name="transMoney" />
+            <label class="lineSpace"></label>
+        </view>
+    </block>
+
+    <!-- <view class="cell">
+        <image class="cellImage" src="/images/bangding.png"></image>
+        <text class="cellTitle" data-source="{{ infor }}">绑定账户</text>
+        <!-- <text class="cellContent">成都银行 ************1231</text>
+        <input  class="cellInput" value='{{shopInfo.ShopName}}' />
+        <label class="lineSpace"></label>
+    </view> -->
+    <view class="warn">
+        <image class="warn-img" src="/images/waring.png"></image>
+        <text class="cellContent">请谨慎修改商店信息</text>
+    </view>
+    <button type="primary" formType="submit" class='mt15'>修改</button>
+</form>

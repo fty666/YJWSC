@@ -1,0 +1,25 @@
+<view class="container">
+
+  <picker bindchange="bindPickerChange" value="{{index}}" range="{{array}}">
+    <view class="picker">
+      <view class="fb-type" style="height:{{px2rpxHeight*104}}px;">
+        <view class="type-label" style="height:{{px2rpxHeight*36}}px;">{{array[index]}}</view>
+        <image class="type-icon" src="http://yanxuan.nosdn.127.net/hxm/yanxuan-wap/p/20161201/style/img/icon-normal/pickerArrow-a8b918f05f.png"  style="width:{{px2rpxWidth*36}}px;height:{{px2rpxWidth*36}}px;"></image>
+
+      </view>
+    </view>
+  </picker>
+  <view class="fb-body" style="height:{{px2rpxHeight*374}}px;">
+    <textarea class="content" placeholder="对我们网站、商品、服务，你还有什么建议吗？你还希望在严选上买到什么？请告诉我们..." />
+    <view class="text-count">0/500</view>
+  </view>
+  <view class="fb-mobile" style="height:{{px2rpxHeight*162}}px;">
+    <view class="label" style="height:{{px2rpxHeight*58}}px;">手机号码</view>
+    <view class="mobile-box" style="height:{{px2rpxHeight*104}}px;">
+      <input class="mobile" placeholder="方便我们与你联系"  style="height:{{px2rpxHeight*50}}px;"/>
+      <image class="clear-icon" src="http://yanxuan.nosdn.127.net/hxm/yanxuan-wap/p/20161201/style/img/icon-normal/clear-fb-dd9d604f86.png" style="width:{{px2rpxWidth*28}}px;height:{{px2rpxWidth*28}}px;"></image>
+    </view>
+  </view>
+
+  <button class="fb-btn" style="height:{{px2rpxHeight*98}}px;">提交</button>
+</view>

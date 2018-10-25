@@ -1,0 +1,35 @@
+<block wx:if="{{glo_is_load}}">
+    <view class="glo_load_view">
+        <text class="iconfont icon-loading animated infinite rotate mr5"></text>
+        <text>正在努力加载</text>
+    </view>
+</block>
+<block wx:else>
+    <block wx:if="{{quan_list == null || quan_list == '' || quan_list.length < 0 }}">
+        <!--暂无内容提示 start-->
+        <view class="no-content tc">
+            <text class="no-content-icon iconfont icon-yemianwuneirong"></text>
+            <view class="no-content-font">暂无优惠券</view>
+        </view>
+        <!--暂无内容提示 end-->
+    </block>
+    <block wx:else>
+        <view class="contenter">
+            <block wx:for="{{quan_list}}" wx:key="{{item.couponId}}">
+                <view class="dollar-list" >
+                    <view class="top write {{item.sta == '1' ? 'used' : 'overdue'}}" catchtap='useCoupon' data-couponid='{{item.couponId}}' data-index='{{index}}'> 
+                        <view class="money-msg f16">¥
+                            <text class="money">{{item.couponPrice}}</text> <text class='f12'>优惠劵(满{{item.conditions}}使用)</text></view>
+                        <view class="status tc fr">{{item.shop_name}}</view>
+                    </view>
+                    <view class="bottom grey">
+                        <view>
+                            <text class="iconfont icon-time mr10 linght"></text>开始日期：{{item.couponCreateTime}}</view>
+                        <view>
+                            <text class="iconfont icon-info mr10 linght"></text>结束日期：{{item.endTime}}</view>
+                    </view>
+                </view>
+            </block>
+        </view>
+    </block>
+</block>

@@ -1,0 +1,70 @@
+page {
+    padding: 0 20rpx;
+    box-sizing: border-box;
+}
+.contents{
+    width: 100%;
+}
+.no-data{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+}
+.card {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    margin-top: 20rpx;
+    font-size: 40rpx;
+    background-color: #fff;
+    border: 2px solid #ccc;
+}
+
+.moren {
+    position: absolute;
+    top: 10rpx;
+    left: 10rpx;
+    border: 1rpx solid #ccc;
+    border-radius: 50%;
+}
+
+.active {
+    background-color: #1b9af7;
+}
+
+.card-num {
+    width: 100%;
+    padding-top: 20rpx;
+    box-sizing: border-box;
+    text-align: center;
+}
+
+.btn {
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+    width: 100%;
+    padding-right: 10rpx;
+}
+
+.add {
+    position: fixed;
+    bottom: 0rpx;
+    left: 0;
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+    width: 95%;
+    margin: 20rpx 2%;
+    padding: 20rpx;
+    font-size: 40rpx;
+    color: #fff;
+    background-color: #1b9af7;
+    border-radius: 10rpx;
+    border: 1px solid #ddd;
+}

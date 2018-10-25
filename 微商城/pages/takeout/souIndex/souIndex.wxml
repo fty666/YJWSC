@@ -1,0 +1,63 @@
+<block wx:if="{{is_load}}">
+  <view class="glo_load_view">
+    <text class="iconfont icon-loading animated infinite rotate mr5"></text>
+    <text>正在努力加载</text>
+  </view>
+</block>
+<block wx:else>
+  <view class='allpage2'>
+    <scroll-view scroll-y>
+      <view class='near' style="height:{{px2rpxHeight*130}}px;">
+        <view class='near-line' style="width:{{px2rpxWidth*100}}px;height:{{px2rpxHeight*1}}px;"></view>
+        <view class='near-shop'>优质商家</view>
+        <view class='near-line' style="width:{{px2rpxWidth*100}}px;height:{{px2rpxHeight*1}}px;"></view>
+      </view>
+      <view class='contents' style="height:{{px2rpxHeight*1100}}px;">
+        <block wx:if="{{has_data}}">
+          <scroll-view scroll-y bindscrolltoupper='scrollToUpper' bindscrolltolower='scrollToLower'>
+            <view class='shop'>
+              <block wx:if="{{shop==''}}">
+                <view class='shops'>没有该店铺</view>
+              </block>
+              <block wx:else>
+                <block wx:for="{{shop}}" wx:for-item="shop" wx:key="{{shop.shopId}}">
+                  <view class="shop-each {{shop.is_sale==0?'stops':''}} " catchtap='goToShop' data-shop_code='{{shop.shop_code}}' data-salse='{{shop.is_sale}}'>
+                    <image class='shop-img' src='{{uploadFileUrl + shop.logo}}' style="width:{{px2rpxWidth*170}}px;height:{{px2rpxWidth*170}}px;"></image>
+                    <view class='shop-text'>
+                      <view class='shop-name'>{{shop.ShopName}}</view>
+                      <view class='shop-comment' style="width:{{px2rpxWidth*470}}px;height:{{px2rpxHeight*50}}px;">
+                        <view class='shop-comment-left'>
+                          <view class='qisong' style="width:{{px2rpxWidth*150}}px;">起送 ¥{{shop.foodShopDetail.initialMoney}}</view>
+                          <view class='qisong' style="width:{{px2rpxWidth*150}}px;">人均 ¥{{shop.avgMoney}}</view>
+                        </view>
+                      </view>
+                      <view class='shop-tag'>
+                        <view class='shop-tag-each'>
+                          <image class='shop-tag-img' src='/images/jian.png' style="width:{{px2rpxWidth*30}}px;height:{{px2rpxWidth*30}}px;"></image>
+                          <view class='shop-tag-text' style="width:{{px2rpxWidth*400}}px;">
+                            <block wx:for="{{shop.reduction}}" wx:for-item='reduction' wx:key="{{reduction.reductionId}}">
+                              满{{reduction.full}}减{{reduction.reductionPrice}};
+                            </block>
+                          </view>
+                        </view>
+                      </view>
+                    </view>
+                  </view>
+                </block>
+              </block>
+            </view>
+          </scroll-view>
+        </block>
+        <block wx:else>
+          <navigator class='no-data' url="/pages/shop/mall/mall">
+            <view>您还没有相关的订单</view>
+            <view>可以去看看有哪些想买的</view>
+          </navigator>
+        </block>
+      </view>
+    </scroll-view>
+  </view>
+  <!--自定义tarBar  -->
+  <!-- <import src="../../../template/template.wxml" />
+  <template is="tabBar" data="{{tabBar:bindData.tabBar}}" /> -->
+</block>

@@ -1,0 +1,145 @@
+<block wx:if="{{is_load}}">
+    <view class="glo_load_view">
+        <text class="iconfont icon-loading animated infinite rotate mr5"></text>
+        <text>正在努力加载</text>
+    </view>
+</block>
+<block wx:else>
+    <view>
+        <!--送货地址  -->
+        <view class='wai1'>
+            <!--送货地址信息  -->
+            <view class='flex addr'>
+                <view>
+                    <image src='../../../images/gps.png' class='add'></image>
+                </view>
+                <block wx:if="{{address}}">
+                    <view class='ainfo'>
+                        <view class='address'>{{address.area_detail}}</view>
+                        <view class='user'>{{address.addr_receiver}} {{address.addr_mobile}}</view>
+                    </view>
+                </block>
+                <block wx:else>
+                    <view class='ainfo'>
+                        <view class='address'></view>
+                        <view class='user c666' style='font-size:36rpx'>
+                            <text class="iconfont icon-add"></text> 添加地址</view>
+                    </view>
+                </block>
+                <view class='more' catchtap='goToAddress'>
+                    <text class="iconfont icon-youjiantou"></text>
+                </view>
+            </view>
+            <view class='xia'></view>
+            <!-- <view class='flex'>
+                <view>
+                    <image src='../../../images/time.png' class='time'></image>
+                </view>
+                <view class='font'>立即送出</view>
+                <view class='font1'>大约11:18送达</view>
+            </view> -->
+        </view>
+
+        <!--商家自配  -->
+        <view class='flex wai2'>
+            <view>
+                <image src='{{aliyunUrl + shop_info.logo}}' class='logo'></image>
+            </view>
+            <view class='sname'>{{shop_info.ShopName}}</view>
+            <!-- <view class='zi'>商家自配</view> -->
+        </view>
+
+        <!--商品详情  -->
+        <block wx:for="{{goods_list}}" wx:for-item="goods" wx:key="{{goods.id}}">
+            <view class='wai3'>
+                <view>
+                    <image src='{{aliyunUrl+goods.img}}' class='picture'></image>
+                </view>
+                <view class='oinfo'>
+                    <view class='good'>{{goods.goods_name}}</view>
+                    <view class='goods'>X{{goods.num}}</view>
+                </view>
+                <view class='money f18'>￥{{goods.discountPrice}}</view>
+            </view>
+        </block>
+        <!--具体费用  -->
+        <view class='wai4'>
+            <!-- <view class='flex'>
+                <view class='bao'>包装费</view>
+                <view class='fei'>￥0</view>
+            </view> -->
+            <view class='flex'>
+                <view class='bao'>配送费</view>
+                <view class='fei'>￥{{userMoney}}</view>
+            </view>
+            <view class='xia2'></view>
+
+            <view class='flex'>
+                <view class='bao'>满减优惠</view>
+                <view class='fei'>￥{{full_subtraction}}</view>
+            </view>
+            <view class='xia2'></view>
+            <!-- <view class='flex'>
+                <view class='bao'>美团红包</view>
+                <view class='fei2'>暂无可用
+                    <text class="iconfont icon-youjiantou"></text> </view>
+            </view> -->
+            <view class='flex'>
+                <view class='bao'>商家代金券</view>
+                <view class='fei2'>{{coupon == '' ? '选择优惠券' : '满'+coupon.conditions+'减'+coupon.couponPrice}}
+                    <text class="iconfont icon-youjiantou" catchtap='goToCoupon'></text>
+                </view>
+            </view>
+            <view class='xia2'></view>
+
+            <view class='flex'>
+                <view class='subtotal'>小计</view>
+                <view class='subtotals'>￥{{totalPrice}}</view>
+            </view>
+        </view>
+
+        <!--号码保护  -->
+        <!-- <view class='wai5 flex'>
+            <view class='sinfo'>
+                <view class='tel'>号码保护</view>
+                <view class='tels'>对商家，骑手隐藏您的手机号，保护您的隐藏</view>
+            </view>
+            <view class='an'>
+                <switch name="switch" />
+            </view>
+        </view> -->
+
+        <!--支付方式  -->
+        <view class='wai6'>
+            <!-- <view class='flex'>
+                <view class='pays'>支付方式</view>
+                <view class='pay'>在线支付</view>
+            </view>
+            <view class='xia'></view> -->
+            <view class='msg'>
+                <view class='msg-text1'>备注</view>
+                <textarea class='msg-text2' bindinput="msg" placeholder='口味偏好等'></textarea>
+            </view>
+            <view class='tableware'>
+                <view>餐具数量</view>
+                <!--选择餐具  -->
+                <picker class='picker' bindchange="getTableware" value="{{tableware}}" range="{{tablewareArr}}">
+                    <view>
+                        数量：{{tableware}}
+                    </view>
+                </picker>
+            </view>
+        </view>
+
+        <view class='wechat' bindtap='pay'>支付</view>
+
+        <!-- </block> -->
+        <!-- <block wx:else>
+      <navigator class='no-order' url="/pages/shop/mall/mall">
+        <view>您还没有相关的订单</view>
+        <view>可以去看看有哪些想买的</view>
+      </navigator>
+    </block> -->
+
+    </view>
+</block>

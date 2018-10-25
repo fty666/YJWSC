@@ -1,0 +1,302 @@
+page {
+  background: #f4f4f4;
+}
+
+.flex {
+  display: flex;
+}
+
+.addr {
+  justify-content: space-between;
+  align-items: center;
+  padding-right: 20rpx;
+}
+
+.wai1 {
+  width: 90%;
+  margin-top: 30rpx;
+  margin-left: 30rpx;
+  background: #fff;
+}
+
+.add {
+  margin-top: 80rpx;
+  margin-left: 30rpx;
+}
+
+.ainfo {
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.address {
+  margin-left: 30rpx;
+  margin-top: 55rpx;
+  font-size: 35rpx;
+}
+
+.user {
+  margin-left: 30rpx;
+  margin-top: 15rpx;
+  font-size: 30rpx;
+  color: #aaa;
+}
+
+.more {
+  margin-left: 120rpx;
+  margin-top: 50rpx;
+}
+
+.xia {
+  margin-left: 35rpx;
+  width: 90%;
+  background: #ddd;
+  margin-top: 40rpx;
+}
+
+.time {
+  width: 50rpx;
+  height: 50rpx;
+  margin-top: 25rpx;
+  margin-left: 30rpx;
+}
+
+.font {
+  margin-left: 30rpx;
+  margin-top: 29rpx;
+  font-size: 35rpx;
+}
+
+.font1 {
+  margin-left: 30rpx;
+  margin-top: 30rpx;
+  font-size: 28rpx;
+  color: blue;
+}
+
+/*店家自送  */
+
+.wai2 {
+  width: 90%;
+  margin-left: 30rpx;
+  background: #fff;
+  margin-top: 30rpx;
+}
+
+.logo {
+  margin-left: 30rpx;
+  margin-top: 30rpx;
+  border-radius: 50%;
+}
+
+.sname {
+  margin-left: 30rpx;
+  margin-top: 50rpx;
+  font-size: 35rpx;
+  color: #999;
+  letter-spacing: 5rpx;
+}
+
+.zi {
+  width: 133rpx;
+  height: 40rpx;
+  border: 1rpx solid black;
+  text-align: center;
+  margin-left: 170rpx;
+  font-size: 28rpx;
+  margin-top: 45rpx;
+}
+
+.wai3 {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  width: 100%;
+  padding-right: 50rpx;
+  /* border-bottom:1rpx solid #aaa;  */
+}
+
+.picture {
+  margin-left: 50rpx;
+}
+
+.good {
+  margin-left: 50rpx;
+  margin-top: 50rpx;
+  color: #333;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.goods {
+  margin-left: 50rpx;
+  margin-top: 10rpx;
+  color: #999;
+  font-size: 30rpx;
+}
+
+.money {
+  margin-left: 125rpx;
+  margin-top: 50rpx;
+  color: #333;
+}
+
+/*具体费用  */
+
+.wai4 {
+  width: 90%;
+  margin-left: 35rpx;
+  background: #fff;
+}
+
+.bao {
+  /* width: 180rpx; */
+  margin-top: 50rpx;
+  margin-left: 30rpx;
+  font-size: 35rpx;
+}
+
+.fei {
+  margin-left: 260rpx;
+  margin-top: 50rpx;
+  font-size: 35rpx;
+}
+
+.fei2 {
+  margin-left: 215rpx;
+  margin-top: 50rpx;
+  font-size: 33rpx;
+  color: #aaa;
+}
+
+.fei3 {
+  margin-left: 260rpx;
+  margin-top: 50rpx;
+  font-size: 35rpx;
+}
+
+.xia2 {
+  width: 90%;
+  border: 3rpx dashed #ddd;
+  margin-top: 45rpx;
+  margin-left: 30rpx;
+}
+
+.subtotal {
+  margin-left: 430rpx;
+  margin-top: 30rpx;
+  font-size: 35rpx;
+}
+
+.subtotals {
+  margin-left: 20rpx;
+  margin-top: 30rpx;
+  color: red;
+  font-size: 35rpx;
+}
+
+/*电话保护  */
+
+.wai5 {
+  width: 90%;
+  height: 180rpx;
+  margin-left: 30rpx;
+  margin-top: 30rpx;
+  background: #fff;
+}
+
+.tel {
+  margin-top: 45rpx;
+  margin-left: 20rpx;
+  font-size: 35rpx;
+}
+
+.tels {
+  width: 540rpx;
+  margin-left: 20rpx;
+  margin-top: 20rpx;
+  font-size: 25rpx;
+  color: #ddd;
+}
+
+.an {
+  margin-top: 55rpx;
+}
+
+/*支付方式  */
+
+.wai6 {
+  width: 90%;
+  margin-left: 30rpx;
+  background: #fff;
+  margin-top: 30rpx;
+}
+
+.pays {
+  margin-top: 50rpx;
+  margin-left: 30rpx;
+  font-size: 35rpx;
+}
+
+.pay {
+  margin-left: 300rpx;
+  margin-top: 50rpx;
+  font-size: 33rpx;
+  color: #aaa;
+}
+
+.wechat {
+  width: 100%;
+  text-align: center;
+  background: green;
+  color: white;
+  line-height: 92rpx;
+  letter-spacing: 5rpx;
+  margin-top: 50rpx;
+}
+
+.c666 {
+  color: #666;
+}
+
+/*备注  */
+
+.msg {
+  display: flex;
+  justify-content: flex-start;
+  width: 100%;
+}
+
+.msg-text1 {
+  display: flex;
+  justify-content: center;
+  font-size: 30rpx;
+}
+
+.msg-text2 {
+  margin-left: 20rpx;
+  padding: 10rpx;
+  border: 1rpx solid #ccc;
+}
+
+/*餐具数量  */
+
+.tableware {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-top: 20rpx;
+  padding-right: 20rpx;
+  box-sizing: border-box;
+  /* border: 1rpx solid red; */
+}
+
+.picker {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  color: #aaa;
+}

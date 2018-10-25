@@ -1,0 +1,33 @@
+<view>
+    <!--广告轮播图  -->
+    <view>
+        <swiper indicator-dots="true" autoplay="true" interval="5000" style='width:100%;' duration="500">
+            <block wx:for="{{imgUrls}}" wx:key="index">
+                <swiper-item>
+                    <image src="{{item}}" class="img" style="width:{{px2rpxWidth*750}}px;height:{{px2rpxHeight*500}}px;"/>
+                </swiper-item>
+            </block>
+        </swiper>
+    </view>
+    <!--商家类别  -->
+    <view class='seller' style="height:{{px2rpxHeight*800}}px;">
+        <scroll-view scroll-y>
+            <view class='seller2'>
+                <view class='shop' wx:for="{{shop}}" wx:key="{{item.groupId}}" data-gid="{{item.groupId}}" catchtap='shops' style="width:{{px2rpxWidth*150}}px;height:{{px2rpxHeight*150}}px;">
+                    <view>
+                        <block wx:if="{{item.img}}">
+                            <image src='{{upload_file_url+item.img}}' class='gimg' style="width:{{px2rpxWidth*130}}px;height:{{px2rpxWidth*130}}px;"></image>
+                        </block>
+                        <block wx:else>
+                            <image src='../../../images/logo.png' class='gimg' style="width:{{px2rpxWidth*130}}px;height:{{px2rpxWidth*130}}px;"></image>
+                        </block>
+                    </view>
+                    <view class='font'  style="width:{{px2rpxWidth*130}}px;height:{{px2rpxHeight*80}}px;">{{item.groupName}}</view>
+                </view>
+            </view>
+        </scroll-view>
+    </view>
+</view>
+<view class='jianju2'></view>
+<import src="../../../template/template.wxml" />
+<template is="tabBar" data="{{tabBar:bindData.tabBar}}" />

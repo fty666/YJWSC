@@ -1,0 +1,30 @@
+<block wx:if="{{glo_is_load}}">
+    <view class="glo_load_view">
+        <text class="iconfont icon-loading animated infinite rotate mr5"></text>
+        <text>正在努力加载</text>
+    </view>
+</block>
+<block wx:else>
+    <block wx:if="{{collectList==''}}">
+        <view class='fon1'>你还没有收藏的店铺</view>
+        <!-- <view class='fon2'>快去收藏吧</view> -->
+    </block>
+    <block wx:else>
+        <view class="container">
+            <view class="collect-list">
+                <view class="item" bindtap="openGoods" wx:for="{{collectList}}" wx:key="{{item.shop_code}}" data-index="{{index}}">
+                    <view>
+                        <image class="img" src="{{upload_file_url+item.logo}}"></image>
+                    </view>
+                    <view class="info">
+                        <view class="name">{{item.shop_name}}</view>
+                        <view class="subtitle">{{item.shop_addr}}</view>
+                    </view>
+                    <view class="price">
+                        <button type='warn' catchtap='remove' data-shopcode="{{item.shop_code}}" class='esc'>取消收藏</button>
+                    </view>
+                </view>
+            </view>
+        </view>
+    </block>
+</block>

@@ -1,0 +1,102 @@
+<block wx:if="{{glo_is_load}}">
+    <view class="glo_load_view">
+        <text class="iconfont icon-loading animated infinite rotate mr5"></text><text>正在努力加载</text>
+    </view>
+</block>
+<block wx:else>
+<!--filter start-->
+ <view class="filter-box tc"style="height:{{px2rpxHeight*92}}px;">
+    <view class="filter gridXb flex"style="height:{{px2rpxHeight*92}}px;">
+    <view class="sub filter-item {{select_type == ''?'active':''}}" bindtap="select_goods_list" data-stype="">综合</view>
+    <view class="sub price-rank {{is_select_xiaoliang ? 'pr-arrow':''}} {{select_type == 'xiaoliang'?'active':''}}" bindtap="select_goods_list" data-stype="xiaoliang">销量</view>
+    <view class="sub price-rank {{is_select_jiage?'pr-arrow':''}} {{select_type == 'jiage'?'active':''}}" bindtap="select_goods_list" data-stype="jiage">好评</view>
+    <view class="type f20 filter-item" bindtap="toggle_list_type_bind">
+        <text class="iconfont {{list_type==true?'icon-list':'icon-apps'}}"></text>
+    </view>
+  </view>
+</view> 
+<view class="search">
+    <view class="search-box flex">
+        <input class="sub search-input" type="text" placeholder="请搜索店铺" confirm-type="search" bindconfirm="goods_search_bind"  style="height:{{px2rpxHeight*80}}px;"/>
+        <button size="mini" class="search-btn"><icon type="search" size="18" /></button>
+    </view>
+  </view>
+<!--filter end-->
+
+<!--list start-->
+<view class="malllist" wx:if="{{list_type&&true}}">
+    <!-- <block wx:if="{{goods_data&&goods_data!=''&&goods_data!=null}}"> -->
+        <!-- <block wx:for="{{goods_data}}"> -->
+        <block wx:for="{{[1,2,3]}}">
+            <view class="m-item flex" bindtap="malllist" id="{{item.id}}">
+                <view class="m-imgbox"  style="width:{{px2rpxWidth*100}}px;height:{{px2rpxHeight*100}}px;">
+                    <image src="{{upload_file_url+'1.jpg'}}" class="m-img" mode="aspectFill"></image>
+                </view>
+                <view class="sub flex flexC ml20 m-box">
+                    <view class="m-tit lineText2">
+                        <text>123{{item.g_name}}</text>
+                    </view>
+                    <view class="m-info grey f12 mt5 sub">
+                        <text>月销{{item.sale_number}}笔</text>
+                    </view>
+                    <view class="good-price mt10">
+                        <!-- <block wx:if="{{item.promote_status == 1}}"> -->
+                            <text class="iconfont icon-cu"></text>
+                            <text class="f20">￥{{item.promote_price}}</text>
+                            <text class="delLine">￥{{item.shop_price}}</text>
+                        <!-- </block> -->
+                        <!-- <block wx:else>
+                            <block wx:if="{{item.vip_price > 0}}">
+                                <text class="iconfont icon-vip"></text>
+                                <text class="f20">￥{{item.vip_price}}</text>
+                                <text class="delLine">￥{{item.shop_price}}</text>
+                            </block>
+                            <block wx:else>
+                                <text class="f20">￥{{item.shop_price}}</text>
+                            </block>
+                        </block> -->
+                    </view>
+                </view>
+            </view>
+        </block>
+    <!-- </block> -->
+</view>
+<!--list end-->
+
+<view class="goods clearfix" wx:if="{{!list_type}}">
+<!-- <block wx:if="{{goods_data&&goods_data!=''&&goods_data!=null}}"> -->
+    <!-- <block wx:for="{{goods_data}}"> -->
+    <block wx:for="{{[1,2,3]}}">
+        <view class="goods-item" bindtap="detail" id="{{item.id}}">
+            <view class="goods-imgbox">
+            <image src="{{upload_file_url+'1.jpg'}}" class="goods-img" mode="aspectFill"></image>
+            </view>
+            <view class="goods-info">
+            <view class="goods-name lineText">
+                <text>123{{item.g_name}}</text>
+            </view>
+            <view class="m-info grey f12 sub">
+                <text>月销456{{item.sale_number}}笔</text>
+            </view>
+            <view class="goods-price mt5">
+                <text class="f16">￥789{{item.shop_price}}</text>
+                <text class="delLine">￥5600.00</text>
+            </view>
+            </view>
+        </view>
+    </block>
+<!-- </block> -->
+</view>
+
+<!--back top-->
+<view class="backtop" bindtap="goTop" wx:if="{{floorstatus}}">
+  <text class="iconfont icon-fold" style="width:{{px2rpxWidth*80}}px;height:{{px2rpxHeight*80}}px;"></text>
+</view>
+
+<!--tips-->
+<block wx:if="{{is_loadmore==false}}">
+<view class="tips-foot tc f12">
+  不要扯了，已经扯到底了
+</view>
+</block>
+</block>

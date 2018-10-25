@@ -1,0 +1,66 @@
+<view>
+  <view class="jl" style="height:{{px2rpxHeight*30}}px;"></view>
+  <!--距离顶部  -->
+  <view class="from" style="height:{{px2rpxHeight*405}}px;">
+    <form bindsubmit="formSubmit" bindreset="formReset">
+
+      <!--头像设置  -->
+      <view class="section">
+        <view class="file">头像</view>
+        <view class="picture" bindtap='immediate_sales' style="width:{{px2rpxWidth*140}}px;height:{{px2rpxHeight*140}}px;">
+          <image src="{{upload_file_url+img}}" style='width:140rpx;height:140rpx;'></image>
+        </view>
+      </view>
+
+      <!--距离设置  -->
+      <view style="clear:both;"></view>
+      <view class="kuandu" style="height:{{px2rpxHeight*5}}px;"></view>
+
+      <!--昵称  -->
+      <view class="section">
+        <view class="nechen">用户昵称</view>
+        <view class="shezhi" style="width:{{px2rpxWidth*500}}px;">
+          <input name="nickName" bindblur="names" value="{{userinfo.user_name}}" placeholder="  " />
+        </view>
+        <view style="clear:both;"></view>
+      </view>
+
+      <!--距离设置  -->
+      <view style="clear:both;"></view>
+      <view class="kuandu" style="height:{{px2rpxHeight*5}}px;"></view>
+
+      <!-- 电话  -->
+      <view class="phones">
+        <view class="nechen">用户电话</view>
+        <view class="shezhi" style="width:{{px2rpxWidth*500}}px;">
+          <input name="telephone" type='number' bindblur="phones" value="{{userinfo.telephone==0?'':userinfo.telephone}}" placeholder="填写手机号" />
+        </view>
+        <view style="clear:both;"></view>
+      </view>
+
+      <!--距离设置  -->
+      <view style="clear:both;"></view>
+      <view class="kuandu" style="height:{{px2rpxHeight*5}}px;"></view>
+
+      <!--头像提交页面  -->
+      <view hidden="{{immediate_sale_hidden}}">
+        <view bindtap='cancel_sale' class="covering-layer"></view>
+        <view class="immediate-sales" style="height:{{px2rpxHeight*300}}px;">
+          <view class="pai" bindtap='photo' style="height:{{px2rpxHeight*80}}px;">拍摄</view>
+          <view class='xia' style="height:{{px2rpxHeight*5}}px;"></view>
+          <view class="ben" bindtap='local' style="height:{{px2rpxHeight*80}}px;">本地选择</view>
+          <view class='xia2' style="height:{{px2rpxHeight*15}}px;"></view>
+          <view class='esc' catchtap='cancel_sale' style="height:{{px2rpxHeight*80}}px;">取消</view>
+        </view>
+      </view>
+
+    </form>
+  </view>
+
+  <!--地址管理  -->
+  <!-- <view>
+    <label>
+      <button class='butt' type='warn' bindtap='bttns' style="height:{{px2rpxHeight*100}}px;">保存信息</button>
+    </label>
+  </view> -->
+</view>

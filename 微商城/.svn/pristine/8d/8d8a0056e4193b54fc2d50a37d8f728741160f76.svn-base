@@ -1,0 +1,84 @@
+<view class="container">
+    <view class="profile-info">
+        <!-- <button wx:if="{{!hasUserInfo && canIUse}}" open-type="getUserInfo" bindgetuserinfo="getUserInfo"> 获取头像昵称 </button>
+        <block wx:else> -->
+            <image class="avatar" src="{{upload_file_url+uinfo.photo}}"></image>
+            <view class="info">
+                <!-- <text class="name">{{userInfo.nickName}}</text> -->
+                 <text class="level">{{uinfo.user_name}}</text> 
+            </view>
+        <!-- </block> -->
+    </view>
+
+    <view class="user-menu">
+        <view class="item">
+            <navigator url="/pages/user/order/order" class="a">
+                <image class="myicon" src="../../../images/order.png"></image>
+                <text class="txt">我的订单</text>
+            </navigator>
+        </view>
+        <view class="item"  >
+            <view class="a" catchtap='fave'>
+                <image class="myicon" src="../../../images/coupon.png"></image>
+                <text class="txt">优惠券</text>
+            </view>
+        </view>
+        <!-- <view class="item no-border">
+            <navigator url="url" class="a">
+                <image class="myicon" src="../../../images/gift.png"></image>
+                <text class="txt">礼品卡</text>
+            </navigator>
+        </view> -->
+        <view class="item">
+            <navigator url="/pages/user/collect/collect" class="a">
+                <image class="myicon" src="../../../images/collection.png"></image>
+                <text class="txt">我的收藏</text>
+            </navigator>
+        </view>
+        <!-- <view class="item">
+            <navigator url="/pages/ucenter/footprint/footprint" class="a">
+                <image class="myicon" src="../../../images/footer.png"></image>
+                <text class="txt">我的足迹</text>
+            </navigator>
+        </view> -->
+        <!-- <view class="item no-border">
+            <navigator url="url" class="a">
+                <image class="myicon" src="../../../images/member.png"></image>
+                <text class="txt">会员福利</text>
+            </navigator>
+        </view> -->
+        <view class="item">
+            <navigator url="../address/address" class="a">
+                <image class="myicon" src="../../../images/address.png"></image>
+                <text class="txt">地址管理</text>
+            </navigator>
+        </view>
+        <view class="item">
+            <navigator url="/pages/user/usersinfo/userinfo" class="a">
+                <image class="myicon" src="../../../images/safe.png"></image>
+                <text class="txt">用户信息</text>
+            </navigator>
+        </view>
+        <!-- <view class="item no-border">
+            <navigator url="url" class="a">
+                <image class="myicon" src="../../../images/connect.png"></image>
+                <text class="txt">联系客服</text>
+            </navigator>
+        </view>
+        <view class="item item-bottom">
+            <navigator url="url" class="a">
+               <image class="myicon" src="../../../images/help.png"></image>
+                <text class="txt">帮助中心</text>
+            </navigator>
+        </view>
+        <view class="item item-bottom">
+            <navigator url="/pages/user/feedback/feedback" class="a">
+               <image class="myicon" src="../../../images/opinion.png"></image>
+                <text class="txt">意见反馈</text>
+            </navigator>
+        </view> -->
+    </view>
+    <import src="../../../template/template.wxml" />
+    <template is="tabBar" data="{{tabBar:bindData.tabBar}}" />
+    <!-- <view class="logout" bindtap="exitLogin">退出登录</view> -->
+</view>

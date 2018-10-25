@@ -1,0 +1,119 @@
+/* mallcart.wxss */
+
+.mallcart-title {
+  padding: 10px;
+  background: #fff;
+}
+
+.mallcart-del {
+  text-align: center;
+}
+
+.radio {
+  text-align: center;
+}
+
+.cart-item {
+  padding: 15px 10px;
+  box-sizing: border-box;
+  background: #fff;
+  margin-top: 5px;
+}
+
+.cart-img {
+  display: block;
+  margin-right: 8px;
+}
+
+.cart-title {
+  line-height: 140%;
+}
+
+.count-set {
+  width: auto;
+  border: 1px solid #eee;
+}
+
+.count-set text {
+  display: block;
+  line-height: 30px;
+  padding: 0 15px;
+}
+
+.buy-couts {
+  border-left: 1px solid #eee;
+  border-right: 1px solid #eee;
+}
+
+.count-set .flase {
+  background: rgba(0, 0, 0, 0.05);
+  color: #999;
+}
+
+/* .mallcart-float{ height: 46px; border: 1rpx solid red;} */
+
+.mallcart-foot {
+  position: fixed;
+  z-index: 999;
+  left: 0;
+  bottom: 100rpx;
+  width: 100%;
+  line-height: 46px;
+  background: #fff;
+}
+
+.mall-cart-sum {
+  line-height: 18px;
+  padding-top: 5px;
+}
+
+.mall-cart-btn {
+  background: #e64340;
+  display: block;
+  color: #fff;
+  padding: 0 30px;
+  border-radius: 0;
+}
+
+.guige {
+  height: 100%;
+  font-size: 25rpx;
+  margin-left: 10rpx;
+  text-overflow: ellipsis;
+  overflow: hidden;
+  /* background-color: #f0f0f0;
+    border-radius: 10rpx;
+    border: 1rpx solid #f0f0f0; */
+}
+
+/*  重写 checkbox 样式  */
+
+/* 未选中的 背景样式 */
+
+checkbox .wx-checkbox-input {
+  border-radius: 50%; /* 圆角 */
+  width: 40rpx; /* 背景的宽 */
+  height: 40rpx; /* 背景的高 */
+}
+
+/* 选中后的 背景样式 （红色背景 无边框 可根据UI需求自己修改） */
+
+checkbox .wx-checkbox-input.wx-checkbox-input-checked {
+  border: none;
+  background: red;
+}
+
+/* 选中后的 对勾样式 （白色对勾 可根据UI需求自己修改） */
+
+checkbox .wx-checkbox-input.wx-checkbox-input-checked::before {
+  border-radius: 50%; /* 圆角 */
+  width: 40rpx; /* 选中后对勾大小，不要超过背景的尺寸 */
+  height: 40rpx; /* 选中后对勾大小，不要超过背景的尺寸 */
+  line-height: 40rpx;
+  text-align: center;
+  font-size: 30rpx; /* 对勾大小 30rpx */
+  color: #fff; /* 对勾颜色 白色 */
+  background: transparent;
+  transform: translate(-50%, -50%) scale(1);
+  -webkit-transform: translate(-50%, -50%) scale(1);
+}

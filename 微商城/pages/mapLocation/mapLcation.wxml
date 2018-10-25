@@ -1,0 +1,5 @@
+<map id="map" longitude="113.324520" latitude="23.099994" scale="18" cover-image="../images/connect.png" bindcontroltap="controltap" markers="{{markers}}" bindmarkertap="markertap" polyline="{{polyline}}" bindregionchange="regionchange" show-location
+  enable-zoom="true" style="width: 100%; height: 300px;"></map>
+
+<!--scale  地图定位范围  -->
+<!--  -->

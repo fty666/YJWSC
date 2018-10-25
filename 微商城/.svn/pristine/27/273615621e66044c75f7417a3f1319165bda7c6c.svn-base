@@ -1,0 +1,304 @@
+page {
+    background: #f4f4f4;
+}
+
+.flex {
+    display: flex;
+}
+
+.addr {
+    justify-content: space-between;
+    align-items: center;
+    padding-right: 20rpx;
+    /* border: 1rpx solid red; */
+}
+
+.wai1 {
+    width: 90%;
+    height: 300rpx;
+    margin-top: 30rpx;
+    margin-left: 30rpx;
+    background: #fff;
+}
+
+.add {
+    width: 50rpx;
+    height: 50rpx;
+    margin-top: 80rpx;
+    margin-left: 30rpx;
+}
+
+.ainfo {
+    display: flex;
+    flex-direction: column;
+}
+
+.address {
+    margin-left: 30rpx;
+    margin-top: 55rpx;
+    font-size: 35rpx;
+}
+
+.user {
+    margin-left: 30rpx;
+    margin-top: 15rpx;
+    font-size: 30rpx;
+    color: #aaa;
+}
+
+.more {
+    margin-left: 120rpx;
+    margin-top: 80rpx;
+}
+
+.xia {
+    height: 2rpx;
+    margin-left: 35rpx;
+    width: 90%;
+    background: #ddd;
+    margin-top: 40rpx;
+}
+
+.time {
+    width: 50rpx;
+    height: 50rpx;
+    margin-top: 25rpx;
+    margin-left: 30rpx;
+}
+
+.font {
+    margin-left: 30rpx;
+    margin-top: 29rpx;
+    font-size: 35rpx;
+}
+
+.font1 {
+    margin-left: 30rpx;
+    margin-top: 30rpx;
+    font-size: 28rpx;
+    color: blue;
+}
+
+/*店家自送  */
+
+.wai2 {
+    height: 130rpx;
+    width: 90%;
+    margin-left: 30rpx;
+    background: #fff;
+    margin-top: 30rpx;
+}
+
+.logo {
+    width: 80rpx;
+    height: 80rpx;
+    margin-left: 30rpx;
+    margin-top: 30rpx;
+    border-radius: 50%;
+}
+
+.sname {
+    margin-left: 30rpx;
+    margin-top: 50rpx;
+    font-size: 35rpx;
+    color: #999;
+    letter-spacing: 5rpx;
+}
+
+.zi {
+    width: 133rpx;
+    height: 40rpx;
+    border: 1rpx solid black;
+    text-align: center;
+    margin-left: 170rpx;
+    font-size: 28rpx;
+    margin-top: 45rpx;
+}
+
+.wai3 {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    height: 200rpx;
+    width: 100%;
+    padding-right: 50rpx; 
+    border-bottom:1rpx solid #aaa; 
+}
+
+.picture {
+    width: 100rpx;
+    height: 100rpx;
+    margin-left: 50rpx;
+    margin-top: 50rpx;
+}
+
+.good {
+    margin-left: 50rpx;
+    margin-top: 50rpx;
+    color: #333;
+}
+
+.goods {
+    margin-left: 50rpx;
+    margin-top: 10rpx;
+    color: #999;
+    font-size: 30rpx;
+}
+
+.money {
+    margin-left: 250rpx;
+    margin-top: 50rpx;
+    color: #333;
+}
+
+/*具体费用  */
+
+.wai4 {
+    width: 90%;
+    height: 590rpx;
+    margin-left: 35rpx;
+    background: #fff;
+}
+
+.bao {
+    width: 180rpx;
+    margin-top: 50rpx;
+    margin-left: 30rpx;
+    font-size: 35rpx;
+}
+
+.fei {
+    margin-left: 370rpx;
+    margin-top: 50rpx;
+    font-size: 35rpx;
+}
+
+.fei2 {
+    margin-left: 250rpx;
+    margin-top: 50rpx;
+    font-size: 33rpx;
+    color: #aaa;
+}
+
+.xia2 {
+    width: 90%;
+    border: 3rpx dashed #ddd;
+    margin-top: 45rpx;
+    margin-left: 30rpx;
+}
+
+.subtotal {
+    margin-left: 430rpx;
+    margin-top: 30rpx;
+    font-size: 35rpx;
+}
+
+.subtotals {
+    margin-left: 20rpx;
+    margin-top: 30rpx;
+    color: red;
+    font-size: 35rpx;
+}
+
+/*电话保护  */
+
+.wai5 {
+    width: 90%;
+    height: 180rpx;
+    margin-left: 30rpx;
+    margin-top: 30rpx;
+    background: #fff;
+}
+
+.tel {
+    margin-top: 45rpx;
+    margin-left: 20rpx;
+    font-size: 35rpx;
+}
+
+.tels {
+    width: 540rpx;
+    margin-left: 20rpx;
+    margin-top: 20rpx;
+    font-size: 25rpx;
+    color: #ddd;
+}
+
+.an {
+    margin-top: 55rpx;
+}
+
+/*支付方式  */
+
+.wai6 {
+    height: 400rpx;
+    width: 90%;
+    margin-left: 30rpx;
+    background: #fff;
+    margin-top: 30rpx;
+}
+
+.pays {
+    /* width: 150rpx; */
+    margin-top: 50rpx;
+    margin-left: 30rpx;
+    font-size: 35rpx;
+}
+
+.pay {
+    margin-left: 300rpx;
+    margin-top: 50rpx;
+    font-size: 33rpx;
+    color: #aaa;
+}
+
+.wechat {
+    width: 100%;
+    height: 100rpx;
+    text-align: center;
+    background: green;
+    color: white;
+    line-height: 92rpx;
+    /* margin-left: 100rpx; */
+    letter-spacing: 5rpx;
+    margin-top: 50rpx;
+}
+.c666{
+    color: #666;
+}
+/*备注  */
+.msg{
+    display: flex;
+    justify-content: flex-start;
+    width: 100%;
+    height: 150rpx;
+    /* border-bottom: 1rpx solid #aaa; */
+}
+.msg-text1{
+    display: flex;
+    justify-content: center;
+    font-size: 30rpx;
+}
+.msg-text2{
+    width: 580rpx;
+    height: 150rpx;
+    margin-left:20rpx;
+    padding: 10rpx;
+    border: 1rpx solid #ccc;
+}
+/*餐具数量  */
+.tableware{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-top:20rpx;
+    padding-right:20rpx;
+    box-sizing: border-box; 
+    /* border: 1rpx solid red; */
+}
+.picker{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color: #aaa;
+}

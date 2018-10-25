@@ -1,0 +1,12 @@
+<view class="container">
+  <view class="collect-list">
+    <view class="item" bindtap="openGoods" wx:for="{{collectList}}" wx:key="{{item.shop_code}}" data-index="{{index}}">
+      <view><image class="img" src="{{upload_file_url+item.logo}}"></image></view>
+      <view class="info">
+        <view class="name">{{item.shop_name}}</view>
+        <view class="subtitle">{{item.shop_addr}}</view>
+      </view>
+      <view class="price"><button type='warn' catchtap='remove' data-shopcode="{{item.shop_code}}" class='esc'>取消收藏</button></view> 
+    </view>
+  </view>
+</view>

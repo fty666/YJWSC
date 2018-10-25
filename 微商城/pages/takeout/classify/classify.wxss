@@ -1,0 +1,240 @@
+/*搜索  */
+
+.border {
+  width: 94%;
+  /* height: 90rpx; */
+  margin-left: 20rpx;
+  border-radius: 50rpx;
+  background: #efefef;
+  display: flex;
+}
+
+.sou {
+  /* width: 50rpx;
+  height: 50rpx; */
+  margin-top: 20rpx;
+  margin-left: 50rpx;
+}
+
+.inpt {
+  width: 100%;
+  text-align: center;
+  margin-top: 20rpx;
+  margin-left: 5rpx;
+}
+
+/*店铺分类  */
+
+.place {
+  width: 90%;
+  height: 200rpx;
+}
+
+.class-each {
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+  width: 100%;
+  height: 200rpx;
+}
+
+/* .scroll{
+  width: 100%;
+  height: 120rpx;
+} */
+
+.list {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 160rps;
+  height: 120rpx;
+  padding: 0 20rpx;
+  box-sizing: border-box;
+  border: 1rpx solid red;
+}
+
+/*描述店铺按钮  */
+
+.depict {
+  display: flex;
+}
+
+.btn {
+  line-height: 120rpx;
+  margin-left: 40rpx;
+  font-size: 35rpx;
+}
+
+/*排序  */
+
+.sort {
+  width: 100%;
+  /* height: 600rpx; */
+  display: flex;
+  flex-direction: column;
+  background: white;
+  position: absolute;
+  z-index: 9999;
+}
+
+.pai1 {
+  /* height: 80rpx; */
+  margin-left: 45rpx;
+  font-size: 30rpx;
+  line-height: 85rpx;
+}
+
+/*筛选  */
+
+.dress {
+  width: 100%;
+  /* height: 700rpx; */
+  background: white;
+  position: absolute;
+  z-index: 9999;
+}
+
+.tese {
+  display: flex;
+  flex-wrap: wrap;
+  font-size: 35rpx;
+}
+
+.ren {
+  margin-top: 100rpx;
+  font-size: 35rpx;
+  margin-left: 40rpx;
+}
+
+.shops {
+  margin-top: 80rpx;
+  margin-left: 40rpx;
+  font-size: 35rpx;
+  z-index: 99999;
+}
+
+.te {
+  margin-left: 20rpx;
+  margin-top: 20rpx;
+  text-align: center;
+  line-height: 75rpx;
+  background: #efefef;
+  font-size: 30rpx;
+}
+
+.rest {
+  width: 50%;
+  /* height: 74rpx; */
+  text-align: center;
+  line-height: 65rpx;
+  font-size: 30rpx;
+  margin-top: 130rpx;
+  border: 1rpx solid #efefef;
+  background: white;
+}
+
+.sub {
+  width: 50%;
+  /* height: 75rpx; */
+  text-align: center;
+  line-height: 65rpx;
+  background: yellow;
+  font-size: 30rpx;
+  margin-top: 130rpx;
+}
+
+/*下划线  */
+
+.xia {
+  width: 100%;
+  /* height: 4rpx; */
+  background: #f8f8f8;
+}
+
+/*促销按钮  */
+
+.btn1 {
+  /* width: 160rpx;
+  height: 80rpx; */
+  background: #f8f8f8;
+  line-height: 80rpx;
+  margin-left: 25rpx;
+  font-size: 27rpx;
+  text-align: center;
+  margin-top: 18rpx;
+}
+
+/*店铺信息  */
+
+.shopinfo {
+  width: 100%;
+  display: flex;
+  margin-top: 80rpx;
+}
+
+/*logo  */
+
+.logos {
+  margin-left: 30rpx;
+}
+
+.cu {
+  display: flex;
+}
+
+.cu2 {
+  display: flex;
+  margin-top: -25rpx;
+}
+
+.cu3 {
+  display: flex;
+}
+
+.hao {
+  /* width: 80rpx;
+  height: 50rpx; */
+  margin-top: 20rpx;
+  margin-left: 5rpx;
+}
+
+.font1 {
+  font-size: 27rpx;
+  color: #676767;
+  line-height: 30rpx;
+}
+
+/*起送配送  */
+
+.font2 {
+  font-size: 27rpx;
+  color: #676767;
+  margin-left: 20rpx;
+  margin-top: 20rpx;
+}
+
+/*满减折扣  */
+
+.agio {
+  /* width: 80rpx;
+  height: 80rpx; */
+  margin-left: 20rpx;
+  margin-top: 16rpx;
+}
+
+.font3 {
+  font-size: 27rpx;
+  color: #676767;
+  margin-left: 20rpx;
+  margin-top: 35rpx;
+}
+
+.first {
+  /* width: 50rpx;
+  height: 100rpx; */
+  font-size: 27rpx;
+  color: #676767;
+  margin-left: 225rpx;
+  margin-top: 35rpx;
+}

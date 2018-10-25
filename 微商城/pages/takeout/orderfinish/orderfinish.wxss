@@ -1,0 +1,197 @@
+.wai1 {
+    height: 400rpx;
+}
+
+.finsh {
+    margin-left: 265rpx;
+    color: black;
+    font-size: 45rpx;
+    line-height: 125rpx;
+}
+
+.font1 {
+    margin-left: 100rpx;
+    margin-top: 8rpx;
+    font-size: 31rpx;
+    color: #9d9d9d;
+    letter-spacing: 3rpx;
+}
+
+.resu {
+    margin-left: 250rpx;
+    text-align: center;
+    line-height: 80rpx;
+    margin-top: 20rpx;
+    background: #ffd161;
+    font-size: 30rpx;
+}
+
+.go {
+    margin-left: 30rpx;
+    text-align: center;
+    line-height: 80rpx;
+    margin-top: 20rpx;
+    background: #ffd161;
+    font-size: 30rpx;
+}
+
+.xia {
+    width: 90%;
+    margin-left: 20rpx;
+    border: 2rpx dashed #ddd;
+    margin-top: 50rpx;
+}
+
+/*flex格式  */
+
+.flex {
+    display: flex;
+}
+
+/*外卖人姓名  */
+
+.font {
+    margin-left: 150rpx;
+    margin-top: 30rpx;
+}
+
+.tel1 {
+    margin-left: 250rpx;
+    margin-top: 25rpx;
+}
+
+.xing {
+    margin-left: 150rpx;
+    margin-top: 22rpx;
+}
+
+.font2 {
+    font-size: 45rpx;
+    color: #ddd;
+    line-height: 70rpx;
+}
+
+.xia2 {
+    background: #eaeaea;
+}
+
+/*商品详情  */
+
+.logo {
+    border-radius: 50%;
+    margin-top: 20rpx;
+    margin-left: 20rpx;
+}
+
+.name {
+    margin-left: 20rpx;
+    margin-top: 45rpx;
+    font-size: 30rpx;
+}
+
+.gos {
+    margin-left: 430rpx;
+    margin-top: 35rpx;
+}
+
+.info {
+    background: #e3e3e3;
+}
+
+.photo {
+    margin-left: 25rpx;
+    margin-top: 40rpx;
+}
+
+.money {
+    margin-top: 30rpx;
+    margin-left: 350rpx;
+}
+
+.sname {
+    margin-left: 20rpx;
+    margin-top: 30rpx;
+    font-size: 30rpx;
+    color: black;
+}
+
+.smany {
+    margin-left: 20rpx;
+    margin-top: 15rpx;
+    font-size: 25rpx;
+    color: black;
+}
+
+/*餐盒费  */
+
+.he {
+    margin-left: 30rpx;
+    line-height: 90rpx;
+}
+
+.fei {
+    line-height: 90rpx;
+    margin-left: 460rpx;
+}
+
+.pei {
+    line-height: 90rpx;
+    margin-left: 460rpx;
+}
+
+.xia3 {
+    width: 90%;
+    margin-left: 20rpx;
+    border: 2rpx dashed #ddd;
+}
+
+.come {
+    margin-left: 285rpx;
+    line-height: 90rpx;
+    font-size: 30rpx;
+}
+
+.fact {
+    line-height: 90rpx;
+    color: red;
+}
+
+/*联系商家  */
+
+.tel {
+    margin-left: 225rpx;
+    margin-top: 35rpx;
+}
+
+.touch {
+    font-size: 35rpx;
+    line-height: 128rpx;
+    margin-left: 20rpx;
+}
+
+/*配送地址  */
+
+.add {
+    width: 100%;
+}
+
+.data {
+    margin-left: 50rpx;
+    line-height: 100rpx;
+    color: #999;
+    font-size: 35rpx;
+    width: 20%;
+}
+
+.once {
+    margin-left: 50rpx;
+    line-height: 100rpx;
+    font-size: 30rpx;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+
+.orderin {
+    width: 100%;
+}

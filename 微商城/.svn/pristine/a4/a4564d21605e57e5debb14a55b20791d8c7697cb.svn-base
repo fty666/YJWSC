@@ -1,0 +1,56 @@
+<view>
+    <!--头像信息  -->
+    <view class='wai flex'>
+        <view>
+            <image src='{{uploadFileUrl+uinfo.photo}}' class='photo'></image>
+        </view>
+        <view class='user'>
+            <view class='name'>{{uinfo.user_name}}</view>
+            <view class='tel'>{{uinfo.telephone}}</view>
+        </view>
+    </view>
+
+    <!--美团信息  -->
+    <view class='flex wai2'>
+        <view>
+            <image src='../../../images/money.png' class='logo'></image>
+        </view>
+        <view class='font'>美团红包</view>
+        <view class='font2'>
+            <text class="iconfont icon-youjiantou"></text> </view>
+    </view>
+
+    <navigator url='/pages/user/address/address'>
+        <view class='flex wai3'>
+            <view>
+                <image src='../../../images/address.png' class='logo'></image>
+            </view>
+            <view class='font'>我的地址</view>
+            <view class='font2'>
+                <text class="iconfont icon-youjiantou"></text> </view>
+        </view>
+    </navigator>
+
+    <!-- <view class='flex wai3'>
+        <view>
+            <image src='../../../images/happy.png' class='logo'></image>
+        </view>
+        <view class='font'>邀请有奖</view>
+        <view class='font2'>
+            <text class="iconfont icon-youjiantou"></text> </view>
+    </view> -->
+
+    <view class='flex wai3'>
+        <view>
+            <image src='../../../images/tel.png' class='logo'></image>
+        </view>
+        <view class='font'>客服电话</view>
+        <view class='font'>101-0977-77</view>
+        <view class='font3'>9:00-23:00
+            <text class="iconfont icon-youjiantou"></text> </view>
+    </view>
+
+    <!--自定义tarBar -->
+    <import src="../../../template/template.wxml" />
+    <template is="tabBar" data="{{tabBar:bindData.tabBar}}" />
+</view>

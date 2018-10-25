@@ -1,0 +1,98 @@
+<block wx:if="{{validate==true}}">
+  <view class='showmodel' style="height:{{px2rpxHeight*1200}}px;">
+    <view class='model-each' style="height:{{px2rpxHeight*80}}px;">
+      <view style='width:{{px2rpxHeight*160}}px'>绑定手机号</view>
+      <input class='model-input' bindinput="validateTel" type="number" placeholder='请输入绑定的手机号' />
+    </view>
+    <view class='model-each model-code' style="height:{{px2rpxHeight*80}}px;">
+      <text>验证码</text>
+      <input class="model-input model-input2" bindinput='yanzhen' type="number" value='' placeholder='请输入验证码' style="width:{{px2rpxWidth*320}}px;margin-left:15rpx;" />
+      <button catchtap='sendCode' disabled="{{disabled}}" class='button button-primary button-rounded button-wx-small '>{{send_code}}</button>
+    </view>
+    <view class='model-each model-btn' style="height:{{px2rpxHeight*80}}px;">
+      <view catchtap='validateTelCode' class='button button-highlight button-rounded '>验证</view>
+    </view>
+  </view>
+</block>
+
+<form bindsubmit="editShopInfo">
+  <view class="cell" style="height:{{px2rpxHeight*88}}px;">
+    <text class="cellTitle" data-source="{{ infor }}">商家名称</text>
+    <input class="cellInput" bindinput='editShop_name' name="ShopName" style="width:{{px2rpxWidth*500}}px;" />
+    <label class="lineSpace" style="height:{{px2rpxHeight*2}}px;"></label>
+  </view>
+
+  <view class="cell" style="height:{{px2rpxHeight*88}}px;">
+    <text class="cellTitle" data-source="{{ infor }}">商家手机</text>
+    <input bindinput="getTel" class="cellInput" name="mobile" type="number" style="width:{{px2rpxWidth*500}}px;" />
+    <label class="lineSpace" style="height:{{px2rpxHeight*2}}px;"></label>
+  </view>
+
+  <view class="cell cell-code" style="height:{{px2rpxHeight*88}}px;">
+    <text class="cellTitle">验证码</text>
+    <input class="code" name="smsCode" type="number" value='' placeholder='请输入验证码' style="width:{{px2rpxWidth*300}}px;" />
+    <button catchtap='sendCode' disabled="{{disabled}}" class='button button-primary button-rounded button-wx-small ml30'>{{send_code}}</button>
+  </view>
+
+  <view class="cell" style="height:{{px2rpxHeight*88}}px;">
+    <text class="cellTitle" data-source="{{ infor }}" catchtap='locationing'>商家地址 <text class="iconfont icon-location" ></text></text>
+    <input class="cellInput" name="shop_addr" style="width:{{px2rpxWidth*500}}px;" value='{{address.area_detail}}' disabled='true' />
+    <label class="lineSpace" style="height:{{px2rpxHeight*2}}px;"></label>
+  </view>
+
+  <block wx:if="{{location}}">
+    <view class='myaddress'>
+      <scroll-view scroll-y>
+        <!-- <view class='myaddress-title'>
+                    <view>
+                        <text class="iconfont icon-locationfill"></text> </view>
+                    <view class='ml10'>附近地址</view>
+                </view> -->
+        <block wx:for="{{location}}" wx:for-item="near" wx:key="{{near.id}}">
+          <view class='myaddress-list' catchtap='getLocation' data-locationname='{{near.name}}' data-titude='{{near.location}}'>
+            <view class='myaddress-each'>
+              <view class='addr-addr'>{{near.name}}</view>
+            </view>
+          </view>
+        </block>
+      </scroll-view>
+    </view>
+  </block>
+
+  <view class="cell" style="height:{{px2rpxHeight*88}}px;">
+    <text class="cellTitle" data-source="{{ infor }}">店铺详情</text>
+    <input class="cellInput" name="shop_detail" style="width:{{px2rpxWidth*500}}px;" />
+    <label class="lineSpace" style="height:{{px2rpxHeight*2}}px;"></label>
+  </view>
+
+  <view class="cell" style="height:{{px2rpxHeight*88}}px;">
+
+    <text class="cellTitle" data-source="{{ infor }}">店铺标签</text>
+
+    <input class="cellInput" name="shop_tip" style="width:{{px2rpxWidth*500}}px;" />
+    <label class="lineSpace" style="height:{{px2rpxHeight*2}}px;"></label>
+  </view>
+
+  <block wx:if="{{shopInfo.groupId == 1}}">
+    <!-- <view class="cell" style="height:{{px2rpxHeight*88}}px;">
+            <text class="cellTitle" data-source="{{ infor }}">起送价格</text>
+            <input class="cellInput" name="initialMoney" style="width:{{px2rpxWidth*500}}px;" />
+            <label class="lineSpace" style="height:{{px2rpxHeight*2}}px;"></label>
+        </view> -->
+
+    <view class="cell" style="height:{{px2rpxHeight*88}}px;">
+      <text class="cellTitle" data-source="{{ infor }}">起送价格</text>
+      <input class="cellInput" name="initialMoney" placeholder='起送价不低于25' style="width:{{px2rpxWidth*500}}px;" />
+      <label class="lineSpace" style="height:{{px2rpxHeight*2}}px;"></label>
+    </view>
+  </block>
+
+  <view>
+    <label class="lineSpace" style="height:{{px2rpxHeight*2}}px;"></label>
+  </view>
+  <view class="warn">
+    <image class="warn-img" src="/images/waring.png" style="width:{{px2rpxWidth*48}}px;height:{{px2rpxHeight*48}}px;"></image>
+    <text class="cellContent">请谨慎修改商店信息</text>
+  </view>
+  <button type="primary" formType="submit" class='mt15'>修改</button>
+</form>

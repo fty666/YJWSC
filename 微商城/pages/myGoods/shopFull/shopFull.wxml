@@ -1,0 +1,22 @@
+<block wx:if="{{is_load}}">
+    <view class="glo_load_view">
+        <text class="iconfont icon-loading animated infinite rotate mr5"></text>
+        <text>正在努力加载</text>
+    </view>
+</block>
+<block wx:else>
+    <view class='allpage'>
+        <view>
+            <block wx:for="{{fullinfo}}" wx:key="{{index}}">
+                <view class='cate'  style="height:{{px2rpxHeight*80}}px;">
+                    <input bindblur='editFull' class='cate-input' data-index="{{index}}" data-reductionid='{{item.reductionId}}' value="{{item.full + '-' + item.reductionPrice}}" style="width:{{px2rpxWidth*600}}px;height:{{px2rpxHeight*80}}px;"/>
+                    <view bindtap='delFull' class='del-cate' data-reductionid='{{item.reductionId}}' data-index="{{index}}"  style="width:{{px2rpxWidth*100}}px;height:{{px2rpxHeight*80}}px;">删除</view>
+                </view>
+            </block>
+        </view>
+        <view class='layout'>请按照 11-1 格式填写，满11减1</view>
+        <view class='add-cate'  style="height:{{px2rpxHeight*100}}px;">
+            <view bindtap='addFull' class='sub' style="height:{{px2rpxHeight*100}}px;">添加满减</view>
+        </view>
+    </view>
+</block>
