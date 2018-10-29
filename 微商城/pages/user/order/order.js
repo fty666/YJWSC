@@ -299,11 +299,26 @@ Page({
     // 支付成功通知商家
     let that = this;
     let now = util.formatDate(new Date().getTime());
-    weixin.sendSocket((now + ' 订单号：' + order_uuid), shop_code);
+    that.sendSocket((now + ' 订单号：' + order_uuid), shop_code);
     wx.showToast({
       title: '提醒发货成功',
       icon: 'success',
       duration: 1000
+    })
+  },
+
+  //web发送 
+  sendSocket: function (mymessage, ToSendUserno) {
+    console.log('websocket===' + mymessage + '===' + ToSendUserno);
+    let socketOpen = true;
+    let socketMsgQueue = [];
+    let message = mymessage + '|' + ToSendUserno;
+    let SocketTask = app.globalData.SocketTask;
+    SocketTask.send({
+      data: message,
+      success: function () {
+        console.log('success')
+      }
     })
   },
 

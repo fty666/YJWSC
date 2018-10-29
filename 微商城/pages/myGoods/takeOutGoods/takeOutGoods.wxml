@@ -70,7 +70,7 @@
               </view>
             </view> -->
             <view class="info-each">
-              <view class='sm-title'>商品列表图片</view>
+              <view class='sm-title'>商品列表图片(图片大小最好：宽330px;高：170px)</view>
               <view class='sm-content'>
                 <block wx:for="{{list_img}}" wx:key="{{item.index}}">
                   <view class='img list-img' style="width:{{px2rpxWidth*200}}px;height:{{px2rpxHeight*200}}px;">

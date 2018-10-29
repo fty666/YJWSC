@@ -33,7 +33,7 @@
       </view>
       <!-- </block> -->
       <view class='lingquan' style='top:{{px2rpxHeight*1000}}px;'>
-        <button formType="submit" data-shop_code='' class='button button-primary button-rounded'>添加改满减</button>
+        <button formType="submit" data-shop_code='' class='button button-primary button-rounded'>添加满减</button>
       </view>
     </view>
   </form>

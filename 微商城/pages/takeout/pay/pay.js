@@ -57,6 +57,7 @@ Page({
    * 生命周期函数--监听页面初次渲染完成
    */
   onReady: function () {
+    console.log(app.globalData.SocketTask)
     // console.log(getCurrentPages())
     let that = this;
     // 获取默认地址
@@ -312,7 +313,7 @@ Page({
       }, that, () => {
         let now = util.formatDate(new Date().getTime());
         // 支付成功通知商家
-        weixin.sendSocket((now + ' 订单号：' + orderUUID), that.data.shop_code);
+        that.sendSocket((now + ' 订单号：' + orderUUID), that.data.shop_code);
 
         wx.removeStorage({
           key: that.data.shop_code,
@@ -345,6 +346,21 @@ Page({
     }
     return specification;
   },
+  //web发送 
+  sendSocket: function (mymessage, ToSendUserno) {
+    console.log('websocket===' + mymessage + '===' + ToSendUserno);
+    let socketOpen = true;
+    let socketMsgQueue = [];
+    let message = mymessage + '|' + ToSendUserno;
+    let SocketTask = app.globalData.SocketTask;
+    SocketTask.send({
+      data: message,
+      success: function () {
+        console.log('success')
+      }
+    })
+  }
+
 });
 
 // 获取默认地址

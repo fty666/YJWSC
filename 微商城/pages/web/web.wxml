@@ -1,0 +1,4 @@
+<view>
+<input></input>
+<button catchtap='web'>发送</button>
+</view>
