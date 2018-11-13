@@ -1,0 +1,247 @@
+<!--malldetail.wxml-->
+<!--商品幻灯片 start-->
+<block wx:if="{{glo_is_load}}">
+  <view class="glo_load_view">
+    <text class="iconfont icon-loading animated infinite rotate mr5"></text>
+    <text>正在努力加载</text>
+  </view>
+</block>
+<block wx:else>
+  <scroll-view class="bigWrap" scroll-y="true" scroll-top="{{scrollTop}}" bindscrolltolower="scrolltolower" style="position: absolute; left: 0; top:0; bottom: 0; right: 0;">
+    <view class="swiper">
+      <swiper indicator-dots="{{indicatorDots}}" autoplay="true" current="{{swiperCurrent}}" interval="5000" duration="600" bindchange="swiperChange">
+        <block wx:for="{{lpic}}" wx:key="{{index}}" wx:for-item="pitem">
+          <swiper-item>
+            <image src="{{upload_file_url+pitem.img}}" mode="aspectFill" />
+          </swiper-item>
+        </block>
+      </swiper>
+    </view>
+    <!--商品幻灯片 end-->
+
+    <!--goods start-->
+    <view class="goods-info">
+      <view class="title f16">
+        {{goods_info.goodsName}}
+      </view>
+      <view style='display:flex;'>
+        <block wx:if="{{goods_info.discount==10}}">
+          <view class="price red f18">￥{{goods_info.price}}</view>
+        </block>
+        <block wx:else>
+          <view class="price red f18">￥ {{goods_info.discountPrice}}</view>
+          <view class="price f18" style='color:#ddd;text-decoration:line-through;'>￥{{goods_info.price}}</view>
+        </block>
+
+      </view>
+      <view class="clearfix flex grey gridXt">
+        <text class="sub">销量：{{goods_info.salesNum}}</text>
+      </view>
+    </view>
+    <!--goods end-->
+
+    <!--goods-detail start-->
+    <view class="goods-detail mt15">
+      <view class="nav-tab f16 tc flex">
+        <block wx:if="{{this_g_nav == 1}}">
+          <view class="sub active">商品详情</view>
+        </block>
+        <block wx:else>
+          <view class="sub" bindtap="goods_nav_bind" id="1">商品详情</view>
+        </block>
+        <block wx:if="{{this_g_nav == 2}}">
+          <view class="sub active">商品评价</view>
+        </block>
+        <block wx:else>
+          <view class="sub" bindtap="goods_nav_bind2" id="2">商品评价</view>
+        </block>
+      </view>
+      <!--商品详情-->
+      <view class="container" wx:if="{{this_g_nav==1}}">
+        <import src="../../../wxParse/wxParse.wxml" />
+        <view class="wxParse">
+          {{goods_info.goodsDetails}}
+          <view wx:for="{{xpic}}" wx:key="index">
+            <image src='{{upload_file_url+item.img}}' style="width:100%;height:{{px2rpxWidth*500}}px;margin-top:40rpx;"></image>
+          </view>
+
+          <template is="wxParse" data="{{wxParseData:article.nodes}}" />
+        </view>
+      </view>
+      <!--商品评论-->
+      <view class="container" wx:if="{{this_g_nav==2}}">
+        <view wx:for="{{comments}}" wx:for-item="coitem" wx:key="{{coitem.grade}}">
+          <block wx:if="{{coitem.detail || coitem.img}}">
+            <view class='author' style='display:flex;margin-top:8rpx;'>
+              <view>
+                <image src='{{upload_file_url+coitem.photo}}' style='width:{{75*px2rpxHeight}}px;height:{{px2rpxHeight*75}}px;border-radius:50%;border:1rpx solid #ddd;'></image>
+              </view>
+              <view style='margin-left:30rpx;line-height:80rpx;color:red;font-size:30rpx;'>{{coitem.user_name}}</view>
+            </view>
+            <view style='clear:both'></view>
+            <view class='detail' style='height:{{140*px2rpxWidth}}px;'>{{coitem.detail}}</view>
+            <block wx:if="{{coitem.img==''}}">
+            </block>
+            <block wx:else>
+              <view>
+                <view wx:for="{{coitem.img}}" wx:for-item="imags" wx:key="{{index}}" class='image' style="width:{{px2rpxWidth*180}}px;height:{{px2rpxHeight*180}}px;">
+                  <image src='{{upload_file_url+imags}}' style="width:{{px2rpxWidth*150}}px;height:{{px2rpxWidth*150}}px;margin-left:65rpx;"></image>
+                </view>
+              </view>
+            </block>
+
+            <view style='clear:both'></view>
+            <view class='xia' style="height:1px;"></view>
+          </block>
+        </view>
+      </view>
+      <!--底部浮动 start-->
+      <view class="foot-nav mt15" style='height:{{170*px2rpxHeight}}px'>
+        <view class="flex con gridXt tc">
+          <view class="fast-links mr15 flex f12" style="width:{{px2rpxWidth*340}}px;height:">
+            <view class="sub gridYr" bindtap="bind_contant_kefu" data-mobile='{{goods_info.mobile}}'>
+              <text class="iconfont icon-mark red">客服</text>
+            </view>
+            <view class="sub cart notempty" bindtap="bind_go_cart">
+              <text class="iconfont icon-cart">购物车</text>
+            </view>
+          </view>
+          <view class="add-cart sub f16" bindtap="bind_goods_add_cart">
+            <button class="add-cart-btn">加入购物车</button>
+          </view>
+        </view>
+      </view>
+      <!--底部浮动 end-->
+    </view>
+    <!--加入购物车 start-->
+    <form bindsubmit="formSubmit">
+      <view class="add-cart-box floatBox" wx:if="{{is_add_cart_view}}">
+        <view class="layout">
+          <text class="iconfont icon-close fr" catchtap="add_cart_close_bind" style="width:{{px2rpxWidth*48}}px;height:{{px2rpxHeight*48}}px;"></text>
+          <view class="layout-info gridXb flex">
+            <image src="{{upload_file_url+dpic.img}}" mode="aspectFill" style="width:{{px2rpxWidth*92}}px;height:{{px2rpxWidth*92}}px;"></image>
+            <view class="sub ml10">
+              <view class="lineText">{{goods_info.goodsName}}</view>
+              <view class="red f18">
+                ￥ {{goods_info.discountPrice}}
+              </view>
+            </view>
+          </view>
+          <view>
+          </view>
+          <!--颜色选项  -->
+          <block wx:if="{{colors.length > 0}}">
+            <view class="options" wx:if="{{colors}}">
+              <view>颜色</view>
+              <view>
+                <radio-group class='color' bindchange="radioChange1">
+                  <view class="ju" wx:for="{{colors}}" wx:key="{{index}}" style="width:{{px2rpxWidth*330}}px;height:{{px2rpxHeight*70}}px;">
+                    <label>
+                      <radio value="{{item}}" name="color" checked="{{item.checked}}" />{{item}}
+                    </label>
+                  </view>
+                </radio-group>
+              </view>
+            </view>
+          </block>
+          <!--型号选项  -->
+          <block wx:if="{{sizes.length > 0}}">
+            <view class="options" wx:if="{{sizes}}">
+              <view>型号</view>
+              <view>
+                <radio-group class='color' bindchange="radioChange2">
+                  <view class="ju" wx:for="{{sizes}}" wx:key="{{index}}" style="width:{{px2rpxWidth*330}}px;height:{{px2rpxHeight*70}}px;">
+                    <label>
+                      <radio value="{{item}}" name="size" checked="{{item.checked}}" />{{item}}
+                    </label>
+                  </view>
+                </radio-group>
+              </view>
+            </view>
+          </block>
+
+          <!--内存选项  -->
+          <block wx:if="{{volumes.length > 0}}">
+            <view class="options" wx:if="{{volumes}}">
+              <view>内存大小</view>
+              <view>
+                <radio-group class='color' bindchange="radioChange4">
+                  <view class="ju" name="volume" wx:for="{{volumes}}" wx:key="{{index}}" style="width:{{px2rpxWidth*330}}px;height:{{px2rpxHeight*70}}px;">
+                    <label>
+                      <radio value="{{item}}" name="volume" checked="{{item.checked}}" />{{item}}
+                    </label>
+                  </view>
+                </radio-group>
+              </view>
+            </view>
+          </block>
+
+          <!--味道  -->
+          <block wx:if="{{tastes.length > 0}}">
+            <view class="options">
+              <view>口味选择</view>
+              <view>
+                <radio-group class='color' bindchange="radioChange5">
+                  <view class="ju" wx:for="{{tastes}}" wx:key="{{index}}" style="width:{{px2rpxWidth*330}}px;height:{{px2rpxHeight*70}}px;">
+                    <label>
+                      <radio value="{{item}}" name="taste" checked="{{item.checked}}" />{{item}}
+                    </label>
+                  </view>
+                </radio-group>
+              </view>
+            </view>
+          </block>
+
+
+          <!--类型  -->
+          <block wx:if="{{types.length > 0}}">
+            <view class="options">
+              <view>类型选择</view>
+              <view>
+                <radio-group class='color' bindchange="selectType">
+                  <view class="ju" wx:for="{{types}}" wx:key="{{index}}" wx:for-item="mytype" style="width:{{px2rpxWidth*330}}px;height:{{px2rpxHeight*70}}px;">
+                    <label>
+                      <radio value="{{mytype}}" name="typee" />{{mytype}}
+                    </label>
+                  </view>
+                </radio-group>
+              </view>
+            </view>
+          </block>
+
+          <view class="options">
+            <view class="options-tiem">
+              <view class="count-set tc fr flex">
+                <view class="sub" bindtap="bind_cart_number_jian">
+                  <text class="iconfont icon-move"></text>
+                </view>
+                <view class="sub">
+                  <input type="number" value="{{cart_default_number}}" data-num="{{cart_default_number}}" class="buy-couts" disabled="true" style="width:{{px2rpxWidth*120}}px;height:{{px2rpxHeight*60}}px;" />
+                </view>
+                <view class="sub" bindtap="bind_cart_number_jia">
+                  <text class="iconfont icon-add"></text>
+                </view>
+              </view>
+              <view class="name" style="line-height:30px;">
+                <text>购买数量：</text>
+              </view>
+            </view>
+
+
+          </view>
+          <button class="add-cart-btn2" formType="submit" bindtap="goods_add_cart" disabled="{{btn_add_cart_disabled}}">放入购物车</button>
+          <button class="add-cart-btn2" formType="submit" bindtap="goods_add_cart2" disabled="{{btn_add_cart_disabled}}">立刻结算</button>
+
+        </view>
+
+        <view class="floatBox floatBoxBg" style="display:block;" bindtap="set_close"></view>
+
+      </view>
+    </form>
+    <view class="backtop">
+      <text class="iconfont icon-homefill" bindtap="goHome" style="width:{{px2rpxWidth*80}}px;height:{{px2rpxHeight*80}}px;"></text>
+      <text class="iconfont icon-fold" bindtap="goTop" wx:if="{{floorstatus}}" style="width:{{px2rpxWidth*80}}px;height:{{px2rpxHeight*80}}px;"></text>
+    </view>
+    <!--加入购物车 end-->
+  </scroll-view>
+</block>

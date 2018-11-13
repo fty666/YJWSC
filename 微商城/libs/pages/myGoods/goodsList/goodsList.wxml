@@ -1,0 +1,123 @@
+<!-- <block wx:if="{{glo_is_load}}">
+  <view class="glo_load_view">
+    <text class="iconfont icon-loading animated infinite rotate mr5"></text>
+    <text>正在努力加载</text>
+  </view>
+</block> -->
+<!-- <block wx:else> -->
+<!-- <navigator url="/pages/myGoods/addGoods/addGoods" bindtap='addGoods' class='m10 button button-primary button-rounded  button-wx-small'>添加新商品</navigator> -->
+<!--filter start-->
+<view class="filter-box tc" style="height:{{px2rpxHeight*92}}px;">
+  <view class="filter gridXb flex" style="height:{{px2rpxHeight*92}}px;">
+    <view class="sub  {{select_type == 'quanbu' ? 'active' : ''}}" bindtap="select_goods_list" data-stype="quanbu">全部</view>
+    <view class="sub {{select_type == 'shangjia' ? 'active' : ''}}" bindtap="select_goods_list" data-stype="shangjia">上架</view>
+    <view class="sub {{select_type == 'xiajia' ? 'active' : ''}}" bindtap="select_goods_list" data-stype="xiajia">下架</view>
+    <view class="sub {{select_type == 'shenhe' ? 'active' : ''}}" bindtap="select_goods_list" data-stype="shenhe">审核中</view>
+    <view class="sub {{select_type == 'qiangzhixiajia' ? 'active' : ''}}" bindtap="select_goods_list" data-stype="qiangzhixiajia">强制下架 </view>
+    <!-- <view class="sub price-rank {{is_select_xiaoliang ? 'pr-arrow' : ''}} {{select_type == 'xiaoliang' ? 'active' : ''}}" bindtap="select_goods_list" data-stype="xiaoliang">销量</view> -->
+    <!-- <view class="sub price-rank {{is_select_haoping ? 'pr-arrow' : ''}} {{select_type == 'haoping' ? 'active' : ''}}" bindtap="select_goods_list" data-stype="haoping">好评</view> -->
+  </view>
+
+</view>
+<view class="filter-box tc" style="height:{{px2rpxHeight*92}}px;">
+  <view class="filter2 gridXb flex" style="height:{{px2rpxHeight*92}}px;">
+    <view class="sub price-rank {{is_select_xiaoliang ? 'pr-arrow' : ''}} {{select_type == 'xiaoliang' ? 'active' : ''}}" bindtap="select_goods_list" data-stype="xiaoliang">销量</view>
+    <view class="sub price-rank {{is_select_haoping ? 'pr-arrow' : ''}} {{select_type == 'haoping' ? 'active' : ''}}" bindtap="select_goods_list" data-stype="haoping">好评</view>
+    <!-- <view class="sub {{select_type == 'xiajia' ? 'active' : ''}}" bindtap="select_goods_list" data-stype="xiajia">下架</view> -->
+    <!-- <view class="sub {{select_type == 'shenhe' ? 'active' : ''}}" bindtap="select_goods_list" data-stype="shenhe">审核中</view> -->
+    <view catchtap='addGoods' class='m10 button button-primary button-rounded  button-wx-small'>添加新商品</view>
+    <block wx:if="{{groupId == 1}}">
+      <view catchtap='showClass' class='m10 button button-primary button-rounded  button-wx-small'>查看分类</view>
+    </block>
+  </view>
+
+</view>
+<!-- <view class="search">
+    <view class="search-box flex">
+        <input class="sub search-input" type="text" placeholder="请搜索店铺" confirm-type="search" bindconfirm="goods_search_bind"  style="height:{{px2rpxHeight*80}}px;" />
+        <button size="mini" class="search-btn"><icon type="search" size="18" /></button>
+    </view>
+  </view> -->
+<!-- <navigator url="/pages/myGoods/addGoods/addGoods" bindtap='addGoods' class='m10 button button-primary button-rounded  button-wx-small'>添加新商品</navigator> -->
+<!-- <text bindtap="select_goods_list" data-stype="shenhe" class='button button-action button-rounded  button-wx-small'>审核中</text> -->
+<!-- <text bindtap="select_goods_list" data-stype="qiangzhixiajia" class='ml10 button button-highlight button-rounded button-wx-small'>强制下架</text> -->
+<!--filter end-->
+
+<!--list start-->
+<view class="malllist">
+  <block wx:if="{{goods_data && goods_data != '' && goods_data != null}}">
+    <scroll-view scroll-y="true" style='width:100%;height:920rpx;' bindscrolltolower="scrollToLower" bindscrolltoupper="scrollToUpper" scroll-top="{{scrollTop}}" scroll-with-animation="true">
+      <block wx:for="{{goods_data}}" wx:key="{{item.goodsId}}">
+        <view class="m-item flex" id="{{item.goodsId}}">
+          <view class="m-imgbox" style="width:{{px2rpxWidth*100}}px;height:{{px2rpxWidth*100}}px;">
+            <image src="{{aliyunUrl+item.img}}" class="m-img" mode="aspectFill"></image>
+          </view>
+          <view class="sub flex flexC ml20 m-box">
+            <view class="m-tit lineText2">
+              <text>{{item.goodsName}}</text>
+            </view>
+            <view class="m-info grey f12 mt5 sub">
+              <text><text class='iconfont icon-rankfill'></text>销量{{item.sales_num}}笔</text>
+              <!-- <text class='ml10'><text class="iconfont icon-appreciatefill"></text>好评率{{item.perfectRate}}</text> -->
+            </view>
+            <view class="good-price mt10">
+              <text class="f20">￥{{item.price}}</text>
+            </view>
+            <view>
+              <!--0未上架(审核中)  -->
+              <block wx:if="{{item.is_use == 0}}">
+                <text bindtap='isUseGoods' data-goodsid="{{item.goodsId}}" data-stock='{{item.stock}}' data-index="{{index}}" class="f12 ml5 button button-rounded button-wx-tiny">审核中</text>
+              </block>
+
+              <!--1上架  -->
+              <block wx:elif="{{item.is_use == 1}}">
+                <text bindtap='notUseGoods' data-goodsid="{{item.goodsId}}" data-index="{{index}}" class="f12 ml5 button button-rounded button-caution  button-wx-tiny">下架</text>
+                <text bindtap='editGoods' data-goodsid='{{item.goodsId}}' class="f12 ml5 button button-rounded button-highlight button-wx-tiny">修改</text>
+                <text bindtap='deleteGoods' data-goodsid="{{item.goodsId}}" class="f12 ml5 button button-rounded button-royal button-wx-tiny">删除</text>
+              </block>
+
+              <!--2拒绝上架(审核未通过)  -->
+              <block wx:elif="{{item.is_use == 2}}">
+                <text bindtap='isUseGoods' data-goodsid="{{item.goodsId}}" data-stock='{{item.stock}}' data-index="{{index}}" class="f12 ml5 button button-rounded button-primary  button-wx-tiny">上架</text>
+                <text bindtap='editGoods' data-goodsid='{{item.goodsId}}' class="f12 ml5 button button-rounded button-highlight button-wx-tiny">修改</text>
+                <text bindtap='deleteGoods' data-goodsid="{{item.goodsId}}" class="f12 ml5 button button-rounded button-royal button-wx-tiny">删除</text>
+              </block>
+
+              <!--3禁用(强制下架)  -->
+              <block wx:elif="{{item.is_use == 3}}">
+                <text bindtap='auditing' data-goodsid="{{item.goodsId}}" data-index="{{index}}" class="f12 ml5 button button-rounded button-primary  button-wx-tiny">提交审核</text>
+                <text bindtap='editGoods' data-goodsid='{{item.goodsId}}' class="f12 ml5 button button-rounded button-highlight button-wx-tiny">修改</text>
+                <text bindtap='deleteGoods' data-goodsid="{{item.goodsId}}" class="f12 ml5 button button-rounded button-royal button-wx-tiny">删除</text>
+              </block>
+
+              <!--4下架  -->
+              <block wx:elif="{{item.is_use == 4}}">
+                <text bindtap='isUseGoods' data-goodsid="{{item.goodsId}}" data-stock='{{item.stock}}' data-index="{{index}}" class="f12 ml5 button button-rounded button-primary  button-wx-tiny">上架</text>
+                <text bindtap='editGoods' data-goodsid='{{item.goodsId}}' class="f12 ml5 button button-rounded button-highlight button-wx-tiny">修改</text>
+                <text bindtap='deleteGoods' data-goodsid="{{item.goodsId}}" class="f12 ml5 button button-rounded button-royal button-wx-tiny">删除</text>
+              </block>
+
+              <!--5删除  -->
+            </view>
+          </view>
+        </view>
+      </block>
+    </scroll-view>
+  </block>
+</view>
+<!--list end-->
+
+<!--back top-->
+<!-- <view class="backtop" bindtap="goTop" wx:if="{{floorstatus}}">
+        <text class="iconfont icon-fold"></text>
+    </view> -->
+
+<!--tips-->
+<!-- <block wx:if="{{is_loadmore==false}}">
+    <view class="tips-foot tc f12">
+      不要扯了，已经扯到底了
+    </view>
+  </block> -->
+<import src="../../../template/template.wxml" />
+<template is="tabBar" data="{{tabBar:bindData.tabBar}}" />
+<!-- </block> -->

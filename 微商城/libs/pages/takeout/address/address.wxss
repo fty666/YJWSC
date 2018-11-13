@@ -1,0 +1,57 @@
+page{
+     background: white; 
+}
+.xia{
+  height: 4rpx;
+  background: #ddd;
+}
+.wai{
+  height: 185rpx;
+  display: flex;
+}
+.info{
+  display: flex;
+  flex-direction: column;
+}
+.add{
+  margin-left:30rpx;
+  margin-top: 50rpx;
+  font-size: 35rpx; 
+}
+.user{
+  font-size: 30rpx;
+  color: #ddd;
+  margin-left: 25rpx;
+  margin-top: 20rpx;
+}
+.picture{
+  width: 50rpx;
+  height: 50rpx;
+  margin-left: 210rpx;
+  margin-top: 70rpx;
+}
+
+.zen{
+   position: fixed; 
+  margin-top: 900rpx;
+}
+.jia{
+  width: 55rpx;
+  height: 55rpx;
+  margin-left: 180rpx;
+  margin-top: 10rpx;
+}
+.insert{
+  height: 200rpx;
+  width: 60%;
+  text-align: center;
+  letter-spacing: 5rpx;
+   line-height: 90rpx; 
+  position: fixed;
+  margin-left: 150rpx;
+}
+.xia2{
+  height: 5rpx;
+  width: 750rpx;
+  background: #ddd;
+}

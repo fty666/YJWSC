@@ -1,0 +1,52 @@
+.shop-each {
+  width: 100%;
+  padding: 20rpx;
+  box-sizing: border-box;
+}
+
+.each-input {
+  margin-left: 30rpx;
+  padding-left: 10rpx;
+  box-sizing: border-box;
+  border: 1rpx solid #ccc;
+}
+
+.each-radio {
+  margin-left: 30rpx;
+}
+
+.each-textarea {
+  margin-left: 30rpx;
+  padding: 10rpx;
+  box-sizing: border-box;
+  border: 1rpx solid #ccc;
+}
+
+.myaddress {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  padding-top: 50rpx;
+  box-sizing: border-box;
+}
+
+.myaddress-title {
+  display: flex;
+  justify-content: flex-start;
+  padding-left: 20rpx;
+  box-sizing: border-box;
+}
+
+.myaddress-list {
+  margin-top: 20rpx;
+  padding: 0 20rpx 0 70rpx;
+  box-sizing: border-box;
+}
+
+.myaddress-each {
+  display: flex;
+  flex-direction: column;
+  padding-bottom: 20rpx;
+  box-sizing: border-box;
+  border-bottom: 1rpx solid #ccc;
+}

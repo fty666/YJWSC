@@ -1,0 +1,107 @@
+<view class="weui-form-preview">
+  <view class="weui-form-preview__hd">
+    <view class="weui-form-preview__item">
+      <view class="weui-form-preview__label font">订单总价</view>
+      <view class="weui-form-preview__value_in-hd font">¥{{sums}}</view>
+      <view class="weui-form-preview__value_in-hd font">
+        <!-- <text class='favour' decode='ture'>优惠：<block wx:if="{{favour}}"> ￥{{favour}} </block><block wx:if="{{zfavour}}">￥{{zfavour}}</block>&nbsp;&nbsp;&nbsp;</text> -->
+        <text class='favour1'> 实付：￥{{pocket}}</text>
+      </view>
+    </view>
+  </view>
+  <view class="weui-form-preview__bd">
+    <view class="weui-form-preview__item">
+      <view class="weui-form-preview__label font">收货地址</view>
+      <block wx:if="{{has_address}}">
+        <view class="weui-form-preview__value font">
+          <image src='../../../images/updata.png' class='img' bindtap='aupdata' style="width:{{px2rpxWidth*50}}px;height:{{px2rpxWidth*50}}px;"></image>
+        </view>
+      </block>
+    </view>
+  </view>
+  <block wx:if="{{!has_address}}">
+    <navigator url='/pages/user/addressAdd/addressAdd'>
+      <view class="weui-form-preview__bd">您还没有收货地址，快去创建吧</view>
+    </navigator>
+  </block>
+  <block wx:else>
+    <view class="weui-form-preview__bd">
+      <view class="weui-form-preview__item">
+        <view class="weui-form-preview__label font1">收货人信息</view>
+        <view class="weui-form-preview__value font1">
+          {{address.addr_receiver}} {{address.addr_mobile}}
+        </view>
+        <view class="weui-form-preview__label font1">收货地址</view>
+        <view class="weui-form-preview__value font1">
+          {{address.area_path}} {{address.area_detail}}
+        </view>
+      </view>
+    </view>
+  </block>
+
+</view>
+
+<view class="weui-panel weui-panel_access">
+  <view class="weui-panel__bd">
+    <view class="weui-media-box weui-media-box_text">
+      <view class="weui-media-box__desc shop">
+        <text class="iconfont icon-shop"></text> {{firstinfo.shop_name}}</view>
+    </view>
+
+    <view class="weui-media-box weui-media-box_text">
+      <view class="weui-media-box__desc">商品名称：{{firstinfo.goodsName}}</view>
+    </view>
+    <view class="weui-media-box weui-media-box_text">
+      <view class="weui-media-box__desc">商品信息：{{firstinfo.goodsDetails}}</view>
+    </view>
+    <view class="weui-media-box weui-media-box_text">
+      <view class="weui-media-box__desc">数量*价格{{gnum}} x ￥{{firstinfo.price}}</view>
+    </view>
+    <view class="weui-media-box weui-media-box_text">
+      <view class="weui-media-box__desc">规格：
+        <block wx:if="{{color}}">
+          {{color}}*
+        </block>
+        <block wx:if="{{size}}">
+          {{size}}*
+        </block>
+        <block wx:if="{{taste}}">
+          {{taste}}*
+        </block>
+        <block wx:if="{{typee}}">
+          {{typee}}*
+        </block>
+        <block wx:if="{{volume}}">
+          {{volume}}*
+        </block>
+      </view>
+    </view>
+
+    <view class="weui-media-box weui-media-box_text " data-shop_code='{{firstinfo.shopCode}}' catchtap='favourable'>
+      <block wx:if="{{couponPrice}}">
+        <block>优惠券抵:￥{{couponPrice}}</block>
+      </block>
+      <block wx:else>没有优惠券</block>
+    </view>
+
+    <view class="weui-media-box weui-media-box_text fav">
+      <view style='height:50rpx;width:100%;'>
+        <block wx:if="{{firstinfo.reduction.length}}" wx:key="{{index}}">
+          <swiper indicator-dots="{{indicatorDots}}" autoplay="{{autoplay}}" interval="{{interval}}" duration="{{duration}}">
+            <block wx:for="{{firstinfo.reduction}}" wx:key="{{index}}">
+              <swiper-item>
+                <view>满{{item.full}}减{{item.reductionPrice}}</view>
+              </swiper-item>
+            </block>
+          </swiper>
+        </block>
+        <block wx:else>没有满减</block>
+      </view>
+    </view>
+
+  </view>
+</view>
+
+<view class="weui-panel weui-panel_access">
+  <button class="weui-btn" type="primary" bindtap="pay_confirmOrder" loading="{{submitIsLoading}}" disabled="{{buttonIsDisabled}}">在线支付</button>
+</view>

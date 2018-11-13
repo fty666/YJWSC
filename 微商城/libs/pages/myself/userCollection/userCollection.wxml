@@ -1,0 +1,15 @@
+<view>
+    <view class='mycontainer' style="height:{{px2rpxHeight*1200}}px;">
+        <scroll-view>
+            <block wx:for="{{collection}}" wx:key="{{item.user_id}}"> 
+                <view class='box'>
+                    <image class='box-img' src="{{aliyunUrl + item.photo}}" style="width:{{px2rpxWidth*150}}px;height:{{px2rpxWidth*150}}px;"/>
+                    <view class='box-text'>
+                        <view>{{item.user_name}}</view>
+                        <view>{{item.weChat}}</view>
+                    </view>
+                </view>
+            </block>
+        </scroll-view>
+    </view>
+</view>

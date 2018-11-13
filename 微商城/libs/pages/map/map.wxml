@@ -1,0 +1,7 @@
+<view class="map_box">
+  <map id="navi_map" longitude="116.451028" latitude="39.949643" scale="12" markers="{{markers}}" polyline="{{polyline}}"></map>
+</view>
+
+<view class="text_box">
+  <view class="text">骑手距您：{{distance}}</view>
+</view>

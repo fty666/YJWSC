@@ -1,0 +1,32 @@
+<block wx:if="{{glo_is_load}}">
+    <view class="glo_load_view">
+        <text class="iconfont icon-loading animated infinite rotate mr5"></text>
+        <text>正在努力加载</text>
+    </view>
+</block>
+<block wx:else>
+    <view class='nav' style="height:{{px2rpxHeight*100}}px;">
+        <view bindtap='selectTab' class='nav-each {{ status == "" ? "active" : "" }}' data-status="-1" style="width:{{px2rpxWidth*200}}px;height:{{px2rpxHeight*100}}px;">全部</view>
+        <view bindtap='selectTab' class='nav-each {{ status == "1" ? "active" : "" }}' data-status='1' style="width:{{px2rpxWidth*200}}px;height:{{px2rpxHeight*100}}px;">提现完成</view>
+        <view bindtap='selectTab' class='nav-each {{ status == "0" ? "active" : "" }}' data-status='0' style="width:{{px2rpxWidth*200}}px;height:{{px2rpxHeight*100}}px;">提现中</view>
+    </view>
+    <view class='contents'  style="height:{{px2rpxHeight*1105}}px;">
+        <scroll-view scroll-y bindscrolltolower="scrollToLower" scroll-top="{{scrollTop}}" scroll-with-animation="true">
+            <block wx:for="{{withdraw}}" wx:key="{{item.shop_code}}">
+                <view class='div'>
+                    <view>
+                        <view>{{item.card_no}}</view>
+                        <view>{{item.createTime}}</view>
+                    </view>
+                    <view class='f25'>{{item.price}}</view>
+                    <image class='img' src='/images/ing.png' style="width:{{px2rpxWidth*80}}px;height:{{px2rpxWidth*80}}px;"></image>
+                </view>
+            </block>
+        </scroll-view>
+    </view>
+
+    <!--back top-->
+    <view class="backtop" bindtap="goTop" wx:if="{{floorstatus}}">
+        <text class="iconfont icon-fold"></text>
+    </view>
+</block>

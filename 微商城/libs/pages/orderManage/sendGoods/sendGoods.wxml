@@ -1,0 +1,72 @@
+<view class="tab_con flexItem rowStyle">
+  <view class="view1 width20">
+    <scroll-view class="tableView" scroll-y="true" wx:if="{{hasData}}">
+      <!-- <block wx:for="{{ order }}" wx:for-item="order" wx:key="{{index}}"> -->
+      <view class="flexItem rowStyle tableViewCellHeader marginTop10" data-order_uuid='{{order.order_uuid}}'>
+        <image class="orderImage marginLeft12" src="/images/dingdan.png" style="width:{{px2rpxWidth*20}}px;height:{{px2rpxWidth*22}}px;"></image>
+        <label class="color54 fontSize12">订单编号: {{ order.order_uuid }}</label>
+      </view>
+      <view class="flexItem rowStyle tableViewCellHeader" style='border-bottom: solid #ccc 1px;' data-order_uuid='{{order.order_uuid}}'>
+        <label class="color54 fontSize12 ml10">
+          <text class="iconfont icon-iconfontcolor36"></text> 订单时间: {{order.createTime}}</label>
+      </view>
+      <view class="flexItem rowStyle  personInfo" style="height:{{px2rpxHeight*88}}px;">
+        <view class="flexItem rowStyle marginLeft12 centers">
+          <!-- <image class="userHeader" src="{{ url }}"></image> -->
+          <label class="color54 fontSize12">收货人：{{ order.addr_receiver }}</label>
+        </view>
+        <view class="flexItem rowStyle marginRight12 centers" catchtap="callEvent">
+          <image class="call" src="/images/call.png" style="width:{{px2rpxWidth*28}}px;height:{{px2rpxWidth*28}}px;"></image>
+          <label class="color54 fontSize12">{{order.addr_mobile}}</label>
+        </view>
+      </view>
+      <view class="flexItem columnStyle tableViewCell" data-order_uuid='{{order.order_uuid}}'>
+        <block wx:for="{{order.goods}}" wx:for-item="goods" wx:key="{{goods.goodsId}}">
+          <view class="order-each">
+            <image class="goods-img" style="width:{{px2rpxWidth*200}}px;height:{{px2rpxWidth*200}}px;" src='{{upload_file_url+goods.img}}' />
+            <view class="goods-right">
+              <view class="goods-name" style="width:{{px2rpxWidth*470}}px;height:{{px2rpxHeight*50}}px;">{{goods.goods_name}}</view>
+              <view class="goods-price">¥{{goods.price}}
+                <text class='ml10'>优惠：¥12.00</text>
+              </view>
+              <view>数量：{{goods.num}}</view>
+              <view>金额：¥{{goods.sum}}</view>
+            </view>
+          </view>
+        </block>
+      </view>
+      <view class="flexItem rowStyle orderStatus" style="height:{{px2rpxHeight*88}}px;">
+        <view>运费：¥0.00</view>
+        <view>总计：¥{{order.sumPrice}}</view>
+      </view>
+      <view class="js-start tableViewCellHeader marginTop10" data-order_uuid='{{order.order_uuid}}'>
+        <!-- <image class="orderImage marginLeft12" src="/images/dingdan.png"></image> -->
+        <label class="color54 fontSize12 ml10">物流公司: </label>
+        <input catchtap='logisticsCompany' disabled='true' class='ml10' placeholder='{{WLname}}' />
+      </view>
+
+      <block wx:if="{{show}}">
+        <view class='myaddress' style="height:{{px2rpxHeight*500}}px;">
+          <scroll-view scroll-y>
+            <block wx:for="{{company}}" wx:for-item="near" wx:key="{{near.id}}">
+              <view class='myaddress-list' catchtap='getLocation' data-companyname='{{near.companyName}}' data-shortname='{{near.shortName}}'>
+                <view class='myaddress-each'>
+                  <view class='addr-addr'>{{near.companyName}}</view>
+                </view>
+              </view>
+            </block>
+          </scroll-view>
+        </view>
+      </block>
+
+      <view class="js-start rowStyle tableViewCellHeader" style='border-bottom: solid #ccc 1px;' data-order_uuid='{{order.order_uuid}}'>
+        <label class="color54 fontSize12 ml10">物流单号: </label>
+        <input bindblur='logisticsNumber' class='ml10' type="number" placeholder='请输入物流单号' />
+      </view>
+      <view style='padding: 20rpx;box-sizing:border-box;'>
+        <button data-order_uuid='{{order.order_uuid}}' data-order_mainid='{{order.order_mainid}}' catchtap='commitSendGoods' type='primary'>确认发货</button>
+      </view>
+      <!-- </block> -->
+    </scroll-view>
+  </view>
+</view>

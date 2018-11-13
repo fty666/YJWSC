@@ -1,0 +1,57 @@
+page{
+  background: #F4F4F4;
+}
+.wai{
+  background: #FFD161;
+}
+.flex{
+  display: flex;
+
+}
+.photo{
+  margin-top: 50rpx;
+  margin-left: 45rpx;
+  border-radius: 50%;
+}
+.user{
+  display: flex;
+  flex-direction: column;
+}
+.name{
+  margin-top: 50rpx;
+  margin-left: 25rpx;
+}
+.tel{
+  margin-top: 20rpx;
+  margin-left: 25rpx;
+  font-size: 35rpx;
+}
+
+/*美团信息  */
+.wai2{
+  margin-top: 25rpx;
+  background: white;
+}
+.logo{
+  margin-top: 40rpx;
+  margin-left: 30rpx;
+}
+.font{
+  margin-top: 45rpx;
+  margin-left: 30rpx;
+  font-size: 30rpx;
+}
+.font2{
+  margin-left: 400rpx;
+  margin-top: 45rpx;
+}
+
+.wai3{
+  margin-top: 5rpx;
+  background: white;
+}
+.font3{
+  margin-left: 50rpx;
+  margin-top: 45rpx;
+  font-size: 30rpx;
+}

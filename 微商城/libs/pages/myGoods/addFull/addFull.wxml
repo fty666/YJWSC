@@ -1,0 +1,40 @@
+<view class="container">
+  <form bindsubmit="addCoupon">
+    <view class="coupon-list">
+      <!-- <block wx:for="{{coupon}}" wx:for-item="{{coupon}}" wx:key="{{coupon.id}}"> -->
+      <view class="item" style="height:{{px2rpxHeight*460}}px;">
+        <!-- <view class="tag">新人专享</view> -->
+        <view class="content">
+          <view class="left">
+            <input type='number' name="reductionPrice" class="name" placeholder='输入要减的价格'></input>
+            <!--开始日期  -->
+            <picker mode="date" value="{{start}}" start="2015-09-01" bindchange="bindStartChange">
+              <view class="time">开始日期: {{start}}</view>
+            </picker>
+            <picker mode="time" value="{{stime}}" start="00:00" end="23:59" bindchange="bindTime">
+              <view class="time">
+                开始具体时间: {{stime}}
+              </view>
+            </picker>
+            <!--结束日期  -->
+            <picker mode="date" value="{{date}}" start="2015-09-01" bindchange="bindDateChange">
+              <view class="time">截止日期: {{date}}</view>
+            </picker>
+            <picker mode="time" value="{{time}}" start="00:00" end="23:59" bindchange="bindTimeChange">
+              <view class="time">
+                结束具体时间: {{time}}
+              </view>
+            </picker>
+          </view>
+        </view>
+        <view class="condition" style="height:{{px2rpxHeight*90}}px;">
+          <input type='number' name="full" class="txt" placeholder='请输入满多少金额使用' style="height:{{px2rpxHeight*60}}px;"></input>
+        </view>
+      </view>
+      <!-- </block> -->
+      <view class='lingquan' style='top:{{px2rpxHeight*1000}}px;'>
+        <button formType="submit" data-shop_code='' class='button button-primary button-rounded'>添加满减</button>
+      </view>
+    </view>
+  </form>
+</view>

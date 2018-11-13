@@ -1,0 +1,89 @@
+<view class="content" style="height:{{px2rpxHeight*1200}}px;">
+  <scroll-view scroll-y style='width:100%;height:100%'>
+    <form bindsubmit="formSubmit">
+      <view>
+        <!-- <view>上架新商品</view> -->
+        <!-- <view>添加套餐</view> -->
+      </view>
+      <view hidden='{{newGoods}}'>
+        <view>
+          <!-- <view class="big-title">商品关键信息</view> -->
+          <view class="info">
+            <view class="info-each">
+              <!-- <view class='sm-title'>商品分类</view> -->
+              <view class='sm-content'>
+                <radio-group name="goodsId" value="{{goodsInfo.goodsId}}" class="radio-group" bindchange="radioChange">
+                  <!-- <block wx:for="{{category}}" wx:key="{{item.classId}}">
+                                        <view class='sm-content-text'>
+                                            <radio value="{{item.classId}}" checked="{{goodsInfo.class_id == item.classId ? true : false}}" />{{item.className}}</view>
+                                    </block> -->
+                </radio-group>
+              </view>
+              <view style='clear:both'></view>
+            </view>
+          </view>
+        </view>
+        <view>
+          <!-- <view class='big-title'>商品详细信息</view> -->
+          <view class='info'>
+            <view class="info-each">
+              <view class='sm-title'>商品名称</view>
+              <view class='sm-content'>
+                <input name="goods_name" value="{{goodsInfo.goods_name}}" placeholder='请输入商品名称' style="width:{{px2rpxWidth*700}}px;height:{{px2rpxHeight*70}}px;" />
+              </view>
+            </view>
+            <view class="info-each">
+              <view class='sm-title'>价格</view>
+              <view class='sm-content'>
+                <input name="price" type='number' value="{{goodsInfo.price}}" placeholder='请输入价格' style="width:{{px2rpxWidth*700}}px;height:{{px2rpxHeight*70}}px;" />
+              </view>
+            </view>
+            <view class="info-each">
+              <view class='sm-title'>折扣</view>
+              <view class='sm-content'>
+                <input name="discount" value="{{goodsInfo.discount}}" placeholder='请输入折扣' style="width:{{px2rpxWidth*700}}px;height:{{px2rpxHeight*70}}px;" />
+              </view>
+            </view>
+            <view class="info-each">
+              <view class='sm-title'>最大购买量</view>
+              <view class='sm-content'>
+                <input name="maxnum" type='number' value="{{goodsInfo.maxnum}}" placeholder='请输入最大购买量' style="width:{{px2rpxWidth*700}}px;height:{{px2rpxHeight*70}}px;" />
+              </view>
+            </view>
+            <!-- <view class="info-each">
+              <view class='sm-title'>最小购买量</view>
+              <view class='sm-content'>
+                <input name="minnum" type='number' value="{{goodsInfo.minnum}}" placeholder='请输入最大购买量' style="width:{{px2rpxWidth*700}}px;height:{{px2rpxHeight*70}}px;" />
+              </view>
+            </view> -->
+            <view class="info-each">
+              <view class='sm-title'>描述</view>
+              <view class='sm-content'>
+                <input name="goods_details" value="{{goodsInfo.goods_details}}" placeholder='请输入商品描述' style="width:{{px2rpxWidth*700}}px;height:{{px2rpxHeight*100}}px;"></input>
+              </view>
+            </view>
+
+            <view class="info-each">
+              <view class='sm-title'>商品列表图片</view>
+              <view class='sm-content'>
+                <view class='img list-img' style="width:{{px2rpxWidth*200}}px;height:{{px2rpxHeight*200}}px;">
+                  <image src="{{aliyunUrl + img}}" style="width:{{px2rpxWidth*200}}px;height:{{px2rpxWidth*200}}px;" />
+                  <!-- <view catchtap='cancleImg' data-status='1' data-index='{{index}}' class='cancle-img'>x</view> -->
+                </view>
+
+                <image catchtap='addlistImg' wx:if="{{list_img_hidden}}" src="/images/addimage.png" style="width:{{px2rpxWidth*200}}px;height:{{px2rpxWidth*200}}px;" />
+                <!-- <image catchtap='addlistImg'  src="/images/addimage.png" /> -->
+              </view>
+            </view>
+          </view>
+        </view>
+      </view>
+      <view hidden='{{groupGoods}}'>
+
+      </view>
+      <view style='padding:20rpx;box-sizing:boeder-box;'>
+        <button form-type="submit" type="primary">提交</button>
+      </view>
+    </form>
+  </scroll-view>
+</view>

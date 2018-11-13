@@ -1,0 +1,47 @@
+<block wx:if="{{glo_is_load}}">
+  <view class="glo_load_view">
+    <text class="iconfont icon-loading animated infinite rotate mr5"></text>
+    <text>正在努力加载</text>
+  </view>
+</block>
+<block wx:else>
+  <view class="container">
+    <view class="coupon-list" style="height:{{px2rpxHeight*1000}}px;">
+      <block wx:if="{{coupon==null}}">
+        <view class='fav1'>你的店铺没有优惠活动</view>
+        <view class='fav2'>快去添加吧</view>
+      </block>
+      <block wx:else>
+        <view style='width:100%;height:{{px2rpxHeight*1000}}px'>
+          <scroll-view scroll-y>
+            <block wx:for="{{coupon}}" wx:for-item="coupon" wx:key="{{coupon.couponId}}">
+              <view class="item" style="height:{{px2rpxHeight*290}}px;">
+                <!-- <view class="tag">新人专享</view> -->
+                <view class="content">
+                  <view class="left">
+                    <view class="name">赠送商品：{{coupon.goodsName}}</view>
+                    <view class="time">赠送数量:{{coupon.nums}}</view>
+                    <view class="time">结束时间：{{coupon.reductionEndTime}}</view>
+                  </view>
+                  <view class="right" style="width:{{px2rpxWidth*162}}px;">
+                    <button catchtap='delCoupon' data-shopcode='{{coupon.shop_code}}' class="go mt5" data-index='{{index}}' data-couponid='{{coupon.reductionId}}' style="width:{{px2rpxWidth*162}}px;height:{{px2rpxHeight*48}}px;">删除</button>
+
+                    <button catchtap='updtaCoupon' data-shopcode='{{coupon.shop_code}}' data-reductionId='{{coupon.reductionId}}' class="go mt5" data-index='{{index}}' data-couponid='{{coupon.reductionId}}' style="width:{{px2rpxWidth*162}}px;height:{{px2rpxHeight*48}}px;">修改</button>
+
+                  </view>
+                </view>
+                <view class="condition" tyle="height:{{px2rpxHeight*78}}px;">
+                  <text class="txt" style="height:{{px2rpxHeight*30}}px;">满¥{{coupon.full}}使用</text>
+                  <!-- <image src="https://yanxuan.nosdn.127.net/hxm/yanxuan-wap/p/20161201/style/img/icon-normal/couponArrow-71315b4145.png" class="icon"></image>   -->
+                </view>
+              </view>
+            </block>
+          </scroll-view>
+        </view>
+      </block>
+      <view class='lingquan' style="top:{{px2rpxHeight*1100}}px;">
+        <view catchtap='addCoupon' class='button button-caution button-rounded'>添加满赠</view>
+      </view>
+    </view>
+  </view>
+</block>
