@@ -55,7 +55,6 @@ Page({
   onReady: function () {
     let that = this;
     let user_id = app.globalData.user_id;
-    // funData.getShopByCode(app.globalData.user_id, that, (data) => {
     funData.getShopByCode(user_id, that, (data) => {
       console.log(data)
       that.setData({
@@ -253,7 +252,7 @@ Page({
     // 价格只能为数字
     if (!util.checkReg(4, goods.price)) {
       wx.showToast({
-        title: '价格不正确',
+        title: '价格填写不正确',
         icon: 'none',
         duration: 1000,
       });
@@ -280,7 +279,7 @@ Page({
     }
 
     // 判断最大购买量与最小购买量
-    if (parseInt(goods.maxnum) <0) {
+    if (parseInt(goods.maxnum) < 0) {
       wx.showToast({
         title: '购买填写不正确',
         icon: 'none',

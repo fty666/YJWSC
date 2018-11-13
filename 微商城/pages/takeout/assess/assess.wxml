@@ -65,12 +65,13 @@
         </view>
 
         <view class='files'>
-          <view>
-            <image src='../../../images/file.png' catchtap='files' class='file' style="width:{{px2rpxWidth*150}}px;height:{{px2rpxWidth*150}}px;"></image>
-          </view>
           <view wx:for="{{img}}" wx:for-item="imgs" wx:key="{{index}}">
-            <image src='{{uploadFileUrl+imgs}}' class='file' style="width:{{px2rpxWidth*150}}px;height:{{px2rpxWidth*150}}px;"></image>
+            <image src='{{uploadFileUrl+imgs}}' class='file' style="width:{{px2rpxWidth*150}}px;height:{{px2rpxWidth*150}}px;margin-left:{{px2rpxWidth*20}}px;"></image>
           </view>
+          <view>
+            <image src='../../../images/file.png' catchtap='files' class='file' style="width:{{px2rpxWidth*150}}px;height:{{px2rpxWidth*150}}px;margin-left:{{px2rpxWidth*27}}px;"></image>
+          </view>
+
         </view>
 
         <!--具体商品评价  -->

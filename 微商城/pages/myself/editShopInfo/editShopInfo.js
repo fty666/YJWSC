@@ -280,32 +280,37 @@ Page({
     let val = e.detail.value;
     console.log(val)
     // 内容不能为空
-    if (util.isEmpty(val.ShopName) || util.isEmpty(val.mobile) || util.isEmpty(val.smsCode) || util.isEmpty(val.shop_addr) || util.isEmpty(val.shop_detail)) {
-      wx.showToast({
-        title: '信息不能为空',
-        icon: 'none',
-        duration: 1000
-      })
-      return;
-    }
+    // if (util.isEmpty(val.ShopName) || util.isEmpty(val.mobile) || util.isEmpty(val.smsCode) || util.isEmpty(val.shop_addr) || util.isEmpty(val.shop_detail)) {
+    //   wx.showToast({
+    //     title: '信息不能为空',
+    //     icon: 'none',
+    //     duration: 1000
+    //   })
+    //   return;
+    // }
     // 判断手机号
-    if (!util.checkReg(1, val.mobile)) {
-      wx.showToast({
-        title: '手机号不正确',
-        icon: 'none',
-        duration: 2000
-      })
-      return;
+    if (val.mobile.length > 1) {
+      if (!util.checkReg(1, val.mobile)) {
+        wx.showToast({
+          title: '手机号不正确',
+          icon: 'none',
+          duration: 2000
+        })
+        return;
+      }
     }
 
+
     // 起送价
-    if (val.initialMoney < 25) {
-      wx.showToast({
-        title: '起送价输入错误',
-        icon: 'none',
-        duration: 2000
-      })
-      return;
+    if (val.initialMoney.length>=1){
+      if (val.initialMoney < 25) {
+        wx.showToast({
+          title: '起送价输入错误',
+          icon: 'none',
+          duration: 2000
+        })
+        return;
+      }
     }
     // 判断验证码
     // if (!(/\^d{6}$/.test(val.smsCode))){

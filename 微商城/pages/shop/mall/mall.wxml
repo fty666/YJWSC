@@ -12,11 +12,13 @@
     <!-- <text class="iconfont icon-saoyisao" bindtap="shop_saoma_bind" ></text> -->
     <view class="search-box sub">
       <view class="flex">
-        <input class="sub search-input" type="text" placeholder="请输入店铺名称" bindblur="inputBlur" confirm-type="search" bindconfirm="goods_search_bind" style="height:{{px2rpxheight*64}}px;margin-top:3px;" />
+        <input class="sub search-input" type="text" placeholder="请输入店铺名称" bindblur="inputBlur" confirm-type="search"  style="height:{{px2rpxheight*64}}px;margin-top:3px;" />
         <button size="mini" class="search-btn">
           <icon type="search" size="18" />
         </button>
       </view>
+
+      
     </view>
   </view>
   <!--home swiper start-->

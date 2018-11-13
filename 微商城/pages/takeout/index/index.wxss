@@ -292,8 +292,6 @@ page {
 }
 
 .stops {
-    /* background: inherit;
-     filter: blur(15px); */
     z-index: 999999;
     background-color: rgba(0, 0, 0, 0.05);
 }

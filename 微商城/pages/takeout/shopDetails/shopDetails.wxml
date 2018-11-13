@@ -23,8 +23,6 @@
             <view class='font' style="width:{{px2rpxWidth*470}}px;height:{{px2rpxHeight*90}}px;">
               <block wx:for="{{shop_info.reduction}}" wx:for-item="reduction" wx:key="{{reduction.reductionId}}">满{{reduction.full}}减{{reduction.reductionPrice}};</block>
             </view>
-            <!-- <view class='more'>
-              <text class="iconfont icon-youjiantou"></text> </view> -->
           </view>
         </view>
       </view>
@@ -63,7 +61,6 @@
                   </view>
                   <view class='flex2'>
                     <view class='del over_hidden' style="width:{{px2rpxWidth*330}}px;">{{goods.goods_name}}</view>
-                    <!-- <view class='del1 over_hidden' style="width:{{px2rpxWidth*330}}px;">{{goods.goods_details}}</view> -->
                     <view class='del1'>已售{{goods.sales_num}}</view>
                     <view class='flex' style='position:relative'>
                       <block wx:if="{{goods.discount > 0}}" wx:key="{{goods.id}}">
@@ -72,7 +69,7 @@
                         </view>
                       </block>
                       <block wx:else>
-                        <view class='original'>￥{{goods.price}} </view>
+                        <view class='del2'>￥{{goods.price}} </view>
                       </block>
                       <view class='goods-num' style="width:{{px2rpxWidth*170}}px;height:{{px2rpxHeight*50}}px;">
                         <view class='minus' style="width:{{px2rpxWidth*50}}px;height:{{px2rpxHeight*50}}px;">

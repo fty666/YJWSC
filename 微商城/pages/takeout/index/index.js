@@ -147,6 +147,14 @@ Page({
   takes: function (e) {
     console.log(e.detail.value)
     let arrayVal = e.detail.value;
+    if (arrayVal == '') {
+      wx.showToast({
+        icon: 'none',
+        title: '请输入店铺名称',
+        duration: 3000,
+      });
+      return false;
+    }
     wx.navigateTo({
       url: '/pages/takeout/souIndex/souIndex?arrayVal=' + arrayVal,
     })

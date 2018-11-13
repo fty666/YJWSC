@@ -107,7 +107,7 @@
 
                   <!-- 待发货  -->
                   <block wx:if="{{item.status == to_be_shipped}}">
-                    <view catchtap='remindSendGoods' data-order_uuid='{{item.order_uuid}}' data-order_mainid='{{item.order_mainid}}' data-shop_code='{{item.shop_code}}' class='button button button-action button-rounded button-wx-small ml10'>提醒发货</view>
+                    <view catchtap='remindSendGoods' data-order_uuid='{{item.order_uuid}}' data-order_mainid='{{item.order_mainid}}' data-shop_code='{{item.shop_code}}' data-shopmobile='{{item.shopMobile}}' class='button button button-action button-rounded button-wx-small ml10'>提醒发货</view>
                   </block>
 
                   <!-- 待收货  -->

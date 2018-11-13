@@ -4,6 +4,7 @@ const template = require('../../../template/template.js');
 const util = require('../../../utils/util.js');
 const calculate = require('../../../utils/calculate.js');
 const utilFunctions = require('../../../utils/functionData.js');
+const app = getApp();
 var page = 1;
 var pageSize = 20;
 Page({
@@ -337,6 +338,7 @@ Page({
    */
   goToCount: function () {
     let that = this;
+    app.globalData.shop_code =that.data.shop_code;
     wx.redirectTo({
       url: '/pages/takeout/pay/pay?shop_code=' + that.data.shop_code,
     })
@@ -383,7 +385,6 @@ function getFoodGoodsList(myhot, myfoodsClassId, that, resFun) {
       that.setData({
         total_price: value.totalPrice
       });
-
       // 配送需求
       carry(that, value.totalPrice);
     }
@@ -404,7 +405,10 @@ function getFoodGoodsList(myhot, myfoodsClassId, that, resFun) {
       // 折扣除以10
       if (newData[i].discount > 0 && newData[i].discount <= 10) {
         let discount = calculate.calcSub(newData[i].discount, 10);  // 折扣
-        newData[i].discountPrice = calculate.calcMul(newData[i].price, discount); // 折扣价格
+        newData[i].discountPrice = (calculate.calcMul(newData[i].price, discount)).toFixed(2); // 折扣价格
+        if (newData[i].discountPrice==0.00){
+          newData[i].discountPrice == 0.01;
+        }
       } else if (newData[i].discount <= 0 || newData[i].discount > 10 || newData[i].discount == '') {
         newData[i].discountPrice = newData[i].price; // 折扣价格
       }

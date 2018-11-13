@@ -178,6 +178,28 @@ Page({
     let that = this;
     let cid = e.currentTarget.dataset.cid;
     funData.deleteCard(cid, that, () => {
+      // 重新获取数据
+      funData.getShopCode(app.globalData.user_id, that, (data) => {
+        funData.getCardByCode(data.shop_code, that, (data) => {
+          let len = data.length;
+          if (len <= 0) {
+            that.setData({
+              hasData: false,
+              glo_is_load: false,
+            });
+          } else {
+            for (let i = 0; i < len; i++) {
+              data[i].card_no = util.bankCardByStar(data[i].card_no);
+            }
+            that.setData({
+              card: data,
+              hasData: true,
+              glo_is_load: false,
+            });
+          }
+        });
+      });
+
       wx.showToast({
         title: '解除绑定成功',
         icon: 'success',

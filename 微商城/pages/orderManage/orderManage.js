@@ -25,7 +25,7 @@ Page({
     accomplish: 5,       // 5评价完成
     exchange_goods: 6,   // 6换货
     return_of_goods: 7,  // 7退货
-    navTab: ["全部", "待付款", "待发货", "待收货", "客户处理"],
+    navTab: ["全部",  "待发货", "待收货", "退货处理","换货处理"],
     currentNavtab: 0,
     oederSearchInput: null, // 搜索订单号
     scrollTop: 0,
@@ -111,7 +111,7 @@ Page({
    */
   switchTab: function (e) {
     let that = this;
-    // console.log(e.currentTarget.dataset.idx);
+    console.log(e.currentTarget.dataset.idx);
     this.setData({
       currentNavtab: e.currentTarget.dataset.idx,
       floorstatus: false
@@ -123,10 +123,14 @@ Page({
   statusOrder: function (tabstatus, that) {
     if (tabstatus == 0) {
       mystatus = -1;
+    } else if (tabstatus == 3) {
+      mystatus = 7;
     } else if (tabstatus == 4) {
-      mystatus = 67;
-    } else {
-      mystatus = tabstatus;
+      mystatus = 6;
+    } else if (tabstatus == 1) {
+      mystatus = 2;
+    }else{
+      mystatus = 3;
     }
     // console.log(mystatus);
     that.getOrder(mystatus, that, page, pageSize);
@@ -204,7 +208,7 @@ Page({
 
 
   // 失去焦点获取输入值
-  blurValue: function (e) {
+  bindchange: function (e) {
     console.log(e.detail.value);
     this.setData({
       oederSearchInput: e.detail.value

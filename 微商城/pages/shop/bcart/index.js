@@ -56,12 +56,27 @@ Page({
   },
 
   onShow: function () {
-    // let that = this;
-    // if (app.globalData.level == '1' || !app.globalData.level) {
-    //     template.tabbar("tabBar", 2, that, 1);
-    // } else if (app.globalData.level == '2' || app.globalData.level == '3') {
-    //     template.tabbar("tabBar", 2, that, 3);
-    // }
+    let that = this;
+    function cart(res) {
+      let leng = res.length
+      for (var i = 0; i < leng; i++) {
+        res[i].is_checked = false;
+        // 折扣除以10
+        if (res[i].discount > 0 && res[i].discount <= 10) {
+          let discount = calculate.calcSub(res[i].discount, 10);  // 折扣
+          res[i].discountPrice = (calculate.calcMul(res[i].price, discount)).toFixed(2); // 折扣价格
+          if (res[i].discountPrice == 0.00) {
+            res[i].discountPrice = 0.01;
+          }
+        } else if (res[i].discount <= 0 || res[i].discount > 10 || res[i].discount == '') {
+          res[i].discountPrice = res[i].price; // 折扣价格
+        }
+      }
+      that.setData({
+        cart_list: res,
+      })
+    }
+    utilFunctions.getGoodsCart(cart, this)
   },
 
   onReady: function () {
@@ -73,16 +88,23 @@ Page({
     }
 
     function cart(res) {
-      // console.log(res)
       let leng = res.length
       for (var i = 0; i < leng; i++) {
         res[i].is_checked = false;
+        // 折扣除以10
+        if (res[i].discount > 0 && res[i].discount <= 10) {
+          let discount = calculate.calcSub(res[i].discount, 10);  // 折扣
+          res[i].discountPrice = (calculate.calcMul(res[i].price, discount)).toFixed(2); // 折扣价格
+          if (res[i].discountPrice == 0.00) {
+            res[i].discountPrice = 0.01;
+          }
+        } else if (res[i].discount <= 0 || res[i].discount > 10 || res[i].discount == '') {
+          res[i].discountPrice = res[i].price; // 折扣价格
+        }
       }
-      // console.log(res)
       that.setData({
         cart_list: res,
       })
-      // console.log(that.data.cart_list)
     }
     utilFunctions.getGoodsCart(cart, this),
 
@@ -189,11 +211,11 @@ Page({
   setShop: function (e) {
     console.log(e.detail.value)
     let datas = e.detail.value;
-    let reg=/^\d$/;
-    if(reg.test(datas)==false){
+    let reg = /^\d$/;
+    if (reg.test(datas) == false) {
       wx.showToast({
         title: '输入有误',
-        icon:'none'
+        icon: 'none'
       })
       return false;
     }
@@ -230,21 +252,21 @@ Page({
   selectList: function (e) {
     // console.log(e)
     // 获取data- 传进来的index
-    var index = e.currentTarget.dataset.index;
-    // console.log(index);  
+    let index = e.currentTarget.dataset.index;
+    let that=this;
     // 获取购物车列表
-    var carts = this.data.cart_list;
+    let carts = that.data.cart_list;
     console.log(carts)
     // 获取当前商品的选中状态
     let is_checked = carts[index].is_checked;
     // 改变状态       
     carts[index].is_checked = !is_checked;
-    this.setData({
+    that.setData({
       cart_list: carts
     });
     console.log(carts)
     // 重新获取总价
-    this.getTotalPrice();
+    that.getTotalPrice();
   },
 
   /**
@@ -259,8 +281,8 @@ Page({
     for (let i = 0; i < carts.length; i++) {
       if (carts[i].is_checked) {
         // 判断选中才会计算价格
-        console.log(calculate.calcMul(carts[i].num, carts[i].price))
-        total = calculate.calcAdd(total, calculate.calcMul(carts[i].num, carts[i].price));  // 所有价格加起来
+        // console.log(calculate.calcMul(carts[i].num, carts[i].price))
+        total = calculate.calcAdd(total, calculate.calcMul(carts[i].num, carts[i].discountPrice));  // 所有价格加起来
         // 计算购物车数量
         all_g_number = calculate.calcAdd(all_g_number, carts[i].num);
       }
@@ -324,45 +346,42 @@ Page({
     for (let i = 0; i < lengs; i++) {
       if (carts[i].is_checked) {
         cid.push(carts[i].goodsCart_id)
-        // console.log(cid)
         // 判断选中才会执行删除
         mycid.push(carts[i].is_checked);
-
       }
-      if (cid.length == 0) {
-        wx.showToast({
-          title: '请选择要删除的商品',
-          icon: 'none'
-        })
-        return false;
-      }
-      wx.showModal({
-        title: '确定要删除吗',
-        content: '',
-        success: function (res) {
-          if (res.confirm) {
-            // 同步删除数据库
-            function deletes(res) {
-              wx.showToast({
-                title: '删除成功',
-              })
-            }
-            utilFunctions.deleteGoodsCart(deletes, cid, this)
-            console.log(cid)
-            carts.splice(i, 1);
-            that.setData({
-              cart_list: carts
-            });
-          } else if (res.cancel) {
-            wx.showToast({
-              title: '已取消',
-              icon: 'none'
-            })
-            cid = [];
-          }
-        }
-      })
     }
+    if (cid.length == 0) {
+      wx.showToast({
+        title: '请选择要删除的商品',
+        icon: 'none'
+      })
+      return false;
+    }
+    wx.showModal({
+      title: '确定要删除吗',
+      content: '',
+      success: function (res) {
+        if (res.confirm) {
+          // 同步删除数据库
+          function deletes(res) {
+            wx.showToast({
+              title: '删除成功',
+            })
+            that.carts()
+          }
+          utilFunctions.deleteGoodsCart(deletes, cid, this)
+          that.setData({
+            cart_list: carts
+          });
+        } else {
+          wx.showToast({
+            title: '已取消',
+            icon: 'none'
+          })
+          cid = [];
+        }
+      }
+    })
   },
 
   /**

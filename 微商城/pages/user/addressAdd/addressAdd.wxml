@@ -5,7 +5,7 @@
         <input class="input" bindinput="bindinputName" placeholder="姓名" name="addr_receiver" data-value="{{address.name}}" auto-focus style="height:{{px2rpxHeight*44}}px;" />
       </view>
       <view class="form-item" style="height:{{px2rpxHeight* 116}}px;">
-        <input class="input" bindinput="bindinputMobile" name="addr_mobile" data-value="{{address.mobile}}" placeholder="手机号码" style="height:{{px2rpxHeight*44}}px;" />
+        <input class="input" bindinput="bindinputMobile" name="addr_mobile" data-value="{{address.mobile}}" type='number' placeholder="手机号码" style="height:{{px2rpxHeight*44}}px;" />
       </view>
 
       <view class="form-item" style="height:{{px2rpxHeight* 116}}px;">
@@ -23,11 +23,6 @@
       <block wx:if="{{location}}">
         <view class='myaddress' style="height:{{px2rpxHeight*500}}px;">
           <scroll-view scroll-y>
-            <!-- <view class='myaddress-title'>
-                    <view>
-                        <text class="iconfont icon-locationfill"></text> </view>
-                    <view class='ml10'>附近地址</view>
-                </view> -->
             <block wx:for="{{location}}" wx:for-item="near" wx:key="{{near.id}}">
               <view class='myaddress-list' catchtap='getLocation' data-locationname='{{near.name}}' data-titude='{{near.location}}'>
                 <view class='myaddress-each'>

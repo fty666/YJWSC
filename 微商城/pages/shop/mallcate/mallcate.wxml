@@ -8,7 +8,7 @@
   <!--mallcate.wxml-->
   <view class="cate flex flexC">
     <block wx:if="{{have}}">
-      <view class='has'>没有该店铺</view>
+      <view class='has'>当前分类没有店铺</view>
     </block>
     <block wx:else>
       <view style='width:100%;height:2200rpx;'>

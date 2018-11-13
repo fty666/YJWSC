@@ -108,28 +108,29 @@ Page({
         volume: options.volume
       })
     }
-    // console.log(options.volume)
     // 传过来的收货地址ID
-    let addids = options.addressId;
-    this.setData({
-      addId: addids
-    })
-    if (addids) {
-      this.oneadd()
-    } else {
-      this.moadd()
-    }
+    // let addids = options.addressId;
+    console.log('穿过老的')
+    // console.log(addids)
+    // this.setData({
+    //   addId: addids
+    // })
+    // if (addids) {
+    //   this.oneadd()
+    // } else {
+
+    // }
     // console.log(options)
-    var gids = wx.getStorageSync('gid')
-    var sum = wx.getStorageSync('num')
+    var gids = wx.getStorageSync('gid');
+    var sum = wx.getStorageSync('num');
+    let ZKprice = options.ZKprice;//传过来的折扣价格
     var that = this
     // 直接结算
     function goods(res) {
       console.log(res)
-      // console.log(res.reduction.length)
       // 满减活动
       var di = 0;
-      let nums = calculate.calcMul(res.price, sum);
+      let nums = calculate.calcMul(ZKprice, sum);
       for (let l = 0; l < res.reduction.length; l++) {
         if (res.reduction[l].full <= nums) {
           if (res.reduction[l].reductionPrice > di) {
@@ -147,7 +148,6 @@ Page({
           discount: res.discount
         })
       }
-      // console.log(di)
       picke = calculate.calcReduce(nums, di);
       nums = calculate.dealMoney(nums)
       picke = calculate.dealMoney(picke)
@@ -174,10 +174,10 @@ Page({
   },
 
   onReady: function () {
-    console.log(app.globalData.user_id)
+    this.moadd()
     // 获取用户信息
     funDta.getUser(app.globalData.user_id, this, (res) => {
-      console.log(res)
+      // console.log(res)
       this.setData({
         weChat: res.weChat
       });
@@ -185,7 +185,7 @@ Page({
     let that = this;
     // 查看店铺信息
     funDta.getShopbycode(that.data.shop_code, this, (res) => {
-      console.log(res)
+      // console.log(res)
       this.setData({
         shop_info: res.shop
       });
@@ -194,7 +194,6 @@ Page({
     wx.getStorage({
       key: 'PX_TO_RPX',
       success: function (res) {
-        console.log(res)
         that.setData({
           px2rpxHeight: res.data.px2rpxHeight,
           px2rpxWidth: res.data.px2rpxWidth,
@@ -205,38 +204,37 @@ Page({
 
 
   onShow: function () {
-    // console.log(this.data.coupon)
+    console.log('88946565')
+    console.log(this.data.address)
+    console.log(this.data.has_address)
     let cou = this.data.coupon;
-    console.log(cou)
-    // let dis = cou.discount;
     let coup = cou.couponId;
     if (coup) {
       this.setData({
         couponId: coup,
       })
     }
-    let yhq = cou.couponPrice;
+    let yhq = 0;
+    if (cou.couponPrice) {
+      yhq = cou.couponPrice;
+    } else {
+      yhq = 0;
+    }
     this.setData({
-      // discount: dis,
       couponPrice: yhq
     })
-    console.log(yhq)
     let fav = this.data.favour;
     yhq = calculate.calcAdd(fav, yhq);
     let nums = this.data.sums;
     let numss = calculate.calcReduce(nums, yhq);
-    // console.log(numss)
     if (numss < 0) {
       numss = 0;
-    }    
+    }
     this.setData({
       zfavour: yhq,
       pocket: numss,
       favour: 0,
     });
-    // console.log(this.data.pocket);
-    // console.log(var_pocket)
-    console.log(util.isEmpty(this.data.pocket))
     if (util.isEmpty(this.data.pocket)) {
       this.setData({
         pocket: var_pocket
@@ -255,13 +253,13 @@ Page({
       console.log(res)
       if (util.isEmpty(res)) {
         this.setData({
-          has_address: true
+          has_address: false
         });
       } else {
         this.setData({
           address: res,
           addid: res.id,
-          has_address: false
+          has_address: true
         })
       }
     }
@@ -271,17 +269,17 @@ Page({
   /**
    * 查看单个地址
    */
-  oneadd: function () {
-    let that = this
-    function addinfo(res) {
-      console.log(res)
-      this.setData({
-        address: res,
-        addid: res.id
-      })
-    }
-    utilFunctions.getAddrById(addinfo, that.data.addId, this)
-  },
+  // oneadd: function () {
+  //   let that = this
+  //   function addinfo(res) {
+  //     console.log(res)
+  //     this.setData({
+  //       address: res,
+  //       addid: res.id
+  //     })
+  //   }
+  //   utilFunctions.getAddrById(addinfo, that.data.addId, this)
+  // },
 
 
   /**
@@ -404,11 +402,6 @@ Page({
     num = this.data.gnum;
     price.push(ishop.price);
     carts_price.push(psum);
-    // color.push(ishop.color);
-    // size.push(ishop.size);
-    // typee.push(ishop.type);
-    // volume.push(ishop.volume);
-    // taste.push(ishop.taste);
     shopcode.push(ishop.shopCode);
     // let reception='';//判断商家是否接单，微商城传空
     // console.log(shopcode)
@@ -423,10 +416,9 @@ Page({
         money: that.data.pocket,
         openid: that.data.weChat
       }, that, () => {
-        console.log(99999)
         let now = util.formatDate(new Date().getTime());
         // 支付成功通知商家
-        weixin.sendSocket((now + ' 订单号：' + res[0].order_uuid), that.data.shop_code);
+        // weixin.sendSocket((now + ' 订单号：' + res[0].order_uuid), that.data.shop_code);
         // weixin.sendSocket((now + ' 订单号：' + res[0].order_uuid), '111');
 
         wx.removeStorage({
@@ -439,6 +431,16 @@ Page({
             });
           }
         })
+
+        // 订单传递
+        app.globalData.ZKprice = '';
+        app.globalData.color = '';
+        app.globalData.shcode = '';
+        app.globalData.size = '';
+        app.globalData.tastes = '';
+        app.globalData.typee = '';
+        app.globalData.volume = '';
+
         // //支付成功发送短信通知商家
         // funDta.getOrderSms(that.data.shop_info.mobile, that, () => {
         //     wx.showModal({

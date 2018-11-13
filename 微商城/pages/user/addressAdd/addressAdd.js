@@ -11,7 +11,7 @@ Page({
       area_detail: '',
       addr_receiver: '',
       addr_mobile: '',
-      is_default: 0,
+      is_default: 1,
       latitude: '', // 纬度
       longitude: '' // 经度
     },
@@ -26,16 +26,6 @@ Page({
   },
 
   onLoad: function (options) {
-    // 页面初始化 options为页面跳转所带来的参数
-    // console.log(options)
-    // if (options.id) {
-    //   this.setData({
-    //     addressId: options.id
-    //   });
-    //   this.getAddressDetail();
-    // }
-    // this.getRegionList(1);
-
   },
 
   onReady: function () {
@@ -129,14 +119,11 @@ Page({
    * 定位
    */
   location: function () {
-    console.log(99999)
     let that = this;
     let address = that.data.address;
     utilFunctions.amapFilePackage((data) => {
-      console.log(data);
       address.area_detail = data[0].regeocodeData.pois[0].name;
       let longitude_latitude = data[0].regeocodeData.pois[0].location.split(',');
-      // console.log(longitude_latitude)
       address.longitude = longitude_latitude[0];
       address.latitude = longitude_latitude[1];
       that.setData({
@@ -144,7 +131,6 @@ Page({
         address: address,
       });
     }, () => { });
-    // console.log(address)
   },
 
   /**
@@ -237,20 +223,41 @@ Page({
       });
       return;
     }
-    console.log(address);
+    // console.log(address);
 
     function add() {
-      wx.redirectTo({
-        url: '/pages/user/address/address'
-      })
-      wx.showToast({
-        icon: 'success',
-        title: '添加成功'
-      });
+      let urls = util.getPrevPageUrl();
+      let twoyrls = util.twoPage()
+      console.log(urls)
+      let pages = getCurrentPages();
+      let prevPage = pages[pages.length - 3];  //上一个页面
+      // 直接购买
+      if (urls == 'pages/shop/onepay/onepay' || twoyrls == 'pages/shop/onepay/onepay') {
+        wx.navigateTo({
+          url: '/pages/shop/onepay/onepay?shcode=' + app.globalData.shcode + '&color=' + app.globalData.color + '&size=' + app.globalData.size + '&tastes=' + app.globalData.tastes + '&typee' + app.globalData.typee + '&volume' + app.globalData.volume + '&ZKprice=' + app.globalData.ZKprice
+        })
+      } else if (urls == 'pages/takeout/pay/pay' || twoyrls == 'pages/takeout/pay/pay') {
+        // 外卖跳转
+        wx.navigateTo({
+          url: "/pages/takeout/pay/pay?shop_code=" + app.globalData.shop_code
+        })
+      } else if (urls == 'pages/shop/orderpay/index' || twoyrls == 'pages/shop/orderpay/index') {
+        // 购物车跳转
+        wx.navigateTo({
+          url: "/pages/shop/orderpay/index"
+        })
+      } else {
+        // 其他
+        wx.redirectTo({
+          url: '/pages/user/address/address'
+        })
+        wx.showToast({
+          icon: 'success',
+          title: '添加成功'
+        });
+      }
     }
     utilFunctions.addAddrUrl(add, address, this)
-
-
   },
 
   formSubmit(e) {

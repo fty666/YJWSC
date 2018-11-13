@@ -11,7 +11,7 @@
             <view class="weui-form-preview__value_in-hd font">共计：¥ {{goods_total}}
             </view>
             <view class="weui-form-preview__value_in-hd font">
-                <text class='favour' decode='ture'>优惠：￥{{favour}}&nbsp;&nbsp;&nbsp;</text>
+                <!-- <text class='favour' decode='ture'>优惠：￥{{favour}}&nbsp;&nbsp;&nbsp;</text> -->
                 <text class='favour1'> 实付：￥{{pocket}}</text>
             </view>
         </view>
@@ -20,13 +20,13 @@
         <view class="weui-form-preview__item">
             <view class="weui-form-preview__label font">收货地址</view>
             <view class="weui-form-preview__value font">
-                <image src='../../../images/updata.png' class='img' bindtap='aupdata' style="width:{{px2rpxWidth*50}}px;height:{{px2rpxWidth*50}}px;"></image>
+                <image src='../../../images/updata.png' class='img' bindtap='list' style="width:{{px2rpxWidth*50}}px;height:{{px2rpxWidth*50}}px;"></image>
             </view>
         </view>
     </view>
     <view class="weui-form-preview__bd">
         <block wx:if="{{has_address}}">
-            <view class="weui-form-preview__item">
+            <view class="weui-form-preview__item" bindtap='list'>
                 <view class="weui-form-preview__label font1">收货人信息</view>
                 <view class="weui-form-preview__value font1">
                     {{address.addr_receiver}} {{address.addr_mobile}}
@@ -88,8 +88,8 @@
             <view class="weui-media-box weui-media-box_text fav">
                 <view class="weui-media-box__desc cu ">
                     <view>
-                        <block wx:if="{{item.reduction}}" wx:key="{{item.reduction.reductionId}}">满{{item.reduction.full}}减{{item.reduction.reductionPrice}}</block>
-                        <block wx:else>无</block>
+                        <block wx:if="{{item.reduction==[]}}" wx:key="{{item.reduction.reductionId}}">满{{item.reduction.full}}减{{item.reduction.reductionPrice}}</block>
+                        <block wx:else>满减: 无</block>
                     </view>
                 </view>
             </view>

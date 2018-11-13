@@ -18,7 +18,7 @@
           </view>
         </view>
         <view class='search ml10' style="height:{{px2rpxHeight*60}}px;">
-          <input class='search-input' placeholder='寿司'  bindblur='takes' style="height:{{px2rpxHeight*60}}px;"></input>
+          <input class='search-input' placeholder='请输入店铺名称'  bindblur='takes' style="height:{{px2rpxHeight*60}}px;"></input>
           <view class='search-icon' style="width:{{px2rpxWidth*80}}px;height:{{px2rpxHeight*60}}px;">
             <text class="iconfont icon-search"></text>
           </view>
@@ -42,22 +42,12 @@
         <view class='near-line' style="width:{{px2rpxWidth*100}}px;height:{{px2rpxHeight*1}}px;"></view>
       </view>
       <view class='select' style="height:{{px2rpxHeight*100}}px;">
-        <!-- <view class='select-each'>
-                    <view class='select-text'> 综合排序</view>
-                    <text class="iconfont icon-unfold ml5"></text>
-                </view> -->
         <view bindtap='requirementSelect' data-select='all' class="select-each {{select == 'all' ? 'select-active' : ''}}">
           <view class='select-text'>全部</view>
         </view>
         <view bindtap='requirementSelect' data-select='saleNum' class="select-each {{select == 'saleNum' ? 'select-active' : ''}}">
           <view class='select-text '>销量最高</view>
         </view>
-        <!-- <view class='select-each' style="width:{{px2rpxWidth*150}}px;height:{{px2rpxHeight*80}}px;">
-                    <view class='select-text'>速度最快</view>
-                </view> -->
-        <!-- <view class='select-each' style="width:{{px2rpxWidth*150}}px;height:{{px2rpxHeight*80}}px;">
-                    <view class='select-text'>筛选</view>
-                </view> -->
         <view bindtap='requirementSelect' data-select='reduction' class="select-each {{select == 'reduction' ? 'select-active' : ''}}">
           <view class='select-text'>满减优惠</view>
         </view>
@@ -108,9 +98,6 @@
       </view>
     </scroll-view>
   </view>
-  <!--自定义tarBar  -->
-  <!-- <import src="../../../template/template.wxml" />
-  <template is="tabBar" data="{{tabBar:bindData.tabBar}}" /> -->
     <import src="../../../template/template.wxml" />
     <template is="tabBar" data="{{tabBar:bindData.tabBar}}" />
 </block>

@@ -41,36 +41,30 @@
     </view>
 
     <!--满赠活动  -->
-    <view class='manjian' style='height:52rpx;'>
-      <view>
-        <image class='manjian-img ' src='/images/jian.png' style="width:{{px2rpxWidth*30}}px;height:{{px2rpxHeight*30}}px;"></image>
-      </view>
-      <!-- <view class='manjian-text f12 ml5'> -->
-      <swiper autoplay="true" interval="2000">
-        <block wx:for="{{gift}}" wx:for-item="gift" wx:key="{{gift.reductionId}}">
+    <block wx:for="{{gift}}" wx:for-item="gift" wx:key="{{gift.reductionId}}">
+      <view class='manjian' style='height:52rpx;'>
+        <view>
+          <image class='manjian-img ' src='/images/jian.png' style="width:{{px2rpxWidth*30}}px;height:{{px2rpxHeight*30}}px;"></image>
+        </view>
+        <swiper autoplay="true" interval="2000">
           <swiper-item>
             <view style='width:600rpx;height:50rpx;display:inline-block;text-align:left;color:red;margin-top:14rpx;margin-left:13rpx;'>满{{gift.full}}赠{{gift.goodsName}}X{{gift.nums}};</view>
           </swiper-item>
-        </block>
-      </swiper>
-      <!-- </view> -->
-    </view>
+        </swiper>
+      </view>
+    </block>
 
     <!--满减活动  -->
-    <view class='manjian' style='height:52rpx;'>
-      <image class='manjian-img ' src='/images/jian.png' style="width:{{px2rpxWidth*30}}px;height:{{px2rpxHeight*30}}px;"></image>
-      <!-- <view class='manjian-text f12 ml5'> -->
-      <swiper autoplay="true" interval="2000">
-        <block wx:for="{{shopinfo.reduction}}" wx:for-item="reduction" wx:key="{{reduction.reductionId}}">
+    <block wx:for="{{shopinfo.reduction}}" wx:for-item="reduction" wx:key="{{reduction.reductionId}}">
+      <view class='manjian' style='height:52rpx;'>
+        <image class='manjian-img ' src='/images/jian.png' style="width:{{px2rpxWidth*30}}px;height:{{px2rpxHeight*30}}px;"></image>
+        <swiper autoplay="true" interval="2000">
           <swiper-item>
             <view style='width:600rpx;height:50rpx;display:inline-block;text-align:left;color:red;margin-left:13rpx;'>满{{reduction.full}}减{{reduction.reductionPrice}};</view>
           </swiper-item>
-        </block>
-      </swiper>
-      <!-- </view> -->
-    </view>
-
-
+        </swiper>
+      </view>
+    </block>
 
     <navigator url="/pages/myGoods/getCoupon/getCoupon?shop_code={{shop_code}}">
       <view class='manjian'>

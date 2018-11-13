@@ -32,7 +32,7 @@
         <label class="floatLeft lineSpace" style="height:{{px2rpxHeight*2}}px;"></label>
         <view class="height35" style="height:{{px2rpxHeight*70}}px;">
             <label class="font-size12 floatLeft margin-left12 balance">可提现金额<text class='ml10'>{{ pay_account}} 元</text></label>
-            <label class="font-size12 floatRight margin-right12 allDeposit" bindtap="allDeposit">全部提现</label>
+            <!-- <label class="font-size12 floatRight margin-right12 allDeposit" bindtap="allDeposit">全部提现</label> -->
         </view>
     </view>
     <view class="view3" style="flex-item">

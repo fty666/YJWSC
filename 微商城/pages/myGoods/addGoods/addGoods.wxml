@@ -41,7 +41,7 @@
             <view class="info-each">
               <view class='sm-title'>折扣</view>
               <view class='sm-content'>
-                <input name="discount" placeholder='请输入折扣:0.1-9.9' />
+                <input name="discount" placeholder='请输入折扣:1-10,不打折为10' />
               </view>
             </view>
             <view class="info-each">
@@ -131,7 +131,6 @@
               <view class='sm-content'>
                 <!-- <block wx:if="{{swiper_img_hidden}}"> -->
                 <block wx:for="{{swiper_img}}" wx:key="{{item.index}}">
-                  <!-- <block wx:for="{{[1,2,3]}}" wx:key="{{item.index}}"> -->
                   <view class="img swiper-img">
                     <image src="{{aliyunUrl + item}}" />
                     <view catchtap='cancleImg' data-status='2' data-index='{{index}}' class='cancle-img'>x</view>
@@ -140,7 +139,6 @@
                     </view>
                   </view>
                 </block>
-                <!-- </block> -->
                 <image catchtap='addswiperImg' wx:if='{{swiper_img_hidden}}' src="/images/addimage.png" />
               </view>
             </view>

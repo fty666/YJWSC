@@ -22,6 +22,16 @@ App({
     weChat: '',
     // 商品ID,地址跳转商品详情
     goodsId: '',
+    //订单跳转
+    shcode:'',
+    color:'',
+    ZKprice:'',
+    size:'',
+    tastes:'',
+    typee:'',
+    volume:'',
+    // 外卖订单
+    shop_code:'',
   },
 
   onLaunch: function () {
@@ -29,6 +39,7 @@ App({
     // 登录
     wx.login({
       success: res => {
+        console.log(res)
         console.log(res.code);
         // 发送 res.code 到后台换取 openId, sessionKey, unionId
         funData.mylogin(res.code, function (data) {

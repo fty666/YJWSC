@@ -171,11 +171,11 @@ Page({
             // 支付成功通知商家
             // weixin.sendSocket(JSON.stringify(goods_list), that.data.shop_code);
             let lenths = shop_code.length;
-            for (let b=0;b<lenths;b++){
-                setTimeout(function(){
-                    weixin.sendSocket((now + ' 订单号：' + that.data.relevance_uuid), shop_code[b]);
-                },500)
-            }
+            // for (let b=0;b<lenths;b++){
+            //     setTimeout(function(){
+            //         weixin.sendSocket((now + ' 订单号：' + that.data.relevance_uuid), shop_code[b]);
+            //     },500)
+            // }
             // weixin.sendSocket((now + ' 订单号：' + orders.order_uuid), '111');
 
             wx.removeStorage({

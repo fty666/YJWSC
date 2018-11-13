@@ -16,7 +16,7 @@
     <!-- <text class="iconfont icon-saoyisao" bindtap="shop_saoma_bind" style="width:{{px2rpxWidth*100}}px;"></text> -->
     <view class="search-box sub">
       <view class="flex">
-        <input class="sub search-input" type="text" placeholder="搜索订单号" confirm-type="search" bindblur="blurValue" bindconfirm="oederSearch" style="height:{{px2rpxHeight*64}}px;" />
+        <input class="sub search-input" type="text" placeholder="搜索订单号" confirm-type="search" bindchange="bindchange" bindconfirm="oederSearch" style="height:{{px2rpxHeight*64}}px;" />
         <button catchtap='oederSearch' size="mini" class="search-btn">
           <icon type="search" size="18" />
         </button>
@@ -24,8 +24,6 @@
     </view>
   </view>
   <!--搜索 end  -->
-
-  <!-- <view class="tab_con flexItem rowStyle {{currentNavtab==0 ? 'list_active0' : ''}} {{currentNavtab==1 ? 'list_active1' : ''}} {{currentNavtab==2 ? 'list_active2' : ''}} {{currentNavtab==3 ? 'list_active3' : ''}} {{currentNavtab==4 ? 'list_active4' : ''}}"> -->
   <view class="tab_con flexItem rowStyle">
     <view class="view1 width20">
       <scroll-view class="tableView" scroll-y wx:if="{{hasData}}" bindscrolltolower="scrollToLower" bindscrolltoupper="scrollToUpper" scroll-top="{{scrollTop}}" scroll-with-animation="true" style="height:{{px2rpxHeight*910}}px;">
@@ -124,10 +122,7 @@
       </scroll-view>
     </view>
   </view>
-  <!--back top-->
-  <!-- <view class="backtop" bindtap="goTop" wx:if="{{floorstatus}}">
-    <text class="iconfont icon-fold"></text>
-  </view> -->
+
 
   <import src="../../template/template.wxml" />
   <template is="tabBar" data="{{tabBar:bindData.tabBar}}" />

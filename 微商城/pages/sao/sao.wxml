@@ -1,0 +1,2 @@
+<!--pages/sao/sao.wxml-->
+<button bindtap='sao'>扫码</button>

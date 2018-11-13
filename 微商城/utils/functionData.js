@@ -181,6 +181,9 @@ module.exports = {
       newOrder[key].shop_code = newOrder[key].goods[0].shop_code;
       newOrder[key].order_mainid = newOrder[key].goods[0].order_mainid;
       newOrder[key].transMoney = newOrder[key].goods[0].transMoney;
+      newOrder[key].shopMobile = newOrder[key].goods[0].shopMobile;
+      newOrder[key].reception = newOrder[key].goods[0].reception;
+      newOrder[key].horseManStatus = newOrder[key].goods[0].horseManStatus;
       // 计算每个订单的总价
       let sum = 0;
       let goods_len = newOrder[key].goods.length;

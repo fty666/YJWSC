@@ -86,11 +86,13 @@ Page({
   last: function (index) {
     let that = this;
     let urls = util.getPrevPageUrl();
+    console.log(urls)
     // console.log(urls)
     let url1 = 'pages/shop/orderpay/index';
     let url2 = 'pages/shop/onepay/onepay';
     let url3 = "pages/user/opays/opays";
     let url4 = "pages/takeout/pay/pay";
+   
     if (urls == url3) {
       wx.navigateTo({
         url: '/' + urls + '?addressId=' + this.data.aid,
@@ -98,7 +100,11 @@ Page({
     }
     if (urls == url4 || urls == url1 || urls == url2) {
       let pages = getCurrentPages();
+      console.log('78965')
+      console.log(pages)
       let prevPage = pages[pages.length - 2];  //上一个页面
+      console.log(prevPage)
+      // if()
       //直接调用上一个页面的setData()方法，把数据存到上一个页面中去
       prevPage.setData({
         address: that.data.addressList[index],

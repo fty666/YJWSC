@@ -550,3 +550,8 @@ button.search-btn icon {
     word-break: break-all; */
     width: 400rpx;
 }
+
+.stops {
+    z-index: 999999;
+    background-color: rgba(0, 0, 0, 0.05);
+}

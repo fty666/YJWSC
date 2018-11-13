@@ -1,9 +1,9 @@
 {
   "extEnable": true,
   "pages": [
-    "pages/shop/mall/mall",
-    "pages/web/web",
+    "pages/shop/mall/mall",    
     "pages/map/map",
+    "pages/sao/sao",    
     "pages/shop/malldetail/malldetail",
     "pages/shop/onepay/onepay",
     "pages/myGoods/CouponList/CouponList",

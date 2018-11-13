@@ -3,7 +3,7 @@ const Base64 = require('./Base64.js');
 require('./hmac.js');
 require('./sha1.js');
 const Crypto = require('./crypto.js');
-const utils = require('../utils/util.js');
+const utils = require('../../utils/util.js');
 
 
 /**

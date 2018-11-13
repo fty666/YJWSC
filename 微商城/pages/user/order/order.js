@@ -296,15 +296,19 @@ Page({
     let order_uuid = e.currentTarget.dataset.order_uuid;
     let order_mainid = e.currentTarget.dataset.order_mainid;
     let shop_code = e.currentTarget.dataset.shop_code;
+    let shopMobile = e.currentTarget.dataset.shopmobile;
     // 支付成功通知商家
     let that = this;
     let now = util.formatDate(new Date().getTime());
     that.sendSocket((now + ' 订单号：' + order_uuid), shop_code);
-    wx.showToast({
-      title: '提醒发货成功',
-      icon: 'success',
-      duration: 1000
-    })
+    //支付成功发送短信通知商家
+    funDta.getOrderSms(shopMobile, that, () => {
+      wx.showToast({
+        title: '提醒发货成功',
+        icon: 'success',
+        duration: 1000
+      })
+    });
   },
 
   //web发送 

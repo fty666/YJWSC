@@ -45,7 +45,6 @@ Page({
     console.log(options)
     let that = this;
     // console.log(util.getPrevPageUrl())
-
     this.setData({
       shop_code: options.shop_code,
       options: options.shop_code,
@@ -90,7 +89,6 @@ Page({
    */
   onShow: function () {
     let that = this;
-
     // 优惠券
     if (!util.isEmpty(that.data.coupon)) {
       let couponId = that.data.coupon.couponId;
@@ -314,17 +312,18 @@ Page({
         let now = util.formatDate(new Date().getTime());
         // 支付成功通知商家
         that.sendSocket((now + ' 订单号：' + orderUUID), that.data.shop_code);
-
         wx.removeStorage({
           key: that.data.shop_code,
           success: function (res) {
           }
         })
+        // 去除订单shopcode
+        app.globalData.shop_code='';
         //支付成功发送短信通知商家
         funDta.getOrderSms(that.data.shop_info.mobile, that, () => {
           // setTimeout(function () {
           wx.redirectTo({
-            url: '/pages/takeout/index/index',
+            url: '/pages/takeout/order/order',
           })
           // }, 1000);
         });
@@ -366,7 +365,6 @@ Page({
 // 获取默认地址
 function getAddrByDefault(that) {
   funDta.getAddrByDefault(getApp().globalData.user_id, that, (data) => {
-    console.log(data);
     if (util.isEmpty(data)) {
       that.setData({
         address: '',
@@ -379,7 +377,7 @@ function getAddrByDefault(that) {
         success: function (res) {
           if (res.confirm) {
             wx.navigateTo({
-              url: '/pages/user/address/address',
+              url: '/pages/user/addressAdd/addressAdd',
             })
           } else if (res.cancel) {
 
@@ -433,6 +431,9 @@ function orderinfo(that) {
           totalPrice = reductions(shopdata.reduction, totalPrice, that);
           // 添加配送费
           totalPrice = distribution(totalPrice, that.data.userMoney);
+          console.log(totalPrice)
+          totalPrice = totalPrice.toFixed(2);
+          console.log('价格' + totalPrice)
           that.setData({
             totalGoodsPrice: res.data.totalPrice,
             totalPrice: totalPrice,

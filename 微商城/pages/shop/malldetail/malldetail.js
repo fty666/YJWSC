@@ -61,6 +61,7 @@ Page({
     taste_suss: false, //味道规格
     volume_suss: false, //内存规格
     type_suss: false, //类型规格
+    ZKprice:'',//折扣价格
     px2rpxWidth: '',
     px2rpxHeight: '',
   },
@@ -110,10 +111,29 @@ Page({
       goods_id: post_id,
     })
     function goods(res) {
-      console.log(res)
+      let shopinfo = res;
+      console.log(shopinfo)
+      let len = shopinfo.length;
+      // 折扣判断
+      // 折扣除以10
+      if (shopinfo.discount > 0 && shopinfo.discount <= 10) {
+        let discount = operating.calcSub(shopinfo.discount, 10);  // 折扣
+        shopinfo.discountPrice = (operating.calcMul(shopinfo.price, discount)).toFixed(2); // 折扣价格
+        if (shopinfo.discountPrice==0.00){
+          shopinfo.discountPrice=0.01;
+        }
+        that.setData({
+          ZKprice: shopinfo.discountPrice
+        })
+      } else if (shopinfo.discount <= 0 || shopinfo.discount > 10 || shopinfo.discount == '') {
+        shopinfo.discountPrice = shopinfo.price; // 折扣价格
+        that.setData({
+          ZKprice: shopinfo.discountPrice
+        })
+      }
       app.globalData.goodsId = res.goodsId,
         that.setData({
-          goods_info: res,
+          goods_info: shopinfo,
           shopcode: res.shopCode,
           pictures: res.picture,
           nums: res.price
@@ -132,7 +152,6 @@ Page({
       that.setData({
         colors: color
       })
-      // console.log(that.data.colors)
       // 商品型号
       let str2 = res.size
       let size = [];
@@ -227,8 +246,6 @@ Page({
       // 冒泡排序
       lsort = utils.mySort(lsort, 1)
       xsort = utils.mySort(xsort, 1)
-      // console.log(lsort)
-      // console.log(xsort)
       // 判断图片信息
       // 轮播图图片
       for (let ll = 0; ll < lsort.length; ll++) {
@@ -248,8 +265,7 @@ Page({
           }
         }
       }
-      // console.log(zxpic)
-      // console.log(zlpic)
+
       that.setData({
         dpic: dpicture,
         xpic: zxpic,
@@ -462,8 +478,19 @@ Page({
     let nums = this.data.cart_default_number
     let gids = this.data.goods_id
     wx.navigateTo({
-      url: '/pages/shop/onepay/onepay?shcode=' + this.data.shopcode + '&color=' + this.data.color + '&size=' + this.data.size + '&tastes=' + this.data.tastes + '&typee' + this.data.typee + '&volume' + this.data.volume
+      url: '/pages/shop/onepay/onepay?shcode=' + this.data.shopcode + '&color=' + this.data.color + '&size=' + this.data.size + '&tastes=' + this.data.tastes + '&typee' + this.data.typee + '&volume' + this.data.volume + '&ZKprice=' + this.data.ZKprice
     })
+
+    // 订单传递
+    app.globalData.ZKprice = this.data.ZKprice;
+    app.globalData.color = this.data.color;
+    app.globalData.shcode = this.data.shopcode;
+    app.globalData.size = this.data.size;
+    app.globalData.tastes = this.data.tastes;
+    app.globalData.typee = this.data.typee;
+    app.globalData.volume = this.data.volume;
+
+
     // 存入内存
     wx.setStorage({
       key: "num",
@@ -578,9 +605,9 @@ Page({
   bind_contant_kefu: function (e) {
     let that = this
     let phones = e.currentTarget.dataset.mobile;
-      wx.makePhoneCall({
-        phoneNumber: phones
-      });
+    wx.makePhoneCall({
+      phoneNumber: phones
+    });
   },
   //进入购物车
   bind_go_cart: function () {

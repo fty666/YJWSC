@@ -22,13 +22,19 @@
     <!--goods start-->
     <view class="goods-info">
       <view class="title f16">
-        <!-- <text class="cuxiao" style="height:{{px2rpxHeight*32}}px;">促</text> -->
         {{goods_info.goodsName}}
       </view>
-      <view class="price red f18">￥ {{goods_info.price}}
+      <view style='display:flex;'>
+        <block wx:if="{{goods_info.discount==10}}">
+          <view class="price red f18">￥{{goods_info.price}}</view>
+        </block>
+        <block wx:else>
+          <view class="price red f18">￥ {{goods_info.discountPrice}}</view>
+          <view class="price f18" style='color:#ddd;text-decoration:line-through;'>￥{{goods_info.price}}</view>
+        </block>
+
       </view>
       <view class="clearfix flex grey gridXt">
-        <!-- <text class="sub">库存：{{goods_info.stock}}</text> -->
         <text class="sub">销量：{{goods_info.salesNum}}</text>
       </view>
     </view>
@@ -117,7 +123,7 @@
             <view class="sub ml10">
               <view class="lineText">{{goods_info.goodsName}}</view>
               <view class="red f18">
-                ￥ {{goods_info.price}}
+                ￥ {{goods_info.discountPrice}}
               </view>
             </view>
           </view>

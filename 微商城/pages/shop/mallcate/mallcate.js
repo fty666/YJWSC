@@ -51,9 +51,9 @@ Page({
       console.log(res)
       //   所有店铺
       that.setData({
-         shops: res.PageInfo.list,
-         have: util.isEmpty(res.PageInfo.list)
-       })
+        shops: res.PageInfo.list,
+        have: util.isEmpty(res.PageInfo.list)
+      })
     }
     utilFunctions.getShopUrl(gid, that.data.pages, that.data.pasesize, classify, this)
 
@@ -65,7 +65,7 @@ Page({
         // console.log(res)
         that.setData({
           shops: res.PageInfo.list,
-          // have: util.isEmpty(res.PageInfo.list)
+          have: util.isEmpty(res.PageInfo.list)
         })
       }
       utilFunctions.getShopByName(arrayVal, that.data.pages, that.data.pasesize, groupId, gets, this)

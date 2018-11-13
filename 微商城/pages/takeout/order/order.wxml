@@ -17,7 +17,18 @@
               <image src='{{uploadFileUrl+item.logo}}' class='photo' style="width:{{px2rpxWidth*120}}px;height:{{px2rpxWidth*120}}px;"></image>
             </view>
             <view class='shops'>{{item.shop_name}}</view>
-            <view class='order'>订单已完成</view>
+            <block wx:if="{{item.reception==0}}">
+              <view class='order'>商家未接单</view>
+            </block>
+            <block wx:if="{{item.reception==1 && item.horseManStatus==0}}">
+              <view class='order'>商家已接单</view>
+            </block>
+            <block wx:if="{{item.horseManStatus==1 || item.horseManStatus==2}}">
+              <view class='order'>骑手送货中</view>
+            </block>
+            <block wx:if="{{item.horseManStatus==3 && item.reception==1}}">
+              <view class='order'>订单已完成</view>
+            </block>
           </view>
           <view class='xia' style="height:{{px2rpxHeight*3}}px;"></view>
 
@@ -33,15 +44,17 @@
           </view>
           <view style='margin-left:{{px2rpxWidth*320}}px'>{{item.createTime}}</view>
           <view class='xia' style="height:{{px2rpxHeight*3}}px;margin-top:15rpx;"></view>
-          <view class='wai3' style="height:{{px2rpxHeight*150}}px;">
-            <view class='recur' catchtap='again' data-shop_code='{{item.shop_code}}' style="width:{{px2rpxWidth*200}}px;height:{{px2rpxHeight*80}}px;margin-left:160rpx;margin-top:40rpx;">再来一单</view>
-            <!-- <block wx:if="{{item.status == 3}}">
+          <block wx:if="{{item.status==4}}">
+            <view class='wai3' style="height:{{px2rpxHeight*150}}px;">
+              <view class='recur' catchtap='again' data-shop_code='{{item.shop_code}}' style="width:{{px2rpxWidth*200}}px;height:{{px2rpxHeight*80}}px;margin-left:160rpx;margin-top:40rpx;">再来一单</view>
+              <!-- <block wx:if="{{item.status == 3}}">
                             <view class='go' data-oid='{{item.order_uuid}}' catchtap='goMap'>查看路线</view>
                         </block> -->
-            <block wx:if="{{item.status == 4}}">
-              <view class='go' style='margin-left:50rpx;' data-oid='{{item.order_uuid}}' catchtap='comment' style="width:{{px2rpxWidth*200}}px;height:{{px2rpxHeight*80}}px;">去评论</view>
-            </block>
-          </view>
+              <block wx:if="{{item.status == 4}}">
+                <view class='go' style='margin-left:50rpx;' data-oid='{{item.order_uuid}}' catchtap='comment' style="width:{{px2rpxWidth*200}}px;height:{{px2rpxHeight*80}}px;">去评论</view>
+              </block>
+            </view>
+          </block>
           <view class='xia2'></view>
         </view>
       </scroll-view>

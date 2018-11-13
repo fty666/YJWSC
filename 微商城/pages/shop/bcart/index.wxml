@@ -24,31 +24,43 @@
         <view class="sub" style='margin-left:40rpx;'>
           <text class="iconfont icon-shop sub"> 微商城</text>
         </view>
-        <view class="mallcart-del grey f18" catchtap="bind_delete_cart" style="width:{{px2rpxWidth*30}}px;">
+        <view class="mallcart-del grey f18" catchtap="bind_delete_cart" style="width:{{px2rpxWidth*50}}px;">
           <text class="iconfont icon-delete"></text>
         </view>
       </view>
       <view class="cart-content">
-        <scroll-view scroll-y style='width:100%;height:920rpx;'>
-          <checkbox-group bindchange="single_checkboxChange">
-            <block wx:for="{{cart_list}}" wx:key="{{item.shop_code}}">
+        <scroll-view scroll-y style='width:100%;height:{{920*px2rpxHeight}}px;'>
+          <block wx:for="{{cart_list}}" wx:key="{{item.shop_code}}">
+            <!-- <checkbox-group bindchange="single_checkboxChange"> -->
               <view class="cart-item flex">
-                <label class="radio" style="padding-top:{{100*px2rpxWidth}}px;width:{{px2rpxWidth*60}}px">
-                  <checkbox value="{{item.id}}" checked="{{item.is_checked}}" bindtap='selectList' data-index="{{index}}" />
-                </label>
+                <!-- <label class="radio" style="padding-top:{{100*px2rpxWidth}}px;width:{{px2rpxWidth*60}}px"> -->
+                <checkbox class="radio" style="padding-top:{{100*px2rpxWidth}}px;width:{{px2rpxWidth*60}}px" value="{{item.id}}" checked="{{item.is_checked}}" catchtap='selectList' data-index="{{index}}" />
+                <!-- </label> -->
                 <image src="{{upload_file_url+item.img}}" mode="aspectFill" style="width:{{px2rpxWidth*225}}px;height:{{px2rpxWidth*225}}px" />
                 <view class="cart-info sub">
                   <text class="cart-title lineText2 mb5" style='font-size:30rpx;margin-left:10rpx;  text-overflow: ellipsis;overflow: hidden;'>{{item.goods_name}}</text>
                   <view class="cart-title lineText2 mb5">
-                    <view class="guige" style="width:{{px2rpxWidth*300}}px;color:#ddd;">规格：
-                      <block wx:if="{{item.color}}">{{item.color}}*</block>
-                      <block wx:if="{{item.size}}">；{{item.size}}*</block>
-                      <block wx:if="{{item.type}}">；{{item.type}}*</block>
-                      <block wx:if="{{item.volume}}">；{{item.volume}}*</block>
-                      <block wx:if="{{item.taste}}">；{{item.taste}}*</block>
-                    </view>
+                    <block wx:if="{{item.color | item.size | item.type | item.volume | item.taste}}">
+                      <view class="guige" style="width:{{px2rpxWidth*300}}px;color:#ddd;">规格：
+                        <block wx:if="{{item.color}}">{{item.color}}*</block>
+                        <block wx:if="{{item.size}}">；{{item.size}}*</block>
+                        <block wx:if="{{item.type}}">；{{item.type}}*</block>
+                        <block wx:if="{{item.volume}}">；{{item.volume}}*</block>
+                        <block wx:if="{{item.taste}}">；{{item.taste}}*</block>
+                      </view>
+                    </block>
                   </view>
-                  <view class="price f18 red mb5" style='margin-left:10rpx;'>￥{{item.price}}</view>
+                  <!--折扣价格  -->
+                  <view style='display:flex;'>
+                    <block wx:if="{{item.discount==10}}">
+                      <view class="price f18 red mb5" style='margin-left:10rpx;'>￥{{item.discountPrice}}</view>
+                    </block>
+                    <block wx:else>
+                      <view class="price f18 red mb5" style='margin-left:10rpx;'>￥{{item.discountPrice}}</view>
+                      <view class="price f18  mb5" style='color:#ddd;text-decoration:line-through;font-size:15px; margin-left:15rpx;'> ￥{{item.price}}</view>
+                    </block>
+                  </view>
+
                   <view class="count-set fr tc flex">
                     <view class="sub" bindtap="bind_cart_number_jian" id="{{item.num}}" data-goodsCart="{{item.goodsCart_id}}" data-index="{{index}}" data-stock="{{item.stock}}">
                       <text class="iconfont icon-move"></text>
@@ -63,8 +75,8 @@
                   </view>
                 </view>
               </view>
-            </block>
-          </checkbox-group>
+            <!-- </checkbox-group> -->
+          </block>
         </scroll-view>
       </view>
     </view>
@@ -72,7 +84,7 @@
     <!--底部浮动 start-->
     <view class="mallcart-float mt15">
       <view class="mallcart-foot flex gridXt">
-        <label class="radio" style="padding:0 10px; width:{{px2rpxWidth*30}}px;" style=""></label>
+        <label class="radio" style="padding:0 {{px2rpxWidth*10}}px; width:{{px2rpxWidth*30}}px;" style=""></label>
         <view class="mall-cart-sum sub tr">
           <view>合计：
             <text class="red f16">￥{{totalPrice}}</text>

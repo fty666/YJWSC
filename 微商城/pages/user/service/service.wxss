@@ -17,7 +17,7 @@
 .number{
   margin-left: 200rpx;
   font-size: 35rpx;
-  color: #e1e1e1;
+  color: black;
 }
 
 /*下划线  */

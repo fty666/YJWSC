@@ -36,28 +36,6 @@ Page({
         // 显示tarBar模板
         template.tabbar("tabBar", 1, this, 4);
         loadData(that);
-
-        //我的订单
-        // let order_type = 2;
-        // let uid = app.globalData.user_id;
-        // let that = this;
-        // function microplat(res) {
-        //     res = utilFunctions.dealOrderData(res.PageInfo.list);
-        //     if (util.isEmpty(res)) {
-        //         that.setData({
-        //             has_data: false,
-        //         })
-        //     } else {
-        //         that.setData({
-        //             has_data: true,
-        //         })
-        //     }
-        //     that.setData({
-        //         is_load: false,
-        //         orderinfo: res,
-        //     })
-        // }
-        // utilFunctions.getOrderUrl(app.globalData.user_id, order_type, page, pageSize, microplat, this);
         //获取缓存
         wx.getStorage({
           key: 'PX_TO_RPX',
@@ -181,7 +159,6 @@ function loadData(that) {
     let shop_code='';
     // let uid = 4;
     function microplat(res) {
-        // console.log(res.PageInfo.list)
         res = utilFunctions.dealOrderData(res.PageInfo.list);
         console.log(res);
         if (util.isEmpty(res)) {

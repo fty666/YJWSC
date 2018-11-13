@@ -50,7 +50,6 @@ Page({
     // 获取购物车数据
     let carts = wx.getStorageSync('lists');
     let nums = wx.getStorageSync('nums');
-    // console.log(carts)
     let mytotal_money = 0; // 所有商品的总价格(不带优惠)
     let myreal_money = 0;  // 每个商店优惠后的总价格
     let sum = 0;   // 订单的总价格(优惠后的)
@@ -63,14 +62,14 @@ Page({
     }
     // 价格判断
     for (let i = 0; i < cart_len; i++) {
-      // let carts_price = 0; // 每个店铺里每个商品的总价格
       let total_money = 0; // 每个店铺的所有商品的总价格 total_money 不带优惠
       let real_money = 0;  // 每个商店优惠后的总价格
       let couponId = '';   // 每个店铺的优惠券的id
       let goods = carts[i].goods;
       let goods_len = carts[i].goods.length;
       for (let j = 0; j < goods_len; j++) {
-        let carts_price = calculate.calcMul(goods[j].num, goods[j].price);
+        // 计算折扣价格
+        let carts_price = calculate.calcMul(goods[j].num, goods[j].discountPrice);
         // 添加单个商品总价格到对应商品信息里去
         carts[i].goods[j].carts_price = carts_price;
         // 添加所有商品总价格到对应商店信息里去
@@ -115,7 +114,6 @@ Page({
       // 订单的总价格
       sum = calculate.calcAdd(sum, carts[i].real_money);
     }
-    // console.log(favours)
     console.log(carts);
     this.setData({
       pocket: sum,  // 实付
@@ -149,7 +147,6 @@ Page({
   },
 
   onShow: function () {
-    console.log(this.data.address);
     // console.log(this.data.address)
     if (!util.isEmpty(this.data.coupon)) {
       let carts = this.data.orderinfo;
@@ -226,6 +223,11 @@ Page({
    *修改默认地址 
    */
   aupdata: function () {
+    wx: wx.navigateTo({
+      url: '/pages/user/addressAdd/addressAdd'
+    })
+  },
+  list:function(){
     wx: wx.navigateTo({
       url: '/pages/user/address/address'
     })
@@ -376,13 +378,10 @@ Page({
       let order_uuid = '';
       let shop_code = [];
       if (lengs <= 2) {
-        // console.log('一条数据')
         goodsname = data[0].goods_name;
         shop_code = data[0].shop_code;
         order_uuid = data[1].relevanceUUID;
-        // console.log(order_uuid)
       } else {
-        // console.log('多条条数据')
         for (let h = 0; h < lengs - 1; h++) {
           goodsname += data[h].goods_name + ',';
           shop_code.push(data[h].shop_code);
@@ -390,11 +389,9 @@ Page({
         for (let k = 0; k < lengs; k++) {
           if (data[k].relevanceUUID) {
             order_uuid = data[k].relevanceUUID;
-            // console.log(order_uuid)
           }
         }
       }
-      // goodsname = goodsname.slice(0, price.lastIndexOf(','));
       utilFunctions.weixinPay({
         body: goodsname,
         orderUUID: order_uuid,
@@ -405,10 +402,9 @@ Page({
         // 支付成功通知商家
         // weixin.sendSocket(JSON.stringify(goods_list), that.data.shop_code);
         let cha = shop_code.length;
-        for (let g = 0; g < cha; g++) {
-          weixin.sendSocket((now + ' 订单号：' + order_uuid), shop_code[g]);
-        }
-        // weixin.sendSocket((now + ' 订单号：' + order_uuid), '111');
+        // for (let g = 0; g < cha; g++) {
+        //   weixin.sendSocket((now + ' 订单号：' + order_uuid), shop_code[g]);
+        // }
 
         wx.removeStorage({
           key: that.data.shop_code,

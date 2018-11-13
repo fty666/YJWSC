@@ -54,15 +54,14 @@ Page({
   onReady: function () {
     let that = this;
     let user_id = app.globalData.user_id;
-    // funData.getShopByCode(app.globalData.user_id, that, (data) => {
     funData.getShopByCode(user_id, that, (data) => {
       console.log(data)
       that.setData({
         shop_code: data.shop.shop_code,
         shop_info: data.shop
       });
-      console.log(data.shop.shop_tip)
-      let scodes = data.shop.groupId
+      let scodes = data.shop.groupId;
+      console.log('12345' + data.shop.groupId)
       if (scodes == 1) {
         // 获取外卖分类
         utilFunctions.getFoodClass(data.shop.shop_code, (res) => {
@@ -72,6 +71,22 @@ Page({
           });
         }, that);
       } else {
+        if (data.shop.groupId == 'undefined' || data.shop.groupId == undefined) {
+          console.log('88888' + data.shop.groupId)
+          wx.showModal({
+            title: '提示',
+            content: '请先完善店铺信息',
+            icon: 'none',
+            success: function (res) {
+              if (res.confirm) {
+                wx.navigateTo({
+                  url: '/pages/myself/myself',
+                })
+              }
+            }
+          })
+          return false;
+        }
         // 查询分类
         funData.getClass(data.shop.groupId, that, function (res) {
           console.log(res);
@@ -229,13 +244,13 @@ Page({
           swiper_sort[swiper_img[i]] = i;
         }
       }
-      // if (swiper_img.length >= 3) {
-      //     swiper_img_hidden = !swiper_img_hidden;
-      // }
+      if (swiper_img.length >= 3) {
+        swiper_img_hidden = !swiper_img_hidden;
+      }
       that.setData({
         swiper_img: swiper_img,
         swiper_sort: swiper_sort,
-        // swiper_img_hidden: swiper_img_hidden
+        swiper_img_hidden: swiper_img_hidden
       });
     });
   },

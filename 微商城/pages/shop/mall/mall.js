@@ -44,10 +44,19 @@ Page({
     let that = this
     let arrayVal = [];
     arrayVal.push(e.detail.value);
-    wx.navigateTo({
-      url: '/pages/shop/mallcate/mallcate?gname=' + arrayVal,
-    })
-    arrayVal=[];
+    let dttails = e.detail.value;
+    if (dttails == '') {
+      wx.showToast({
+        icon: 'none',
+        title: '请输入店铺名称',
+        duration: 3000,
+      });
+      return false;
+    }
+      wx.navigateTo({
+        url: '/pages/shop/mallcate/mallcate?gname=' + arrayVal,
+      })
+    arrayVal = [];
   },
 
   /**
@@ -73,7 +82,7 @@ Page({
 
     function gets(res) {
       // console.log(res)
-      arrays = res.slice(0, 3)
+      arrays = res.slice(0, 7)
       that.setData({
         group: arrays
       })

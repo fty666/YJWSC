@@ -39,10 +39,10 @@
                         <label class="color54 fontSize12">付款时间</label>
                         <label class="color54 fontSize12"> {{ info.createTime }}</label>
                     </view>
-                    <view class="flexItem rowStyle marginBottom10 cellStyle">
+                    <!-- <view class="flexItem rowStyle marginBottom10 cellStyle">
                         <label class="color54 fontSize12">付款方式</label>
-                        <label class="color54 fontSize12">{{ info.pay_way }}</label>
-                    </view>
+                        <label class="color54 fontSize12">在线支付</label>
+                    </view> -->
                 </view>
             </block>
 

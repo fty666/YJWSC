@@ -51,7 +51,7 @@ Page({
    *  初始化页面，获取商品分类
    */
   onLoad: function (options) {
-    // console.log(options)
+    console.log(options)
     this.setData({ gid: options.groupid });
     this.setData({ this_cate_id: options.groupid, shop_code: options.shop_code });
     var that = this;

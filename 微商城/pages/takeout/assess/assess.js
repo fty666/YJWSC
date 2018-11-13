@@ -33,6 +33,7 @@ Page({
     px2rpxHeight: '',
     bike: '',//骑手信息
     bikeId: '',//骑手ID
+    SCfiles: true,//上传图片显示
   },
 
   /**
@@ -125,7 +126,6 @@ Page({
     utilFunctions.myUpload(function (fileNmae) {
       photos.push(fileNmae)
       image.push(fileNmae)
-      console.log(fileNmae)
       that.setData({
         photo: photos,
         img: image
@@ -139,6 +139,10 @@ Page({
         })
       }
     })
+    // console.log(image.length)
+    // if (image.length > 3) {
+    //   SCfiles: false
+    // }
   },
 
   zanCai: function (e) {
@@ -169,11 +173,11 @@ Page({
       });
       return;
     }
-
     // 店铺参数
     let goodsId = '';
     let grade = '';
     let comment = this.data.comments;
+    console.log(comment)
     let goods = this.data.orderInfo[0].goods;
     let len = goods.length;
     // 商品参数
@@ -190,22 +194,23 @@ Page({
         comment[goods[i].goodsId] = 5;
       }
       grade += comment[goods[i].goodsId] + ','
-
     }
     if (util.isEmpty(shop_detail)) {
-      shop_detail = '@' + ','
+      shop_detail = '@' + ',';
+    } else {
+      shop_detail = e.detail.value.text + ',';
     }
     if (util.isEmpty(this.data.photo)) {
       this.setData({
         photo: '@' + '/'
       })
     }
+
     // 店铺评价
     let shop = {
       goodsId: this.data.shop_code,
       detail: shop_detail,
       user_id: app.globalData.user_id,
-      // user_id: 4,
       img: this.data.photo,
       order_mainid: this.data.order_mainid,
       status: this.data.status,
@@ -217,32 +222,31 @@ Page({
       goodsId: goodsId,
       detail: good_detail,
       user_id: app.globalData.user_id,
-      // user_id: 4,
-      img: good_img,
+      img: '@/',
       order_mainid: this.data.order_mainid,
       status: this.data.status,
       grade: grade,
       mold: mold,
     }
     // 骑手评价
-    console.log(this.data.bikeId)
     let horseman = {
       goodsId: this.data.bikeId,
       // goodsId: 55,
       detail: '@',
       user_id: app.globalData.user_id,
       // user_id: 4,
-      img: '@/',
+      img: '/@',
       order_mainid: this.data.order_mainid,
       status: this.data.status,
       grade: this.data.rider_grade,
       mold: 3,
     }
+
+    //总参数传递
     let datas = {
       goodsId: data.goodsId + shop.goodsId + ',' + horseman.goodsId,
       detail: data.detail + shop.detail + horseman.detail,
       user_id: app.globalData.user_id,
-      // user_id: 4,
       img: data.img + shop.img + horseman.img,
       order_mainid: data.order_mainid,
       status: data.status,

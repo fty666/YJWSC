@@ -294,6 +294,17 @@ function getPrevPageUrl() {
 }
 
 /**
+ * 获取上倆页url
+ * @returns {*}
+ */
+function twoPage() {
+  let pages = getCurrentPages(); //获取加载的页面
+  let prevPage = pages[pages.length - 3]; //获取上一级页面的对象
+  let url = prevPage.route; //上一个页面url
+  return url;
+}
+
+/**
  * 倒计时
  * @param endTime
  */
@@ -448,4 +459,5 @@ module.exports = {
     arrDelete: arrDelete,
     randomWord: randomWord,
     timeStamp: timeStamp,
+    twoPage: twoPage,
 }
