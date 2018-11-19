@@ -162,7 +162,7 @@
           <view class='ju' style="height:{{px2rpxHeight*400}}px;">
             <view class='info' style="height:{{px2rpxHeight*100}}px;">
               <view>
-                <image src='{{aliyunUrl+com.logo}}' class='photo' style="width:{{px2rpxWidth*140}}px;height:{{px2rpxWidth*140}}px;"></image>
+                <image src='{{aliyunUrl+com.photo}}' class='photo' style="width:{{px2rpxWidth*140}}px;height:{{px2rpxWidth*140}}px;"></image>
               </view>
               <view style='display:flex;flex-direction:column'>
                 <view class='name' style="width:{{px2rpxWidth*200}}px;">{{com.userName}}</view>

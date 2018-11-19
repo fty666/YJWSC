@@ -44,6 +44,24 @@ App({
         // 发送 res.code 到后台换取 openId, sessionKey, unionId
         funData.mylogin(res.code, function (data) {
           console.log(data.data.data);
+          if (data.data.data.stauts==0){
+
+            wx.showModal({
+              title: '提示',
+              content: '您的账户被禁用了,请联系客服',
+              icon:'none',
+              success: function () {
+                wx.redirectTo({
+                  url: '/pages/kefu/kefu',
+                })
+              },
+              fail:function(){
+                wx.redirectTo({
+                  url: '/pages/kefu/kefu',
+                })
+              }
+            })
+          }
           that.globalData.user_id = data.data.data.user_id;
           that.globalData.level = data.data.data.level;
           if (utils.isEmpty(that.globalData.user_id)) {
@@ -70,11 +88,9 @@ App({
           // 已经授权，可以直接调用 getUserInfo 获取头像昵称，不会弹框
           wx.getUserInfo({
             success: res => {
-              // console.log(res);
               // 可以将 res 发送给后台解码出 unionId
               this.globalData.userInfo = res.userInfo
               // 由于 getUserInfo 是网络请求，可能会在 Page.onLoad 之后才返回
-              // 所以此处加入 callback 以防止这种情况
               if (this.userInfoReadyCallback) {
                 this.userInfoReadyCallback(res);
               }

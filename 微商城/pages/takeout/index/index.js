@@ -200,8 +200,10 @@ Page({
         icon: 'none'
       })
     } else {
-      wx.navigateTo({
-        url: '/pages/takeout/shopDetails/shopDetails?shop_code=' + e.currentTarget.dataset.shop_code
+      wx.nextTick(function () {
+        wx.navigateTo({
+          url: '/pages/takeout/shopDetails/shopDetails?shop_code=' + e.currentTarget.dataset.shop_code
+        })
       })
     }
 

@@ -53,9 +53,12 @@ Page({
       });
       return false;
     }
+    // wx.nextTick(function () {
       wx.navigateTo({
         url: '/pages/shop/mallcate/mallcate?gname=' + arrayVal,
       })
+    // })
+
     arrayVal = [];
   },
 
@@ -222,16 +225,18 @@ Page({
   */
   goToShop: function (e) {
     let sale = e.currentTarget.dataset.salse;
-    if (sale == 0) {
-      wx.showToast({
-        title: '该店铺停止营业',
-        icon: 'none'
-      })
-    } else {
-      wx.navigateTo({
-        url: '/pages/takeout/shopDetails/shopDetails?shop_code=' + e.currentTarget.dataset.shop_code
-      })
-    }
+    wx.nextTick(function () {
+      if (sale == 0) {
+        wx.showToast({
+          title: '该店铺停止营业',
+          icon: 'none'
+        })
+      } else {
+        wx.navigateTo({
+          url: '/pages/takeout/shopDetails/shopDetails?shop_code=' + e.currentTarget.dataset.shop_code
+        })
+      }
+    })
   },
 
   getShareInfo: function () {

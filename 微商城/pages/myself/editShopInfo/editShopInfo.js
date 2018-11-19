@@ -289,6 +289,20 @@ Page({
     //   return;
     // }
     // 判断手机号
+    if (that.data.shopInfo.groupId == 1) {
+      // 起送价
+      if (val.initialMoney.length >= 1) {
+        if (val.initialMoney < 25) {
+          wx.showToast({
+            title: '起送价输入错误',
+            icon: 'none',
+            duration: 2000
+          })
+          return;
+        }
+      }
+    }
+
     if (val.mobile.length > 1) {
       if (!util.checkReg(1, val.mobile)) {
         wx.showToast({
@@ -301,17 +315,7 @@ Page({
     }
 
 
-    // 起送价
-    if (val.initialMoney.length>=1){
-      if (val.initialMoney < 25) {
-        wx.showToast({
-          title: '起送价输入错误',
-          icon: 'none',
-          duration: 2000
-        })
-        return;
-      }
-    }
+
     // 判断验证码
     // if (!(/\^d{6}$/.test(val.smsCode))){
     //     console.log('8888888888')

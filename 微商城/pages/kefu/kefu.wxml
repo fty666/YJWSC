@@ -1,0 +1,7 @@
+  <view class="lianxikefu" catchtap='custom' style='margin-top:30rpx;'>
+    <image src="https://zuoanzac.oss-cn-beijing.aliyuncs.com/kefu.png"></image>
+    <view class="lianxikefu-font">
+      <view class="lianxikefu-font1">联系客服</view>
+      <view class="lianxikefu-font2">联系客服为您提供贴心服务(9:00-21:00)</view>
+    </view>
+  </view>

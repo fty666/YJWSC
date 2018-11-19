@@ -15,8 +15,8 @@ Page({
     px2rpxWidth: '',
     px2rpxHeight: '',
     // 可以提现的额度
-    pay_account:'',
-    ID_card:'',//IDcards
+    pay_account: '',
+    ID_card: '',//IDcards
   },
 
   // 加载
@@ -61,15 +61,15 @@ Page({
         }
       });
       // 获取可以提现的金额
-      function calbacks(res){
-          console.log(res)
-          that.setData({
-            pay_account: res.payAccount
-          })
+      function calbacks(res) {
+        console.log(res)
+        that.setData({
+          pay_account: res.payAccount
+        })
       }
-      funData.getPayAccount(shopcode,that,calbacks)
+      funData.getPayAccount(shopcode, that, calbacks)
     })
-    
+
   },
   onShow: function () {
 
@@ -151,16 +151,13 @@ Page({
   // 提现
   extract: function () {
     let that = this;
-    // console.log(that.data.card)
-    // console.log(app.globalData.shopCode) 
     let cardNo = that.data.cardNo;
-    if (cardNo == '' || cardNo == undefined || cardNo==null){
-      console.log('8564544')
-        wx.showToast({
-          title: '请先添加银行卡',
-          icon:'none'
-        })
-        return false;
+    if (cardNo == '' || cardNo == undefined || cardNo == null) {
+      wx.showToast({
+        title: '请先添加银行卡',
+        icon: 'none'
+      })
+      return false;
     }
     let pay_account = that.data.shopInfo.pay_account;
     let deposit = that.data.deposit;
@@ -181,6 +178,14 @@ Page({
       return;
     }
 
+    if (that.data.deposit < 100) {
+      wx.showToast({
+        title: '提现金额不能小于100',
+        icon: 'none'
+      })
+      return false;
+    }
+
     // if (that.data.owner != that.data.card.owner || that.data.owner == '') {
     //   // 持卡人姓名验证
     //   wx.showToast({
@@ -190,14 +195,15 @@ Page({
     //   });
     //   return;
     // }
+
+
+
     let datas = {
-      shopCode: that.data.shopcode, 
+      shopCode: that.data.shopcode,
       card_no: cardNum,
       price: that.data.deposit,
       owner: that.data.owner
     };
-    console.log(datas);
-    // funData.withdraw(app.globalData.shopCode, that.card.card_no, that.data.deposit, that.data.owner, that, () => {
     funData.withdraw(datas, that, () => {
       wx.showToast({
         title: '提现成功',

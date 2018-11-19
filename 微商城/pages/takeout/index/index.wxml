@@ -18,7 +18,7 @@
           </view>
         </view>
         <view class='search ml10' style="height:{{px2rpxHeight*60}}px;">
-          <input class='search-input' placeholder='请输入店铺名称'  bindblur='takes' style="height:{{px2rpxHeight*60}}px;"></input>
+          <input class='search-input' placeholder='请输入外卖店铺名称' bindblur='takes' style="height:{{px2rpxHeight*60}}px;"></input>
           <view class='search-icon' style="width:{{px2rpxWidth*80}}px;height:{{px2rpxHeight*60}}px;">
             <text class="iconfont icon-search"></text>
           </view>
@@ -98,6 +98,6 @@
       </view>
     </scroll-view>
   </view>
-    <import src="../../../template/template.wxml" />
-    <template is="tabBar" data="{{tabBar:bindData.tabBar}}" />
+  <import src="../../../template/template.wxml" />
+  <template is="tabBar" data="{{tabBar:bindData.tabBar}}" />
 </block>

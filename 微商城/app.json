@@ -2,6 +2,7 @@
   "extEnable": true,
   "pages": [
     "pages/shop/mall/mall",    
+    "pages/kefu/kefu",    
     "pages/map/map",
     "pages/sao/sao",    
     "pages/shop/malldetail/malldetail",

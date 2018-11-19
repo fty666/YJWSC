@@ -12,5 +12,4 @@ module.exports = {
   uploadFileUrl: 'http://jiaoyuvideo.oss-cn-beijing.aliyuncs.com/',
   // 高德地图key
   wxGaodeMapKey: 'e0aa130ad1e3021c27bc637f22eda880',
-
 }
