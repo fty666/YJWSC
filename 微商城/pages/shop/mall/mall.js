@@ -134,13 +134,6 @@ Page({
   },
 
   onShow: function () {
-    // console.log(app.globalData.level)
-    // let that = this;
-    // if (app.globalData.level == '1' || !app.globalData.level) {
-    //     template.tabbar("tabBar", 0, that, 1);
-    // } else if (app.globalData.level == '2' || app.globalData.level == '3') {
-    //     template.tabbar("tabBar", 0, that, 3);
-    // }
   },
 
   onReady: function () {
@@ -240,10 +233,7 @@ Page({
   },
 
   getShareInfo: function () {
-    //获取分享信息
-    //   requestUtil.get(_DuoguanData.duoguan_get_share_data_url, { mmodule: 'duoguanshop' }, (info) => {
-    //       this.setData({ shareInfo:info});
-    //   });
+
   },
   onShareAppMessage: function () {
     var that = this;

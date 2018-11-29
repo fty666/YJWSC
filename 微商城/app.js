@@ -1,5 +1,3 @@
-
-const urlData = require('./utils/urlData.js');
 const funData = require('./utils/functionMethodData.js');
 const weixin = require('./utils/weixin.js');
 const utils = require('./utils/util.js');

@@ -133,7 +133,6 @@ Page({
       that.setData({
         myshop_code: data.shop.shop_code,
       })
-      console.log(that.data.myshop_code);
       if (util.isEmpty(data)) {
         that.setData({
           level: app.globalData.level

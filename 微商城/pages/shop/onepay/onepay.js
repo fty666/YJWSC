@@ -149,7 +149,7 @@ Page({
         })
       }
       picke = calculate.calcReduce(nums, di);
-      nums = calculate.dealMoney(nums)
+      nums = calculate.dealMoney(nums);
       picke = calculate.dealMoney(picke)
       di = calculate.dealMoney(di);
       that.setData({

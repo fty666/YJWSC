@@ -72,12 +72,12 @@
                         <view class='del2'>￥{{goods.price}} </view>
                       </block>
                       <view class='goods-num' style="width:{{px2rpxWidth*170}}px;height:{{px2rpxHeight*50}}px;">
-                        <view class='minus' style="width:{{px2rpxWidth*50}}px;height:{{px2rpxHeight*50}}px;">
-                          <image class='minus-img' src='../../../images/jiang.png' wx:if='{{goods.num > 0 ? true : false}}' catchtap='changCartNum' data-goodsid='{{goods.id}}' data-type='minus' style="width:{{px2rpxWidth*50}}px;height:{{px2rpxWidth*50}}px;z-index:99999;"></image>
+                        <view class='minus' style="width:{{px2rpxWidth*60}}px;height:{{px2rpxHeight*60}}px;">
+                          <image class='minus-img' src='../../../images/jiang.png' wx:if='{{goods.num > 0 ? true : false}}' catchtap='changCartNum' data-goodsid='{{goods.id}}' data-type='minus' style="width:{{px2rpxWidth*60}}px;height:{{px2rpxWidth*60}}px;z-index:99999;"></image>
                         </view>
                         <view class='goods-num-text' style="width:{{px2rpxWidth*50}}px;height:{{px2rpxWidth*50}}px;">{{goods.num}}</view>
-                        <view class='increase' style="width:{{px2rpxWidth*50}}px;height:{{px2rpxWidth*50}}px;">
-                          <image class='increase-img' src='../../../images/jia.png' catchtap='changCartNum' data-goodsid='{{goods.id}}' data-type='add' style="width:{{px2rpxWidth*50}}px;height:{{px2rpxWidth*50}}px;"></image>
+                        <view class='increase' style="width:{{px2rpxWidth*60}}px;height:{{px2rpxWidth*60}}px;">
+                          <image class='increase-img' src='../../../images/jia.png' catchtap='changCartNum' data-goodsid='{{goods.id}}' data-type='add' style="width:{{px2rpxWidth*60}}px;height:{{px2rpxWidth*60}}px;"></image>
                         </view>
                       </view>
                     </view>
@@ -196,7 +196,7 @@
 
 
     <!--购物车start  -->
-    <view class='showmodel' wx:if="{{cart_hidden}}" style="height:{{px2rpxHeight*1200}}px;" catchtap='hidds'>
+    <view class='showmodel' wx:if="{{cart_hidden}}" style="height:{{px2rpxHeight*1200}}px;">
       <view class='cart-all'>
         <view class='empty-cart' catchtap='emptyCart' style="height:{{px2rpxHeight*100}}px;">
           <view class='empty-cart-reduction'>
@@ -213,9 +213,9 @@
           </block>
           <block wx:else>
             <view class='cart'>
-              <view class='cart-name' style="width:{{px2rpxWidth*400}}px;height:{{px2rpxHeight*120}}px;">{{cart_goods.goods_name}}</view>
+              <view class='cart-name'  catchtap='hidds' style="width:{{px2rpxWidth*400}}px;height:{{px2rpxHeight*150}}px;">{{cart_goods.goods_name}}</view>
               <view class='cart-price' style="width:{{px2rpxWidth*100}}px;height:{{px2rpxHeight*120}}px;">¥{{cart_goods.discountPrice}}</view>
-              <view class='goods-num' style='bottom:30rpx;width:{{px2rpxWidth*170}}px;height:{{px2rpxHeight*50}}px;'>
+              <view class='goods-num' style='bottom:40rpx;width:{{px2rpxWidth*170}}px;height:{{px2rpxHeight*70}}px;'>
                 <view class='minus' style="width:{{px2rpxWidth*50}}px;height:{{px2rpxHeight*50}}px;">
                   <image class='minus-img' src='../../../images/jiang.png' hidden='{{cart_goods.num == 0 ? true : false}}' catchtap='changCartNum' data-goodsid='{{cart_goods.id}}' data-type='minus' style="width:{{px2rpxWidth*50}}px;height:{{px2rpxWidth*50}}px;"></image>
                 </view>

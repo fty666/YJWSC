@@ -233,8 +233,6 @@ Page({
     } else {
       numss = datas;
     }
-    // numss += 1;
-    console.log(numss)
     carts[index].num = numss;
     let that = this
     function updata(res) {
