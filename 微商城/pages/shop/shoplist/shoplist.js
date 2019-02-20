@@ -35,13 +35,14 @@ Page({
     page: 1,
     px2rpxWidth: '',
     px2rpxHeight: '',
-    gift: '',//满赠活动
+    gift: '', //满赠活动
+    groupids: '', //分类id
   },
 
   /**
    *  商品详情跳转
    */
-  mall_list_bind: function (e) {
+  mall_list_bind: function(e) {
     wx.navigateTo({
       url: '/pages/shop/malldetail/malldetail?goodsid=' + e.currentTarget.id + '&shopCode=' + this.data.shop_code
     })
@@ -50,13 +51,17 @@ Page({
   /**
    *  初始化页面，获取商品分类
    */
-  onLoad: function (options) {
-    console.log(options)
-    this.setData({ gid: options.groupid });
-    this.setData({ this_cate_id: options.groupid, shop_code: options.shop_code });
+  onLoad: function(options) {
+    this.setData({
+      gid: options.groupid
+    });
+    this.setData({
+      this_cate_id: options.groupid,
+      shop_code: options.shop_code
+    });
     var that = this;
+
     function Slist(data) {
-      console.log(data)
       that.setData({
         sarray: data,
       });
@@ -67,7 +72,6 @@ Page({
       shop_code: options.shop_code
     };
     funData.getReductionInGoods(datas, that, (res) => {
-      console.log(res);
       that.setData({
         gift: res,
       });
@@ -75,7 +79,6 @@ Page({
 
     //店铺信息
     function shops(res) {
-      console.log(res)
       that.setData({
         shopinfo: res
       })
@@ -86,13 +89,12 @@ Page({
   /**
    *搜索商品 
    */
-  inputBlur: function (e) {
-    // console.log(e)
+  inputBlur: function(e) {
     let that = this
     let arrayVal = [];
     arrayVal.push(e.detail.value);
+
     function gets(res) {
-      console.log(res)
       that.setData({
         goods: res,
         have: util.isEmpty(res),
@@ -104,14 +106,13 @@ Page({
 
   /**
    * 数据加载
-  */
-  onReady: function () {
+   */
+  onReady: function() {
     // 设置默认
     let that = this
     setTimeout(
-      function () {
+      function() {
         function codelist(res) {
-          console.log(res)
           that.setData({
             goods: res.PageInfo.list,
           })
@@ -121,8 +122,7 @@ Page({
     //获取缓存
     wx.getStorage({
       key: 'PX_TO_RPX',
-      success: function (res) {
-        console.log(res)
+      success: function(res) {
         that.setData({
           px2rpxHeight: res.data.px2rpxHeight,
           px2rpxWidth: res.data.px2rpxWidth,
@@ -132,57 +132,56 @@ Page({
   },
 
   // 全部列表
-  erery: function () {
+  erery: function() {
     let listId = ""
-    let that = this
+    let that = this;
+
     function codelist(res) {
-      //   console.log(res)
       that.setData({
         goods: res.PageInfo.list,
         listId: "",
         have: false
       })
     }
-    // utilFunctions.getGoodsUrl(that.data.shop_code, listId, codelist, this)
     utilFunctions.getGoodsUrl(that.data.shop_code, that.data.listId, that.data.page, that.data.pageSize, codelist, this)
   },
   /**
    *  商品分类列表，获取商品列表
    */
-  cate_item_bind: function (e) {
+  cate_item_bind: function(e) {
     let that = this;
-    // funData.getShopCode(app.globalData.user_id, that, (data) => {
-    //     // console.log(data);
-    //     app.globalData.shopCode = data.shop_code;
-    //     let cids = e.currentTarget.dataset.cid
-    //     // console.log(cids)
-    //     // console.log(that.data.listId)
-    // });
     let cids = e.currentTarget.dataset.cid;
-    console.log(that.data.shop_code)
+
     function codelist(res) {
-      //   console.log(res)
-      that.setData({
-        goods: res.PageInfo.list,
-        listId: cids,
-        have: false
-      })
+      let len = res.PageInfo.list.length;
+      if (len == 0) {
+        that.setData({
+          goods: res.PageInfo.list,
+          listId: cids,
+          have: true,
+        })
+      } else {
+        that.setData({
+          goods: res.PageInfo.list,
+          listId: cids,
+          have: false,
+        })
+      }
     }
-    // utilFunctions.getGoodsUrl(that.data.shop_code, cids, codelist, this);
-    utilFunctions.getGoodsUrl(that.data.shop_code, that.data.listId, that.data.page, that.data.pageSize, codelist, this)
+    utilFunctions.getGoodsUrl(that.data.shop_code, cids, that.data.page, that.data.pageSize, codelist, this)
   },
 
   /**
-* 滚动到底部/右边，会触发 scrolltolower 事件
-*/
-  scrollToLower: function () {
+   * 滚动到底部/右边，会触发 scrolltolower 事件
+   */
+  scrollToLower: function() {
     let that = this;
     let pageSize = that.data.pageSize;
     let page = that.data.page;
     let gid = that.data.groupids;
     pageSize += 20;
+
     function codelist(res) {
-      //   console.log(res)
       that.setData({
         goods: res.PageInfo.list,
       })

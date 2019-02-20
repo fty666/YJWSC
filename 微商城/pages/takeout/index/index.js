@@ -27,7 +27,7 @@ Page({
   /**
    * 生命周期函数--监听页面加载
    */
-  onLoad: function (options) {
+  onLoad: function(options) {
     // console.log(options)
     let that = this;
     if (!util.isEmpty(options)) {
@@ -40,7 +40,7 @@ Page({
   /**
    * 生命周期函数--监听页面初次渲染完成
    */
-  onReady: function () {
+  onReady: function() {
     let that = this;
     // 显示tarBar模板
     template.tabbar("tabBar", 0, this, 4);
@@ -51,20 +51,18 @@ Page({
       });
     } else {
       funDta.amapFilePackage((data) => {
-        console.log(data);
         that.setData({
           locationName: data[0].regeocodeData.pois[0].name,
           location: data[0].regeocodeData.pois[0].location
         });
-      }, () => { });
+      }, () => {});
     }
     // 加载数据
     that.getShopBySelect(that.data.select);
     //获取缓存
     wx.getStorage({
       key: 'PX_TO_RPX',
-      success: function (res) {
-        console.log(res)
+      success: function(res) {
         that.setData({
           px2rpxHeight: res.data.px2rpxHeight,
           px2rpxWidth: res.data.px2rpxWidth,
@@ -77,49 +75,49 @@ Page({
   /**
    * 生命周期函数--监听页面显示
    */
-  onShow: function () {
+  onShow: function() {
     let that = this;
   },
 
   /**
    * 生命周期函数--监听页面隐藏
    */
-  onHide: function () {
+  onHide: function() {
 
   },
 
   /**
    * 生命周期函数--监听页面卸载
    */
-  onUnload: function () {
+  onUnload: function() {
 
   },
 
   /**
    * 页面相关事件处理函数--监听用户下拉动作
    */
-  onPullDownRefresh: function () {
+  onPullDownRefresh: function() {
 
   },
 
   /**
    * 页面上拉触底事件的处理函数
    */
-  onReachBottom: function () {
+  onReachBottom: function() {
 
   },
 
   /**
    * 用户点击右上角分享
    */
-  onShareAppMessage: function () {
+  onShareAppMessage: function() {
 
   },
 
   /**
    * 选择地址
    */
-  chooseAddress: function () {
+  chooseAddress: function() {
     wx.navigateTo({
       url: '/pages/takeout/chooseAddress/chooseAddress',
     })
@@ -128,14 +126,16 @@ Page({
   /**
    * 条件选择
    */
-  requirementSelect: function (e) {
+  requirementSelect: function(e) {
     let that = this;
     let select = e.currentTarget.dataset.select;
     let query = select;
     pageSize = 20;
     if (select == 'distance') {
       let location = that.data.location.split(',');
-      query = ['distance', [location[0]], [location[1]]];
+      query = ['distance', [location[0]],
+        [location[1]]
+      ];
     };
     that.getShopBySelect(query);
     that.setData({
@@ -144,7 +144,7 @@ Page({
   },
 
   //查询店铺
-  takes: function (e) {
+  takes: function(e) {
     console.log(e.detail.value)
     let arrayVal = e.detail.value;
     if (arrayVal == '') {
@@ -161,7 +161,7 @@ Page({
   },
 
   // 根据条件查询店铺
-  getShopBySelect: function (myselect) {
+  getShopBySelect: function(myselect) {
     let that = this;
     let data = {
       groupId: 1,
@@ -192,7 +192,7 @@ Page({
   /**
    * 去商店
    */
-  goToShop: function (e) {
+  goToShop: function(e) {
     let sale = e.currentTarget.dataset.salse;
     if (sale == 0) {
       wx.showToast({
@@ -200,7 +200,7 @@ Page({
         icon: 'none'
       })
     } else {
-      wx.nextTick(function () {
+      wx.nextTick(function() {
         wx.navigateTo({
           url: '/pages/takeout/shopDetails/shopDetails?shop_code=' + e.currentTarget.dataset.shop_code
         })
@@ -212,14 +212,14 @@ Page({
   /**
    * 滚动到顶部/左边，会触发 scrolltoupper 事件
    */
-  scrollToUpper: function () {
+  scrollToUpper: function() {
 
   },
 
   /**
    * 滚动到底部/右边，会触发 scrolltolower 事件
    */
-  scrollToLower: function () {
+  scrollToLower: function() {
     console.log(9999)
     let that = this;
     pageSize += 20;

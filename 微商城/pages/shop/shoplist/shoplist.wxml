@@ -77,12 +77,12 @@
     <view class="cate-box sub">
       <scroll-view scroll-y="true" class="sidebar tc gridXt" style="width:{{px2rpxWidth*160}}px;">
         <view class="cate-name {{listId=='' ?'cate-name-active':''}} gridXb" bindtap="erery">全部</view>
-        <block wx:for="{{sarray}}" wx:key="{{item.groupId}}">
+        <block wx:for="{{sarray}}" wx:key="{{item.classId}}">
           <view class="cate-name {{listId==item.classId?'cate-name-active':''}} gridXb" bindtap="cate_item_bind" data-cid="{{item.classId}}" id="{{item.classId}}">{{item.className}}</view>
         </block>
       </scroll-view>
       <view class='showgoods' style="height:{{px2rpxHeight*690}}px;">
-        <scroll-view scroll-y="true" class="cate-con" scroll-into-view="{{classifyViewed}}" bindscrolltoupper='scrollToUpper' bindscrolltolower='scrollToLower'>
+        <scroll-view scroll-y="true" class="cate-con" scroll-into-view="{{classifyViewed}}"  bindscrolltolower='scrollToLower'>
           <view class=" flex">
             <block wx:if="{{have}}">
               <view class='has'>没有该商品</view>

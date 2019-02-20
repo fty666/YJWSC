@@ -11,7 +11,7 @@ module.exports = {
   /**
    * wx.request二次封装
    */
-  myWxRequest: function (myurl, mydata, mysufun) {
+  myWxRequest: function(myurl, mydata, mysufun) {
     wx.request({
       url: myurl,
       method: 'POST',
@@ -19,7 +19,7 @@ module.exports = {
       header: {
         'content-type': 'application/x-www-form-urlencoded'
       },
-      success: function (res) {
+      success: function(res) {
         if (res.data.state == 1) {
           mysufun(res.data);
         } else {
@@ -35,7 +35,7 @@ module.exports = {
   /**
    * wx.request二次封装 post请求
    */
-  requestUrl: function (data, url, pageobj, callback) {
+  requestUrl: function(data, url, pageobj, callback) {
     wx.request({
       url: url,
       data: data,
@@ -43,9 +43,8 @@ module.exports = {
         'content-type': 'application/x-www-form-urlencoded'
       },
       method: 'POST',
-      success: function (res) {
+      success: function(res) {
         if (res.data.state == 1) {
-          console.log(res);
           callback.apply(pageobj, [res.data.data]);
         } else {
           wx.showModal({
@@ -55,17 +54,17 @@ module.exports = {
           })
         }
       },
-      complete: function () { }
+      complete: function() {}
     })
   },
-  httpRequest: function (data, url, callback, pageobj) {
+  httpRequest: function(data, url, callback, pageobj) {
     wx.request({
       url: url,
       data: data,
       header: {
         'Content-Type': 'application/json'
       },
-      success: function (res) {
+      success: function(res) {
         if (res.statusCode != 200) {
           wx.showModal({
             title: '提示',
@@ -83,7 +82,7 @@ module.exports = {
           }
         }
       },
-      fail: function () {
+      fail: function() {
         wx.showModal({
           title: '提示',
           content: "error:网络请求失败",
@@ -96,13 +95,13 @@ module.exports = {
   /**
    * 上传图片二次封装
    */
-  myUpload: function (suFun) {
+  myUpload: function(suFun) {
     wx.chooseImage({
       count: 1,
       sizeType: ['original', 'compressed'],
       sourceType: ['album', 'camera'],
       // 上传文件
-      success: function (res) {
+      success: function(res) {
         // console.log(res)
         let tempFilePaths = res.tempFilePaths;
         // 临时文件路径
@@ -142,7 +141,7 @@ module.exports = {
   /**
    * 查询快递
    */
-  inquiryExpress: function (mytype, mypostid, mysufun) {
+  inquiryExpress: function(mytype, mypostid, mysufun) {
     switch (mytype) {
       case '中通':
       case '中通快递':
@@ -185,7 +184,7 @@ module.exports = {
       header: {
         'content-type': 'application/x-www-form-urlencoded'
       },
-      success: function (res) {
+      success: function(res) {
         // console.log(res);
         // if (res.data.message == 'ok') {
         //     mysufun(res.data.data);
@@ -208,9 +207,11 @@ module.exports = {
    * @param errFun
    */
   amapFilePackage(sucFun, errFun) {
-    let myAmapFun = new amapFile.AMapWX({ key: config.wxGaodeMapKey });
+    let myAmapFun = new amapFile.AMapWX({
+      key: config.wxGaodeMapKey
+    });
     myAmapFun.getRegeo({
-      success: function (data) {
+      success: function(data) {
         //成功回调
         // console.log(data)
         // that.setData({
@@ -218,7 +219,7 @@ module.exports = {
         // });
         sucFun(data)
       },
-      fail: function (info) {
+      fail: function(info) {
         //失败回调
         console.log(info)
         errFun(info);
@@ -231,10 +232,12 @@ module.exports = {
    * @param flag
    * @param parameter
    */
-  staticMap: function (flag, parameter, that) {
-    let myAmapFun = new amapFile.AMapWX({ key: config.wxGaodeMapKey });
+  staticMap: function(flag, parameter, that) {
+    let myAmapFun = new amapFile.AMapWX({
+      key: config.wxGaodeMapKey
+    });
     wx.getSystemInfo({
-      success: function (data) {
+      success: function(data) {
         console.log(data);
         let height = data.windowHeight;
         let width = data.windowWidth;
@@ -249,14 +252,16 @@ module.exports = {
             // markers: `mid,0xFF0000,A:$(longitude_A),$(latitude_A);B:$(longitude_B),$(latitude_B)`,
             markers: parameter,
 
-            success: function (res) {
+            success: function(res) {
 
               that.setData({
                 src: res.url
               });
             },
-            fail: function (info) {
-              wx.showModal({ title: info.errMsg });
+            fail: function(info) {
+              wx.showModal({
+                title: info.errMsg
+              });
             }
           });
         } else if (flag == 'paths') {
@@ -270,14 +275,16 @@ module.exports = {
             // 绘制区域
             // paths: "10,0x0000ff,0.1,0x0000ff,0.7:116.31604,39.96491;116.320816,39.966606;116.321785,39.966827;116.32361,39.966957;116.39361,39.966957;116.39361,39.936957",
             paths: parameter,
-            success: function (res) {
+            success: function(res) {
               console.log(res);
               that.setData({
                 src: res.url
               });
             },
-            fail: function (info) {
-              wx.showModal({ title: info.errMsg });
+            fail: function(info) {
+              wx.showModal({
+                title: info.errMsg
+              });
             }
           });
         } else if (flag == 'labels') {
@@ -288,13 +295,15 @@ module.exports = {
             scale: 2,
             // labels: "朝阳公园,2,0,16,0xFFFFFF,0x008000:116.48482,39.94858",
             labels: parameter,
-            success: function (res) {
+            success: function(res) {
               that.setData({
                 src: res.url
               });
             },
-            fail: function (info) {
-              wx.showModal({ title: info.errMsg })
+            fail: function(info) {
+              wx.showModal({
+                title: info.errMsg
+              })
             }
           });
         }
@@ -313,9 +322,9 @@ module.exports = {
   // },
 
   // 登录
-  mylogin: function (mycode, sufun) {
+  mylogin: function(mycode, sufun) {
     wx.login({
-      success: function (res) {
+      success: function(res) {
         console.log(res)
         if (res.code) {
           //发起网络请求
@@ -328,7 +337,7 @@ module.exports = {
             data: {
               code: res.code
             },
-            success: function (data) {
+            success: function(data) {
               sufun(data)
             }
           })
@@ -340,7 +349,7 @@ module.exports = {
   },
 
   // 查询商品列表(默认上架)
-  getGoods: function (myshopCode, page, pageSize, pageobj, callback) {
+  getGoods: function(myshopCode, page, pageSize, pageobj, callback) {
     let that = this;
     let data = {
       shopCode: myshopCode,
@@ -352,17 +361,19 @@ module.exports = {
   },
 
   // 添加商品
-  insertGoods: function (data, pageobj, callback) {
+  insertGoods: function(data, pageobj, callback) {
     this.requestUrl(data, urlData.insertGoodsUrl, pageobj, callback);
   },
 
   // 查询商品详情
-  getGoodsDetails: function (goodsid, pageobj, callback) {
-    this.requestUrl({ goodsId: goodsid }, urlData.getGoodsDetailsUrl, pageobj, callback);
+  getGoodsDetails: function(goodsid, pageobj, callback) {
+    this.requestUrl({
+      goodsId: goodsid
+    }, urlData.getGoodsDetailsUrl, pageobj, callback);
   },
 
   // 上架/下架商品 0审核,1上架,2下架,3强制下架,4删除  // 修改商品   // 删除商品
-  deleteGoods: function (goodsid, isuse, pageobj, callback) {
+  deleteGoods: function(goodsid, isuse, pageobj, callback) {
     let data = {
       goodsId: goodsid,
       isUse: isuse,
@@ -372,7 +383,7 @@ module.exports = {
 
   // 修改商品信息
   // updateGoods: function (goodsid, mygoods_name, mygoods_details, myprice, mystock, myimg, mystatus, pageobj, callback){
-  updateGoods: function (data, pageobj, callback) {
+  updateGoods: function(data, pageobj, callback) {
     // let data = {
     //     goodsId: goodsid,
     //     goods_name: mygoods_name,
@@ -386,12 +397,12 @@ module.exports = {
   },
 
   // 查询分组
-  getGroup: function (pageobj, callback) {
+  getGroup: function(pageobj, callback) {
     this.requestUrl({}, urlData.getGroupUrl, pageobj, callback);
   },
 
   // 查询分类
-  getClass: function (groupid, pageobj, callback) {
+  getClass: function(groupid, pageobj, callback) {
     let data = {
       groupId: groupid
     }
@@ -399,7 +410,7 @@ module.exports = {
   },
 
   // 查询商品对应的评论
-  getComment: function (goodsid, pageobj, callback) {
+  getComment: function(goodsid, pageobj, callback) {
     let data = {
       goodsId: goodsid
     }
@@ -409,7 +420,7 @@ module.exports = {
   // 添加评论
   // insertComment: function (goodsId, detail, user_id, img, order_mainid, status, grade, mold, pageobj, callback) {
 
-  insertComment: function (shop, pageobj, callback) {
+  insertComment: function(shop, pageobj, callback) {
     // let data = {
     //     goodsId: goodsId,
     //     detail: detail,
@@ -425,7 +436,7 @@ module.exports = {
   },
 
   // 查询订单(查店铺的订单)
-  getOrder: function (shopCode, mystatus, mypage, mypageSize, order_type, user_id, pageobj, callback) {
+  getOrder: function(shopCode, mystatus, mypage, mypageSize, order_type, user_id, pageobj, callback) {
     let data = {
       shop_code: shopCode,
       status: mystatus,
@@ -438,7 +449,7 @@ module.exports = {
   },
 
   // 修改订单状态
-  updateOrderStatus: function (orderMainid, mystatus, pageobj, callback) {
+  updateOrderStatus: function(orderMainid, mystatus, pageobj, callback) {
     let data = {
       order_mainid: orderMainid,
       status: mystatus
@@ -447,7 +458,7 @@ module.exports = {
   },
 
   // 外卖修改订单状态
-  updateOrder: function (orderMainid, reception, pageobj, callback) {
+  updateOrder: function(orderMainid, reception, pageobj, callback) {
     let data = {
       order_mainid: orderMainid,
       reception: reception
@@ -456,7 +467,7 @@ module.exports = {
   },
 
   // 查询订单详情
-  getOrderDetail: function (orderuuid, pageobj, callback) {
+  getOrderDetail: function(orderuuid, pageobj, callback) {
     let data = {
       order_uuid: orderuuid
     }
@@ -464,7 +475,7 @@ module.exports = {
   },
 
   // 对订单数据的处理
-  dealOrderData: function (data) {
+  dealOrderData: function(data) {
     // console.log(data);
     let order = [];
     let k = 0;
@@ -526,7 +537,9 @@ module.exports = {
     }
     // 将每个对象里的数组转化为对象
     for (let key in newOrder) {
-      newOrder[key] = { goods: newOrder[key] }
+      newOrder[key] = {
+        goods: newOrder[key]
+      }
     }
     // 把每个订单的独有部分提出来
     let orderArr = [];
@@ -570,7 +583,7 @@ module.exports = {
   },
 
   //  查询退换货
-  getGoodBack: function (orderuuid, pageobj, callback) {
+  getGoodBack: function(orderuuid, pageobj, callback) {
     let data = {
       order_uuid: orderuuid
     }
@@ -578,7 +591,7 @@ module.exports = {
   },
 
   // 查询售卖总金额
-  getOrderMoney: function (shopCode, pageobj, callback) {
+  getOrderMoney: function(shopCode, pageobj, callback) {
     let data = {
       shop_code: shopCode
     }
@@ -586,7 +599,7 @@ module.exports = {
   },
 
   // 查询每笔订单的金额
-  getOneOrderMoney: function (shopCode, mypage, mypageSize, pageobj, callback) {
+  getOneOrderMoney: function(shopCode, mypage, mypageSize, pageobj, callback) {
     let data = {
       shop_code: shopCode,
       page: mypage,
@@ -596,7 +609,7 @@ module.exports = {
   },
 
   // 按天查询订单金额
-  getMoneyByDay: function (shopCode, myyear, mymonth, pageobj, callback) {
+  getMoneyByDay: function(shopCode, myyear, mymonth, pageobj, callback) {
     let data = {
       shop_code: shopCode,
       year: myyear,
@@ -606,7 +619,7 @@ module.exports = {
   },
 
   // 按月查询订单金额
-  getMoneyByMonth: function (shopCode, myyear, pageobj, callback) {
+  getMoneyByMonth: function(shopCode, myyear, pageobj, callback) {
     let data = {
       shop_code: shopCode,
       year: myyear,
@@ -615,7 +628,7 @@ module.exports = {
   },
 
   // 修改商家logo信息
-  updateInfoLogo: function (shopCode, mylogo, pageobj, callback) {
+  updateInfoLogo: function(shopCode, mylogo, pageobj, callback) {
     let data = {
       shop_code: shopCode,
       logo: mylogo,
@@ -624,7 +637,7 @@ module.exports = {
   },
 
   // 修改商家信息 
-  updateInfoByCode: function (data, pageobj, callback) {
+  updateInfoByCode: function(data, pageobj, callback) {
     // let data = {
     //     shop_code: shopCode,
     //     groupId: groupId,
@@ -639,7 +652,7 @@ module.exports = {
   },
 
   // 完善商家信息
-  updateShopInfo: function (data, pageobj, callback) {
+  updateShopInfo: function(data, pageobj, callback) {
     // let data = {
     //     shop_code: shopCode,
     //     shop_detail: myshop_detail,
@@ -654,7 +667,7 @@ module.exports = {
   },
 
   // 查询商家信息
-  getShop: function (shopCode, pageobj, callback) {
+  getShop: function(shopCode, pageobj, callback) {
     let data = {
       shop_code: shopCode,
       page: 1,
@@ -664,14 +677,14 @@ module.exports = {
   },
 
   // 查看单个商店信息 userid
-  getShopByCode: function (userid, pageobj, callback) {
+  getShopByCode: function(userid, pageobj, callback) {
     let data = {
       user_id: userid,
     }
     this.requestUrl(data, urlData.getShopByCodeurl, pageobj, callback);
   },
   // 查询单个信息 shopcode
-  getShopbycode: function (shopcod, pageobj, callback) {
+  getShopbycode: function(shopcod, pageobj, callback) {
     let data = {
       shop_code: shopcod,
     }
@@ -679,7 +692,7 @@ module.exports = {
   },
 
   // 查所有银行卡
-  getCardByCode: function (shopCode, pageobj, callback) {
+  getCardByCode: function(shopCode, pageobj, callback) {
     let data = {
       shop_code: shopCode,
     }
@@ -687,7 +700,7 @@ module.exports = {
   },
 
   // 根据id查银行卡
-  getCardById: function (mycid, pageobj, callback) {
+  getCardById: function(mycid, pageobj, callback) {
     let data = {
       cid: mycid,
     }
@@ -695,7 +708,7 @@ module.exports = {
   },
 
   // 设为默认银行卡
-  updateCardDefault: function (cid, shopcode, pageobj, callback) {
+  updateCardDefault: function(cid, shopcode, pageobj, callback) {
     let data = {
       cid: cid,
       shop_code: shopcode
@@ -704,7 +717,7 @@ module.exports = {
   },
 
   // 添加银行卡
-  insertCard: function (myowner, myID_card, mycard_no, mymobile, mybank, shopcode, pageobj, callback) {
+  insertCard: function(myowner, myID_card, mycard_no, mymobile, mybank, shopcode, pageobj, callback) {
     let data = {
       owner: myowner,
       ID_card: myID_card,
@@ -717,7 +730,7 @@ module.exports = {
   },
 
   // 删除银行卡
-  deleteCard: function (mycard_id, pageobj, callback) {
+  deleteCard: function(mycard_id, pageobj, callback) {
     let data = {
       card_id: mycard_id
     }
@@ -725,7 +738,7 @@ module.exports = {
   },
 
   // 添加物流信息
-  insertTransInfo: function (myorder_uuid, mytransNO, myshortName, myorder_mainid, pageobj, callback) {
+  insertTransInfo: function(myorder_uuid, mytransNO, myshortName, myorder_mainid, pageobj, callback) {
     let data = {
       order_uuid: myorder_uuid,
       transNO: mytransNO,
@@ -737,7 +750,7 @@ module.exports = {
   },
 
   // 获取单个物流信息
-  getTransInfo: function (myorder_uuid, pageobj, callback) {
+  getTransInfo: function(myorder_uuid, pageobj, callback) {
     let data = {
       order_uuid: myorder_uuid,
     }
@@ -745,7 +758,7 @@ module.exports = {
   },
 
   // 查询收藏商店的用户
-  getUserByCode: function (shopCode, pageobj, callback) {
+  getUserByCode: function(shopCode, pageobj, callback) {
     let data = {
       shop_code: shopCode,
     }
@@ -753,13 +766,13 @@ module.exports = {
   },
 
   // 商家提现
-  withdraw: function (datas, pageobj, callback) {
+  withdraw: function(datas, pageobj, callback) {
     let data = datas;
     this.requestUrl(data, urlData.withdrawUrl, pageobj, callback);
   },
 
   // 查询提现记录
-  getWithdrawal: function (shopCode, mystatus, mypage, mypageSize, pageobj, callback) {
+  getWithdrawal: function(shopCode, mystatus, mypage, mypageSize, pageobj, callback) {
     let data = {
       shopCode: shopCode,
       status: mystatus,
@@ -770,7 +783,7 @@ module.exports = {
   },
 
   // 修改退换货状态
-  updateBackStatus: function (myorder_uuid, pageobj, callback) {
+  updateBackStatus: function(myorder_uuid, pageobj, callback) {
     let data = {
       order_uuid: myorder_uuid
     }
@@ -778,7 +791,7 @@ module.exports = {
   },
 
   // 商店注册
-  insertShop: function (data, pageobj, callback) {
+  insertShop: function(data, pageobj, callback) {
     // let data = {
     //     owner: myowner,
     //     shop_name:myshop_name,
@@ -789,32 +802,42 @@ module.exports = {
   },
 
   // 获取分组
-  getGroup: function (pageobj, callback) {
+  getGroup: function(pageobj, callback) {
     this.requestUrl({}, urlData.getGroupUrl, pageobj, callback);
   },
 
   // 发送验证码
-  getSms: function (mymobile, pageobj, callback) {
-    this.requestUrl({ mobile: mymobile }, urlData.getSmsUrl, pageobj, callback);
+  getSms: function(mymobile, pageobj, callback) {
+    this.requestUrl({
+      mobile: mymobile
+    }, urlData.getSmsUrl, pageobj, callback);
   },
 
   // 根据user_id获取shop_code
-  getShopCode: function (myuser_id, pageobj, callback) {
-    this.requestUrl({ user_id: myuser_id }, urlData.getShopCodeUrl, pageobj, callback);
+  getShopCode: function(myuser_id, pageobj, callback) {
+    this.requestUrl({
+      user_id: myuser_id
+    }, urlData.getShopCodeUrl, pageobj, callback);
   },
 
   // 根据user_id获取用户信息
-  getUser: function (myuser_id, pageobj, callback) {
-    this.requestUrl({ user_id: myuser_id }, urlData.getUserUrl, pageobj, callback);
+  getUser: function(myuser_id, pageobj, callback) {
+    this.requestUrl({
+      user_id: myuser_id
+    }, urlData.getUserUrl, pageobj, callback);
   },
 
   // 根据user_id查询用户拥有优惠券
-  getUserCoupon: function (myuser_id, mypage, mypageSize, pageobj, callback) {
-    this.requestUrl({ user_id: myuser_id, page: mypage, pageSize: mypageSize }, urlData.getUserCouponUrl, pageobj, callback);
+  getUserCoupon: function(myuser_id, mypage, mypageSize, pageobj, callback) {
+    this.requestUrl({
+      user_id: myuser_id,
+      page: mypage,
+      pageSize: mypageSize
+    }, urlData.getUserCouponUrl, pageobj, callback);
   },
 
   // 查询对应店铺可用优惠券
-  getUserShopCoupon: function (data, pageobj, callback) {
+  getUserShopCoupon: function(data, pageobj, callback) {
     // let data = {
     //         //     user_id: myuser_id,
     //         //     shop_code: myshop_code,
@@ -827,12 +850,12 @@ module.exports = {
   },
 
   // 添加优惠券
-  insertCoupon: function (data, pageobj, callback) {
+  insertCoupon: function(data, pageobj, callback) {
     this.requestUrl(data, urlData.insertCouponUrl, pageobj, callback);
   },
 
   // 根据店铺查询优惠券
-  getCoupon: function (myshop_code, page, pageSize, pageobj, callback) {
+  getCoupon: function(myshop_code, page, pageSize, pageobj, callback) {
     let data = {
       shop_code: myshop_code,
       page: page,
@@ -842,12 +865,15 @@ module.exports = {
   },
 
   // 删除优惠券
-  deleteCoupon: function (mycouponId, start, pageobj, callback) {
-    this.requestUrl({ couponId: mycouponId, start: start }, urlData.deleteCouponUrl, pageobj, callback);
+  deleteCoupon: function(mycouponId, start, pageobj, callback) {
+    this.requestUrl({
+      couponId: mycouponId,
+      start: start
+    }, urlData.deleteCouponUrl, pageobj, callback);
   },
 
   // 领取优惠券
-  insertUC: function (myuser_id, mycouponId, pageobj, callback) {
+  insertUC: function(myuser_id, mycouponId, pageobj, callback) {
     let data = {
       user_id: myuser_id,
       couponId: mycouponId
@@ -856,47 +882,63 @@ module.exports = {
   },
 
   // 根据分组查询外卖商店
-  getFoodsShop: function (data, pageobj, callback) {
+  getFoodsShop: function(data, pageobj, callback) {
     this.requestUrl(data, urlData.getFoodsShopUrl, pageobj, callback);
   },
 
   // 根据用户id获取用户收货地址
-  getAddr: function (myuser_id, pageobj, callback) {
-    this.requestUrl({ user_id: myuser_id }, urlData.getAddrUrl, pageobj, callback);
+  getAddr: function(myuser_id, pageobj, callback) {
+    this.requestUrl({
+      user_id: myuser_id
+    }, urlData.getAddrUrl, pageobj, callback);
   },
 
   // 根据用户id获取默认地址
-  getAddrByDefault: function (myuser_id, pageobj, callback) {
-    this.requestUrl({ user_id: myuser_id }, urlData.getAddrByDefaultUrl, pageobj, callback);
+  getAddrByDefault: function(myuser_id, pageobj, callback) {
+    this.requestUrl({
+      user_id: myuser_id
+    }, urlData.getAddrByDefaultUrl, pageobj, callback);
   },
 
   // 根据地址id查单个地址
-  getAddrById: function (myaddr_id, pageobj, callback) {
-    this.requestUrl({ addr_id: myaddr_id }, urlData.getAddrByIdUrl, pageobj, callback);
+  getAddrById: function(myaddr_id, pageobj, callback) {
+    this.requestUrl({
+      addr_id: myaddr_id
+    }, urlData.getAddrByIdUrl, pageobj, callback);
   },
 
   // 根据shop_code获取店铺分类
-  getFoodClass: function (myshop_code, pageobj, callback) {
-    this.requestUrl({ shop_code: myshop_code }, urlData.getFoodClassUrl, pageobj, callback);
+  getFoodClass: function(myshop_code, pageobj, callback) {
+    this.requestUrl({
+      shop_code: myshop_code
+    }, urlData.getFoodClassUrl, pageobj, callback);
   },
 
   // 添加外卖分类
-  insertFoodsClass: function (myshop_code, myclassName, pageobj, callback) {
-    this.requestUrl({ shop_code: myshop_code, className: myclassName }, urlData.insertFoodsClassUrl, pageobj, callback);
+  insertFoodsClass: function(myshop_code, myclassName, pageobj, callback) {
+    this.requestUrl({
+      shop_code: myshop_code,
+      className: myclassName
+    }, urlData.insertFoodsClassUrl, pageobj, callback);
   },
 
   // 修改外卖分类
-  updateFoodsClass: function (myfoodClassId, myclassName, pageobj, callback) {
-    this.requestUrl({ foodClassId: myfoodClassId, className: myclassName }, urlData.updateFoodsClassUrl, pageobj, callback);
+  updateFoodsClass: function(myfoodClassId, myclassName, pageobj, callback) {
+    this.requestUrl({
+      foodClassId: myfoodClassId,
+      className: myclassName
+    }, urlData.updateFoodsClassUrl, pageobj, callback);
   },
 
   // 删除外卖分类
-  deleteFoodsClass: function (myfoodClassId, pageobj, callback) {
-    this.requestUrl({ foodClassId: myfoodClassId }, urlData.deleteFoodsClassUrl, pageobj, callback);
+  deleteFoodsClass: function(myfoodClassId, pageobj, callback) {
+    this.requestUrl({
+      foodClassId: myfoodClassId
+    }, urlData.deleteFoodsClassUrl, pageobj, callback);
   },
 
   // 查询外卖商品列表
-  getFoodGoods: function (data, pageobj, callback) {
+  getFoodGoods: function(data, pageobj, callback) {
     // let data = {
     //     shopCode: myshopCode,
     //     isUse: myisUse,
@@ -908,43 +950,50 @@ module.exports = {
   },
 
   // 根据shop_code获取商品详情
-  getFoodGoodsDetails: function (shop_code, page, pageSize, isUse, pageobj, callback) {
+  getFoodGoodsDetails: function(shop_code, page, pageSize, isUse, pageobj, callback) {
     let data = {
       shopCode: shop_code,
       page: page,
-      pageSize, pageSize,
+      pageSize,
+      pageSize,
       isUse: isUse
     }
     this.requestUrl(data, urlData.getFoodGoodsDetailsUrl, pageobj, callback);
   },
 
   // 根据shop_code查单个外卖商家
-  getOutShopByCode: function (myshop_code, pageobj, callback) {
-    this.requestUrl({ shop_code: myshop_code }, urlData.getOutShopByCodeUrl, pageobj, callback);
+  getOutShopByCode: function(myshop_code, pageobj, callback) {
+    this.requestUrl({
+      shop_code: myshop_code
+    }, urlData.getOutShopByCodeUrl, pageobj, callback);
   },
 
   // 提交订单
-  insertOrder: function (data, pageobj, callback) {
+  insertOrder: function(data, pageobj, callback) {
     this.requestUrl(data, urlData.insertOrderUrl, pageobj, callback);
   },
 
   // 验证手机验证码(商家修改信息时使用)
-  verificationSms: function (data, pageobj, callback) {
+  verificationSms: function(data, pageobj, callback) {
     this.requestUrl(data, urlData.verificationSmsUrl, pageobj, callback);
   },
 
   // 查询查询经纬度
-  getMap: function (myorder_uuid, pageobj, callback) {
-    this.requestUrl({ order_uuid: myorder_uuid }, urlData.getMapUrl, pageobj, callback);
+  getMap: function(myorder_uuid, pageobj, callback) {
+    this.requestUrl({
+      order_uuid: myorder_uuid
+    }, urlData.getMapUrl, pageobj, callback);
   },
 
   // 订单成功手机短信通知
-  getOrderSms: function (mymobile, pageobj, callback) {
-    this.requestUrl({ mobile: mymobile }, urlData.getOrderSmsUrl, pageobj, callback);
+  getOrderSms: function(mymobile, pageobj, callback) {
+    this.requestUrl({
+      mobile: mymobile
+    }, urlData.getOrderSmsUrl, pageobj, callback);
   },
 
   // 修改营业状态
-  updateOutShopSale: function (shop_code, is_sale, pageobj, calback) {
+  updateOutShopSale: function(shop_code, is_sale, pageobj, calback) {
     console.log(shop_code)
     console.log(is_sale)
     let data = {
@@ -955,7 +1004,7 @@ module.exports = {
   },
 
   // 根据shop_code获取商品
-  getGoodsByCodeUrl: function (shop_code, pageobj, calback) {
+  getGoodsByCodeUrl: function(shop_code, pageobj, calback) {
     let data = {
       shop_code: shop_code,
     }
@@ -963,33 +1012,33 @@ module.exports = {
   },
 
   // 添加满赠
-  insertReductionInGoods: function (datas, pageobj, calback) {
+  insertReductionInGoods: function(datas, pageobj, calback) {
     let data = datas;
     this.requestUrl(data, urlData.insertReductionInGoods, pageobj, calback);
   },
   // 查询满赠
-  getReductionInGoods: function (datas, pageobj, calback) {
+  getReductionInGoods: function(datas, pageobj, calback) {
     let data = datas;
     this.requestUrl(data, urlData.getReductionInGoods, pageobj, calback);
   },
   //删除满赠
-  deleteReduction: function (datas, pageobj, calback) {
+  deleteReduction: function(datas, pageobj, calback) {
     let data = datas;
     this.requestUrl(data, urlData.deleteReduction, pageobj, calback);
   },
 
   // 修改满赠
-  updateReductionInGoods: function (datas, pageobj, calback) {
+  updateReductionInGoods: function(datas, pageobj, calback) {
     let data = datas;
     this.requestUrl(data, urlData.updateReductionInGoods, pageobj, calback);
   },
   // 获取满赠的信息
-  getReductionInGoodsById: function (datas, pageobj, calback) {
+  getReductionInGoodsById: function(datas, pageobj, calback) {
     let data = datas;
     this.requestUrl(data, urlData.getReductionInGoodsById, pageobj, calback);
   },
   //查询待付款
-  getNoPayOrder: function (user_id, pageobj, calback) {
+  getNoPayOrder: function(user_id, pageobj, calback) {
     let data = {
       user_id: user_id,
       orderType: 2
@@ -998,7 +1047,7 @@ module.exports = {
   },
 
   //去付款
-  getPayOrder: function (uuid, pageobj, calback) {
+  getPayOrder: function(uuid, pageobj, calback) {
     let data = {
       relevanceUUID: uuid
     };
@@ -1007,7 +1056,7 @@ module.exports = {
 
 
   //取消订单
-  updateRelevanceOrder: function (oid, pageobj, calback) {
+  updateRelevanceOrder: function(oid, pageobj, calback) {
     let data = {
       relevanceUUID: oid
     };
@@ -1015,18 +1064,18 @@ module.exports = {
   },
 
   // 添加外卖评论
-  insertShopComment: function (datas, calback, pageobj) {
+  insertShopComment: function(datas, calback, pageobj) {
     let data = datas;
     this.requestUrl(data, urlData.insertShopComment, calback, pageobj);
   },
   // 获取骑手信息
-  getHorseManByUUID: function (datas, calbacks, pageobj) {
+  getHorseManByUUID: function(datas, calbacks, pageobj) {
     let data = datas;
     this.requestUrl(data, urlData.getHorseManByUUID, pageobj, calbacks, );
   },
 
   //查询可提现金额
-  getPayAccount: function (shopCode, pageobj, calbacks) {
+  getPayAccount: function(shopCode, pageobj, calbacks) {
     let data = {
       shopCode: shopCode
     };
@@ -1034,15 +1083,10 @@ module.exports = {
   },
 
   //查询物流公司
-  getCompany: function (pageobj, calbacks) {
+  getCompany: function(pageobj, calbacks) {
     let data = {
 
     };
     this.requestUrl(data, urlData.getCompany, pageobj, calbacks, );
   }
 }
-
-
-
-
-

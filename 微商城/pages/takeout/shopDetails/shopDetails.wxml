@@ -156,7 +156,6 @@
       <!--评价  -->
       <view wx:if="{{nav_type== 'comment'}}">
 
-
         <!-- 具体评价 -->
         <block wx:for="{{comment}}" wx:for-item="com" wx:key="{{index}}">
           <view class='ju' style="height:{{px2rpxHeight*400}}px;">

@@ -68,7 +68,6 @@ Page({
     let that = this;
     wx.showLoading()
     setTimeout(function () {
-
       // 获取店铺信息
       funDta.getOutShopByCode(that.data.shop_code, that, (res) => {
         let pei = res.initialMoney;
@@ -88,7 +87,6 @@ Page({
 
       // 获取店铺商品列表(默认热销,分类为空)
       getFoodGoodsList(1, '', that);
-
       // 获取商家评论
       function calback(res) {
         let pres = res.PageInfo.list
@@ -133,7 +131,6 @@ Page({
   xinfo: function (e) {
     let that = this;
     let gids = e.currentTarget.dataset.gsid;
-
     function calback(res) {
       that.setData({
         shopinfo: res
@@ -278,9 +275,6 @@ Page({
         selectGoods = goods_list[i];
       }
     }
-    console.log(mytype)
-    console.log(goods_list)
-    console.log(selectGoods)
     // 计算总价
     calculateTotalPrice(mytype, goods_list, selectGoods, that);
   },
@@ -370,7 +364,6 @@ Page({
    * 食物 滚动到顶部/左边，会触发 scrolltoupper 事件
    */
   scrollToUpper: function () { },
-
   /**
    * 食物 滚动到底部/右边，会触发 scrolltolower 事件
    */
@@ -458,7 +451,6 @@ function calculateTotalPrice(flag, goods_list, selectGoods, that) {
     }
 
   }
-  console.log(totalPrice);
   // 配送需求
   carry(that, totalPrice);
   if (totalPrice <= 0) {

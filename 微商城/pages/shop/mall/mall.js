@@ -67,22 +67,8 @@ Page({
    */
   onLoad: function (options) {
     let that = this;
-    // 获取用户授权
-    // this.getUserInfo();
-
-    // 加载页面tarBar模块
-    // setTimeout(function(){
-    //     console.log(app.globalData.level)
-    //     if (app.globalData.level == '1' || !app.globalData.level) {
-    //         template.tabbar("tabBar", 0, that, 1);
-    //     } else if (app.globalData.level == '2' || app.globalData.level == '3') {
-    //         template.tabbar("tabBar", 0, that, 3);
-    //     } 
-    // },1000);
-
     //获取商家分组
     let arrays = [];
-
     function gets(res) {
       // console.log(res)
       arrays = res.slice(0, 7)
@@ -90,7 +76,6 @@ Page({
         group: arrays
       })
     }
-
     utilFunctions.getGroup(gets, this);
   },
 
@@ -137,7 +122,6 @@ Page({
   },
 
   onReady: function () {
-    // console.log(app.globalData.level)
     let that = this;
     setTimeout(function () {
       if (app.globalData.level == '1' || !app.globalData.level) {
@@ -154,7 +138,6 @@ Page({
       groupId: 1,
     }
     function calback(res) {
-      console.log(res)
       that.setData({
         takeout: res.PageInfo.list
       })
@@ -165,7 +148,6 @@ Page({
     wx.getStorage({
       key: 'PX_TO_RPX',
       success: function (res) {
-        console.log(res)
         that.setData({
           px2rpxHeight: res.data.px2rpxHeight,
           px2rpxWidth: res.data.px2rpxWidth,
@@ -231,9 +213,7 @@ Page({
       }
     })
   },
-
   getShareInfo: function () {
-
   },
   onShareAppMessage: function () {
     var that = this;

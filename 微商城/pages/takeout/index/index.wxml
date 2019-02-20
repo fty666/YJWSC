@@ -31,7 +31,7 @@
           <view class='near-line' style="width:{{px2rpxWidth*100}}px;height:{{px2rpxHeight*1}}px;"></view>
         </view>
         <view class='guanggao'>
-          <block wx:for="{{6}}">
+          <block wx:for="{{6}}" wx:key="{{index}}">
             <image src='../../../images/888.jpg' class='guanggao-img' style="width:{{px2rpxWidth*340}}px;height:{{px2rpxWidth*200}}px;"></image>
           </block>
         </view>

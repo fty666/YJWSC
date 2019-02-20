@@ -57,25 +57,25 @@ Page({
     taste: "",
     //判断是否能跳转
     color_suss: false, //颜色规格
-    size_suss: false,  //尺寸规格
+    size_suss: false, //尺寸规格
     taste_suss: false, //味道规格
     volume_suss: false, //内存规格
     type_suss: false, //类型规格
-    ZKprice:'',//折扣价格
+    ZKprice: '', //折扣价格
     px2rpxWidth: '',
     px2rpxHeight: '',
   },
-  goTop: function (e) {
+  goTop: function(e) {
     this.setData({
       scrollTop: 0
     })
   },
-  swiperChange: function (e) {
+  swiperChange: function(e) {
     this.setData({
       swiperCurrent: e.detail.current
     })
   },
-  goHome: function (e) {
+  goHome: function(e) {
     wx.navigateTo({
       url: '../mall/mall'
     })
@@ -83,13 +83,12 @@ Page({
   /**
    * 生命周期函数--监听页面初次渲染完成
    */
-  onReady: function () {
+  onReady: function() {
     let that = this;
     //获取缓存
     wx.getStorage({
       key: 'PX_TO_RPX',
-      success: function (res) {
-        console.log(res)
+      success: function(res) {
         that.setData({
           px2rpxHeight: res.data.px2rpxHeight,
           px2rpxWidth: res.data.px2rpxWidth,
@@ -102,25 +101,24 @@ Page({
   /**
    * 页面数据加载，监听事件，获取商品详细信息
    */
-  onLoad: function (options) {
-    console.log(options)
+  onLoad: function(options) {
     let that = this
     let post_id = options.goodsid;
     let shopCode = options.shopCode;
     that.setData({
       goods_id: post_id,
     })
+
     function goods(res) {
       let shopinfo = res;
-      console.log(shopinfo)
       let len = shopinfo.length;
       // 折扣判断
       // 折扣除以10
       if (shopinfo.discount > 0 && shopinfo.discount <= 10) {
-        let discount = operating.calcSub(shopinfo.discount, 10);  // 折扣
+        let discount = operating.calcSub(shopinfo.discount, 10); // 折扣
         shopinfo.discountPrice = (operating.calcMul(shopinfo.price, discount)).toFixed(2); // 折扣价格
-        if (shopinfo.discountPrice==0.00){
-          shopinfo.discountPrice=0.01;
+        if (shopinfo.discountPrice == 0.00) {
+          shopinfo.discountPrice = 0.01;
         }
         that.setData({
           ZKprice: shopinfo.discountPrice
@@ -210,7 +208,6 @@ Page({
       })
       // console.log(that.data.tastes)
       let pic = res.picture;
-      console.log(pic)
       // 店铺头像
       let dpicture = [];
       // 轮播图
@@ -221,7 +218,6 @@ Page({
       let xpicture = [];
       let xsort = []
       let zxpic = []
-      console.log(pic)
       // for循环遍历商品图片详情
       for (let i = 0; i < pic.length; i++) {
         // 区分状态值
@@ -276,7 +272,7 @@ Page({
 
   },
 
-  initGoodsInfoData: function (data) {
+  initGoodsInfoData: function(data) {
     var that = this
     that.setData({
       goods_info: data.info,
@@ -284,7 +280,7 @@ Page({
     })
     WxParse.wxParse('article', 'html', data.info.g_content, that, 0)
   },
-  initshopConfigData: function (data) {
+  initshopConfigData: function(data) {
     this.setData({
       shop_config: data.info,
       glo_is_load: false
@@ -293,7 +289,7 @@ Page({
   /**
    * 商品详情
    */
-  goods_nav_bind: function (e) {
+  goods_nav_bind: function(e) {
     var that = this
     var this_target = e.target.id;
     that.setData({
@@ -306,14 +302,14 @@ Page({
   /**
    * 商品评论
    */
-  goods_nav_bind2: function (e) {
+  goods_nav_bind2: function(e) {
     var that = this
     var this_target = e.target.id;
     that.setData({
       this_g_nav: this_target
     })
+
     function comment(res) {
-      console.log(res)
       let len = res.length;
       for (let k = 0; k < len; k++) {
         res[k].img = res[k].img.split(',');
@@ -321,13 +317,12 @@ Page({
       that.setData({
         comments: res
       })
-      console.log(that.data.sphoto)
     }
     utilFunctions.getComment(that.data.goods_id, comment, this)
   },
 
   //显示加入购物车
-  bind_goods_add_cart: function () {
+  bind_goods_add_cart: function() {
     var that = this
     that.setData({
       is_add_cart_view: true
@@ -335,14 +330,14 @@ Page({
   },
 
   //隐藏购物车
-  add_cart_close_bind: function () {
+  add_cart_close_bind: function() {
     var that = this
     that.setData({
       is_add_cart_view: false
     })
   },
   //减少数量
-  bind_cart_number_jian: function () {
+  bind_cart_number_jian: function() {
     var that = this
     var this_default_number = parseInt(that.data.cart_default_number)
     if (this_default_number > 1) {
@@ -364,7 +359,7 @@ Page({
     }
   },
   //增加数量
-  bind_cart_number_jia: function () {
+  bind_cart_number_jia: function() {
     var that = this
     var this_default_number = parseInt(that.data.cart_default_number)
     that.setData({
@@ -376,7 +371,7 @@ Page({
     })
   },
   //加入购物车
-  goods_add_cart: function () {
+  goods_add_cart: function() {
     //颜色规格 
     if (this.data.color_suss == false) {
       wx.showToast({
@@ -418,6 +413,7 @@ Page({
       return false;
     }
     var that = this;
+
     function insert(data) {
       // console.log(data)
       that.setData({
@@ -434,7 +430,7 @@ Page({
   /**
    *去结算 
    */
-  goods_add_cart2: function () {
+  goods_add_cart2: function() {
     //颜色规格 
     if (this.data.color_suss == false) {
       wx.showToast({
@@ -500,13 +496,8 @@ Page({
       key: "gid",
       data: gids
     })
-
-    // // 清空选择
-    // that.setData({
-
-    // })
   },
-  radioChange4: function (e) {
+  radioChange4: function(e) {
     // console.log('radio发生change事件，携带value值为：', e.detail.value)
     this.setData({
       volume: e.detail.value,
@@ -514,7 +505,7 @@ Page({
     })
   },
   // 颜色
-  radioChange1: function (e) {
+  radioChange1: function(e) {
     // console.log('radio发生change事件，携带value值为：', e.detail.value)
     this.setData({
       color: e.detail.value,
@@ -522,7 +513,7 @@ Page({
     })
   },
   // 尺寸
-  radioChange2: function (e) {
+  radioChange2: function(e) {
     // console.log('radio发生change事件，携带value值为：', e.detail.value)
     this.setData({
       size: e.detail.value,
@@ -530,7 +521,7 @@ Page({
     })
   },
   // 口味
-  radioChange5: function (e) {
+  radioChange5: function(e) {
     // console.log('radio发生change事件，携带value值为：', e.detail.value)
     this.setData({
       taste: e.detail.value,
@@ -538,7 +529,7 @@ Page({
     })
   },
   // 类型
-  selectType: function (e) {
+  selectType: function(e) {
     console.log('radio发生change事件，携带value值为：', e.detail.value)
     this.setData({
       typee: e.detail.value,
@@ -549,7 +540,7 @@ Page({
 
 
 
-  initAddCartData: function (data) {
+  initAddCartData: function(data) {
     var that = this;
     wx.hideToast();
     that.setData({
@@ -559,7 +550,7 @@ Page({
       wx.showModal({
         title: '提示',
         content: "添加购物车成功! 点确定进入下单页面,取消留在该页面",
-        success: function (res) {
+        success: function(res) {
           if (res.confirm == true) {
             wx.redirectTo({
               url: '../mallcart/mallcart'
@@ -576,8 +567,8 @@ Page({
         title: '提示',
         content: '登陆超时，将重新获取用户信息',
         showCancel: false,
-        success: function (res) {
-          app.getNewToken(function (token) {
+        success: function(res) {
+          app.getNewToken(function(token) {
             that.setData({
               local_global_token: token
             })
@@ -602,7 +593,7 @@ Page({
     }
   },
   //联系客服
-  bind_contant_kefu: function (e) {
+  bind_contant_kefu: function(e) {
     let that = this
     let phones = e.currentTarget.dataset.mobile;
     wx.makePhoneCall({
@@ -610,18 +601,18 @@ Page({
     });
   },
   //进入购物车
-  bind_go_cart: function () {
+  bind_go_cart: function() {
     wx.navigateTo({
       url: "/pages/shop/bcart/index"
     })
   },
-  set_close: function () {
+  set_close: function() {
     this.setData({
       is_add_cart_view: false
     })
   },
   //属性选择
-  select_attr_bind: function (e) {
+  select_attr_bind: function(e) {
     var that = this;
     var this_attr_id = e.currentTarget.id;
     var this_attr_name = e.currentTarget.dataset.type;
@@ -651,7 +642,7 @@ Page({
     })
   },
   //下拉刷新
-  onPullDownRefresh: function () {
+  onPullDownRefresh: function() {
     var that = this
     that.setData({
       this_page: 1
@@ -663,7 +654,7 @@ Page({
     }, 1000)
   },
   //滚动加载
-  indexscrolltolower: function () {
+  indexscrolltolower: function() {
     var that = this
     that.setData({
       hasMore: true
@@ -671,7 +662,7 @@ Page({
     var this_target = this.data.this_items
     _function.getReplyList(that.data.this_post_id, that.data.this_page + 1, that.data.pagesize, that.initReplyLoadData, this)
   },
-  initReplyLoadData: function (data) {
+  initReplyLoadData: function(data) {
     var that = this
     if (data.info == null) {
       that.setData({
@@ -693,7 +684,7 @@ Page({
       })
     }
   },
-  onShareAppMessage: function () {
+  onShareAppMessage: function() {
     var that = this
     return {
       title: that.data.goods_info.g_name,

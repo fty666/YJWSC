@@ -37,13 +37,9 @@ App({
     // 登录
     wx.login({
       success: res => {
-        console.log(res)
-        console.log(res.code);
         // 发送 res.code 到后台换取 openId, sessionKey, unionId
         funData.mylogin(res.code, function (data) {
-          console.log(data.data.data);
           if (data.data.data.stauts==0){
-
             wx.showModal({
               title: '提示',
               content: '您的账户被禁用了,请联系客服',

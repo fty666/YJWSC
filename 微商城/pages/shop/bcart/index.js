@@ -27,8 +27,8 @@ Page({
 
   /**
    * 事件初始化，加载购物车信息
-  */
-  onLoad: function (options) {
+   */
+  onLoad: function(options) {
     let that = this;
     // 加载页面tarBar模块
     this.carts()
@@ -38,32 +38,32 @@ Page({
   /**
    *加载购物车信息 
    */
-  carts: function () {
+  carts: function() {
     let that = this
+
     function cart(res) {
       // console.log(res)
       let leng = res.length
       for (var i = 0; i < leng; i++) {
         res[i].is_checked = false;
       }
-      console.log(res)
       that.setData({
         cart_list: res,
       })
-      // console.log(that.data.cart_list)
     }
     utilFunctions.getGoodsCart(cart, this);
   },
 
-  onShow: function () {
+  onShow: function() {
     let that = this;
+
     function cart(res) {
       let leng = res.length
       for (var i = 0; i < leng; i++) {
         res[i].is_checked = false;
         // 折扣除以10
         if (res[i].discount > 0 && res[i].discount <= 10) {
-          let discount = calculate.calcSub(res[i].discount, 10);  // 折扣
+          let discount = calculate.calcSub(res[i].discount, 10); // 折扣
           res[i].discountPrice = (calculate.calcMul(res[i].price, discount)).toFixed(2); // 折扣价格
           if (res[i].discountPrice == 0.00) {
             res[i].discountPrice = 0.01;
@@ -79,7 +79,7 @@ Page({
     utilFunctions.getGoodsCart(cart, this)
   },
 
-  onReady: function () {
+  onReady: function() {
     let that = this;
     if (app.globalData.level == '1' || !app.globalData.level) {
       template.tabbar("tabBar", 2, that, 1);
@@ -93,7 +93,7 @@ Page({
         res[i].is_checked = false;
         // 折扣除以10
         if (res[i].discount > 0 && res[i].discount <= 10) {
-          let discount = calculate.calcSub(res[i].discount, 10);  // 折扣
+          let discount = calculate.calcSub(res[i].discount, 10); // 折扣
           res[i].discountPrice = (calculate.calcMul(res[i].price, discount)).toFixed(2); // 折扣价格
           if (res[i].discountPrice == 0.00) {
             res[i].discountPrice = 0.01;
@@ -111,8 +111,7 @@ Page({
       //获取缓存
       wx.getStorage({
         key: 'PX_TO_RPX',
-        success: function (res) {
-          console.log(res)
+        success: function(res) {
           that.setData({
             px2rpxHeight: res.data.px2rpxHeight,
             px2rpxWidth: res.data.px2rpxWidth,
@@ -122,7 +121,7 @@ Page({
   },
 
   //全选
-  all_checkboxChange: function (e) {
+  all_checkboxChange: function(e) {
     var that = this
     var isallcheck = false
     if (e.detail.value[0] == 1) {
@@ -151,7 +150,7 @@ Page({
   /**
    * 减少数量
    */
-  bind_cart_number_jian: function (e) {
+  bind_cart_number_jian: function(e) {
     // console.log(e)
     const index = e.currentTarget.dataset.index
     // 购物车ID
@@ -166,6 +165,7 @@ Page({
     numss -= 1;
     let that = this
     carts[index].num = numss;
+
     function updata(res) {
       that.setData({
         cart_list: carts
@@ -179,10 +179,8 @@ Page({
   /**
    * 增加数量
    */
-  bind_cart_number_jia: function (e) {
-    console.log(e)
+  bind_cart_number_jia: function(e) {
     let datas = e.currentTarget.dataset.stock
-    console.log(datas)
     let index = e.currentTarget.dataset.index
     // 购物车ID
     let cartId = e.currentTarget.dataset.goodscart
@@ -196,6 +194,7 @@ Page({
     numss += 1;
     carts[index].num = numss;
     let that = this
+
     function updata(res) {
       that.setData({
         cart_list: carts
@@ -208,8 +207,7 @@ Page({
   /**
    *手动输入 
    */
-  setShop: function (e) {
-    console.log(e.detail.value)
+  setShop: function(e) {
     let datas = e.detail.value;
     let reg = /^\d$/;
     if (reg.test(datas) == false) {
@@ -235,6 +233,7 @@ Page({
     }
     carts[index].num = numss;
     let that = this
+
     function updata(res) {
       that.setData({
         cart_list: carts
@@ -247,14 +246,12 @@ Page({
   /**
    * 选择商品
    */
-  selectList: function (e) {
-    // console.log(e)
+  selectList: function(e) {
     // 获取data- 传进来的index
     let index = e.currentTarget.dataset.index;
-    let that=this;
+    let that = this;
     // 获取购物车列表
     let carts = that.data.cart_list;
-    console.log(carts)
     // 获取当前商品的选中状态
     let is_checked = carts[index].is_checked;
     // 改变状态       
@@ -262,15 +259,14 @@ Page({
     that.setData({
       cart_list: carts
     });
-    console.log(carts)
     // 重新获取总价
     that.getTotalPrice();
   },
 
   /**
-    * 计算总价
-    */
-  getTotalPrice: function () {
+   * 计算总价
+   */
+  getTotalPrice: function() {
     // 获取购物车列表
     let carts = this.data.cart_list;
     let total = '0.00';
@@ -279,8 +275,7 @@ Page({
     for (let i = 0; i < carts.length; i++) {
       if (carts[i].is_checked) {
         // 判断选中才会计算价格
-        // console.log(calculate.calcMul(carts[i].num, carts[i].price))
-        total = calculate.calcAdd(total, calculate.calcMul(carts[i].num, carts[i].discountPrice));  // 所有价格加起来
+        total = calculate.calcAdd(total, calculate.calcMul(carts[i].num, carts[i].discountPrice)); // 所有价格加起来
         // 计算购物车数量
         all_g_number = calculate.calcAdd(all_g_number, carts[i].num);
       }
@@ -303,7 +298,7 @@ Page({
 
 
 
-  initeditCartListData: function (data) {
+  initeditCartListData: function(data) {
     var that = this
     if (data.code == 1) {
       _function.getCartList(wx.getStorageSync("utoken"), that.initgetCartListData, this)
@@ -312,8 +307,8 @@ Page({
         title: '提示',
         content: '登陆超时，将重新获取用户信息',
         showCancel: false,
-        success: function (res) {
-          app.getNewToken(function (token) {
+        success: function(res) {
+          app.getNewToken(function(token) {
             that.setData({
               local_global_token: token
             })
@@ -333,14 +328,12 @@ Page({
   /**
    * 删除购物车
    */
-  bind_delete_cart: function (e) {
+  bind_delete_cart: function(e) {
     let that = this;
     let carts = that.data.cart_list;
-    console.log(carts)
     let mycid = [];
     let cid = [];
     let lengs = carts.length;
-    console.log(lengs)
     for (let i = 0; i < lengs; i++) {
       if (carts[i].is_checked) {
         cid.push(carts[i].goodsCart_id)
@@ -358,7 +351,7 @@ Page({
     wx.showModal({
       title: '确定要删除吗',
       content: '',
-      success: function (res) {
+      success: function(res) {
         if (res.confirm) {
           // 同步删除数据库
           function deletes(res) {
@@ -385,7 +378,7 @@ Page({
   /**
    * 结算跳转
    */
-  mallsure: function () {
+  mallsure: function() {
     if (this.data.cart_list == null) {
       wx.showModal({
         title: '提示',
@@ -442,15 +435,15 @@ Page({
     })
   },
 
-  initdelCartListData: function (data) {
+  initdelCartListData: function(data) {
     var that = this
     if (data.code == 2) {
       wx.showModal({
         title: '提示',
         content: '登陆超时，将重新获取用户信息',
         showCancel: false,
-        success: function (res) {
-          app.getNewToken(function (token) {
+        success: function(res) {
+          app.getNewToken(function(token) {
             that.setData({
               local_global_token: token
             })
@@ -468,7 +461,7 @@ Page({
   },
 
   //下拉刷新
-  onPullDownRefresh: function () {
+  onPullDownRefresh: function() {
     var that = this
     _function.getCartList(wx.getStorageSync("utoken"), that.initgetCartListData, this)
     that.setData({
@@ -478,6 +471,4 @@ Page({
       wx.stopPullDownRefresh()
     }, 1000)
   },
-
-  // 
 })
