@@ -1,5 +1,8 @@
 {
-    "navigationBarTitleText": "商品详情",
-    "backgroundTextStyle":"dark",
-    "enablePullDownRefresh":true
+  "navigationBarTitleText": "商品详情",
+  "backgroundTextStyle": "dark",
+  "enablePullDownRefresh": true,
+  "usingComponents": {
+    "i-rate": "../../../component/rate/index"
+  }
 }

@@ -88,7 +88,7 @@ page{
 .item{
   position: relative;
   width: 100%;
-  background: linear-gradient(to right,#cfa568,#e3bf79);
+  /* background: linear-gradient(to right,#cfa568,#e3bf79); */
   margin-bottom: 30rpx;
   padding-top: 52rpx;
 }
@@ -183,6 +183,6 @@ page{
      height: 100%;
      padding: 0 20rpx; 
 }
-input{
+/* input{
     border: 1rpx solid #ccc;
-}
+} */

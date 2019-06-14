@@ -17,7 +17,7 @@
     <view class="contenter">
       <block wx:for="{{quan_list}}" wx:key="{{item.couponId}}">
         <view class="dollar-list" style="width:{{px2rpxWidth*690}}px;">
-          <view class="top write {{item.sta == '1' ? 'overdue' : 'used' }}" catchtap='useCoupon' data-couponid='{{item.couponId}}' data-index='{{index}}' data-group_id='{{item.group_id}}' data-shop_code='{{item.shop_code}}' data-full='{{item.couponPrice}}' style="height:{{px2rpxHeight*160}}px;">
+          <view class="top write overdue" catchtap='useCoupon' data-index='{{index}}' data-res='{{item}}' style="height:{{px2rpxHeight*160}}px;">
             <view class="money-msg f16">¥
               <text class="money">{{item.couponPrice}}</text>
               <text class='f12'>优惠劵(满{{item.conditions}}使用)</text>

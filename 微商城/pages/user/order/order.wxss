@@ -34,17 +34,17 @@ page {
 }
 
 .orders {
-  height: auto;
   width: 100%;
   overflow: hidden;
 }
 
 .order {
-  margin-top: 20rpx;
   background: #fff;
+  font-size: 14px;
+  color: black;
 }
 
-.order .h {
+.h {
   line-height: 83.3rpx;
   margin-left: 31.25rpx;
   padding-right: 31.25rpx;
@@ -53,30 +53,30 @@ page {
   color: #333;
 }
 
-.order .h .l {
+.h .l {
   float: left;
 }
 
-.order .h .r {
+.h .r {
   float: right;
   color: #b4282d;
   font-size: 24rpx;
 }
 
-.order .goods {
+ .goods {
   display: flex;
   justify-content: flex-start;
   align-items: center;
   margin-left: 31.25rpx;
 }
 
-.order .goods .img {
+.goods .img {
   display: flex;
   justify-content: center;
   align-items: center;
 }
 
-.order .goods .info {
+ .goods .info {
   /* flex: 1; */
   display: flex;
   flex-direction: column;
@@ -85,7 +85,7 @@ page {
   padding-left: 20rpx;
 }
 
-.order .goods .name {
+ .goods .name {
   /* margin-top: 30rpx; */
   display: block;
   line-height: 44rpx;
@@ -96,19 +96,19 @@ page {
   text-overflow: ellipsis;
 }
 
-.order .goods .number {
+ .goods .number {
   display: block;
   line-height: 37rpx;
   color: #666;
   font-size: 25rpx;
 }
 
-.order .goods .status {
+ .goods .status {
   color: #b4282d;
   font-size: 25rpx;
 }
 
-.order .b {
+ .b {
   line-height: 103rpx;
   margin-left: 31.25rpx;
   padding-right: 31.25rpx;
@@ -117,11 +117,11 @@ page {
   color: #333;
 }
 
-.order .b .l {
+.b .l {
   float: left;
 }
 
-.order .b .d {
+ .b .d {
   float: left;
   margin-left: 120rpx;
 }
@@ -131,12 +131,12 @@ page {
   margin-left: 50rpx;
 }
 
-.order .b .r {
+.b .r {
   float: right;
   display: flex;
 }
 
-.order .b .btn {
+ .b .btn {
   margin-top: 19rpx;
   margin-left: 30rpx;
   line-height: 64.5rpx;
@@ -158,4 +158,10 @@ page {
   justify-content: center;
   align-items: center;
   margin-top: 150px;
+}
+
+
+.Fstat{
+  color: black;
+  font-size: 16px;
 }

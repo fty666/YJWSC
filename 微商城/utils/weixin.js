@@ -79,32 +79,6 @@ module.exports = {
         console.log('success')
       }
     })
-
-
-    // if (!util.isEmpty(message)) {
-    //   socketMsgQueue.push(message);
-    // }
-
-    // wx.onSocketOpen(function (res) {
-    //   console.log('连接成功');
-    //   socketOpen = true
-    //   for (var i = 0; i < socketMsgQueue.length; i++) {
-    //     if (socketOpen) {
-    //       console.log('发送了')
-    //       wx.sendSocketMessage({
-    //         data: socketMsgQueue[i]
-    //       })
-    //     } else {
-    //       socketMsgQueue.push(socketMsgQueue[i])
-    //     }
-    //   }
-    //   socketMsgQueue = []
-    // });
-
-    // wx.onSocketError(function (res) {
-    //   socketOpen = false;
-    //   console.log('WebSocket连接打开失败，请检查！')
-    // });
   },
 
   /**

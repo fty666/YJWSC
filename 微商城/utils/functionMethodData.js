@@ -348,14 +348,14 @@ module.exports = {
     });
   },
 
-  // 查询商品列表(默认上架)
-  getGoods: function(myshopCode, page, pageSize, pageobj, callback) {
+  // 查询商品列表
+  getGoods: function(myshopCode, page, pageSize, isUse, pageobj, callback) {
     let that = this;
     let data = {
       shopCode: myshopCode,
       page: page,
       pageSize: pageSize,
-      isUse: 1,
+      isUse: isUse,
     };
     this.requestUrl(data, urlData.getGoodsUrl, pageobj, callback);
   },
@@ -452,7 +452,8 @@ module.exports = {
   updateOrderStatus: function(orderMainid, mystatus, pageobj, callback) {
     let data = {
       order_mainid: orderMainid,
-      status: mystatus
+      status: mystatus,
+      reception: 1
     }
     this.requestUrl(data, urlData.updateOrderStatusUrl, pageobj, callback);
   },
@@ -855,8 +856,9 @@ module.exports = {
   },
 
   // 根据店铺查询优惠券
-  getCoupon: function(myshop_code, page, pageSize, pageobj, callback) {
+  getCoupon: function(userId, myshop_code, page, pageSize, pageobj, callback) {
     let data = {
+      userId: userId,
       shop_code: myshop_code,
       page: page,
       pageSize: pageSize
@@ -1071,7 +1073,7 @@ module.exports = {
   // 获取骑手信息
   getHorseManByUUID: function(datas, calbacks, pageobj) {
     let data = datas;
-    this.requestUrl(data, urlData.getHorseManByUUID, pageobj, calbacks, );
+    this.requestUrl(data, urlData.getHorseManByUUID, pageobj, calbacks);
   },
 
   //查询可提现金额
@@ -1079,7 +1081,7 @@ module.exports = {
     let data = {
       shopCode: shopCode
     };
-    this.requestUrl(data, urlData.getPayAccount, pageobj, calbacks, );
+    this.requestUrl(data, urlData.getPayAccount, pageobj, calbacks);
   },
 
   //查询物流公司
@@ -1087,6 +1089,6 @@ module.exports = {
     let data = {
 
     };
-    this.requestUrl(data, urlData.getCompany, pageobj, calbacks, );
+    this.requestUrl(data, urlData.getCompany, pageobj, calbacks);
   }
 }

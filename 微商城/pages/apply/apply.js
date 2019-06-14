@@ -30,19 +30,8 @@ Page({
    */
   onLoad: function (options) {
     let that = this;
-    // 根据用户id获取shopCode
-    // setTimeout(function(){
-    //     funData.getShopByCode(app.globalData.user_id, that, (data) => {
-    //             console.log(data);
-    //         that.setData({
-    //             shopInfo: data.shop,
-    //         });
-    //     });
-    // },1000);
-
     // 获取店铺分类
     funData.getGroup(that, (data) => {
-      //   console.log(data)
       that.setData({
         group: data
       });
@@ -55,7 +44,7 @@ Page({
   onReady: function () {
     let that = this;
     funData.getShopByCode(app.globalData.user_id, that, (data) => {
-      console.log(data);
+      // console.log(data);
       that.setData({
         shopInfo: data.shop,
       });
@@ -64,7 +53,6 @@ Page({
     wx.getStorage({
       key: 'PX_TO_RPX',
       success: function (res) {
-        console.log(res)
         that.setData({
           px2rpxHeight: res.data.px2rpxHeight,
           px2rpxWidth: res.data.px2rpxWidth,
@@ -74,52 +62,9 @@ Page({
   },
 
   /**
-   * 生命周期函数--监听页面显示
-   */
-  onShow: function () {
-
-  },
-
-  /**
-   * 生命周期函数--监听页面隐藏
-   */
-  onHide: function () {
-
-  },
-
-  /**
-   * 生命周期函数--监听页面卸载
-   */
-  onUnload: function () {
-
-  },
-
-  /**
-   * 页面相关事件处理函数--监听用户下拉动作
-   */
-  onPullDownRefresh: function () {
-
-  },
-
-  /**
-   * 页面上拉触底事件的处理函数
-   */
-  onReachBottom: function () {
-
-  },
-
-  /**
-   * 用户点击右上角分享
-   */
-  onShareAppMessage: function () {
-
-  },
-
-  /**
    * 选择分组
    */
   radioChange: function (e) {
-    console.log(e)
     if (e.detail.value == '1' || e.detail.value == 1) {
       this.setData({
         change_takeout: true
@@ -137,7 +82,7 @@ Page({
   location: function (e) {
     let that = this;
     funData.amapFilePackage((data) => {
-      console.log(data)
+      // console.log(data)
       let locationName = {};
       locationName.desc = data[0].name;
       locationName.latitude = data[0].latitude;
@@ -203,17 +148,6 @@ Page({
     let shop = e.detail.value;
     console.log(shop.password.length)
     let len = shop.password.length;
-    console.log(len)
-    // 店铺logo不能为空
-    // if (util.isEmpty(that.data.logo)) {
-    //     wx.showToast({
-    //         title: 'logo不能为空',
-    //         icon: 'none',
-    //         duration: 1000
-    //     });
-    //     return;
-    // }
-
     // 店铺分类不能为空
     if (util.isEmpty(shop.group_id)) {
       wx.showToast({
@@ -324,13 +258,14 @@ Page({
     shop.level = 3;
     shop.password = shop.password;
     shop.passtoo = shop.password;
-    console.log(shop)
+    // console.log(shop)
     funData.updateShopInfo(shop, that, () => {
       wx.showToast({
         title: '信息已成功提交',
         icon: 'success',
         duration: 1000
       });
+      app.globalData.level=3;
       setTimeout(function () {
         wx.reLaunch({
           url: '/pages/myself/myself'

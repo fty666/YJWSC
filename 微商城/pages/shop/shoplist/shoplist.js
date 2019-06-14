@@ -135,7 +135,6 @@ Page({
   erery: function() {
     let listId = ""
     let that = this;
-
     function codelist(res) {
       that.setData({
         goods: res.PageInfo.list,
@@ -151,7 +150,6 @@ Page({
   cate_item_bind: function(e) {
     let that = this;
     let cids = e.currentTarget.dataset.cid;
-
     function codelist(res) {
       let len = res.PageInfo.list.length;
       if (len == 0) {

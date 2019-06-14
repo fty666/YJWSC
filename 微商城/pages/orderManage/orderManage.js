@@ -17,28 +17,28 @@ Page({
     runningMoney: 0.0,
     publicWelfareMoney: 0.0,
     hasData: false,
-    all_order: -1,       // 全部
-    pending_payment: 1,  // 1未付款
-    to_be_shipped: 2,    // 2付款未发货(可退货)
-    to_be_received: 3,   // 3付款待收货
-    to_be_evaluated: 4,  // 4收货待评价(订单完成)
-    accomplish: 5,       // 5评价完成
-    exchange_goods: 6,   // 6换货
-    return_of_goods: 7,  // 7退货
-    navTab: ["全部",  "待发货", "待收货", "退货处理","换货处理"],
+    all_order: -1, // 全部
+    pending_payment: 1, // 1未付款
+    to_be_shipped: 2, // 2付款未发货(可退货)
+    to_be_received: 3, // 3付款待收货
+    to_be_evaluated: 4, // 4收货待评价(订单完成)
+    accomplish: 5, // 5评价完成
+    exchange_goods: 6, // 6换货
+    return_of_goods: 7, // 7退货
+    navTab: ["全部", "待发货", "待收货", "退货处理", "换货处理"],
     currentNavtab: 0,
     oederSearchInput: null, // 搜索订单号
     scrollTop: 0,
     floorstatus: false,
     shop_code: '',
     uploadFileUrl: urlData.uploadFileUrl,
-    oids: '',//订单id
-    now: false,//显示已发货
+    oids: '', //订单id
+    now: false, //显示已发货
     px2rpxWidth: '',
     px2rpxHeight: '',
   },
 
-  catchtouchstart: function (e) {
+  catchtouchstart: function(e) {
     let that = this;
     that.setData({
       startPoint: [e.touches[0].clientX, e.touches[0].clientY]
@@ -57,38 +57,23 @@ Page({
   // },
 
   // 加载
-  onLoad: function (options) {
+  onLoad: function(options) {
     let that = this
     // 加载页面tarBar模块
     template.tabbar("tabBar", 1, this, 2);
-    // if (that.data.currentNavtab == 0) {
-    //     mystatus = -1;
-    // }
-    // setTimeout(function () {
-    //     funData.getShopCode(app.globalData.user_id, that, (data) => {
-    //         that.setData({
-    //             shop_code: data.shop_code
-    //         });
-    //     });
-    //     setTimeout(function () {
-    //         that.getOrder(mystatus, that, page, pageSize);
-    //     }, 1000);
-    // }, 1000);
 
   },
 
-  onReady: function () {
-    console.log(app.globalData.groupId)
+  onReady: function() {
     let that = this;
     funData.getShopCode(app.globalData.user_id, that, (data) => {
-      console.log(data);
       that.setData({
         shop_code: data.shop_code
       });
     });
     if (that.data.currentNavtab == 0) {
       mystatus = -1;
-      setTimeout(function () {
+      setTimeout(function() {
         that.getOrder(mystatus, that, page, pageSize);
         weixin.onSocket(that.data.shop_code);
       }, 1000);
@@ -96,8 +81,7 @@ Page({
     //获取缓存
     wx.getStorage({
       key: 'PX_TO_RPX',
-      success: function (res) {
-        console.log(res)
+      success: function(res) {
         that.setData({
           px2rpxHeight: res.data.px2rpxHeight,
           px2rpxWidth: res.data.px2rpxWidth,
@@ -109,9 +93,8 @@ Page({
   /**
    * 点击导航
    */
-  switchTab: function (e) {
+  switchTab: function(e) {
     let that = this;
-    console.log(e.currentTarget.dataset.idx);
     this.setData({
       currentNavtab: e.currentTarget.dataset.idx,
       floorstatus: false
@@ -120,7 +103,7 @@ Page({
   },
 
   // 查询各种状态的订单
-  statusOrder: function (tabstatus, that) {
+  statusOrder: function(tabstatus, that) {
     if (tabstatus == 0) {
       mystatus = -1;
     } else if (tabstatus == 3) {
@@ -129,7 +112,7 @@ Page({
       mystatus = 6;
     } else if (tabstatus == 1) {
       mystatus = 2;
-    }else{
+    } else {
       mystatus = 3;
     }
     // console.log(mystatus);
@@ -137,21 +120,18 @@ Page({
   },
 
   // 查询订单
-  getOrder: function (mystatus, that, page, pageSize) {
+  getOrder: function(mystatus, that, page, pageSize) {
     // 查询店铺订单
     let order_type = '';
-    let user_id='';
+    let user_id = '';
     if (app.globalData.groupId == 1) {
       order_type = 1;
     } else {
       order_type = 2;
     }
-    funData.getOrder(that.data.shop_code, mystatus, page, pageSize, order_type, user_id, that, function (data) {
-      // console.log(data.PageInfo.list);
-      // console.log(data.PageInfo.list[0].orderMobile);
+    funData.getOrder(that.data.shop_code, mystatus, page, pageSize, order_type, user_id, that, function(data) {
       // 对订单数据格式的转化
       let order = funData.dealOrderData(data.PageInfo.list);
-      // console.log(order);
       that.setData({
         order: order,
         hasData: true,
@@ -163,13 +143,12 @@ Page({
   /**
    * 发货按钮
    */
-  sendGoods: function (e) {
-    console.log(this.data.order)
+  sendGoods: function(e) {
     if (this.data.order[0].groupId == 1) {
       let reception = that.data.to_be_received;
-      // let status=3;
       let order_mainid = this.data.order[0].order_mainid;
       let that = this;
+
       function calback() {
         wx.showToast({
           title: '发货成功',
@@ -187,7 +166,7 @@ Page({
   },
 
   // 改变状态 同步修改数据
-  changeOrderStatus: function (index, mystatus, that) {
+  changeOrderStatus: function(index, mystatus, that) {
     let order = that.data.order;
     let len = order.length;
     order[index].status = mystatus;
@@ -199,7 +178,7 @@ Page({
   /**
    * 查询订单详情
    */
-  orderDetail: function (e) {
+  orderDetail: function(e) {
     console.log(e.currentTarget.dataset.order_uuid);
     wx.navigateTo({
       url: '/pages/orderManage/orderDeatail/orderDeatail?order_uuid=' + e.currentTarget.dataset.order_uuid
@@ -208,8 +187,7 @@ Page({
 
 
   // 失去焦点获取输入值
-  bindchange: function (e) {
-    console.log(e.detail.value);
+  bindchange: function(e) {
     this.setData({
       oederSearchInput: e.detail.value
     });
@@ -218,7 +196,7 @@ Page({
   /**
    * 搜索订单
    */
-  oederSearch: function () {
+  oederSearch: function() {
     let that = this;
     wx.navigateTo({
       url: '/pages/orderManage/orderDeatail/orderDeatail?order_uuid=' + that.data.oederSearchInput
@@ -228,8 +206,7 @@ Page({
   /**
    *修改收货地址 
    */
-  addrupdata: function (e) {
-    console.log(e);
+  addrupdata: function(e) {
     let oids = e.currentTarget.dataset.oid;
     wx.navigateTo({
       url: '/pages/orderManage/editAddr/editAddr?oid=' + oids
@@ -239,18 +216,16 @@ Page({
   /**
    * 换货详情按钮
    */
-  exchangeGoods: function (e) {
+  exchangeGoods: function(e) {
     wx.navigateTo({
       url: '/pages/orderManage/exchangeGoods/exchangeGoods?order_uuid=' + e.currentTarget.dataset.order_uuid
-      // url: '/pages/orderManage/exchangeGoods/exchangeGoods'
-
     })
   },
 
   /**
    * 退货详情按钮
    */
-  returnGoods: function (e) {
+  returnGoods: function(e) {
     wx.navigateTo({
       url: '/pages/orderManage/returnGoods/returnGoods?order_uuid=' + e.currentTarget.dataset.order_uuid
       // url: '/pages/orderManage/returnGoods/returnGoods'
@@ -261,7 +236,7 @@ Page({
   /**
    *  查看物流详情
    */
-  checkLogistics: function (e) {
+  checkLogistics: function(e) {
     wx.navigateTo({
       url: '/pages/orderManage/express/express?order_uuid=' + e.currentTarget.dataset.order_uuid
     })
@@ -270,11 +245,9 @@ Page({
   /**
    * 滚动到底部/右边，会触发 scrolltolower 事件
    */
-  scrollToLower: function () {
+  scrollToLower: function() {
     let that = this;
     pageSize += 20;
-    // console.log(pageSize);
-    // console.log(mystatus)
     that.getOrder(mystatus, that, page, pageSize);
     that.setData({
       floorstatus: true
@@ -284,7 +257,7 @@ Page({
   /**
    * 滚动到顶部/左边，会触发 scrolltoupper 事件
    */
-  scrollToUpper: function () {
+  scrollToUpper: function() {
     this.setData({
       floorstatus: false
     })
@@ -293,7 +266,7 @@ Page({
   /**
    * 返回顶部
    */
-  goTop: function (e) {
+  goTop: function(e) {
     this.setData({
       scrollTop: 0
     })

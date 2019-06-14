@@ -41,7 +41,7 @@ Page({
   /**
    * 生命周期函数--监听页面加载
    */
-  onLoad: function (options) {
+  onLoad: function(options) {
     console.log(options)
     this.setData({
       code: options.scode
@@ -51,17 +51,15 @@ Page({
   /**
    * 生命周期函数--监听页面初次渲染完成
    */
-  onReady: function () {
+  onReady: function() {
     let that = this;
     let user_id = app.globalData.user_id;
     funData.getShopByCode(user_id, that, (data) => {
-      console.log(data)
       that.setData({
         shop_code: data.shop.shop_code,
         shop_info: data.shop
       });
       let scodes = data.shop.groupId;
-      console.log('12345' + data.shop.groupId)
       if (scodes == 1) {
         // 获取外卖分类
         utilFunctions.getFoodClass(data.shop.shop_code, (res) => {
@@ -72,12 +70,11 @@ Page({
         }, that);
       } else {
         if (data.shop.groupId == 'undefined' || data.shop.groupId == undefined) {
-          console.log('88888' + data.shop.groupId)
           wx.showModal({
             title: '提示',
             content: '请先完善店铺信息',
             icon: 'none',
-            success: function (res) {
+            success: function(res) {
               if (res.confirm) {
                 wx.navigateTo({
                   url: '/pages/myself/myself',
@@ -88,7 +85,7 @@ Page({
           return false;
         }
         // 查询分类
-        funData.getClass(data.shop.groupId, that, function (res) {
+        funData.getClass(data.shop.groupId, that, function(res) {
           console.log(res);
           that.setData({
             category: res
@@ -99,51 +96,9 @@ Page({
   },
 
   /**
-   * 生命周期函数--监听页面显示
-   */
-  onShow: function () {
-
-  },
-
-  /**
-   * 生命周期函数--监听页面隐藏
-   */
-  onHide: function () {
-
-  },
-
-  /**
-   * 生命周期函数--监听页面卸载
-   */
-  onUnload: function () {
-
-  },
-
-  /**
-   * 页面相关事件处理函数--监听用户下拉动作
-   */
-  onPullDownRefresh: function () {
-
-  },
-
-  /**
-   * 页面上拉触底事件的处理函数
-   */
-  onReachBottom: function () {
-
-  },
-
-  /**
-   * 用户点击右上角分享
-   */
-  onShareAppMessage: function () {
-
-  },
-
-  /**
    * 添加类型
    */
-  spec: function (e) {
+  spec: function(e) {
     let that = this;
     // 获取类型
     let myspec = e.currentTarget.dataset.spec;
@@ -163,7 +118,7 @@ Page({
   /**
    * 获取类型值
    */
-  specInput: function (e) {
+  specInput: function(e) {
     let that = this;
     let goods_spec_value = that.data.goods_spec_value;
     let myspec = e.currentTarget.dataset.spec;
@@ -185,20 +140,15 @@ Page({
   /**
    * 删除类型
    */
-  cancleInput: function (e) {
+  cancleInput: function(e) {
     let that = this;
     let goods_spec = that.data.goods_spec;
     let goods_spec_value = that.data.goods_spec_value;
-    // console.log(goods_spec);
-    // console.log(goods_spec_value);
-
     let myspec = e.currentTarget.dataset.spec;
     let myspec_value = myspec + '_value';
     let data_spec = goods_spec[myspec];
     let data_value = goods_spec_value[myspec_value];
     let index = e.currentTarget.dataset.index;
-
-    // console.log(data_spec)
     data_spec.splice(index, 1);
     data_value.splice(index, 1);
     goods_spec[myspec] = data_spec;
@@ -212,12 +162,11 @@ Page({
   /**
    * 添加商品列表图片
    */
-  addlistImg: function () {
+  addlistImg: function() {
     let that = this;
     let list_img = that.data.list_img;
     let list_img_hidden = that.data.list_img_hidden;
-    funData.myUpload(function (fileName) {
-      console.log(fileName)
+    funData.myUpload(function(fileName) {
       list_img.push(fileName);
       if (list_img.length >= 1) {
         list_img_hidden = !list_img_hidden;
@@ -232,12 +181,12 @@ Page({
   /**
    * 添加商品轮播图片,规定三张
    */
-  addswiperImg: function () {
+  addswiperImg: function() {
     let that = this;
     let swiper_img = that.data.swiper_img;
     let swiper_sort = that.data.swiper_sort;
     let swiper_img_hidden = that.data.swiper_img_hidden;
-    funData.myUpload(function (fileNmae) {
+    funData.myUpload(function(fileNmae) {
       swiper_img.push(fileNmae);
       for (let i = 0; i < swiper_img.length; i++) {
         if (swiper_img[i] == fileNmae) {
@@ -254,18 +203,40 @@ Page({
       });
     });
   },
+  /**
+   *查看大图片 
+   */
+  bigImg(e) {
+    var imgs = e.currentTarget.dataset.imgsrc;
+    var arr = [];
+    arr.push(imgs)
+    //图片预览
+    wx.previewImage({
+      current: imgs, // 当前显示图片的http链接
+      urls: arr // 需要预览的图片http链接列表
+    })
+  },
+
+  bigImg2(e) {
+    var imgs = e.currentTarget.dataset.imgsrc;
+    var arr = [];
+    arr.push(imgs)
+    //图片预览
+    wx.previewImage({
+      current: imgs, // 当前显示图片的http链接
+      urls: arr // 需要预览的图片http链接列表
+    })
+  },
 
   /**
    * 轮播图排序
    */
-  swiperSort: function (e) {
+  swiperSort: function(e) {
     let that = this;
-    // console.log(e);
     let swiper_sort = that.data.swiper_sort;
     let index = e.currentTarget.dataset.index;
     let img = e.currentTarget.dataset.sort;
     swiper_sort[img] = e.detail.value;
-    // console.log(swiper_sort)
     that.setData({
       swiper_sort: swiper_sort
     });
@@ -274,25 +245,21 @@ Page({
   /**
    * 添加商品详情图片,规定4张
    */
-  addgoodsDetailImg: function () {
+  addgoodsDetailImg: function() {
     let that = this;
     let goodsDetail_img = that.data.goodsDetail_img;
     let goodsDetail_sort = that.data.goodsDetail_sort;
     let goodsDetail_img_hidden = that.data.goodsDetail_img_hidden;
-    funData.myUpload(function (fileNmae) {
+    funData.myUpload(function(fileNmae) {
       goodsDetail_img.push(fileNmae);
       for (let i = 0; i < goodsDetail_img.length; i++) {
         if (goodsDetail_img[i] == fileNmae) {
           goodsDetail_sort[goodsDetail_img[i]] = i;
         }
       }
-      // if (goodsDetail_img.length >= 4) {
-      //     goodsDetail_img_hidden = !goodsDetail_img_hidden;
-      // }
       that.setData({
         goodsDetail_img: goodsDetail_img,
         goodsDetail_sort: goodsDetail_sort,
-        // goodsDetail_img_hidden: goodsDetail_img_hidden
       });
     });
 
@@ -301,13 +268,11 @@ Page({
   /**
    * 详情图片排序
    */
-  detailSort: function (e) {
+  detailSort: function(e) {
     let that = this;
     let goodsDetail_sort = that.data.goodsDetail_sort;
     let img = e.currentTarget.dataset.sort;
-    // console.log(img)
     goodsDetail_sort[img] = e.detail.value;
-    // console.log(goodsDetail_sort);
     that.setData({
       goodsDetail_sort: goodsDetail_sort
     });
@@ -316,7 +281,7 @@ Page({
   /**
    * 删除图片
    */
-  cancleImg: function (e) {
+  cancleImg: function(e) {
     let that = this;
     let status = e.currentTarget.dataset.status;
     let index = e.currentTarget.dataset.index;
@@ -350,11 +315,9 @@ Page({
   /**
    * 获取表单提交的值
    */
-  formSubmit: function (e) {
-    // console.log(e.detail.value);
+  formSubmit: function(e) {
     let that = this;
     let goods = e.detail.value;
-    // console.log(goods);
     // 主要信息不能为空
     if (goods.goods_details == '' || goods.goods_name == '' || goods.price == '' || goods.stock == '') {
       wx.showToast({
@@ -397,13 +360,11 @@ Page({
     let list_img = that.data.list_img;
     let swiper_img = that.data.swiper_img;
     let swiper_sort = that.data.swiper_sort;
-    // console.log(swiper_sort)
     let goodsDetail_img = that.data.goodsDetail_img;
     let goodsDetail_sort = that.data.goodsDetail_sort;
-    // console.log(goodsDetail_sort)
     let status = ''; // 存放图片的状态, 列表图1,轮播图2,详情图3
-    let img = '';    // 存放图片
-    let sort = '';   // 存放图片排序
+    let img = ''; // 存放图片
+    let sort = ''; // 存放图片排序
     // 商品列表图
     let list_img_len = list_img.length;
     for (let i = 0; i < list_img_len; i++) {
@@ -446,7 +407,7 @@ Page({
       }
     }
     goods.img = img; // 图片
-    goods.status = status;  // 图片转态
+    goods.status = status; // 图片转态
     goods.shopCode = that.data.shop_code; // 商品编号
     goods.sort = sort; // 图片排序
     goods.color = that.data.goods_spec_value.color_spec_value.join(','); // 颜色规格
@@ -455,7 +416,6 @@ Page({
     goods.volume = that.data.goods_spec_value.capacity_spec_value.join(','); // 容量规格
     goods.taste = that.data.goods_spec_value.taste_spec_value.join(','); // 容量规格
 
-    // console.log(goods);
     // 添加商品
     funData.insertGoods(goods, that, () => {
       wx.showToast({
@@ -463,9 +423,9 @@ Page({
         icon: 'success',
         duration: 1000,
       });
-      setTimeout(function () {
+      setTimeout(function() {
         wx.redirectTo({
-          url: '/pages/myGoods/goodsList/goodsList'
+          url: '/pages/myGoods/goodsList/goodsList?selectype=' + 'shenhe'
         })
       }, 1500);
     });

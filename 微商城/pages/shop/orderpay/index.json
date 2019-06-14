@@ -1,5 +1,8 @@
 {
   "navigationBarTitleText": "支付页面",
   "backgroundTextStyle": "dark",
-  "enablePullDownRefresh": true
+  "enablePullDownRefresh": true,
+  "usingComponents": {
+    "coupon": "/component/coupons/coupons"
+  }
 }

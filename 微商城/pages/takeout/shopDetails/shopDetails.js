@@ -66,62 +66,48 @@ Page({
    */
   onReady: function () {
     let that = this;
-    wx.showLoading()
-    setTimeout(function () {
-      // 获取店铺信息
-      funDta.getOutShopByCode(that.data.shop_code, that, (res) => {
-        let pei = res.initialMoney;
-        that.setData({
-          shop_info: res,
-          pei: pei,
-          initialMoney: res.initialMoney
-        });
+    // 获取店铺信息
+    funDta.getOutShopByCode(that.data.shop_code, that, (res) => {
+      let pei = res.initialMoney;
+      that.setData({
+        shop_info: res,
+        pei: pei,
+        initialMoney: res.initialMoney
       });
+    });
 
-      // 获取店铺分类
-      funDta.getFoodClass(that.data.shop_code, that, (res) => {
-        that.setData({
-          shop_class: res
-        });
+    // 获取店铺分类
+    funDta.getFoodClass(that.data.shop_code, that, (res) => {
+      that.setData({
+        shop_class: res
       });
+    });
 
-      // 获取店铺商品列表(默认热销,分类为空)
-      getFoodGoodsList(1, '', that);
-      // 获取商家评论
-      function calback(res) {
-        let pres = res.PageInfo.list
-        // 获取评论图片
-        for (let l = 0; l < pres.length; l++) {
-          pres[l].shopImg = pres[l].shopImg.split(',');
-        }
+    // 获取店铺商品列表(默认热销,分类为空)
+    getFoodGoodsList(1, '', that);
+    // 获取商家评论
+    function calback(res) {
+      let pres = res.PageInfo.list
+      // 获取评论图片
+      for (let l = 0; l < pres.length; l++) {
+        pres[l].shopImg = pres[l].shopImg.split(',');
+      }
+      that.setData({
+        comment: pres
+      })
+    }
+    utilFunctions.getShopComment(that.data.shop_code, page, pageSize, calback, that);
+    //获取缓存
+    wx.getStorage({
+      key: 'PX_TO_RPX',
+      success: function (res) {
         that.setData({
-          comment: pres
+          px2rpxHeight: res.data.px2rpxHeight,
+          px2rpxWidth: res.data.px2rpxWidth,
         })
       }
-      utilFunctions.getShopComment(that.data.shop_code, page, pageSize, calback, that);
-      //获取缓存
-      wx.getStorage({
-        key: 'PX_TO_RPX',
-        success: function (res) {
-          that.setData({
-            px2rpxHeight: res.data.px2rpxHeight,
-            px2rpxWidth: res.data.px2rpxWidth,
-          })
-        }
-      })
-      wx.showLoading({
-        title: '稍等加载中...',
-        mask:false
-      })
+    })
 
-      // 缓存时间
-      setTimeout(function () {
-        wx.hideLoading({
-        }
-        )
-      }, 1500)
-
-    }, 500)
 
   },
 
@@ -131,6 +117,7 @@ Page({
   xinfo: function (e) {
     let that = this;
     let gids = e.currentTarget.dataset.gsid;
+
     function calback(res) {
       that.setData({
         shopinfo: res
@@ -163,46 +150,10 @@ Page({
   },
 
   /**
-   * 生命周期函数--监听页面显示
-   */
-  onShow: function () {
-
-  },
-
-  /**
    * 生命周期函数--监听页面隐藏
    */
-  onHide: function () {
+  onHide: function () { },
 
-  },
-
-  /**
-   * 生命周期函数--监听页面卸载
-   */
-  onUnload: function () {
-
-  },
-
-  /**
-   * 页面相关事件处理函数--监听用户下拉动作
-   */
-  onPullDownRefresh: function () {
-
-  },
-
-  /**
-   * 页面上拉触底事件的处理函数
-   */
-  onReachBottom: function () {
-
-  },
-
-  /**
-   * 用户点击右上角分享
-   */
-  onShareAppMessage: function () {
-
-  },
 
   /**
    *  菜单-评价-商家

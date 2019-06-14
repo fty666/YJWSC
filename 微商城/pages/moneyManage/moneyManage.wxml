@@ -24,7 +24,7 @@
                 </view>
             </view> -->
         </view>
-        <scroll-view class="tableView" scroll-y bindscrolltoupper="scrollToUpper" bindscrolltolower="scrollToLower" scroll-top="{{scrollTop}}" scroll-with-animation="true" style="height:{{px2rpxHeight*885}}px;">
+        <scroll-view class="tableView" scroll-y bindscrolltolower="scrollToLower" scroll-top="{{scrollTop}}" scroll-with-animation="true" style="height:{{px2rpxHeight*885}}px;">
             <block wx:if="{{hasData}}" wx:for="{{ moneyInfo }}" wx:for-item="info" wx:key="{{info.order_uuid}}">
                 <view class="flexItem rowStyle tableViewCellHeader marginTop10" bindtap="goOrderDetail" data-order_uuid="{{info.order_uuid}}" style="height:{{px2rpxHeight*70}}px;">
                     <image class="orderImage marginLeft12" src="/images/dingdan.png"  style="width:{{px2rpxWidth*20}}px;height:{{px2rpxHeight*22}}px;"></image>

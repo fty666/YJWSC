@@ -7,8 +7,8 @@
       <!--头像设置  -->
       <view class="section">
         <view class="file">头像</view>
-        <view class="picture" bindtap='immediate_sales' style="width:{{px2rpxWidth*140}}px;height:{{px2rpxHeight*140}}px;">
-          <image src="{{upload_file_url+img}}" style='width:140rpx;height:140rpx;'></image>
+        <view class="picture" bindtap='immediate_sales' style="width:{{px2rpxWidth*140}}px;height:{{px2rpxWidth*140}}px;">
+          <image src="{{upload_file_url+img}}" style="width:{{px2rpxWidth*140}}px;height:{{px2rpxWidth*140}}px;"></image>
         </view>
       </view>
 

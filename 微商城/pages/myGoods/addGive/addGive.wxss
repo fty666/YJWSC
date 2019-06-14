@@ -89,7 +89,6 @@ page{
   position: relative;
   height: auto;
   width: 100%;
-  background: linear-gradient(to right,#cfa568,#e3bf79);
   margin-bottom: 30rpx;
   padding-top: 52rpx;
 }

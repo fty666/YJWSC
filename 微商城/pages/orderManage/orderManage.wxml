@@ -37,11 +37,10 @@
               <text class="iconfont icon-iconfontcolor36"></text> 订单时间: {{order.createTime}}</label>
           </view>
           <view class="flexItem rowStyle  personInfo" style="height:{{px2rpxHeight*88}}px;">
-            <view class="flexItem rowStyle marginLeft12 centers">
-              <!-- <image class="userHeader" src="{{ url }}" style="width:{{px2rpxWidth*52}}px;height:{{px2rpxWidth*52}}px;"></image> -->
+            <view class="flexItem rowStyle marginLeft12 centers" style='width:{{px2rpxWidth*400}}px'>
               <label class="color54 fontSize12">收货人：{{ order.orderReceiver }}</label>
             </view>
-            <view class="flexItem rowStyle marginRight12 centers" catchtap="callEvent">
+            <view class="flexItem rowStyle  centers" catchtap="callEvent">
               <image class="call" src="/images/call.png" style="width:{{px2rpxWidth*28}}px;height:{{px2rpxWidth*28}}px;"></image>
               <text class="color54 fontSize12">{{order.orderMobile}}</text>
             </view>

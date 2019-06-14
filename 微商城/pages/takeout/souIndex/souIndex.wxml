@@ -14,7 +14,7 @@
       </view>
       <view class='contents' style="height:{{px2rpxHeight*1100}}px;">
         <block wx:if="{{has_data}}">
-          <scroll-view scroll-y bindscrolltoupper='scrollToUpper' bindscrolltolower='scrollToLower'>
+          <scroll-view scroll-y bindscrolltolower='scrollToLower'>
             <view class='shop'>
               <block wx:if="{{shop==''}}">
                 <view class='shops'>没有该店铺</view>

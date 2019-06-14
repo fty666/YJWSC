@@ -132,7 +132,7 @@
                 <!-- <block wx:if="{{swiper_img_hidden}}"> -->
                 <block wx:for="{{swiper_img}}" wx:key="{{item.index}}">
                   <view class="img swiper-img">
-                    <image src="{{aliyunUrl + item}}" />
+                    <image src="{{aliyunUrl + item}}" catchtap='bigImg' data-imgsrc='{{aliyunUrl + item}}' />
                     <view catchtap='cancleImg' data-status='2' data-index='{{index}}' class='cancle-img'>x</view>
                     <view class='sort'>
                       <input value='{{index}}' data-sort="{{item}}" data-index="{{index}}" bindblur="swiperSort" placeholder='排序' />
@@ -145,11 +145,9 @@
             <view class="info-each">
               <view class='sm-title'>商品详细信息图片</view>
               <view class='sm-content'>
-                <!-- <blcok wx:if="{{goodsDetail_img_hidden}}"> -->
                 <block wx:for="{{goodsDetail_img}}" wx:key="{{item.index}}">
-                  <!-- <block wx:for="{{[1,2,3]}}" wx:key="{{item.index}}">  -->
                   <view class="img detail-img">
-                    <image src="{{aliyunUrl + item}}" />
+                    <image src="{{aliyunUrl + item}}" catchtap='bigImg2' data-imgsrc='{{aliyunUrl + item}}' />
                     <view catchtap='cancleImg' data-status='3' data-index='{{index}}' class='cancle-img'>x</view>
                     <view class='sort'>
                       <input value='{{index}}' data-sort="{{item}}" data-index="{{index}}" bindblur="detailSort" placeholder='排序' />

@@ -1,8 +1,11 @@
 {
   "extEnable": true,
-  "pages": [
-    "pages/shop/mall/mall",    
-    "pages/kefu/kefu",    
+  "pages": [        
+    "pages/shop/mall/mall",
+    "pages/orderManage/sendGoods/sendGoods",
+    "pages/user/order/order",
+    "pages/apply/apply",
+    "pages/kefu/kefu",
     "pages/map/map",
     "pages/shop/malldetail/malldetail",
     "pages/shop/onepay/onepay",
@@ -35,7 +38,6 @@
     "pages/user/address/address",
     "pages/user/addressUpdata/addressUpdata",
     "pages/user/addressAdd/addressAdd",
-    "pages/user/order/order",
     "pages/shop/shoplist/shoplist",
     "pages/shop/sellerlist/sellerlist",
     "pages/shop/mallquan/index",
@@ -50,7 +52,6 @@
     "pages/user/coupon/getCoupon/getCoupon",
     "pages/user/express/express",
     "pages/myself/myself",
-    "pages/apply/apply",
     "pages/apply/auditing/auditing",
     "pages/myGoods/goodsList/goodsList",
     "pages/moneyManage/moneyManage",
@@ -68,7 +69,6 @@
     "pages/myGoods/takeOutEdit/takeOutEdit",
     "pages/myGoods/shopClass/shopClass",
     "pages/orderManage/orderDeatail/orderDeatail",
-    "pages/orderManage/sendGoods/sendGoods",
     "pages/orderManage/express/express",
     "pages/myself/editShopInfo/editShopInfo",
     "pages/myself/myMoney/myMoney",
@@ -94,8 +94,14 @@
   ],
   "window": {
     "backgroundTextStyle": "light",
-    "navigationBarBackgroundColor": "#09BB07",
+    "navigationBarBackgroundColor": "#f5f5f5",
     "navigationBarTitleText": "微商城",
-    "navigationBarTextStyle": "white"
-  }
+    "navigationBarTextStyle": "black"
+  },
+  "permission": {
+    "scope.userLocation": {
+      "desc": "授权您的地理信息"
+    }
+  },
+  "sitemapLocation": "sitemap.json"
 }

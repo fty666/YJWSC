@@ -27,30 +27,28 @@ Page({
   /**
    * 生命周期函数--监听页面加载
    */
-  onLoad: function (options) {
-    console.log(options)
+  onLoad: function(options) {
     let arrayVal = options.arrayVal
     let that = this;
-    let groupId=1;
+    let groupId = 1;
+
     function gets(res) {
-      console.log(res)
       that.setData({
         shop: res.PageInfo.list
       })
     }
-    utilFunctions.getShopByName(arrayVal, page, pageSize, groupId,gets, that)
+    utilFunctions.getShopByName(arrayVal, page, pageSize, groupId, gets, that)
   },
 
   /**
    * 生命周期函数--监听页面初次渲染完成
    */
-  onReady: function () {
+  onReady: function() {
     let that = this;
     //获取缓存
     wx.getStorage({
       key: 'PX_TO_RPX',
-      success: function (res) {
-        console.log(res)
+      success: function(res) {
         that.setData({
           px2rpxHeight: res.data.px2rpxHeight,
           px2rpxWidth: res.data.px2rpxWidth,
@@ -63,56 +61,22 @@ Page({
   /**
    * 生命周期函数--监听页面显示
    */
-  onShow: function () {
+  onShow: function() {
     let that = this;
   },
-
-  /**
-   * 生命周期函数--监听页面隐藏
-   */
-  onHide: function () {
-
-  },
-
-  /**
-   * 生命周期函数--监听页面卸载
-   */
-  onUnload: function () {
-
-  },
-
-  /**
-   * 页面相关事件处理函数--监听用户下拉动作
-   */
-  onPullDownRefresh: function () {
-
-  },
-
-  /**
-   * 页面上拉触底事件的处理函数
-   */
-  onReachBottom: function () {
-
-  },
-
-  /**
-   * 用户点击右上角分享
-   */
-  onShareAppMessage: function () {
-
-  },
-
   /**
    * 条件选择
    */
-  requirementSelect: function (e) {
+  requirementSelect: function(e) {
     let that = this;
     let select = e.currentTarget.dataset.select;
     let query = select;
     pageSize = 20;
     if (select == 'distance') {
       let location = that.data.location.split(',');
-      query = ['distance', [location[0]], [location[1]]];
+      query = ['distance', [location[0]],
+        [location[1]]
+      ];
     };
     that.getShopBySelect(query);
     that.setData({
@@ -121,23 +85,20 @@ Page({
   },
 
   //查询店铺
-  takes: function (e) {
-    console.log(e.detail.value)
+  takes: function(e) {
     let arrayVal = e.detail.value;
     let that = this;
     let groupIdd = '1';
     function gets(res) {
-      console.log(res)
       that.setData({
         shop: res.PageInfo.list
       })
     }
-    utilFunctions.getShopByName(arrayVal,page,pageSize,groupIdd,gets, that)
-    // arrayVal, pages, pasesize, groupId, gets, pageobj
+    utilFunctions.getShopByName(arrayVal, page, pageSize, groupIdd, gets, that)
   },
 
   // 根据条件查询店铺
-  getShopBySelect: function (myselect) {
+  getShopBySelect: function(myselect) {
     let that = this;
     let data = {
       groupId: 1,
@@ -156,7 +117,6 @@ Page({
     // 在当前页面显示导航条加载动画
     wx.showNavigationBarLoading();
     funDta.getFoodsShop(data, that, (res) => {
-      // console.log(res);
       that.setData({
         shop: res.PageInfo.list,
       });
@@ -168,7 +128,7 @@ Page({
   /**
    * 去商店
    */
-  goToShop: function (e) {
+  goToShop: function(e) {
     let sale = e.currentTarget.dataset.salse;
     if (sale == 0) {
       wx.showToast({
@@ -184,17 +144,9 @@ Page({
   },
 
   /**
-   * 滚动到顶部/左边，会触发 scrolltoupper 事件
-   */
-  scrollToUpper: function () {
-
-  },
-
-  /**
    * 滚动到底部/右边，会触发 scrolltolower 事件
    */
-  scrollToLower: function () {
-    console.log(9999)
+  scrollToLower: function() {
     let that = this;
     pageSize += 20;
     this.getShopBySelect(that.data.select);

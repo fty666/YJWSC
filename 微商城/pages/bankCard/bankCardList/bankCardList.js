@@ -20,14 +20,11 @@ Page({
   /**
    * 生命周期函数--监听页面加载
    */
-  onLoad: function (options) {
+  onLoad: function(options) {
     let that = this;
-    setTimeout(function () {
+    setTimeout(function() {
       funData.getShopCode(app.globalData.user_id, that, (data) => {
-        // console.log(data);
-        // that.globalData.shopCode = data.shop_code;
         funData.getCardByCode(data.shop_code, that, (data) => {
-          // console.log(data);
           let len = data.length;
           if (len <= 0) {
             that.setData({
@@ -47,7 +44,6 @@ Page({
           }
         });
       });
-
     }, 1000);
 
   },
@@ -55,12 +51,10 @@ Page({
   /**
    * 生命周期函数--监听页面初次渲染完成
    */
-  onReady: function () {
+  onReady: function() {
     let that = this;
     // 获取shopcode
     funData.getShopCode(app.globalData.user_id, that, (data) => {
-      // console.log(data)
-      //  var shopcode = data.shop_code
       that.setData({
         shopcode: data.shop_code
       })
@@ -68,77 +62,36 @@ Page({
     //获取缓存
     wx.getStorage({
       key: 'PX_TO_RPX',
-      success: function (res) {
-        console.log(res)
+      success: function(res) {
         that.setData({
           px2rpxHeight: res.data.px2rpxHeight,
           px2rpxWidth: res.data.px2rpxWidth,
         })
       }
     })
-
-
   },
 
   /**
    * 生命周期函数--监听页面显示
    */
-  onShow: function () {
+  onShow: function() {
     this.onLoad();
-  },
-
-  /**
-   * 生命周期函数--监听页面隐藏
-   */
-  onHide: function () {
-
-  },
-
-  /**
-   * 生命周期函数--监听页面卸载
-   */
-  onUnload: function () {
-
-  },
-
-  /**
-   * 页面相关事件处理函数--监听用户下拉动作
-   */
-  onPullDownRefresh: function () {
-
-  },
-
-  /**
-   * 页面上拉触底事件的处理函数
-   */
-  onReachBottom: function () {
-
-  },
-
-  /**
-   * 用户点击右上角分享
-   */
-  onShareAppMessage: function () {
-
   },
 
   /**
    * 选择银行卡
    */
-  selectBankCard: function (e) {
+  selectBankCard: function(e) {
     let prevUrl = util.getPrevPageUrl();
-    // pages/myself/myMoney/myMoney
-    // console.log(prevUrl);
     wx.navigateTo({
       url: '/' + util.getPrevPageUrl() + '?cid=' + e.currentTarget.dataset.cid
     })
-
   },
 
   /**
    * 添加银行卡
    */
-  addCard: function () {
+  addCard: function() {
     wx.navigateTo({
       url: '/pages/bankCard/addBankCard/addBankCard'
     })
@@ -147,7 +100,7 @@ Page({
   /**
    * 设置默认
    */
-  setCardDefault: function (e) {
+  setCardDefault: function(e) {
     let that = this;
     let cid = e.currentTarget.dataset.cid;
     let card = that.data.card;
@@ -174,37 +127,44 @@ Page({
   /**
    * 解除绑定
    */
-  unbindBankCard: function (e) {
+  unbindBankCard: function(e) {
     let that = this;
     let cid = e.currentTarget.dataset.cid;
-    funData.deleteCard(cid, that, () => {
-      // 重新获取数据
-      funData.getShopCode(app.globalData.user_id, that, (data) => {
-        funData.getCardByCode(data.shop_code, that, (data) => {
-          let len = data.length;
-          if (len <= 0) {
-            that.setData({
-              hasData: false,
-              glo_is_load: false,
+    wx.showModal({
+      title: '提示',
+      content: '是否确定要解除',
+      success: function(res) {
+        if (res.confirm) {
+          funData.deleteCard(cid, that, () => {
+            // 重新获取数据
+            funData.getShopCode(app.globalData.user_id, that, (data) => {
+              funData.getCardByCode(data.shop_code, that, (data) => {
+                let len = data.length;
+                if (len <= 0) {
+                  that.setData({
+                    hasData: false,
+                    glo_is_load: false,
+                  });
+                } else {
+                  for (let i = 0; i < len; i++) {
+                    data[i].card_no = util.bankCardByStar(data[i].card_no);
+                  }
+                  that.setData({
+                    card: data,
+                    hasData: true,
+                    glo_is_load: false,
+                  });
+                }
+              });
             });
-          } else {
-            for (let i = 0; i < len; i++) {
-              data[i].card_no = util.bankCardByStar(data[i].card_no);
-            }
-            that.setData({
-              card: data,
-              hasData: true,
-              glo_is_load: false,
+            wx.showToast({
+              title: '解除绑定成功',
+              icon: 'success',
+              duration: 1000
             });
-          }
-        });
-      });
-
-      wx.showToast({
-        title: '解除绑定成功',
-        icon: 'success',
-        duration: 1000
-      });
-    });
+          });
+        }
+      }
+    })
   },
 })

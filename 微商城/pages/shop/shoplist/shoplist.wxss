@@ -76,6 +76,9 @@ button.search-btn icon {
 .cate-name {
   line-height: 92rpx;
   position: relative;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
 }
 
 .cate-name-active::after {
@@ -162,7 +165,6 @@ button.search-btn icon {
   display: flex;
   justify-content: flex-start;
   width: 100%;
-  margin-bottom: 20rpx;
   background-color: #fff;
 }
 

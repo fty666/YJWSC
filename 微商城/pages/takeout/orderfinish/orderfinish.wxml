@@ -1,19 +1,11 @@
-<!-- <block wx:if="{{glo_is_load}}">
-  <view class="glo_load_view">
-    <text class="iconfont icon-loading animated infinite rotate mr5"></text>
-    <text>正在努力加载</text>
-  </view>
-</block> -->
-<!-- <block wx:else> -->
-
 <view style='height:2000rpx;'>
   <!--订单完成  -->
   <view>
-    <view class='finsh'>订单完成
+    <view class='finsh'>订单详请
       <text class="iconfont icon-youjiantou"></text> </view>
     <view class='font1'>感谢您对本商城的信任，期待再次光临</view>
     <view style='display:flex'>
-        <view class='resu' catchtap='again' data-shocode='{{orderinfo.shop_code}}' style="width:{{px2rpxWidth*230}}px;height:{{px2rpxHeight*90}}px;">再来一单</view>
+      <view class='resu' catchtap='again' data-shocode='{{orderinfo.shop_code}}' style="width:{{px2rpxWidth*230}}px;height:{{px2rpxHeight*80}}px;">再来一单</view>
     </view>
     <view class='xia'></view>
     <!--外卖专员  -->
@@ -21,7 +13,7 @@
       <view>
         <view>
           <view class='font'>外卖小哥</view>
-          <view class='font2' style='margin-left: {{px2rpxWidth*170}}px;'>4.9</view>
+          <view class='font2' style='margin-left: {{px2rpxWidth*170}}px;color:black'>4.9</view>
         </view>
         <!-- <view>
           <image src='' class='xing' style="width:{{px2rpxWidth*100}}px;height:{{px2rpxWidth*30}}px;"></image>
@@ -33,7 +25,6 @@
     </view>
     <view class='xia2' style="height:{{px2rpxHeight*20}}px;"></view>
   </view>
-
   <!--商品详情  -->
   <view>
     <!--店铺信息  -->
@@ -95,7 +86,7 @@
     </view>
     <view class='flex'>
       <view class='data'>配送服务</view>
-      <view class='once'>美团专送，提高品质服务</view>
+      <view class='once'>微商城专送，提高品质服务</view>
     </view>
   </view>
   <view class='xia2'></view>
@@ -117,13 +108,4 @@
       <view class='once'>在线实付</view>
     </view>
   </view>
-
-  <!-- </block> -->
-  <!-- <block wx:else>
-      <navigator class='no-order' url="/pages/shop/mall/mall">
-        <view>您还没有相关的订单</view>
-        <view>可以去看看有哪些想买的</view>
-      </navigator>
-    </block> -->
-
 </view>

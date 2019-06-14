@@ -28,22 +28,22 @@ Page({
     favour: "",
     has_address: false, // 是否有地址
     coupon: '', // 优惠券
-    discount: "",//折扣
-    couponIds: "",//优惠券id
-    reductionId: "",//满减id
+    discount: "", //折扣
+    couponIds: "", //优惠券id
+    reductionId: "", //满减id
     weChat: '',
     px2rpxWidth: '',
     px2rpxHeight: '',
+    // 显示优惠券
+    couponShow: true,
+    couponList: {}, //要使用的优惠券
+    arrCoupon: [], //页面显示的优惠券
+    XshopCode: '', //判断选取的商品
+    Zprice: 0, //总价钱
+    yhqPrice: 0, //优惠的价格
   },
 
-  /**
-   *页面监听数据加载事件，获取订单详情 
-   */
-  onLoad: function (options) {
-
-  },
-
-  onReady: function () {
+  onReady: function() {
     let that = this;
     // 默认地址
     this.moadd();
@@ -51,8 +51,8 @@ Page({
     let carts = wx.getStorageSync('lists');
     let nums = wx.getStorageSync('nums');
     let mytotal_money = 0; // 所有商品的总价格(不带优惠)
-    let myreal_money = 0;  // 每个商店优惠后的总价格
-    let sum = 0;   // 订单的总价格(优惠后的)
+    let myreal_money = 0; // 每个商店优惠后的总价格
+    let sum = 0; // 订单的总价格(优惠后的)
     let favours = 0; // 优惠的价格
     let order = {};
     let cart_len = carts.length;
@@ -63,8 +63,8 @@ Page({
     // 价格判断
     for (let i = 0; i < cart_len; i++) {
       let total_money = 0; // 每个店铺的所有商品的总价格 total_money 不带优惠
-      let real_money = 0;  // 每个商店优惠后的总价格
-      let couponId = '';   // 每个店铺的优惠券的id
+      let real_money = 0; // 每个商店优惠后的总价格
+      let couponId = ''; // 每个店铺的优惠券的id
       let goods = carts[i].goods;
       let goods_len = carts[i].goods.length;
       for (let j = 0; j < goods_len; j++) {
@@ -114,12 +114,12 @@ Page({
       // 订单的总价格
       sum = calculate.calcAdd(sum, carts[i].real_money);
     }
-    console.log(carts);
     this.setData({
-      pocket: sum,  // 实付
+      pocket: sum, // 实付
+      Zprice: sum,
       orderinfo: carts,
-      goods_total: mytotal_money,      // 共计
-      favour: favours  // 优惠
+      goods_total: mytotal_money, // 共计
+      favour: favours // 优惠
     });
     mypocket = sum;
     mygoods_total = mytotal_money;
@@ -127,7 +127,7 @@ Page({
 
     // 获取用户信息
     funDta.getUser(getApp().globalData.user_id, this, (res) => {
-      console.log(res)
+      // console.log(res)
       this.setData({
         weChat: res.weChat
       });
@@ -135,8 +135,7 @@ Page({
     //获取缓存
     wx.getStorage({
       key: 'PX_TO_RPX',
-      success: function (res) {
-        console.log(res)
+      success: function(res) {
         that.setData({
           px2rpxHeight: res.data.px2rpxHeight,
           px2rpxWidth: res.data.px2rpxWidth,
@@ -145,8 +144,7 @@ Page({
     })
 
   },
-
-  onShow: function () {
+  onShow: function() {
     // console.log(this.data.address)
     if (!util.isEmpty(this.data.coupon)) {
       let carts = this.data.orderinfo;
@@ -186,7 +184,7 @@ Page({
   /**
    *查看默认地址 
    **/
-  moadd: function () {
+  moadd: function() {
     // 收货地址
     function maddress(res) {
       // console.log(res);
@@ -204,67 +202,87 @@ Page({
     }
     utilFunctions.getAddrByDefault(maddress, this)
   },
-
-  /**
-   * 查看单个地址
-   */
-  // oneadd: function () {
-  //     let that = this
-  //     function addinfo(res) {
-  //         this.setData({
-  //             address: res,
-  //             addid: res.id
-  //         })
-  //     }
-  //     utilFunctions.getAddrById(addinfo, that.data.addId, this)
-  // },
-
   /**
    *修改默认地址 
    */
-  aupdata: function () {
+  aupdata: function() {
     wx: wx.navigateTo({
       url: '/pages/user/addressAdd/addressAdd'
     })
   },
-  list:function(){
+  list: function() {
     wx: wx.navigateTo({
       url: '/pages/user/address/address'
     })
   },
-
   /**
-   *跳转优惠券 
+   * 选择优惠券
    */
-  favourable: function (e) {
-    // console.log(e)
-    let uid = e.currentTarget.dataset.uid;
+  goToCoupon: function(e) {
+    // 传递商家Code
     let shop_code = e.currentTarget.dataset.shop_code;
-    let payPrice = e.currentTarget.dataset.payprice;
-
-    // 选择优惠券之前判断有没有优惠券
-    utilFunctions.getUserCoupon(uid, shop_code, payPrice, 1, 1, (res) => {
-      console.log(res);
-      if (util.isEmpty(res.PageInfo.list)) {
-        wx.showToast({
-          title: '没有优惠券',
-          icon: 'none',
-          duration: 1000
-        });
-        return;
+    app.globalData.couponCode = shop_code;
+    app.globalData.prcirCounp = this.data.pocket;
+    wx.setNavigationBarTitle({
+      title: '选取优惠券'
+    })
+    if (this.data.XshopCode == shop_code) {
+      if (this.data.couponList.couponPrice) {
+        let nowtal = calculate.calcReduce(this.data.Zprice, this.data.yhqPrice);
+        this.setData({
+          couponShow: false,
+          pocket: nowtal,
+        })
       } else {
-        wx.navigateTo({
-          url: '/pages/shop/mallquanlist/index?uid=' + uid + '&shop_code=' + shop_code + '&payPrice=' + payPrice
-        });
+        this.setData({
+          couponShow: false,
+        })
       }
-    }, this);
 
-
+    } else {
+      this.setData({
+        couponShow: false,
+      })
+    }
+  },
+  // 获取优惠券
+  MyEvent(e) {
+    let pocket = this.data.pocket;
+    let mycoupon = e.detail;
+    let arr = this.data.arrCoupon;
+    let yhqPrice = this.data.yhqPrice;
+    let that = this;
+    let newTotalPrice = 0;
+    wx.setNavigationBarTitle({
+      title: '订单支付'
+    })
+    if (util.isEmpty(mycoupon)) {
+      newTotalPrice = pocket;
+    } else {
+      if (e.detail.shop_code != this.data.XshopCode) {
+        yhqPrice += mycoupon.couponPrice;
+      }
+      newTotalPrice = calculate.calcReduce(this.data.Zprice, yhqPrice);
+    }
+    if (e.detail.shop_code == this.data.XshopCode) {} else {
+      if (e.detail.couponPrice != undefined) {
+        arr.push(e.detail);
+        this.setData({
+          XshopCode: e.detail.shop_code
+        })
+      }
+    }
+    that.setData({
+      pocket: newTotalPrice,
+      couponShow: true,
+      couponList: e.detail,
+      arrCoupon: arr,
+      yhqPrice: yhqPrice
+    });
   },
 
-
   //开始支付
-  pay_confirmOrder: function () {
+  pay_confirmOrder: function() {
     let that = this;
     // 判断有没有地址
     if (util.isEmpty(that.data.address)) {
@@ -279,8 +297,7 @@ Page({
     let user_id = app.globalData.user_id;
     let addr_id = that.data.address.id;
     let order_type = 2;
-    let status = 1;  // 未付款
-
+    let status = 1; // 未付款
     let total_money = '';
     let real_money = '';
     let goodsId = '';
@@ -291,16 +308,14 @@ Page({
     let discount = '';
     let reductionId = '';
     let couponIds = '';
-
     let color = '';
     let size = '';
     let typee = '';
     let volume = '';
     let taste = '';
-
     // 商品详情
     let order = this.data.orderinfo;
-    console.log(order);
+    // console.log(order);
     let orderLen = order.length;
     for (let i = 0; i < orderLen; i++) {
       let goods = order[i].goods;
@@ -352,7 +367,7 @@ Page({
       user_id: app.globalData.user_id,
       addr_id: that.data.address.id,
       order_type: 2,
-      status: 1,  // 未付款
+      status: 1, // 未付款
       total_money: total_money,
       real_money: real_money,
       goodsId: goodsId,
@@ -369,9 +384,7 @@ Page({
       volume: volume,
       taste: taste,
     }
-    // console.log(data);
     utilFunctions.insertMoreOrder(data, (data) => {
-      // 微信支付
       console.log(data)
       let lengs = parseInt(data.length);
       let goodsname = '';
@@ -392,48 +405,17 @@ Page({
           }
         }
       }
-      utilFunctions.weixinPay({
-        body: goodsname,
-        orderUUID: order_uuid,
-        money: that.data.pocket,
-        openid: that.data.weChat
-      }, that, () => {
-        let now = util.formatDate(new Date().getTime());
-        // 支付成功通知商家
-        // weixin.sendSocket(JSON.stringify(goods_list), that.data.shop_code);
-        let cha = shop_code.length;
-        // for (let g = 0; g < cha; g++) {
-        //   weixin.sendSocket((now + ' 订单号：' + order_uuid), shop_code[g]);
-        // }
-
-        wx.removeStorage({
-          key: that.data.shop_code,
-          success: function () {
-            wx.showToast({
-              title: '下单成功',
-              icon: 'success',
-              duration: 1000
-            });
-          }
-        })
-        //     // //支付成功发送短信通知商家
-        //     // funDta.getOrderSms(that.data.shop_info.mobile, that, () => {
-        //         // wx.showModal({
-        //         //     content: '付款成功,已通知商家',
-        //         //     showCancel: 'false',
-        //         //     success: function (res) {
-        //         //         if (res.confirm) {
-        //         //             console.log('用户点击确定')
-        //         //         }
-        //         //     }
-        //         // })
-        //     // });
-
+      // 正式支付
+      // 正式支付完
+      // 测试支付
+      function ce(res) {
+        console.log(res);
+        console.log('支付成功')
         wx.redirectTo({
           url: '/pages/user/pay_success/pay_success?addid=' + that.data.address.id + '&totalPrice=' + that.data.pocket,
         })
-
-      });
+      }
+      utilFunctions.cezhifu(order_uuid, ce, this);
     }, that);
   },
 });

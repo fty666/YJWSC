@@ -9,7 +9,7 @@ const config = require('./config.js');
 
 module.exports = {
 
-  requestUrl: function (data, url, callback, pageobj) {
+  requestUrl: function(data, url, callback, pageobj) {
     wx.request({
       url: url,
       data: data,
@@ -17,7 +17,7 @@ module.exports = {
         'content-type': 'application/x-www-form-urlencoded'
       },
       method: 'POST',
-      success: function (res) {
+      success: function(res) {
         if (res.data.state == 1) {
           callback.apply(pageobj, [res.data.data])
           // console.log(res)
@@ -29,19 +29,18 @@ module.exports = {
           })
         }
       },
-      complete: function () {
-      }
+      complete: function() {}
     })
   },
 
-  httpRequest: function (data, url, callback, pageobj) {
+  httpRequest: function(data, url, callback, pageobj) {
     wx.request({
       url: url,
       data: data,
       header: {
         'Content-Type': 'application/json'
       },
-      success: function (res) {
+      success: function(res) {
         if (res.statusCode != 200) {
           wx.showModal({
             title: '提示',
@@ -59,7 +58,7 @@ module.exports = {
           }
         }
       },
-      fail: function () {
+      fail: function() {
         wx.showModal({
           title: '提示',
           content: "error:网络请求失败",
@@ -72,9 +71,11 @@ module.exports = {
    * 获取定位二次封装
    */
   amapFilePackage(sucFun, errFun) {
-    let myAmapFun = new amapFile.AMapWX({ key: config.wxGaodeMapKey });
+    let myAmapFun = new amapFile.AMapWX({
+      key: config.wxGaodeMapKey
+    });
     myAmapFun.getRegeo({
-      success: function (data) {
+      success: function(data) {
         //成功回调
         // console.log(data)
         // that.setData({
@@ -82,7 +83,7 @@ module.exports = {
         // });
         sucFun(data)
       },
-      fail: function (info) {
+      fail: function(info) {
         //失败回调
         // console.log(info)
         errFun(info);
@@ -90,7 +91,7 @@ module.exports = {
     })
   },
 
-  getShareData: function (mmodule, callback, pageobj) {
+  getShareData: function(mmodule, callback, pageobj) {
     let that = this;
     let data = {
       token: urlData.duoguan_user_token,
@@ -100,7 +101,7 @@ module.exports = {
     let res = this.requestUrl(data, urlData.duoguan_get_share_data_url, callback, pageobj)
   },
 
-  getSwiperList: function (callback, pageobj) {
+  getSwiperList: function(callback, pageobj) {
     var that = this;
     var data = {
       token: urlData.duoguan_user_token,
@@ -109,7 +110,7 @@ module.exports = {
     var res = this.requestUrl(data, urlData.duoguan_swiper_url, callback, pageobj)
   },
 
-  dishPostOrderComment: function (utoken, oid, fval, fcon, callback, pageobj) {
+  dishPostOrderComment: function(utoken, oid, fval, fcon, callback, pageobj) {
     var data = {
       token: urlData.duoguan_user_token,
       utoken: utoken,
@@ -139,7 +140,7 @@ module.exports = {
 
 
   // // 对订单数据的处理
-  dealOrderData: function (data) {
+  dealOrderData: function(data) {
     // console.log(data);
     let newData = data;
     let order = [];
@@ -160,7 +161,9 @@ module.exports = {
     }
     // 将每个对象里的数组转化为对象
     for (let key in newOrder) {
-      newOrder[key] = { goods: newOrder[key] }
+      newOrder[key] = {
+        goods: newOrder[key]
+      }
     }
 
     let orderArr = [];
@@ -184,6 +187,7 @@ module.exports = {
       newOrder[key].shopMobile = newOrder[key].goods[0].shopMobile;
       newOrder[key].reception = newOrder[key].goods[0].reception;
       newOrder[key].horseManStatus = newOrder[key].goods[0].horseManStatus;
+      newOrder[key].relevance_uuid = newOrder[key].goods[0].relevance_uuid;
       // 计算每个订单的总价
       let sum = 0;
       let goods_len = newOrder[key].goods.length;
@@ -206,7 +210,7 @@ module.exports = {
   },
 
   // 微信支付
-  weixinPay: function (data, pageobj, SunFun) {
+  weixinPay: function(data, pageobj, SunFun) {
     let that = this;
     // body   商品名
     // order_uuid  订单号
@@ -223,11 +227,10 @@ module.exports = {
         'package': res.package,
         'signType': 'MD5',
         'paySign': res.paySign,
-        'success': function (res) {
+        'success': function(res) {
           SunFun();
         },
-        'fail': function (res) {
-        }
+        'fail': function(res) {}
       });
 
     }, pageobj);
@@ -236,7 +239,7 @@ module.exports = {
 
 
   //对同一店铺的数据处理 
-  dealShop_code: function (data) {
+  dealShop_code: function(data) {
     // console.log(data);
     let newData = data;
     let order = [];
@@ -260,7 +263,9 @@ module.exports = {
     // console.log(newShop)
     // 将每个对象里的数组转化为对象
     for (let key in newShop) {
-      newShop[key] = { goods: newShop[key] }
+      newShop[key] = {
+        goods: newShop[key]
+      }
     }
     // console.log(newShop)
     let orderArr = [];
@@ -282,13 +287,13 @@ module.exports = {
   /**
    * 上传图片二次封装
    */
-  myUpload: function (suFun) {
+  myUpload: function(suFun) {
     wx.chooseImage({
       count: 1,
       sizeType: ['original', 'compressed'],
       sourceType: ['album', 'camera'],
       // 上传文件
-      success: function (res) {
+      success: function(res) {
         let tempFilePaths = res.tempFilePaths;
         // 临时文件路径
         let filePath = tempFilePaths[0];
@@ -325,13 +330,13 @@ module.exports = {
   },
 
   // 分类列表获取商家分组
-  getGroup: function (group, pageobj) {
+  getGroup: function(group, pageobj) {
     var that = this
     this.requestUrl({}, urlData.getGroupUrl, group, pageobj)
   },
 
   // 分类列表获取商家分类
-  getShopUrl: function (groupids, pages, pasesize, classify, pageobj) {
+  getShopUrl: function(groupids, pages, pasesize, classify, pageobj) {
     let that = this
     let data = {
       groupId: groupids,
@@ -343,7 +348,7 @@ module.exports = {
   },
 
   // 获取商品分类
-  getClassUrl: function (gid, Slist, pageobj) {
+  getClassUrl: function(gid, Slist, pageobj) {
     // console.log(gid)
     let that = this
     let data = {
@@ -353,7 +358,7 @@ module.exports = {
   },
 
   // 获取商品列表
-  getGoodsUrl: function (shop_code, listId, page, pageSize, codelist, pageobj) {
+  getGoodsUrl: function(shop_code, listId, page, pageSize, codelist, pageobj) {
     let that = this
     let data = {
       shopCode: shop_code,
@@ -430,7 +435,7 @@ module.exports = {
   },
 
   // 查询所有订单
-  getOrderUrl: function (myuser_id, order_type, page, pagesize, shop_code, microplat, pageobj) {
+  getOrderUrl: function(myuser_id, order_type, page, pagesize, shop_code, microplat, pageobj) {
     let data = {
       user_id: myuser_id,
       status: urlData.status,
@@ -444,7 +449,7 @@ module.exports = {
   },
 
   //微商城查询订单，后期复制了一遍担心上面的其他地方用 
-  getOrderUrls: function (status, myuser_id, order_type, page, pagesize, shop_code, microplat, pageobj) {
+  getOrderUrls: function(status, myuser_id, order_type, page, pagesize, shop_code, microplat, pageobj) {
     let data = {
       user_id: myuser_id,
       status: status,
@@ -458,7 +463,7 @@ module.exports = {
   },
 
   // 查询各种转态订单
-  getOrderStatusUrl: function (myuserid, mystatus, page, pagesize, callback, pageobj) {
+  getOrderStatusUrl: function(myuserid, mystatus, page, pagesize, callback, pageobj) {
     let data = {
       user_id: myuserid,
       status: mystatus,
@@ -466,7 +471,7 @@ module.exports = {
       pageSize: pagesize,
       reception: '',
       order_type: 2,
-      shop_code:'',
+      shop_code: '',
     }
     this.requestUrl(data, urlData.getOrderUrl, callback, pageobj)
   },
@@ -713,7 +718,7 @@ module.exports = {
   },
 
   // 修改订单状态
-  updateOrderStatus: function (myorder_mainid, mystatus, callback, pageobj) {
+  updateOrderStatus: function(myorder_mainid, mystatus, callback, pageobj) {
     let data = {
       order_mainid: myorder_mainid,
       status: mystatus,
@@ -723,7 +728,7 @@ module.exports = {
 
 
   // 添加订单
-  insertOrder: function (goodsId, num, price, carts_price, color, size, typee, volume, taste, mytotal_money, myreal_money, addid, status, shopcode, discount, couponId, reductionIds, orders, pageobj) {
+  insertOrder: function(goodsId, num, price, carts_price, color, size, typee, volume, taste, mytotal_money, myreal_money, addid, status, shopcode, discount, couponId, reductionIds, orders, pageobj) {
     let data = {
       user_id: app.globalData.user_id,
       total_money: mytotal_money,
@@ -745,18 +750,18 @@ module.exports = {
       couponId: couponId,
       reductionId: reductionIds,
       reception: '',
-      horseMoney: 0,//骑手的费用微商城固定为0
+      horseMoney: 0, //骑手的费用微商城固定为0
     }
     console.log(data)
     this.requestUrl(data, urlData.insertOrderUrl, orders, pageobj);
   },
 
-  insertMoreOrder: function (data, callback, pageobj) {
+  insertMoreOrder: function(data, callback, pageobj) {
     this.requestUrl(data, urlData.insertOrderUrl, callback, pageobj);
   },
 
   // 查询用户是否有优惠券
-  getUserCoupon: function (uid, myshop_code, mypayPrice, page, pageSize, able, pageobj) {
+  getUserCoupon: function(uid, myshop_code, mypayPrice, page, pageSize, able, pageobj) {
     let data = {
       user_id: uid,
       shop_code: myshop_code,
@@ -790,22 +795,26 @@ module.exports = {
   // },
 
   // 删除订单
-  deleteOrder: function (myorder_mainid, callback, pageobj) {
-    this.requestUrl({ order_mainid: myorder_mainid }, urlData.deleteOrderUrl, callback, pageobj);
+  deleteOrder: function(myorder_mainid, callback, pageobj) {
+    this.requestUrl({
+      order_mainid: myorder_mainid
+    }, urlData.deleteOrderUrl, callback, pageobj);
   },
 
   // 根据优惠劵id查询优惠券
-  getUserCouponById: function (mycouponId, callback, pageobj) {
-    this.requestUrl({ couponId: mycouponId }, urlData.getUserCouponByIdUrl, callback, pageobj);
+  getUserCouponById: function(mycouponId, callback, pageobj) {
+    this.requestUrl({
+      couponId: mycouponId
+    }, urlData.getUserCouponByIdUrl, callback, pageobj);
   },
 
   // 外卖评论
-  insertShopComment: function (data, calback, pageobj) {
+  insertShopComment: function(data, calback, pageobj) {
     this.requestUrl(data, urlData.insertShopCommentUrl, calback, pageobj);
   },
 
   // 查询店铺评论
-  getShopComment: function (shop_code, page, pageSize, calback, pageobj) {
+  getShopComment: function(shop_code, page, pageSize, calback, pageobj) {
     let data = {
       shop_code: shop_code,
       page: page,
@@ -815,48 +824,56 @@ module.exports = {
   },
 
   // 查询外卖店铺分类
-  getFoodClass: function (shop_code, take, pageobj) {
-    this.requestUrl({ shop_code: shop_code }, urlData.getFoodClassUrl, take, pageobj);
+  getFoodClass: function(shop_code, take, pageobj) {
+    this.requestUrl({
+      shop_code: shop_code
+    }, urlData.getFoodClassUrl, take, pageobj);
   },
 
   // 查询外卖商品详情
-  getFoodGoodsDetails: function (gids, calback, pageobj) {
-    this.requestUrl({ goodsId: gids }, urlData.getFoodGoodsDetailsUrl, calback, pageobj);
+  getFoodGoodsDetails: function(gids, calback, pageobj) {
+    this.requestUrl({
+      goodsId: gids
+    }, urlData.getFoodGoodsDetailsUrl, calback, pageobj);
   },
 
 
   // 查看物流信息
-  getTransInfo: function (oid, calback, pageobj) {
-    this.requestUrl({ orderUUID: oid }, urlData.getTransInfoUrl, calback, pageobj);
+  getTransInfo: function(oid, calback, pageobj) {
+    this.requestUrl({
+      orderUUID: oid
+    }, urlData.getTransInfoUrl, calback, pageobj);
   },
 
   // 添加外卖商品
-  insertFoodGoodsUrl: function (goods, calback, pageobj) {
+  insertFoodGoodsUrl: function(goods, calback, pageobj) {
     let data = goods
     this.requestUrl(data, urlData.insertFoodGoodsUrl, calback, pageobj);
   },
 
   // 修改外卖分类
-  updateFoodsClassUrl: function (gclass, calback, pageobj) {
+  updateFoodsClassUrl: function(gclass, calback, pageobj) {
     let data = gclass;
     this.requestUrl(data, urlData.updateFoodsClassUrl, calback, pageobj);
   },
   // 查询满减
-  getReductionUrl: function (shop_code, calback, pageobj) {
-    this.requestUrl({ shop_code: shop_code }, urlData.getReductionUrl, calback, pageobj);
+  getReductionUrl: function(shop_code, calback, pageobj) {
+    this.requestUrl({
+      shop_code: shop_code
+    }, urlData.getReductionUrl, calback, pageobj);
   },
   // 添加满减
-  insertReduction: function (coupon, pageobj, calback) {
+  insertReduction: function(coupon, pageobj, calback) {
     let data = coupon;
     this.requestUrl(data, urlData.insertReductionUrl, calback, pageobj);
   },
   // 修改满减
-  updateReduction: function (datas, pageobj,calback) {
-    let data =datas;
+  updateReduction: function(datas, pageobj, calback) {
+    let data = datas;
     this.requestUrl(data, urlData.updateReductionUrl, calback, pageobj);
   },
   // 删除满减
-  deleteReductionUrl: function (shop_code, reductionId, pageobj, calback) {
+  deleteReductionUrl: function(shop_code, reductionId, pageobj, calback) {
     let data = {
       shop_code: shop_code,
       reductionId: reductionId
@@ -865,42 +882,42 @@ module.exports = {
   },
 
   // 修改外卖商品
-  updateFoodGoodsUrl: function (takes, calback, pageobj) {
+  updateFoodGoodsUrl: function(takes, calback, pageobj) {
     let data = takes;
     this.requestUrl(data, urlData.updateFoodGoodsUrl, calback, pageobj);
   },
 
   // 修改商家后台收货地址
-  updateOrderAddrUrl: function (adds, calback, pageobj) {
+  updateOrderAddrUrl: function(adds, calback, pageobj) {
     let data = adds;
     this.requestUrl(data, urlData.updateOrderAddrUrl, calback, pageobj);
   },
 
   //计算配送费
-  shippingFeeUrl: function (datas, calback, pageobj) {
+  shippingFeeUrl: function(datas, calback, pageobj) {
     let data = datas;
     this.requestUrl(data, urlData.shippingFeeUrl, calback, pageobj);
   },
 
   // 取消订单
-  updateOrderStatusUrl: function (datas, calback, pageobj) {
+  updateOrderStatusUrl: function(datas, calback, pageobj) {
     let data = datas;
     this.requestUrl(data, urlData.updateOrderStatusUrl, calback, pageobj);
   },
 
   //修改店铺信息
-  updateInfoByCodeUrl: function (datas, calback, pageobj) {
+  updateInfoByCodeUrl: function(datas, calback, pageobj) {
     let data = datas;
     this.requestUrl(data, urlData.updateInfoByCodeUrl, calback, pageobj);
   },
 
   // 获取外卖商品
-  getFoodsShopUrl: function (datas, calback, pageobj) {
+  getFoodsShopUrl: function(datas, calback, pageobj) {
     let data = datas;
     this.requestUrl(data, urlData.getFoodsShopUrl, calback, pageobj);
   },
 
-  dishImgUpload: function (pid, utoken, imgurl, cb) {
+  dishImgUpload: function(pid, utoken, imgurl, cb) {
     wx.uploadFile({
       url: urlData.duoguan_dish_imgupload_url,
       filePath: imgurl,
@@ -911,12 +928,18 @@ module.exports = {
         pid: pid,
         img: photo
       },
-      success: function (res) {
+      success: function(res) {
         cb(res.data)
       }
     })
   },
 
-
+  //测试支付
+  cezhifu: function(uuid, calbacks, pageobj) {
+    let data = {
+      relevanceUUID: uuid
+    };
+    this.requestUrl(data, urlData.huidiaorelevanceUUID, calbacks, pageobj);
+  }
 
 }

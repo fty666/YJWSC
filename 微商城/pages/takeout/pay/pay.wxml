@@ -1,8 +1,5 @@
-<block wx:if="{{is_load}}">
-  <view class="glo_load_view">
-    <text class="iconfont icon-loading animated infinite rotate mr5"></text>
-    <text>正在努力加载</text>
-  </view>
+<block wx:if="{{couponShow==false}}">
+  <coupon bind:onMyEvent='MyEvent'></coupon>
 </block>
 <block wx:else>
   <view>

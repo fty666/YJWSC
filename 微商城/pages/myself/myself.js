@@ -39,7 +39,6 @@ Page({
     this.setData({
       isHidden: !this.data.isHidden
     })
-    // console.log(this.data.isHidden)
   },
 
   /**
@@ -94,12 +93,6 @@ Page({
     this.setData({
       isHidden: !this.data.isHidden
     })
-    // wx.navigateTo({
-    //   url: '../login/login'
-    // })
-    // wx.navigateBack({
-    //   delta: 1
-    // })
     wx.redirectTo({
       url: '../login/login'
     })
@@ -120,10 +113,7 @@ Page({
 
   onReady: function () {
     let that = this;
-    // console.log(999999)
-    console.log(app.globalData.user_id)
     funData.getShopByCode(app.globalData.user_id, that, (data) => {
-      console.log(data)
       app.globalData.groupId = data.shop.groupId;
       app.globalData.shopCode = data.shop.shop_code;
       that.setData({
@@ -155,7 +145,6 @@ Page({
           shopInfo: data.shop,
           hasData: true,
           level: data.shop.level
-          // level: 2
         });
         return;
       }
@@ -173,7 +162,6 @@ Page({
     wx.getStorage({
       key: 'PX_TO_RPX',
       success: function (res) {
-        console.log(res)
         that.setData({
           px2rpxHeight: res.data.px2rpxHeight,
           px2rpxWidth: res.data.px2rpxWidth,
@@ -205,7 +193,6 @@ Page({
       }
       // 同步修改数据库
       function calback(res) {
-        console.log(res)
       }
       utilFunctions.updateInfoByCodeUrl(data, calback, that);
     })
@@ -229,10 +216,8 @@ Page({
     wx.makePhoneCall({
       phoneNumber: phone,
       success: function () {
-        console.log("拨打电话成功！")
       },
       fail: function () {
-        console.log("拨打电话失败！")
       }
     })
   },
@@ -272,7 +257,6 @@ Page({
     }
     let that = this;
     let shop_code = that.data.shopInfo.shop_code;
-    console.log(shop_code)
     function calback(res) {
       if (is_sale == 0) {
         wx.showToast({

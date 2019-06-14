@@ -1,1 +1,6 @@
-{"navigationBarTitleText": "订单评价"}
+{
+  "navigationBarTitleText": "订单评价",
+  "usingComponents": {
+    "i-rate": "../../../component/rate/index"
+  }
+}

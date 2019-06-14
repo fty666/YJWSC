@@ -4,7 +4,6 @@ const funData = require('../../../utils/functionMethodData.js');
 const util = require('../../../utils/util.js');
 const utilFunctions = require('../../../utils/functionData.js');
 Page({
-
   /**
    * 页面的初始数据
    */
@@ -38,12 +37,10 @@ Page({
     px2rpxWidth: '',
     px2rpxHeight: '',
   },
-
   /**
    * 生命周期函数--监听页面加载
    */
-  onLoad: function (options) {
-    console.log(options)
+  onLoad: function(options) {
     this.setData({
       code: options.scode
     })
@@ -52,29 +49,28 @@ Page({
   /**
    * 生命周期函数--监听页面初次渲染完成
    */
-  onReady: function () {
+  onReady: function() {
     let that = this;
     let user_id = app.globalData.user_id;
     funData.getShopByCode(user_id, that, (data) => {
-      console.log(data)
       that.setData({
         shop_code: data.shop.shop_code,
         shop_info: data.shop
       });
-      console.log(data.shop.shop_tip)
+      // console.log(data.shop.shop_tip)
       let scodes = data.shop.groupId
       if (scodes == 1) {
         // 获取外卖分类
         utilFunctions.getFoodClass(data.shop.shop_code, (res) => {
-          console.log(res)
+          // console.log(res)
           that.setData({
             category: res
           });
         }, that);
       } else {
         // 查询分类
-        funData.getClass(data.shop.groupId, that, function (res) {
-          console.log(res);
+        funData.getClass(data.shop.groupId, that, function(res) {
+          // console.log(res);
           that.setData({
             category: res
           });
@@ -84,8 +80,7 @@ Page({
     //获取缓存
     wx.getStorage({
       key: 'PX_TO_RPX',
-      success: function (res) {
-        console.log(res)
+      success: function(res) {
         that.setData({
           px2rpxHeight: res.data.px2rpxHeight,
           px2rpxWidth: res.data.px2rpxWidth,
@@ -96,55 +91,13 @@ Page({
   },
 
   /**
-   * 生命周期函数--监听页面显示
-   */
-  onShow: function () {
-
-  },
-
-  /**
-   * 生命周期函数--监听页面隐藏
-   */
-  onHide: function () {
-
-  },
-
-  /**
-   * 生命周期函数--监听页面卸载
-   */
-  onUnload: function () {
-
-  },
-
-  /**
-   * 页面相关事件处理函数--监听用户下拉动作
-   */
-  onPullDownRefresh: function () {
-
-  },
-
-  /**
-   * 页面上拉触底事件的处理函数
-   */
-  onReachBottom: function () {
-
-  },
-
-  /**
-   * 用户点击右上角分享
-   */
-  onShareAppMessage: function () {
-
-  },
-
-  /**
    * 添加商品列表图片
    */
-  addlistImg: function () {
+  addlistImg: function() {
     let that = this;
     let list_img = that.data.list_img;
     let list_img_hidden = that.data.list_img_hidden;
-    funData.myUpload(function (fileNmae) {
+    funData.myUpload(function(fileNmae) {
       list_img.push(fileNmae);
       if (list_img.length >= 1) {
         list_img_hidden = !list_img_hidden;
@@ -156,11 +109,24 @@ Page({
     });
   },
 
+  /**
+   *查看大图片 
+   */
+  bigImg(e) {
+    var imgs = e.currentTarget.dataset.imgsrc;
+    var arr = [];
+    arr.push(imgs)
+    //图片预览
+    wx.previewImage({
+      current: imgs, // 当前显示图片的http链接
+      urls: arr // 需要预览的图片http链接列表
+    })
+  },
 
   /**
    * 删除图片
    */
-  cancleImg: function (e) {
+  cancleImg: function(e) {
     let that = this;
     let status = e.currentTarget.dataset.status;
     let index = e.currentTarget.dataset.index;
@@ -194,11 +160,9 @@ Page({
   /**
    * 获取表单提交的值
    */
-  formSubmit: function (e) {
-    console.log(e.detail.value);
+  formSubmit: function(e) {
     let that = this;
     let goods = e.detail.value;
-    // console.log(goods);
     // 商品名称
     if (goods.goodsName == '') {
       wx.showToast({
@@ -288,20 +252,9 @@ Page({
       return;
     }
     goods.minnum = 1;
-    // console.log(swiper_sort)
-    // console.log(goodsDetail_sort)
-    // let img = '';    // 存放图片
-    // // 商品列表图
-    // let list_img_len = that.data.list_img.length;
-    // for (let i = 0; i < list_img_len; i++) {
-    //     img += list_img[i] + ',';
-    //     status += '1,'
-    //     sort += '0,'
-    // }
     goods.img = that.data.list_img; // 图片
     goods.shopCode = that.data.shop_code;
     goods.thumbs_up = 0;
-    // console.log(goods);
     // 添加商品
     function calback(res) {
       wx.showToast({
@@ -309,9 +262,9 @@ Page({
         icon: 'success',
         duration: 1000,
       });
-      setTimeout(function () {
+      setTimeout(function() {
         wx.redirectTo({
-          url: '/pages/myGoods/goodsList/goodsList'
+          url: '/pages/myGoods/goodsList/goodsList?selectype=' + 'shenhe'
         })
       }, 1500);
     }

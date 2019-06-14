@@ -65,11 +65,7 @@ Page({
     px2rpxWidth: '',
     px2rpxHeight: '',
   },
-  goTop: function(e) {
-    this.setData({
-      scrollTop: 0
-    })
-  },
+
   swiperChange: function(e) {
     this.setData({
       swiperCurrent: e.detail.current
@@ -176,7 +172,8 @@ Page({
         })
       }
       that.setData({
-        typee: stype
+        typee: stype,
+        types: stype
       })
       //商品内存
       let str4 = res.volume
@@ -388,18 +385,18 @@ Page({
       })
       return false;
     }
-    //   味道规格
-    if (this.data.taste_suss == false) {
-      wx.showToast({
-        title: '请填写口味规格',
-        icon: 'none'
-      })
-      return false;
-    }
     //   内存规格
     if (this.data.volume_suss == false) {
       wx.showToast({
         title: '请填写内存规格',
+        icon: 'none'
+      })
+      return false;
+    }
+    //   味道规格
+    if (this.data.taste_suss == false) {
+      wx.showToast({
+        title: '请填写口味规格',
         icon: 'none'
       })
       return false;
@@ -415,10 +412,14 @@ Page({
     var that = this;
 
     function insert(data) {
-      // console.log(data)
       that.setData({
         btn_add_cart_disabled: false,
         is_add_cart_view: false,
+        color_suss: false, //颜色规格
+        size_suss: false, //尺寸规格
+        taste_suss: false, //味道规格
+        volume_suss: false, //内存规格
+        type_suss: false, //类型规格
       });
       wx.showToast({
         title: '添加成功',
@@ -447,14 +448,6 @@ Page({
       })
       return false;
     }
-    //   味道规格
-    if (this.data.taste_suss == false) {
-      wx.showToast({
-        title: '请填写口味规格',
-        icon: 'none'
-      })
-      return false;
-    }
     //   内存规格
     if (this.data.volume_suss == false) {
       wx.showToast({
@@ -463,6 +456,15 @@ Page({
       })
       return false;
     }
+    //   味道规格
+    if (this.data.taste_suss == false) {
+      wx.showToast({
+        title: '请填写口味规格',
+        icon: 'none'
+      })
+      return false;
+    }
+
     //   类型规格
     if (this.data.type_suss == false) {
       wx.showToast({
@@ -485,8 +487,6 @@ Page({
     app.globalData.tastes = this.data.tastes;
     app.globalData.typee = this.data.typee;
     app.globalData.volume = this.data.volume;
-
-
     // 存入内存
     wx.setStorage({
       key: "num",
@@ -495,7 +495,7 @@ Page({
     wx.setStorage({
       key: "gid",
       data: gids
-    })
+    });
   },
   radioChange4: function(e) {
     // console.log('radio发生change事件，携带value值为：', e.detail.value)
@@ -530,7 +530,7 @@ Page({
   },
   // 类型
   selectType: function(e) {
-    console.log('radio发生change事件，携带value值为：', e.detail.value)
+    // console.log('radio发生change事件，携带value值为：', e.detail.value)
     this.setData({
       typee: e.detail.value,
       type_suss: true
@@ -538,60 +538,6 @@ Page({
     // console.log(that.data.typee)
   },
 
-
-
-  initAddCartData: function(data) {
-    var that = this;
-    wx.hideToast();
-    that.setData({
-      btn_add_cart_disabled: false
-    });
-    if (data.code == 1) {
-      wx.showModal({
-        title: '提示',
-        content: "添加购物车成功! 点确定进入下单页面,取消留在该页面",
-        success: function(res) {
-          if (res.confirm == true) {
-            wx.redirectTo({
-              url: '../mallcart/mallcart'
-            })
-          } else {
-            that.setData({
-              is_add_cart_view: false
-            })
-          }
-        }
-      })
-    } else if (data.code == 2) {
-      wx.showModal({
-        title: '提示',
-        content: '登陆超时，将重新获取用户信息',
-        showCancel: false,
-        success: function(res) {
-          app.getNewToken(function(token) {
-            that.setData({
-              local_global_token: token
-            })
-            that.setData({
-              this_page: 1,
-              buttonIsDisabled: false
-            })
-            _function.getGoodsInfo(that.data.this_goods_id, that.initGoodsInfoData, this)
-          })
-        }
-      })
-    } else if (data.code == 5) {
-      wx.showModal({
-        title: '提示',
-        content: data.info,
-        showCancel: false
-      })
-      that.setData({
-        //is_add_cart_view:false
-      })
-      return false;
-    }
-  },
   //联系客服
   bind_contant_kefu: function(e) {
     let that = this

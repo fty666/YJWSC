@@ -16,11 +16,11 @@ Page({
     px2rpxHeight: '',
     // 可以提现的额度
     pay_account: '',
-    ID_card: '',//IDcards
+    ID_card: '', //IDcards
   },
 
   // 加载
-  onLoad: function (options) {
+  onLoad: function(options) {
     var that = this;
     // 获取shopcode
     funData.getShopCode(app.globalData.user_id, that, (data) => {
@@ -34,7 +34,6 @@ Page({
         if (util.getPrevPageUrl() == 'pages/myself/myself') {
           card = data.card;
           cardNum = card.card_no;
-          console.log(cardNum);
           card.card_no = util.bankCardByStar(card.card_no);
           that.setData({
             shopInfo: data.shop,
@@ -46,11 +45,8 @@ Page({
         } else if (util.getPrevPageUrl() == 'pages/bankCard/bankCardList/bankCardList') {
           // 上一级页面是从银行卡列表页面跳转过来的  查询选择的银行卡
           funData.getCardById(options.cid, that, (res) => {
-            console.log(res[0]);
             card = res[0];
-            // console.log(card);
             cardNum = card.card_no;
-            console.log(cardNum);
             card.card_no = util.bankCardByStar(card.card_no);
             that.setData({
               shopInfo: data.shop,
@@ -62,7 +58,6 @@ Page({
       });
       // 获取可以提现的金额
       function calbacks(res) {
-        console.log(res)
         that.setData({
           pay_account: res.payAccount
         })
@@ -71,20 +66,17 @@ Page({
     })
 
   },
-  onShow: function () {
 
-  },
 
   /**
- * 生命周期函数--监听页面初次渲染完成
- */
-  onReady: function () {
+   * 生命周期函数--监听页面初次渲染完成
+   */
+  onReady: function() {
     let that = this;
     //获取缓存
     wx.getStorage({
       key: 'PX_TO_RPX',
-      success: function (res) {
-        console.log(res)
+      success: function(res) {
         that.setData({
           px2rpxHeight: res.data.px2rpxHeight,
           px2rpxWidth: res.data.px2rpxWidth,
@@ -98,9 +90,7 @@ Page({
 
 
   // 全部提现
-  allDeposit: function () {
-    // let deposit = this.data.shopInfo.pay_account;
-    // console.log(deposit);
+  allDeposit: function() {
     let deposit = '0.00';
     if (this.data.shopInfo) {
       deposit = this.data.shopInfo.pay_account;
@@ -113,7 +103,7 @@ Page({
   },
 
   // 更换银行卡
-  changeBankCard: function () {
+  changeBankCard: function() {
     wx.navigateTo({
       url: '/pages/bankCard/bankCardList/bankCardList',
     })
@@ -121,11 +111,10 @@ Page({
 
 
   // 提现金额
-  withdrawPrice: function (e) {
+  withdrawPrice: function(e) {
     let that = this;
     let deposit = e.detail.value;
     let price = Number(deposit);
-    console.log()
     // 输入金额校验
     if (!util.checkReg(4, price)) {
       wx.showToast({
@@ -149,7 +138,7 @@ Page({
   },
 
   // 提现
-  extract: function () {
+  extract: function() {
     let that = this;
     let cardNo = that.data.cardNo;
     if (cardNo == '' || cardNo == undefined || cardNo == null) {
@@ -185,19 +174,6 @@ Page({
       })
       return false;
     }
-
-    // if (that.data.owner != that.data.card.owner || that.data.owner == '') {
-    //   // 持卡人姓名验证
-    //   wx.showToast({
-    //     title: '信息填写错误',
-    //     icon: 'none',
-    //     duration: 2000
-    //   });
-    //   return;
-    // }
-
-
-
     let datas = {
       shopCode: that.data.shopcode,
       card_no: cardNum,
@@ -216,7 +192,7 @@ Page({
   /**
    * 查看明细
    */
-  showDetail: function () {
+  showDetail: function() {
     wx.navigateTo({
       url: '/pages/myself/myMoney/moneyDeatail/moneyDeatail',
     })

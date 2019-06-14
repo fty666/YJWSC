@@ -15,18 +15,19 @@
         <view style='width:100%;height:{{px2rpxHeight*1000}}px'>
           <scroll-view scroll-y>
             <block wx:for="{{coupon}}" wx:for-item="coupon" wx:key="{{coupon.couponId}}">
-              <view class="item" style="height:{{px2rpxHeight*290}}px;">
+              <view class="item yhqbj" style="height:{{px2rpxHeight*290}}px;">
                 <!-- <view class="tag">新人专享</view> -->
                 <view class="content">
                   <view class="left">
                     <view class="name">赠送商品：{{coupon.goodsName}}</view>
                     <view class="time">赠送数量:{{coupon.nums}}</view>
+                    <view class="time">开始时间：{{coupon.reductionCreateTime}}</view>
                     <view class="time">结束时间：{{coupon.reductionEndTime}}</view>
                   </view>
                   <view class="right" style="width:{{px2rpxWidth*162}}px;">
-                    <button catchtap='delCoupon' data-shopcode='{{coupon.shop_code}}' class="go mt5" data-index='{{index}}' data-couponid='{{coupon.reductionId}}' style="width:{{px2rpxWidth*162}}px;height:{{px2rpxHeight*48}}px;">删除</button>
+                    <button catchtap='delCoupon' data-shopcode='{{coupon.shop_code}}' class="go mt5" data-index='{{index}}' data-couponid='{{coupon.reductionId}}' style="width:{{px2rpxWidth*162}}px;height:{{px2rpxHeight*48}}px;line-height:{{px2rpxHeight*50}}px">删除</button>
 
-                    <button catchtap='updtaCoupon' data-shopcode='{{coupon.shop_code}}' data-reductionId='{{coupon.reductionId}}' class="go mt5" data-index='{{index}}' data-couponid='{{coupon.reductionId}}' style="width:{{px2rpxWidth*162}}px;height:{{px2rpxHeight*48}}px;">修改</button>
+                    <button catchtap='updtaCoupon' data-shopcode='{{coupon.shop_code}}' data-reductionId='{{coupon.reductionId}}' class="go mt5" data-index='{{index}}' data-couponid='{{coupon.reductionId}}' style="width:{{px2rpxWidth*162}}px;height:{{px2rpxHeight*48}}px;line-height:{{px2rpxHeight*50}}px">修改</button>
 
                   </view>
                 </view>

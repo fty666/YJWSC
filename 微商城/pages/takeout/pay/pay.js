@@ -7,7 +7,6 @@ const utilFunctions = require('../../../utils/functionData.js');
 const app = getApp();
 var couponIds = [];
 Page({
-
   /**
    * 页面的初始数据
    */
@@ -35,36 +34,31 @@ Page({
     body: '', //商品名
     px2rpxWidth: '',
     px2rpxHeight: '',
-
+    // 显示优惠券
+    couponShow: true,
+    couponList: {}, //要使用的优惠券
   },
 
   /**
    * 生命周期函数--监听页面加载
    */
-  onLoad: function (options) {
-    console.log(options)
+  onLoad: function(options) {
     let that = this;
-    // console.log(util.getPrevPageUrl())
     this.setData({
       shop_code: options.shop_code,
       options: options.shop_code,
     });
-
   },
 
   /**
    * 生命周期函数--监听页面初次渲染完成
    */
-  onReady: function () {
-    console.log(app.globalData.SocketTask)
-    // console.log(getCurrentPages())
+  onReady: function() {
     let that = this;
     // 获取默认地址
     getAddrByDefault(that);
     // 获取信息
     orderinfo(that);
-
-    console.log()
     // 获取用户信息
     funDta.getUser(getApp().globalData.user_id, that, (res) => {
       that.setData({
@@ -74,8 +68,7 @@ Page({
     //获取缓存
     wx.getStorage({
       key: 'PX_TO_RPX',
-      success: function (res) {
-        console.log(res)
+      success: function(res) {
         that.setData({
           px2rpxHeight: res.data.px2rpxHeight,
           px2rpxWidth: res.data.px2rpxWidth,
@@ -84,65 +77,11 @@ Page({
     })
 
   },
-  /**
-   * 生命周期函数--监听页面显示
-   */
-  onShow: function () {
-    let that = this;
-    // 优惠券
-    if (!util.isEmpty(that.data.coupon)) {
-      let couponId = that.data.coupon.couponId;
-      if (couponIds.indexOf(couponId) == -1) {
-        let coupons = coupon(that.data.totalPrice, that.data.coupon.couponPrice, that);
-        console.log(coupons)
-        couponIds.push(couponId);
-        that.setData({
-          totalPrice: coupons,
-        });
-      }
-    }
-    console.log(that.data.totalPrice)
-
-
-  },
-
-  /**
-   * 生命周期函数--监听页面隐藏
-   */
-  onHide: function () {
-    // couponIds = [];
-  },
-
-  /**
-   * 生命周期函数--监听页面卸载
-   */
-  onUnload: function () { },
-
-  /**
-   * 页面相关事件处理函数--监听用户下拉动作
-   */
-  onPullDownRefresh: function () {
-
-  },
-
-  /**
-   * 页面上拉触底事件的处理函数
-   */
-  onReachBottom: function () {
-
-  },
-
-  /**
-   * 用户点击右上角分享
-   */
-  onShareAppMessage: function () {
-
-  },
 
   /**
    * 选择地址
    */
-  goToAddress: function () {
+  goToAddress: function() {
     let that = this;
     // 将当前页面地址存储在缓存中
     wx.setStorageSync('navigate', '/pages/takeout/pay/pay');
@@ -157,18 +96,48 @@ Page({
   /**
    * 选择优惠券
    */
-  goToCoupon: function () {
+  goToCoupon: function() {
+    app.globalData.couponCode = this.data.shop_code;
+    app.globalData.prcirCounp = this.data.totalPrice;
+    wx.setNavigationBarTitle({
+      title: '选取优惠券'
+    })
+    if (this.data.couponList.couponPrice) {
+      let nowtal = calculate.calcAdd(this.data.couponList.couponPrice, this.data.totalPrice);
+      this.setData({
+        couponShow: false,
+        totalPrice: nowtal
+      })
+    } else {
+      this.setData({
+        couponShow: false,
+      })
+    }
+  },
+  // 获取优惠券
+  MyEvent(e) {
+    let totalPrice = this.data.totalPrice;
+    let mycoupon = e.detail.couponPrice;
     let that = this;
-    wx.navigateTo({
-      url: '/pages/shop/mallquanlist/index?uid=' + getApp().globalData.user_id + '&shop_code=' + that.data.shop_code + '&payPrice=' + that.data.totalPrice,
+    let newTotalPrice = 0;
+    wx.setNavigationBarTitle({
+      title: '订单支付'
+    })
+    if (util.isEmpty(mycoupon)) {
+      newTotalPrice = totalPrice;
+    } else {
+      newTotalPrice = calculate.calcReduce(totalPrice, mycoupon);
+    }
+    that.setData({
+      totalPrice: newTotalPrice,
+      couponShow: true,
+      couponList: e.detail
     });
   },
-
   /**
    * 备注
    */
-  msg: function (e) {
-    // console.log(e.detail.value);
+  msg: function(e) {
     this.setData({
       msg: e.detail.value
     });
@@ -177,8 +146,7 @@ Page({
   /**
    * 餐具数量
    */
-  getTableware: function (e) {
-    // console.log(e.detail.value)
+  getTableware: function(e) {
     this.setData({
       tableware: this.data.tablewareArr[e.detail.value]
     })
@@ -187,8 +155,8 @@ Page({
   /**
    * 支付
    */
-  pay: function () {
-    console.log(this.data.goods_list)
+  pay: function() {
+    // console.log(this.data.goods_list)
     let goodsNmae = null;
     let that = this;
     let goods_list = that.data.goods_list;
@@ -206,7 +174,6 @@ Page({
     let goods_list_len = goods_list.length;
     // 获取商品名
     if (goods_list_len <= 1) {
-      // console.log(777)
       for (let i = 0; i < goods_list_len; i++) {
         goodsNmae = goods_list[0].goods_name;
       }
@@ -236,10 +203,10 @@ Page({
     let order_remarks = '备注:' + that.data.msg + ';餐具:' + that.data.tableware;
     // 没有优惠券
     let couponId = '';
-    if (util.isEmpty(that.data.coupon)) {
+    if (util.isEmpty(that.data.couponList)) {
       couponId = 0;
     } else {
-      couponId = that.data.coupon.couponId;
+      couponId = that.data.couponList.couponId;
     }
 
     // 判断超出范围
@@ -285,11 +252,8 @@ Page({
       horseMoney: that.data.horseMoney, //骑手的费用
       reachTime: that.data.reachTime
     }
-    // console.log(data);
     funDta.insertOrder(data, that, (res) => {
       // 清空这个缓存
-      // console.log(that.data.goods_list)
-      console.log(res);
       let lengs = parseInt(res.length);
       let relevanceUUID = '';
       let orderUUID = '';
@@ -302,41 +266,26 @@ Page({
         }
       }
       app.globalData.orderUUID = orderUUID;
-      // // 微信支付
-      utilFunctions.weixinPay({
-        body: goodsNmae,
-        orderUUID: relevanceUUID,
-        money: that.data.totalPrice,
-        openid: that.data.userInfo.weChat
-      }, that, () => {
-        let now = util.formatDate(new Date().getTime());
-        // 支付成功通知商家
-        that.sendSocket((now + ' 订单号：' + orderUUID), that.data.shop_code);
+      // // 微信支付，正式relevanceUUID
+      // 测试支付
+      function ce(res) {
+        console.log(res);
         wx.removeStorage({
           key: that.data.shop_code,
-          success: function (res) {
-          }
+          success: function(res) {}
         })
         // 去除订单shopcode
-        app.globalData.shop_code='';
-        //支付成功发送短信通知商家
-        funDta.getOrderSms(that.data.shop_info.mobile, that, () => {
-          // setTimeout(function () {
-          wx.redirectTo({
-            url: '/pages/takeout/order/order',
-          })
-          // }, 1000);
-        });
-      });
+        app.globalData.shop_code = '';
+        wx.redirectTo({
+          url: '/pages/takeout/order/order',
+        })
+      }
+      utilFunctions.cezhifu(relevanceUUID, ce, this);
     });
-
-
-
-
   },
 
   // 商品规格的处理
-  specification: function (mydata, myspecification) {
+  specification: function(mydata, myspecification) {
     let specification = myspecification;
     if (util.isEmpty(mydata)) {
       specification += '@' + ',';
@@ -346,7 +295,7 @@ Page({
     return specification;
   },
   //web发送 
-  sendSocket: function (mymessage, ToSendUserno) {
+  sendSocket: function(mymessage, ToSendUserno) {
     console.log('websocket===' + mymessage + '===' + ToSendUserno);
     let socketOpen = true;
     let socketMsgQueue = [];
@@ -354,12 +303,9 @@ Page({
     let SocketTask = app.globalData.SocketTask;
     SocketTask.send({
       data: message,
-      success: function () {
-        console.log('success')
-      }
+      success: function() {}
     })
   }
-
 });
 
 // 获取默认地址
@@ -374,7 +320,7 @@ function getAddrByDefault(that) {
       wx.showModal({
         title: '提示',
         content: '你还没有地址，请创建',
-        success: function (res) {
+        success: function(res) {
           if (res.confirm) {
             wx.navigateTo({
               url: '/pages/user/addressAdd/addressAdd',
@@ -400,7 +346,6 @@ function orderinfo(that) {
     that.setData({
       shop_info: shopdata
     });
-
     // 获取配送费
     let datas = {
       startlongitude: shopdata.longitude,
@@ -418,7 +363,8 @@ function orderinfo(that) {
       // 获取商品信息
       wx.getStorage({
         key: that.data.shop_code,
-        success: function (res) {
+        success: function(res) {
+          console.log(res)
           let goods_list = res.data.goods;
           let len = goods_list.length;
           for (let i = len - 1; i >= 0; i--) {
@@ -431,9 +377,7 @@ function orderinfo(that) {
           totalPrice = reductions(shopdata.reduction, totalPrice, that);
           // 添加配送费
           totalPrice = distribution(totalPrice, that.data.userMoney);
-          console.log(totalPrice)
           totalPrice = totalPrice.toFixed(2);
-          console.log('价格' + totalPrice)
           that.setData({
             totalGoodsPrice: res.data.totalPrice,
             totalPrice: totalPrice,
@@ -462,8 +406,6 @@ function reductions(reduction, totalPrice, that) {
   // 满减
   let reductionPrice = 0; // 存放符合满减的价格
   let full_subtraction_id = 0;
-  // console.log(totalPrice)
-  // console.log(reduction);
   let reductionLen = 0;
   if (reduction == undefined || '') {
     reductionLen = 0;
@@ -473,17 +415,11 @@ function reductions(reduction, totalPrice, that) {
   }
   if (reductionLen > 0) {
     for (let i = 0; i < reductionLen; i++) {
-      // if (totalPrice >= reduction[i].full && reduction[i].reductionPrice >= reductionPrice) {
       if (totalPrice >= reduction[i].full) {
         reductionPrice = reduction[i].reductionPrice;
         full_subtraction_id = reduction[i].reductionId;
       }
-      // if (totalPrice < reduction[i].full && reduction[i].reductionPrice >= reductionPrice) {
-      //   reductionPrice = 0;
-      //   full_subtraction_id = 0;
-      // }
     }
-    console.log(reductionPrice)
     newTotalPrice = calculate.calcReduce(totalPrice, reductionPrice);
   } else {
     newTotalPrice = totalPrice;
@@ -491,24 +427,6 @@ function reductions(reduction, totalPrice, that) {
   that.setData({
     full_subtraction_id: full_subtraction_id,
     full_subtraction: reductionPrice
-  });
-
-  return newTotalPrice;
-}
-
-// 添加优惠券
-function coupon(totalPrice, mycoupon, that) {
-  // console.log(mycoupon)
-  // console.log(totalPrice)
-  let newTotalPrice = 0;
-  if (util.isEmpty(mycoupon)) {
-    newTotalPrice = totalPrice;
-  } else {
-    newTotalPrice = calculate.calcReduce(totalPrice, mycoupon);
-    // console.log(newTotalPrice)
-  }
-  that.setData({
-    totalPrice: newTotalPrice
   });
   return newTotalPrice;
 }

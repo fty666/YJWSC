@@ -35,18 +35,6 @@
         </view>
       </view>
     </block>
-    <!-- <view class='service'>
-            <view class='each-text'>服务态度</view>
-            <block wx:for="{{5}}" wx:key="{{index}}">
-                <view class='desc-xing mt25' data-index="{{index}}"><text class="iconfont icon-xingjiline"></text> </view>
-            </block>
-        </view>
-        <view class='service mb10 pt0 mb50'>
-            <view class='each-text'>物流速度</view>
-            <block wx:for="{{5}}" wx:key="{{index}}">
-                <view class='desc-xing mt25' data-index="{{index}}"><text class="iconfont icon-xingjiline"></text> </view>
-            </block>
-        </view> -->
   </scroll-view>
   <view class='btn' style="height:{{px2rpxHeight*100}}px;">
     <button type='primary' catchtap='commitComment'>提交评价</button>

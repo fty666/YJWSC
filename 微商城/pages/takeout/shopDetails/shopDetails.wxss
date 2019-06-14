@@ -11,14 +11,15 @@ page {
 
 .logo {
   margin-left: 30rpx;
+
 }
 
 .font {
   font-size: 25rpx;
   margin-left: 25rpx;
   margin-top: 10rpx;
-  overflow: hidden;
-  text-overflow: ellipsis;
+  /* overflow: hidden;
+  text-overflow: ellipsis; */
   color: white;
 }
 

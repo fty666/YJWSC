@@ -2,8 +2,7 @@
   <form bindsubmit="addCoupon">
     <view class="coupon-list">
       <!-- <block wx:for="{{coupon}}" wx:for-item="{{coupon}}" wx:key="{{coupon.id}}"> -->
-      <view class="item" style="height:{{px2rpxHeight*460}}px;">
-        <!-- <view class="tag">新人专享</view> -->
+      <view class="item yhqbj" style="height:{{px2rpxHeight*460}}px;">
         <view class="content">
           <view class="left">
             <input type='number' name="reductionPrice" class="name" placeholder='输入要减的价格'></input>

@@ -22,14 +22,6 @@
       <view class='each-name'>起送价格</view>
       <input name="initialMoney" class='each-input' placeholder='请填写起送价格，不低于20元' style="width:{{px2rpxWidth*600}}px;height:{{px2rpxHeight*70}}px;"></input>
     </view>
-    <!-- <view class='shop-each'>
-            <view class='each-name'>配送价格</view>
-            <input name="transMoney" class='each-input' placeholder='请填写配送价格' style="width:{{px2rpxWidth*600}}px;height:{{px2rpxHeight*70}}px;"></input>
-        </view> -->
-    <!-- <view class='shop-each'>
-            <view class='each-name'>人均消费</view>
-            <input name="avgMoney" class='each-input' placeholder='请填写人均消费' style="width:{{px2rpxWidth*600}}px;height:{{px2rpxHeight*70}}px;"></input>
-        </view> -->
     <view class='shop-each'>
       <view class='each-name' catchtap='location'>
         <text class="iconfont icon-location mr5"></text> 店铺定位</view>

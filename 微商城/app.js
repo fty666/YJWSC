@@ -4,7 +4,7 @@ const utils = require('./utils/util.js');
 const app = getApp();
 App({
   globalData: {
-    SocketTask:null,
+    SocketTask: null,
     userInfo: null,
     shopCode: '',
     groupId: '',
@@ -21,35 +21,38 @@ App({
     // 商品ID,地址跳转商品详情
     goodsId: '',
     //订单跳转
-    shcode:'',
-    color:'',
-    ZKprice:'',
-    size:'',
-    tastes:'',
-    typee:'',
-    volume:'',
+    shcode: '',
+    color: '',
+    ZKprice: '',
+    size: '',
+    tastes: '',
+    typee: '',
+    volume: '',
     // 外卖订单
-    shop_code:'',
+    shop_code: '',
+    //商家code优惠券时使用
+    couponCode: '',
+    prcirCounp: '', //优惠券使用前价格
   },
 
-  onLaunch: function () {
+  onLaunch: function() {
     let that = this;
     // 登录
     wx.login({
       success: res => {
         // 发送 res.code 到后台换取 openId, sessionKey, unionId
-        funData.mylogin(res.code, function (data) {
-          if (data.data.data.stauts==0){
+        funData.mylogin(res.code, function(data) {
+          if (data.data.data.stauts == 0) {
             wx.showModal({
               title: '提示',
               content: '您的账户被禁用了,请联系客服',
-              icon:'none',
-              success: function () {
+              icon: 'none',
+              success: function() {
                 wx.redirectTo({
                   url: '/pages/kefu/kefu',
                 })
               },
-              fail:function(){
+              fail: function() {
                 wx.redirectTo({
                   url: '/pages/kefu/kefu',
                 })
@@ -60,8 +63,7 @@ App({
           that.globalData.level = data.data.data.level;
           if (utils.isEmpty(that.globalData.user_id)) {
             return;
-          } else {
-          }
+          } else {}
           wx.setStorageSync('user_info', {
             user_id: data.data.data.user_id,
             level: data.data.data.level
@@ -69,7 +71,7 @@ App({
 
           // websoket连接
           that.globalData.SocketTask = wx.connectSocket({
-            url: 'wss://www.yjwsch.com//MicroPlatform/websocket/' +data.data.data.user_id,
+            url: 'wss://www.yjwsch.com//MicroPlatform/websocket/' + data.data.data.user_id,
           });
 
         });
@@ -95,7 +97,35 @@ App({
     });
     // 获取页面信息
     let systemInfo = wx.getSystemInfoSync();
-    wx.setStorageSync('PX_TO_RPX', { px2rpxWidth: systemInfo.windowWidth / 750, px2rpxHeight: systemInfo.screenHeight / 1334 });
+    wx.setStorageSync('PX_TO_RPX', {
+      px2rpxWidth: systemInfo.windowWidth / 750,
+      px2rpxHeight: systemInfo.screenHeight / 1334
+    });
+    //版本更新
+    const updateManager = wx.getUpdateManager()
+    updateManager.onCheckForUpdate(function(res) {
+      // 请求完新版本信息的回调
+    })
+    updateManager.onUpdateReady(function() {
+      wx.showModal({
+        title: '更新提示',
+        content: '新版本已经准备好，是否重启应用？',
+        success: function(res) {
+          if (res.confirm) {
+            // 新的版本已经下载好，调用 applyUpdate 应用新版本并重启
+            updateManager.applyUpdate()
+          }
+        }
+      })
+    })
 
-  },
+    updateManager.onUpdateFailed(function() {
+      // 新的版本下载失败
+      wx.showModal({
+        title: '更新提示',
+        content: '新版本下载失败',
+        showCancel: false
+      })
+    })
+  }
 })

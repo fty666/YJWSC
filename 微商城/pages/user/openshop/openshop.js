@@ -23,16 +23,6 @@ Page({
      * 生命周期函数--监听页面加载
      */
     onLoad: function (options) {
-        // 加载页面tarBar模块
-        let that = this;
-        // setTimeout(function(){
-        //     if (app.globalData.level == '1') {
-        //         template.tabbar("tabBar", 4, that, 1);
-        //     } else if (app.globalData.level == '2' || app.globalData.level == '3') {
-        //         template.tabbar("tabBar", 4, that, 3);
-        //     }
-        // },1000);
-        
     },
 
     /**
@@ -44,7 +34,6 @@ Page({
       wx.getStorage({
         key: 'PX_TO_RPX',
         success: function (res) {
-          console.log(res)
           that.setData({
             px2rpxHeight: res.data.px2rpxHeight,
             px2rpxWidth: res.data.px2rpxWidth,
@@ -64,47 +53,10 @@ Page({
             template.tabbar("tabBar", 4, that, 3);
         }
     },
-
-    /**
-     * 生命周期函数--监听页面隐藏
-     */
-    onHide: function () {
-
-    },
-
-    /**
-     * 生命周期函数--监听页面卸载
-     */
-    onUnload: function () {
-
-    },
-
-    /**
-     * 页面相关事件处理函数--监听用户下拉动作
-     */
-    onPullDownRefresh: function () {
-
-    },
-
-    /**
-     * 页面上拉触底事件的处理函数
-     */
-    onReachBottom: function () {
-
-    },
-
-    /**
-     * 用户点击右上角分享
-     */
-    onShareAppMessage: function () {
-
-    },
-
     /**
      * 获取输入手机号
      */
     getTel: function (e) {
-        // console.log(e.detail.value)
         this.setData({
             tel: e.detail.value
         });
@@ -115,7 +67,6 @@ Page({
      */
     sendCode: function () {
         let that = this;
-        // console.log(that.data.tel)
         // 验证手机号
         if (!util.checkReg(1, that.data.tel)) {
             wx.showToast({
@@ -143,7 +94,6 @@ Page({
                 i = 120;
             }
         }, 1000);
-
         // 获取验证码
         funData.getSms(that.data.tel, that, () => {
             wx.showToast({

@@ -2,14 +2,13 @@
   <form bindsubmit="addCoupon">
     <view class="coupon-list">
       <!-- <block wx:for="{{coupon}}" wx:for-item="{{coupon}}" wx:key="{{coupon.id}}"> -->
-      <view class="item">
+      <view class="item yhqbj">
         <!--满足金额  -->
         <view class="content">
           <view class="left">
             <input type='number' name="full" class="name" placeholder='请输入满赠的金额'></input>
           </view>
         </view>
-
         <!--满足数量  -->
         <view class="content">
           <view class="left">
@@ -44,7 +43,7 @@
           <view class='font'>请选择满赠商品</view>
           <view class='gid'>
             <radio-group class="radio-group" bindchange="radioChange">
-              <label class="check" wx:for="{{goods}}">
+              <label class="check" wx:for="{{goods}}" wx:key="index">
                 <radio value="{{item.goodsId}}" name="goodsId" checked="{{item.checked}}" />{{item.goods_name}}
               </label>
             </radio-group>
@@ -53,7 +52,7 @@
       </view>
       <!-- </block> -->
       <view class='lingquan' style='top:{{px2rpxHeight*1000}}px;'>
-        <button formType="submit" data-shop_code='' class='button button-primary button-rounded'>添加该满赠</button>
+        <button formType="submit" data-shop_code='' class='button button-caution button-rounded'>添加该满赠</button>
       </view>
     </view>
 

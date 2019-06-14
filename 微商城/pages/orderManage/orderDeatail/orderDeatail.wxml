@@ -44,9 +44,9 @@
           </block>
           <block wx:elif="{{order.status == 2}}">
             <view class="statusText">
-              <text class="iconfont icon-waimai"></text>等待发货</view>
+              <text class="iconfont icon-waimai"></text>等待操作</view>
             <view catchtap='sendGoods' data-order_mainid='{{order.order_mainid}}' data-status='{{order.status}}' data-index='{{index}}' class='button button button-primary button-rounded button-wx-small ml10'>
-              发货
+              接单
             </view>
           </block>
           <block wx:elif="{{order.status == 3}}">

@@ -10,7 +10,7 @@
       <button catchtap='sendCode' disabled="{{disabled}}" class='button button-primary button-rounded button-wx-small '>{{send_code}}</button>
     </view>
     <view class='model-each model-btn' style="height:{{px2rpxHeight*80}}px;">
-      <view catchtap='validateTelCode' class='button button-highlight button-rounded '>验证</view>
+      <button catchtap='validateTelCode' class='button'>验证</button>
     </view>
   </view>
 </block>
@@ -94,5 +94,5 @@
     <image class="warn-img" src="/images/waring.png" style="width:{{px2rpxWidth*48}}px;height:{{px2rpxHeight*48}}px;"></image>
     <text class="cellContent">请谨慎修改商店信息</text>
   </view>
-  <button type="primary" formType="submit" class='mt15'>修改</button>
+  <button type="warn" formType="submit" class='mt15' style='width:80%;margin-left:{{px2rpxWidth*70}}px'>修改</button>
 </form>

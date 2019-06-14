@@ -24,9 +24,9 @@
       </view>
     </view>
 
-    <view class='info' style="height:{{px2rpxHeight*2200}}px;">
-      <block wx:if="{{hasData}}">
-        <scroll-view scroll-y bindscrolltoupper='scrollToUpper' bindscrolltolower='scrollToLower'>
+    <view class='info' style="height:{{px2rpxHeight*1100}}px;">
+      <scroll-view scroll-y bindscrolltolower='scrollToLower'>
+        <block wx:if="{{hasData}}">
           <block wx:if="{{pays==true || every==true}}">
             <!--待付款  -->
             <view class="orders" wx:for="{{obligation}}" wx:key="{{index}}">
@@ -95,14 +95,11 @@
               <view class="b" style="height:{{px2rpxHeight*180}}px;">
                 <view class="l">实付：￥{{item.real_money}}</view>
                 <view class="d">日期：{{item.createTime}}</view>
-                <!-- <block wx:if='{{item.status== 4 || item.status== 5}}' >
-                                    <view class='g' catchtap='mores' data-index="{{index}}"  data-mid='{{item.order_mainid}}'>更多</view>
-                                </block> -->
                 <view class="r">
                   <!-- 待付款  -->
                   <block wx:if="{{item.status ==1}}">
-                    <view class='button button button-caution button-rounded button-wx-small ml10' data-order-index="{{index}}" data-uid="{{item.order_uuid}}" catchtap="payOrder">去付款</view>
-                    <view class='button button button-caution button-rounded button-wx-small ml10' data-order-index="{{index}}" data-uid="{{item.order_mainid}}" catchtap="escorder">取消订单</view>
+                    <view class='button button button-caution button-rounded button-wx-small ml10' data-order-index="{{index}}" data-uid="{{item.relevance_uuid}}" catchtap="payOrder">去付款</view>
+                    <view class='button button button-caution button-rounded button-wx-small ml10' data-order-index="{{index}}" data-uid="{{item.relevance_uuid}}" catchtap="escorder">取消订单</view>
                   </block>
 
                   <!-- 待发货  -->
@@ -112,13 +109,13 @@
 
                   <!-- 待收货  -->
                   <block wx:if="{{item.status == to_be_received}}">
-                    <view catchtap='showExpress' data-order_uuid='{{item.order_uuid}}' data-order_mainid='{{item.order_mainid}}' class='button button button-rounded button-wx-small ml10' style='background-color:#fff;'>查看物流</view>
+                    <view catchtap='showExpress' data-order_uuid='{{item.order_uuid}}' data-order_mainid='{{item.order_mainid}}' class='button button button-primary button-rounded button-wx-small ml10'>查看物流</view>
                     <view catchtap='receiveGoods' data-index="{{index}}" data-order_uuid='{{item.order_uuid}}' data-order_mainid='{{item.order_mainid}}' class='button button button-primary button-rounded button-wx-small ml10'>确认收货</view>
                   </block>
 
                   <!-- 待评价  -->
                   <block wx:if="{{item.status == to_be_evaluated}}">
-                    <view catchtap='showExpress' data-order_uuid='{{item.order_uuid}}' data-order_mainid='{{item.order_mainid}}' class='button button button-rounded button-wx-small ml10' style='background-color:#fff;'>查看物流</view>
+                    <view catchtap='showExpress' data-order_uuid='{{item.order_uuid}}' data-order_mainid='{{item.order_mainid}}' class='button button button-primary button-rounded button-wx-small ml10'>查看物流</view>
                     <view catchtap='goComment' data-order-index="{{index}}" data-order_uuid='{{item.order_uuid}}' data-order_mainid='{{item.order_mainid}}' class='button button button-primary button-rounded button-wx-small ml10'>去评价</view>
                     <!-- <view catchtap='afterSale' data-order-index="{{index}}" data-order_uuid='{{item.order_uuid}}' data-order_mainid='{{item.order_mainid}}' class='button button-rounded button-wx-small ml10'>申请售后</view> -->
                   </block>
@@ -134,21 +131,19 @@
                   <block wx:if="{{item.status == 0}}">
                     <view catchtap='deleteOrder' data-order_uuid='{{item.order_uuid}}' data-order_mainid='{{item.order_mainid}}' data-order-index="{{index}}" class='button button-caution button-rounded button-wx-small ml10'>删除订单</view>
                   </block>
-
                 </view>
               </view>
             </view>
           </view>
           <!--查询其他完结  -->
-
-        </scroll-view>
-      </block>
-      <block wx:else>
-        <navigator class='no-order' url="/pages/shop/mall/mall">
-          <view>您还没有相关的订单</view>
-          <view>可以去看看有哪些想买的</view>
-        </navigator>
-      </block>
+        </block>
+        <block wx:else>
+          <navigator class='no-order' url="/pages/shop/mall/mall">
+            <view>您还没有相关的订单</view>
+            <view>可以去看看有哪些想买的</view>
+          </navigator>
+        </block>
+      </scroll-view>
     </view>
 
   </view>

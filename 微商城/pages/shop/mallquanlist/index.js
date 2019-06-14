@@ -31,7 +31,7 @@ Page({
 
     //查询是否有优惠卷 
     function able(res) {
-      console.log(res)
+      // console.log(res)
       let coupon = res.PageInfo.list;
       let len = coupon.length;
       for (let i = 0; i < len; i++) {
@@ -50,58 +50,27 @@ Page({
    */
   useCoupon: function (e) {
     let that = this;
-    let couponId = e.currentTarget.dataset.couponid;
+    let couponId = e.currentTarget.dataset.res.couponid;
     let index = e.currentTarget.dataset.index;
-    let fulls = e.currentTarget.dataset.full;
+    let fulls = e.currentTarget.dataset.res.full;
     let coupon = that.data.quan_list;
     let times = new Date(coupon[index].endTime) - new Date().getTime();
     // console.log(coupon)
     let pages = getCurrentPages();
     let prevPage = pages[pages.length - 2];
     //跳转店铺
-    let groupid = e.currentTarget.dataset.group_id;
-    let shop_code = e.currentTarget.dataset.shop_code;
+    let groupid = e.currentTarget.dataset.res.group_id;
+    console.log(e)
+    let shop_code = e.currentTarget.dataset.res.shop_code;
     if (groupid == 1) {
       wx.navigateTo({
-        url: '/pages/takeout/shopDetails/shopDetails?shop_code=' + e.currentTarget.dataset.shop_code
+        url: '/pages/takeout/shopDetails/shopDetails?shop_code=' + e.currentTarget.dataset.res.shop_code
       })
     } else {
       wx.navigateTo({
         url: '/pages/shop/shoplist/shoplist?groupid=' + groupid + '&shop_code=' + shop_code
       })
     }
-
-    // if (coupon[index].sta == '1' && times > 0) {
-    //   // 优惠券能使用
-    //   if (util.getPrevPageUrl() == 'pages/takeout/pay/pay' || util.getPrevPageUrl() == 'pages/shop/onepay/onepay' || util.getPrevPageUrl() == 'pages/shop/orderpay/index') {
-    //     console.log(fulls)
-    //     prevPage.setData({
-    //       coupon: coupon[index],
-    //       couponPrice: fulls
-    //     });
-    //     wx.navigateBack();
-    //   } else {
-    //     wx.navigateTo({
-    //       url: '/' + util.getPrevPageUrl() + '?couponId=' + couponId + '&couponPrice=' + fulls,
-    //     });
-    //   }
-    // } else {
-    //   wx.showToast({
-    //     title: '此优惠券不可用',
-    //     icon: 'none',
-    //     duration: 1000
-    //   });
-    // }
-
-  },
-
-  //下拉刷新
-  onPullDownRefresh: function () {
-    // var that = this
-    // _function.getShopUserQuanlist(wx.getStorageSync("utoken"), -1, that.initgetShopUserQuanlistData, that);
-    // setTimeout(() => {
-    //     wx.stopPullDownRefresh()
-    // }, 1000)
   },
 
   /**
@@ -113,7 +82,6 @@ Page({
     wx.getStorage({
       key: 'PX_TO_RPX',
       success: function (res) {
-        console.log(res)
         that.setData({
           px2rpxHeight: res.data.px2rpxHeight,
           px2rpxWidth: res.data.px2rpxWidth,

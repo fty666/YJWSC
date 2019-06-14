@@ -15,8 +15,8 @@
         <!--加载数据  -->
         <scroll-view scroll-y bindscrolltoupper='scrollToUpper' bindscrolltolower='scrollToLower'>
           <view class="flex">
-            <block wx:for="{{shops}}" wx:key="{{item.shopId}}" wx:for-item="titem">
-              <view class="cate-item flex1  mb10" bindtap="mall_list_bind" data-id="{{titem.groupId}}" data-shop_code="{{titem.shop_code}}" style="height:{{px2rpxHeight*200}}px;">
+            <block wx:for="{{shops}}" wx:key="{{index}}" wx:for-item="titem">
+              <view class="cate-item flex1  mb10" catchtap="mall_list_bind" data-id="{{titem.groupId}}" data-shop_code="{{titem.shop_code}}" style="height:{{px2rpxHeight*200}}px;">
                 <view class="cate-imgbox">
                   <image src="{{ upload_file_url+titem.logo}}" style='width:{{px2rpxHeight*200}}px;height:{{px2rpxHeight*200}}px;' class="cate-img" mode="aspectFill"></image>
                 </view>

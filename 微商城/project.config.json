@@ -13,8 +13,10 @@
 	"compileType": "miniprogram",
 	"libVersion": "2.3.1",
 	"appid": "wxd8abc546ee945b44",
-	"projectname": "wrrr",
+	"projectname": "%E5%BE%AE%E5%95%86%E5%9F%8E",
 	"isGameTourist": false,
+	"simulatorType": "wechat",
+	"simulatorPluginLibVersion": {},
 	"condition": {
 		"search": {
 			"current": -1,
@@ -33,8 +35,15 @@
 			"list": []
 		},
 		"miniprogram": {
-			"current": -1,
-			"list": []
+			"current": 0,
+			"list": [
+				{
+					"id": -1,
+					"name": "测试升级",
+					"pathName": "pages/shop/mall/mall",
+					"scene": null
+				}
+			]
 		}
 	}
 }
