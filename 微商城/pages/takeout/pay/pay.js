@@ -15,7 +15,7 @@ Page({
     is_load: false,
     shop_code: '',
     options: '',
-    address: null, // 地址
+    address: {}, // 地址
     shop_info: null, // 商店信息
     goods_list: null, // 商品
     totalGoodsPrice: 0, // 所有商品总的价钱
@@ -49,7 +49,6 @@ Page({
       options: options.shop_code,
     });
   },
-
   /**
    * 生命周期函数--监听页面初次渲染完成
    */
@@ -58,7 +57,6 @@ Page({
     // 获取默认地址
     getAddrByDefault(that);
     // 获取信息
-    orderinfo(that);
     // 获取用户信息
     funDta.getUser(getApp().globalData.user_id, that, (res) => {
       that.setData({
@@ -88,9 +86,9 @@ Page({
     wx.navigateTo({
       url: '/pages/user/address/address',
     });
-    if (that.data.has_address == true) {
-      orderinfo(that);
-    }
+    // if (that.data.has_address == true) {
+    //   orderinfo(that);
+    // }
   },
 
   /**
@@ -99,18 +97,16 @@ Page({
   goToCoupon: function() {
     app.globalData.couponCode = this.data.shop_code;
     app.globalData.prcirCounp = this.data.totalPrice;
-    wx.setNavigationBarTitle({
-      title: '选取优惠券'
-    })
     if (this.data.couponList.couponPrice) {
       let nowtal = calculate.calcAdd(this.data.couponList.couponPrice, this.data.totalPrice);
       this.setData({
         couponShow: false,
-        totalPrice: nowtal
+        totalPrice: nowtal,
       })
     } else {
       this.setData({
         couponShow: false,
+        coupon: ''
       })
     }
   },
@@ -125,14 +121,21 @@ Page({
     })
     if (util.isEmpty(mycoupon)) {
       newTotalPrice = totalPrice;
+      that.setData({
+        totalPrice: newTotalPrice,
+        coupon: '',
+        couponShow: true,
+        couponList: e.detail
+      });
     } else {
       newTotalPrice = calculate.calcReduce(totalPrice, mycoupon);
+      that.setData({
+        totalPrice: newTotalPrice,
+        coupon: mycoupon,
+        couponShow: true,
+        couponList: e.detail
+      });
     }
-    that.setData({
-      totalPrice: newTotalPrice,
-      couponShow: true,
-      couponList: e.detail
-    });
   },
   /**
    * 备注
@@ -310,13 +313,13 @@ Page({
 
 // 获取默认地址
 function getAddrByDefault(that) {
+  var that = that;
   funDta.getAddrByDefault(getApp().globalData.user_id, that, (data) => {
     if (util.isEmpty(data)) {
       that.setData({
         address: '',
       });
       // 获取地址
-      // if (that.data.address == null || '') {
       wx.showModal({
         title: '提示',
         content: '你还没有地址，请创建',
@@ -330,17 +333,18 @@ function getAddrByDefault(that) {
           }
         }
       })
-      // }
     } else {
       that.setData({
         address: data
       });
+      orderinfo(that);
     }
   });
 }
 
 // 获取订单信息
 function orderinfo(that) {
+  var that = that;
   // 获取店铺信息
   funDta.getOutShopByCode(that.data.shop_code, that, (shopdata) => {
     that.setData({
@@ -421,6 +425,10 @@ function reductions(reduction, totalPrice, that) {
       }
     }
     newTotalPrice = calculate.calcReduce(totalPrice, reductionPrice);
+    if (newTotalPrice < 0) {
+      newTotalPrice = totalPrice;
+      reductionPrice='0';
+    }
   } else {
     newTotalPrice = totalPrice;
   }

@@ -241,7 +241,14 @@ Page({
       url: '/pages/orderManage/express/express?order_uuid=' + e.currentTarget.dataset.order_uuid
     })
   },
-
+  /**
+   *查看外卖路线 
+   */
+  lookPath() {
+      wx.navigateTo({
+        url: '/pages/map/map',
+      })
+  },
   /**
    * 滚动到底部/右边，会触发 scrolltolower 事件
    */

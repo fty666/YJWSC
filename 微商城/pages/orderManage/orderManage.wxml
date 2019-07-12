@@ -91,6 +91,9 @@
                 <text class="iconfont icon-yemianwuneirong"></text>等待收货
               </view>
               <block wx:if="{{order.groupId==1}}">
+                <view catchtap='lookPath' class='button button button-primary button-rounded button-wx-small ml10'>
+                  查看路线
+                </view>
               </block>
               <block wx:else>
                 <view catchtap='checkLogistics' data-order_uuid='{{order.order_uuid}}' class='button button button-primary button-rounded button-wx-small ml10'>

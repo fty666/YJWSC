@@ -146,7 +146,6 @@ Page({
     console.log(e.detail.value)
     let that = this;
     let shop = e.detail.value;
-    console.log(shop.password.length)
     let len = shop.password.length;
     // 店铺分类不能为空
     if (util.isEmpty(shop.group_id)) {
@@ -161,7 +160,7 @@ Page({
     // 判断密码个数
     if (len < 8 || len > 20) {
       wx.showToast({
-        title: '输入的密码有误',
+        title: '输入的密码有误，输入8~20位',
         icon: 'none',
         duration: 1000
       });

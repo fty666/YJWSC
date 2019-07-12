@@ -17,7 +17,7 @@
           </view>
         </block>
         <block wx:else>
-          <view class='ainfo'>
+          <view class='ainfo' catchtap='goToAddress'>
             <view class='address'></view>
             <view class='user c666' style='font-size:36rpx'>
               <text class="iconfont icon-add"></text> 添加地址</view>
@@ -40,7 +40,7 @@
 
     <!--商品详情  -->
     <block wx:for="{{goods_list}}" wx:for-item="goods" wx:key="{{goods.id}}">
-      <view class='wai3' style='border-bottom:1px solid #ddd;'>
+      <view class='wai3' style='margin-left:{{px2rpxWidth*30}}px'>
         <view>
           <image src='{{aliyunUrl+goods.img}}' class='picture' style="width:{{px2rpxWidth*175}}px;height:{{px2rpxWidth*180}}px;margin-top:{{px2rpxHeight*50}}px;"></image>
         </view>
@@ -48,11 +48,11 @@
           <view class='good' style="width:{{px2rpxWidth*200}}px;">{{goods.goods_name}}</view>
           <view class='goods'>X{{goods.num}}</view>
         </view>
-        <view class='money f18' style='margin-left:105rpx'>￥{{goods.discountPrice}}</view>
+        <view class='money f18' style='width:{{px2rpxWidth*200}}px;margin-right:{{px2rpxWidth*15}}px'>￥{{goods.discountPrice}}</view>
       </view>
     </block>
     <!--具体费用  -->
-    <view class='wai4' style="height:{{px2rpxHeight*590}}px;">
+    <view class='wai4' style="height:{{px2rpxHeight*590}}px;margin-left:{{px2rpxWidth*30}}px">
       <view class='flex'>
         <view class='bao' style="width:{{px2rpxWidth*180}}px;">配送费</view>
         <view class='fei'>￥{{userMoney}}</view>
@@ -66,7 +66,7 @@
       <view class='xia2'></view>
       <view class='flex'>
         <view class='bao' style="width:{{px2rpxWidth*180}}px;">商家代金券</view>
-        <view class='fei2' catchtap='goToCoupon'>{{coupon == '' ? '选择优惠券' : '满'+coupon.conditions+'减'+coupon.couponPrice}}
+        <view class='fei2' catchtap='goToCoupon'>{{coupon == '' ? '选择优惠券' : '已优惠'+coupon+'元'}}
           <text class="iconfont icon-youjiantou" catchtap='goToCoupon'></text>
         </view>
       </view>

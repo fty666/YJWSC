@@ -2,6 +2,8 @@ const utilFunctions = require('../../../utils/functionData.js');
 const URLData = require('../../../utils/data.js');
 const calculate = require('../../../utils/calculate.js');
 const template = require('../../../template/template.js');
+const recorderManager = wx.getRecorderManager()
+const innerAudioContext = wx.createInnerAudioContext()
 const app = getApp();
 Page({
   data: {
@@ -20,13 +22,12 @@ Page({
     pageSize: 10,
     px2rpxWidth: '',
     px2rpxHeight: '',
-    takeout: '',//外卖商品
+    takeout: '', //外卖商品
   },
-
   /**
    *  扫码
    */
-  shop_saoma_bind: function () {
+  shop_saoma_bind: function() {
     // 只允许从相机扫码
     wx.scanCode({
       onlyFromCamera: true,
@@ -35,11 +36,10 @@ Page({
       }
     })
   },
-
   /**
    搜索商品
    */
-  inputBlur: function (e) {
+  inputBlur: function(e) {
     // console.log(e)
     let that = this
     let arrayVal = [];
@@ -54,9 +54,9 @@ Page({
       return false;
     }
     // wx.nextTick(function () {
-      wx.navigateTo({
-        url: '/pages/shop/mallcate/mallcate?gname=' + arrayVal,
-      })
+    wx.navigateTo({
+      url: '/pages/shop/mallcate/mallcate?gname=' + arrayVal,
+    })
     // })
 
     arrayVal = [];
@@ -65,10 +65,12 @@ Page({
   /**
    * 读取首页数据
    */
-  onLoad: function (options) {
+  onLoad: function(options) {
+
     let that = this;
     //获取商家分组
     let arrays = [];
+
     function gets(res) {
       // console.log(res)
       arrays = res.slice(0, 7)
@@ -79,7 +81,7 @@ Page({
     utilFunctions.getGroup(gets, this);
   },
 
-  getUserInfo: function () {
+  getUserInfo: function() {
     if (app.globalData.userInfo) {
       this.setData({
         userInfo: app.globalData.userInfo,
@@ -109,7 +111,7 @@ Page({
     }
   },
 
-  getUserInfoBtn: function (e) {
+  getUserInfoBtn: function(e) {
     console.log(e)
     app.globalData.userInfo = e.detail.userInfo
     this.setData({
@@ -117,14 +119,11 @@ Page({
       hasUserInfo: true
     })
   },
-
-  onShow: function () {
-  },
-
-  onReady: function () {
+  onReady: function() {
     let that = this;
-    setTimeout(function () {
-      if (app.globalData.level == '1' || !app.globalData.level) {
+    setTimeout(function() {
+      // if (app.globalData.level == '1' || !app.globalData.level) {
+      if (app.globalData.level == '1') {
         template.tabbar("tabBar", 0, that, 1);
       } else if (app.globalData.level == '2' || app.globalData.level == '3') {
         template.tabbar("tabBar", 0, that, 3);
@@ -137,6 +136,7 @@ Page({
       pageSize: that.data.pageSize,
       groupId: 1,
     }
+
     function calback(res) {
       that.setData({
         takeout: res.PageInfo.list
@@ -147,7 +147,7 @@ Page({
     //获取缓存
     wx.getStorage({
       key: 'PX_TO_RPX',
-      success: function (res) {
+      success: function(res) {
         that.setData({
           px2rpxHeight: res.data.px2rpxHeight,
           px2rpxWidth: res.data.px2rpxWidth,
@@ -159,7 +159,7 @@ Page({
   /**
    *跳转店铺
    */
-  sgroup: function (e) {
+  sgroup: function(e) {
     // console.log(e)
     let gid = e.currentTarget.dataset.gid;
     if (gid == 1) {
@@ -177,7 +177,7 @@ Page({
   /**
    *更多店铺分类
    */
-  more: function () {
+  more: function() {
     wx.navigateTo({
       url: '/pages/shop/seller/seller'
     })
@@ -186,7 +186,7 @@ Page({
   /**
    *显示店铺
    */
-  go_quan_info_bind: function (e) {
+  go_quan_info_bind: function(e) {
     var that = this;
     wx.navigateTo({
       url: '../mallquan/index?qid=' + e.currentTarget.id
@@ -196,11 +196,11 @@ Page({
 
 
   /**
-  * 去商店
-  */
-  goToShop: function (e) {
+   * 去商店
+   */
+  goToShop: function(e) {
     let sale = e.currentTarget.dataset.salse;
-    wx.nextTick(function () {
+    wx.nextTick(function() {
       if (sale == 0) {
         wx.showToast({
           title: '该店铺停止营业',
@@ -213,9 +213,8 @@ Page({
       }
     })
   },
-  getShareInfo: function () {
-  },
-  onShareAppMessage: function () {
+  getShareInfo: function() {},
+  onShareAppMessage: function() {
     var that = this;
     return {
       title: that.data.shareInfo.title,
@@ -224,7 +223,7 @@ Page({
     }
   },
   //下拉刷新
-  onPullDownRefresh: function () {
+  onPullDownRefresh: function() {
     this.onLoad();
     setTimeout(() => {
       wx.stopPullDownRefresh()

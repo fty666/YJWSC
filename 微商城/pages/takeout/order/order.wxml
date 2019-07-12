@@ -21,7 +21,7 @@
             </view>
             <view style='width:60%;'>
               <block wx:if="{{item.reception==0}}">
-                <view class='Fstat'style='margin-left:{{px2rpxWidth*80}}px;margin-top:{{px2rpxHeight*40}}px'>商家未接单</view>
+                <view class='Fstat' style='margin-left:{{px2rpxWidth*80}}px;margin-top:{{px2rpxHeight*40}}px'>商家未接单</view>
               </block>
               <block wx:if="{{item.reception!=0}}">
                 <view class='Fstat' style='margin-left:{{px2rpxWidth*80}}px;margin-top:{{px2rpxHeight*40}}px'>商家已接单</view>
@@ -47,17 +47,17 @@
             <view class='money'>￥{{item.real_money}}</view>
           </view>
           <view class='xia' style="height:{{px2rpxHeight*3}}px;margin-top:15rpx;"></view>
-          <block wx:if="{{item.status==4}}">
-            <view class='wai3' style="height:{{px2rpxHeight*150}}px;">
-              <view class='recur' catchtap='again' data-shop_code='{{item.shop_code}}' style="width:{{px2rpxWidth*200}}px;height:{{px2rpxHeight*80}}px;margin-left:160rpx;margin-top:40rpx;">再来一单</view>
-              <!-- <block wx:if="{{item.status == 3}}">
-                            <view class='go' data-oid='{{item.order_uuid}}' catchtap='goMap'>查看路线</view>
-                        </block> -->
-              <block wx:if="{{item.status == 4}}">
-                <view class='go' style='margin-left:50rpx;' data-oid='{{item.order_uuid}}' catchtap='comment' style="width:{{px2rpxWidth*200}}px;height:{{px2rpxHeight*80}}px;">去评论</view>
-              </block>
-            </view>
-          </block>
+          <view class='wai3' style="height:{{px2rpxHeight*150}}px;">
+            <!-- 订单完成的操作，评论 -->
+            <block wx:if="{{item.status==4}}">
+              <button catchtap='again' data-shop_code='{{item.shop_code}}' type='primary' style='margin-left:{{px2rpxWidth*310}}px;margin-top:{{px2rpxHeight*40}}px;font-size:12px;width:{{px2rpxWidth*170}}px;height:{{px2rpxHeight*70}}px;line-height:{{px2rpxHeight*70}}px;'>再来一单</button>
+              <button type='warn' data-oid='{{item.order_uuid}}' catchtap='comment' style='margin-top:{{px2rpxHeight*40}}px;font-size:12px;width:{{px2rpxWidth*170}}px;height:{{px2rpxHeight*70}}px;margin-right:{{px2rpxWidth*60}}px;line-height:{{px2rpxHeight*70}}px;'>去评论</button>
+            </block>
+            <!-- 查看路线 -->
+            <block wx:if="{{item.status==3}}">
+              <button type='primary' catchtap='path' style='margin-left:{{px2rpxWidth*500}}px;margin-top:{{px2rpxHeight*40}}px;font-size:12px;width:{{px2rpxWidth*170}}px;height:{{px2rpxHeight*70}}px;line-height:{{px2rpxHeight*70}}px;'>查看路线</button>
+            </block>
+          </view>
           <view class='xia2' style='height:{{px2rpxHeight*8}}px'></view>
         </view>
       </scroll-view>

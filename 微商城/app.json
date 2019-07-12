@@ -1,6 +1,6 @@
 {
   "extEnable": true,
-  "pages": [        
+  "pages": [    
     "pages/shop/mall/mall",
     "pages/orderManage/sendGoods/sendGoods",
     "pages/user/order/order",

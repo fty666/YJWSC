@@ -7,19 +7,19 @@
 <block wx:else>
   <view class="container">
     <view class="nav" style="height:{{px2rpxHeight*88}}px;">
-      <view class="nav-each {{ status == all_order ? 'nav-active' : ''}}" catchtap='selectStatus' data-status='{{all_order}}' style="width:{{px2rpxWidth*178}}px;height:{{px2rpxHeight*88}}px;">
+      <view class="nav-each {{ status == all_order ? 'nav-active' : ''}}" catchtap='selectStatus' data-status='{{all_order}}' style="width:19%;height:{{px2rpxHeight*88}}px;">
         <text>全部</text>
       </view>
-      <view class="nav-each {{ status == pending_payment ? 'nav-active' : ''}}" catchtap='obligation' data-status='{{pending_payment}}' style="width:{{px2rpxWidth*178}}px;height:{{px2rpxHeight*88}}px;">
+      <view class="nav-each {{ status == pending_payment ? 'nav-active' : ''}}" catchtap='obligation' data-status='{{pending_payment}}' style="width:19%;height:{{px2rpxHeight*88}}px;">
         <text>待付款</text>
       </view>
-      <view class="nav-each {{ status == to_be_shipped ? 'nav-active' : ''}}" catchtap='selectStatus' data-status='{{to_be_shipped}}' style="width:{{px2rpxWidth*178}}px;height:{{px2rpxHeight*88}}px;">
+      <view class="nav-each {{ status == to_be_shipped ? 'nav-active' : ''}}" catchtap='selectStatus' data-status='{{to_be_shipped}}' style="width:19%;height:{{px2rpxHeight*88}}px;">
         <text>待发货</text>
       </view>
-      <view class="nav-each {{ status == to_be_received ? 'nav-active' : ''}}" catchtap='selectStatus' data-status="{{to_be_received}}" style="width:{{px2rpxWidth*178}}px;height:{{px2rpxHeight*88}}px;">
+      <view class="nav-each {{ status == to_be_received ? 'nav-active' : ''}}" catchtap='selectStatus' data-status="{{to_be_received}}" style="width:19%;height:{{px2rpxHeight*88}}px;">
         <text>待收货</text>
       </view>
-      <view class="nav-each {{ status == to_be_evaluated ? 'nav-active' : ''}}" catchtap='selectStatus' data-status='{{to_be_evaluated}}' style="width:{{px2rpxWidth*178}}px;height:{{px2rpxHeight*88}}px;">
+      <view class="nav-each {{ status == 4 ? 'nav-active' : ''}}" catchtap='selectStatus' data-status='{{4}}' style="width:19%;height:{{px2rpxHeight*88}}px;">
         <text>待评价</text>
       </view>
     </view>
@@ -117,7 +117,7 @@
                   <block wx:if="{{item.status == to_be_evaluated}}">
                     <view catchtap='showExpress' data-order_uuid='{{item.order_uuid}}' data-order_mainid='{{item.order_mainid}}' class='button button button-primary button-rounded button-wx-small ml10'>查看物流</view>
                     <view catchtap='goComment' data-order-index="{{index}}" data-order_uuid='{{item.order_uuid}}' data-order_mainid='{{item.order_mainid}}' class='button button button-primary button-rounded button-wx-small ml10'>去评价</view>
-                    <!-- <view catchtap='afterSale' data-order-index="{{index}}" data-order_uuid='{{item.order_uuid}}' data-order_mainid='{{item.order_mainid}}' class='button button-rounded button-wx-small ml10'>申请售后</view> -->
+                    <view catchtap='afterSale' data-order-index="{{index}}" data-order_uuid='{{item.order_uuid}}' data-order_mainid='{{item.order_mainid}}' class='button button-rounded button-wx-small ml10'>申请售后</view>
                   </block>
 
                   <!-- 评价完成  -->

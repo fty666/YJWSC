@@ -8,15 +8,15 @@ Page({
       id: 0,
       latitude: 39.989643,
       longitude: 116.481028,
-      width: 50,
-      height: 50
+      width: 30,
+      height: 30
     }, {
         iconPath: "../../images/zhon.png",
       id: 0,
       latitude: 39.90816,
       longitude: 116.434446,
-      width: 50,
-      height: 50
+      width: 30,
+      height: 30
     }],
     distance: 18,
     cost: '',

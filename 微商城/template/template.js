@@ -140,15 +140,7 @@ function tabbarinit(flag) {
         "selectedIconPath": "/images/tabbar/order_iconSelect.png",
         "iconColor": "#8A8A8A",
         "selectIconColor": 'red',
-      },
-      // {
-      //     "pagePath": "/pages/takeout/userInfo/userInfo",
-      //     "text": "我的",
-      //     "iconPath": "/images/tabbar/people.png",
-      //     "selectedIconPath": "/images/tabbar/people_select.png",
-      //     "iconColor": "#8A8A8A",
-      //     "selectIconColor": 'red',
-      // },
+      }
     ]
   }
 

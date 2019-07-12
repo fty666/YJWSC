@@ -41,6 +41,7 @@ Page({
     XshopCode: '', //判断选取的商品
     Zprice: 0, //总价钱
     yhqPrice: 0, //优惠的价格
+    index: 0, //第几个优惠券
   },
 
   onReady: function() {
@@ -59,6 +60,7 @@ Page({
     let coupon = {}; // 优惠券
     for (let i = 0; i < cart_len; i++) {
       coupon[carts[i].shop_code] = '';
+      carts[i].yhqIn = '选择优惠券'
     }
     // 价格判断
     for (let i = 0; i < cart_len; i++) {
@@ -144,42 +146,6 @@ Page({
     })
 
   },
-  onShow: function() {
-    // console.log(this.data.address)
-    if (!util.isEmpty(this.data.coupon)) {
-      let carts = this.data.orderinfo;
-      let coupon = this.data.coupon;
-      let carts_len = carts.length;
-      for (let i = 0; i < carts_len; i++) {
-        if (carts[i].shop_code == coupon.shop_code) {
-          // 每个店铺的优惠券
-          carts[i].coupon = coupon;
-          // 每个店铺的优惠价格
-          carts[i].preferential = calculate.calcAdd(carts[i].preferential, coupon.couponPrice);
-          let favour = calculate.calcAdd(coupon.couponPrice, myfavour);
-          let pocket1 = calculate.calcReduce(mygoods_total, favour);
-          let pocket2 = calculate.calcReduce(mypocket, coupon.couponPrice);
-          let pocket = 0;
-          // console.log(pocket, newpocket);
-          if (pocket1 == pocket2) {
-            pocket = pocket1;
-          } else {
-            pocket = pocket1;
-          }
-          if (pocket <= 0) {
-            pocket = 0;
-          }
-          this.setData({
-            pocket: pocket,
-            favour: favour
-          });
-        }
-      }
-      this.setData({
-        carts: carts
-      });
-    }
-  },
 
   /**
    *查看默认地址 
@@ -221,52 +187,59 @@ Page({
   goToCoupon: function(e) {
     // 传递商家Code
     let shop_code = e.currentTarget.dataset.shop_code;
+    let yhqPrice = this.data.yhqPrice;
+    let index = e.currentTarget.dataset.index;
+    let pocket = this.data.pocket;
+    let newTotalPrice = 0;
     app.globalData.couponCode = shop_code;
-    app.globalData.prcirCounp = this.data.pocket;
-    wx.setNavigationBarTitle({
-      title: '选取优惠券'
-    })
-    if (this.data.XshopCode == shop_code) {
-      if (this.data.couponList.couponPrice) {
-        let nowtal = calculate.calcReduce(this.data.Zprice, this.data.yhqPrice);
-        this.setData({
-          couponShow: false,
-          pocket: nowtal,
-        })
+    // app.globalData.prcirCounp = this.data.pocket;
+    app.globalData.prcirCounp = e.currentTarget.dataset.item.real_money;
+    let that = this;
+    // 不同的店铺，优惠券
+    if (shop_code == that.data.XshopCode) {
+      // 同一店铺，不适用优惠券，最后价格不拼接
+      if (util.isEmpty(this.data.couponList)) {
+        newTotalPrice = pocket;
       } else {
-        this.setData({
-          couponShow: false,
-        })
+      //使用过优惠券加上优惠价格 
+        newTotalPrice = calculate.calcAdd(pocket, yhqPrice);
       }
-
     } else {
-      this.setData({
-        couponShow: false,
-      })
+      newTotalPrice = pocket;
     }
+    that.setData({
+      couponShow: false,
+      index: index,
+      pocket: newTotalPrice
+    });
   },
   // 获取优惠券
   MyEvent(e) {
     let pocket = this.data.pocket;
     let mycoupon = e.detail;
-    let arr = this.data.arrCoupon;
+    let orderinfo = this.data.orderinfo;
     let yhqPrice = this.data.yhqPrice;
+    let index = this.data.index;
     let that = this;
     let newTotalPrice = 0;
-    wx.setNavigationBarTitle({
-      title: '订单支付'
-    })
+    // 没有优惠券或者不适用优惠券
     if (util.isEmpty(mycoupon)) {
-      newTotalPrice = pocket;
-    } else {
       if (e.detail.shop_code != this.data.XshopCode) {
-        yhqPrice += mycoupon.couponPrice;
+        newTotalPrice = pocket;
+        orderinfo[index].yhqIn = '选择优惠券';
+      } else {
+        newTotalPrice = calculate.calcAdd(pocket, yhqPrice);
+        yhqPrice = 0;
+        orderinfo[index].yhqIn = '选择优惠券';
       }
-      newTotalPrice = calculate.calcReduce(this.data.Zprice, yhqPrice);
+    } else {
+      // 有优惠券或者点不通优惠券
+      yhqPrice = mycoupon.couponPrice;
+      newTotalPrice = calculate.calcReduce(pocket, yhqPrice);
+      orderinfo[index].yhqIn = '优惠' + yhqPrice + '元';
     }
     if (e.detail.shop_code == this.data.XshopCode) {} else {
       if (e.detail.couponPrice != undefined) {
-        arr.push(e.detail);
         this.setData({
           XshopCode: e.detail.shop_code
         })
@@ -276,8 +249,8 @@ Page({
       pocket: newTotalPrice,
       couponShow: true,
       couponList: e.detail,
-      arrCoupon: arr,
-      yhqPrice: yhqPrice
+      yhqPrice: yhqPrice,
+      orderinfo: orderinfo
     });
   },
 

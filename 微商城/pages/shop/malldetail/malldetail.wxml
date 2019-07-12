@@ -100,7 +100,12 @@
       <view class="flex con gridXt tc">
         <view class="fast-links mr15 flex f12" style="width:{{px2rpxWidth*340}}px;height:{{170*px2rpxHeight}}px:">
           <view class="sub gridYr" bindtap="bind_contant_kefu" data-mobile='{{goods_info.mobile}}'>
-            <text class="iconfont icon-mark red">客服</text>
+            <view>
+              <image src='../../../images/xkefu.png' style="width:{{px2rpxWidth*40}}px;height:{{40*px2rpxHeight}}px;margin-top:{{px2rpxHeight*10}}px"></image>
+            </view>
+            <view>
+              <text class="red">客服</text>
+            </view>
           </view>
           <view class="sub cart notempty" bindtap="bind_go_cart">
             <text class="iconfont icon-cart">购物车</text>

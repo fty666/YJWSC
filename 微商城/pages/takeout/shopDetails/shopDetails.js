@@ -44,7 +44,7 @@ Page({
   /**
    * 生命周期函数--监听页面加载
    */
-  onLoad: function (options) {
+  onLoad: function(options) {
     // 获取上级页面传过来的参数
     this.setData({
       shop_code: options.shop_code,
@@ -64,7 +64,7 @@ Page({
   /**
    * 生命周期函数--监听页面初次渲染完成
    */
-  onReady: function () {
+  onReady: function() {
     let that = this;
     // 获取店铺信息
     funDta.getOutShopByCode(that.data.shop_code, that, (res) => {
@@ -100,21 +100,36 @@ Page({
     //获取缓存
     wx.getStorage({
       key: 'PX_TO_RPX',
-      success: function (res) {
+      success: function(res) {
         that.setData({
           px2rpxHeight: res.data.px2rpxHeight,
           px2rpxWidth: res.data.px2rpxWidth,
         })
       }
     })
-
-
   },
-
+  /**
+   * 点击菜单类别
+   */
+  menuCate: function(e) {
+    let that = this;
+    let index = e.currentTarget.dataset.index;
+    let classId = e.currentTarget.dataset.classid;
+    // 获取类别对应的商品列表
+    pageSize = 20;
+    if (classId == -1) {
+      getFoodGoodsList(1, '', that);
+    } else {
+      getFoodGoodsList('', classId, that);
+    }
+    that.setData({
+      menu_cate: classId,
+    });
+  },
   /**
    *查看商品详情 
    */
-  xinfo: function (e) {
+  xinfo: function(e) {
     let that = this;
     let gids = e.currentTarget.dataset.gsid;
 
@@ -143,22 +158,17 @@ Page({
   /**
    *关闭商品详情 
    */
-  close: function () {
+  close: function() {
     this.setData({
       ginfo: false
     })
   },
 
-  /**
-   * 生命周期函数--监听页面隐藏
-   */
-  onHide: function () { },
-
 
   /**
    *  菜单-评价-商家
    */
-  nav: function (e) {
+  nav: function(e) {
     let nav_type = e.currentTarget.dataset.navtype;
     this.setData({
       nav_type: nav_type
@@ -166,28 +176,9 @@ Page({
   },
 
   /**
-   * 点击菜单类别
-   */
-  menuCate: function (e) {
-    let that = this;
-    let index = e.currentTarget.dataset.index;
-    let classId = e.currentTarget.dataset.classid;
-    // 获取类别对应的商品列表
-    pageSize = 20;
-    if (classId == -1) {
-      getFoodGoodsList(1, '', that);
-    } else {
-      getFoodGoodsList('', classId, that);
-    }
-    that.setData({
-      menu_cate: classId,
-    });
-  },
-
-  /**
    *  改变购物车数量
    */
-  changCartNum: function (e) {
+  changCartNum: function(e) {
     let that = this;
     let goodsid = e.currentTarget.dataset.goodsid;
     let mytype = e.currentTarget.dataset.type;
@@ -198,7 +189,7 @@ Page({
   /**
    * 改变数量
    */
-  changeNum: function (mygoods_list, goodsid, mytype) {
+  changeNum: function(mygoods_list, goodsid, mytype) {
     if (btnFlag) {
       return;
     }
@@ -233,21 +224,30 @@ Page({
   /**
    * 显示购物车
    */
-  showCart: function () {
+  showCart: function() {
     let cart_hidden = this.data.cart_hidden;
     // 获取缓存
     let value = wx.getStorageSync(this.data.shop_code);
-    this.setData({
-      cart: value,
-      total_price: value.totalPrice,
-      cart_hidden: !cart_hidden,
-    });
+    if (value.totalPrice) {
+      this.setData({
+        cart: value,
+        total_price: value.totalPrice,
+        cart_hidden: !cart_hidden,
+      });
+    } else {
+      this.setData({
+        cart: value,
+        total_price: 0,
+        cart_hidden: !cart_hidden,
+      });
+    }
+
   },
 
   /**
    *隐藏购物车 
    */
-  hidds: function () {
+  hidds: function() {
     let cart_hidden = this.data.cart_hidden;
     this.setData({
       cart_hidden: !cart_hidden,
@@ -256,7 +256,7 @@ Page({
   /**
    * 清空购物车
    */
-  emptyCart: function () {
+  emptyCart: function() {
     let that = this;
     let goods_list = that.data.goods_list;
     let len = goods_list.length;
@@ -287,7 +287,7 @@ Page({
   /**
    *拨打电话 
    */
-  phone: function (e) {
+  phone: function(e) {
     let numbers = e.currentTarget.dataset.phones;
     wx.makePhoneCall({
       phoneNumber: numbers,
@@ -296,7 +296,7 @@ Page({
   /**
    * 去结算
    */
-  goToCount: function () {
+  goToCount: function() {
     let that = this;
     app.globalData.shop_code = that.data.shop_code;
     wx.redirectTo({
@@ -304,21 +304,16 @@ Page({
     })
   },
   // 领取优惠券
-  draw: function () {
+  draw: function() {
     let that = this;
     wx.navigateTo({
       url: '/pages/myGoods/getCoupon/getCoupon?shop_code=' + that.data.shop_code
     })
   },
-
-  /**
-   * 食物 滚动到顶部/左边，会触发 scrolltoupper 事件
-   */
-  scrollToUpper: function () { },
   /**
    * 食物 滚动到底部/右边，会触发 scrolltolower 事件
    */
-  scrollToLower: function () { },
+  scrollToLower: function() {},
 });
 
 // 获取店铺商品列表
@@ -334,14 +329,24 @@ function getFoodGoodsList(myhot, myfoodsClassId, that, resFun) {
   funDta.getFoodGoods(mydata, that, (res) => {
     // 获取这个商店的购物车缓存
     let value = wx.getStorageSync(that.data.shop_code);
+    var totalprice = 0;
     if (!util.isEmpty(value)) {
       var goodsStorage = value.goods;
       var goodsStorage_len = goodsStorage.length;
+      if (value.totalPrice) {
+        if (value.totalPrice == 'NaN') {
+          totalprice = 0;
+        } else {
+          totalprice = value.totalPrice;
+        }
+      } else {
+        totalprice = 0;
+      }
       that.setData({
-        total_price: value.totalPrice
+        total_price: totalprice
       });
       // 配送需求
-      carry(that, value.totalPrice);
+      carry(that, totalprice);
     }
 
     let newData = res.PageInfo.list;
@@ -423,7 +428,16 @@ function calculateTotalPrice(flag, goods_list, selectGoods, that) {
 // 配送需求
 function carry(that, totalPrice) {
   // 最大起送差价
-  let maxPei = that.data.shop_info.initialMoney;
+  let maxPei = '';
+  if (that.data.shop_info == null) {
+    if (that.data.pei == null || that.data.pei == undefined) {
+      maxPei = 0;
+    } else {
+      maxPei = that.data.pei;
+    }
+  } else {
+    maxPei = that.data.shop_info.initialMoney;
+  }
   // 起送差价
   let peis = calculate.calcReduce(maxPei, totalPrice);
   if (peis <= 0) {
@@ -484,7 +498,7 @@ function getTackoutCartStorage(mytotalPrice, mygoods, that) {
     cart: value
   });
 
-  let clear_time = setTimeout(function () {
+  let clear_time = setTimeout(function() {
     btnFlag = false;
     clearTimeout(clear_time);
   }, 500);

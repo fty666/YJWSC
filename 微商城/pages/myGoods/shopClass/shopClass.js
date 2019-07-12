@@ -16,14 +16,14 @@ Page({
   /**
    * 生命周期函数--监听页面加载
    */
-  onLoad: function (options) {
+  onLoad: function(options) {
 
   },
 
   /**
    * 生命周期函数--监听页面初次渲染完成
    */
-  onReady: function () {
+  onReady: function() {
     let that = this;
     funData.getShopCode(getApp().globalData.user_id, that, (data) => {
       that.setData({
@@ -40,7 +40,7 @@ Page({
     //获取缓存
     wx.getStorage({
       key: 'PX_TO_RPX',
-      success: function (res) {
+      success: function(res) {
         console.log(res)
         that.setData({
           px2rpxHeight: res.data.px2rpxHeight,
@@ -53,7 +53,7 @@ Page({
   /**
    * 生命周期函数--监听页面显示
    */
-  onShow: function () {
+  onShow: function() {
     let that = this;
     // 加载类别
     funData.getShopCode(getApp().globalData.user_id, that, (data) => {
@@ -67,50 +67,15 @@ Page({
     });
   },
 
-  /**
-   * 生命周期函数--监听页面隐藏
-   */
-  onHide: function () {
-
-  },
-
-  /**
-   * 生命周期函数--监听页面卸载
-   */
-  onUnload: function () {
-
-  },
-
-  /**
-   * 页面相关事件处理函数--监听用户下拉动作
-   */
-  onPullDownRefresh: function () {
-
-  },
-
-  /**
-   * 页面上拉触底事件的处理函数
-   */
-  onReachBottom: function () {
-
-  },
-
-  /**
-   * 用户点击右上角分享
-   */
-  onShareAppMessage: function () {
-
-  },
 
   /**
    * 修改分类(失去焦点事件)
    */
-  editClass: function (e) {
+  editClass: function(e) {
     let that = this;
     let classId = e.currentTarget.dataset.classid;
     let className = e.detail.value;
     let len = className.length;
-    console.log(len)
     if (len <= 0) {
       wx.showToast({
         title: '类名不能为空',
@@ -118,15 +83,20 @@ Page({
       })
       return false;
     }
-    console.log(className);
+    if (!util.checkReg(6,className)) {
+      wx.showToast({
+        title: '分类名称输入有误',
+        icon: 'none',
+        duration: 1000,
+      });
+      return;
+    }
     if (util.isEmpty(classId)) {
       // 分类id为空时,添加分类
-      funData.insertFoodsClass(that.data.shop_code, className, that, (res) => {
-      });
+      funData.insertFoodsClass(that.data.shop_code, className, that, (res) => {});
     } else {
       // 分类id不为空时,修改分类
-      funData.updateFoodsClass(classId, className, that, (res) => {
-      });
+      funData.updateFoodsClass(classId, className, that, (res) => {});
     }
     // 加载类别
     funData.getShopCode(getApp().globalData.user_id, that, (data) => {
@@ -144,7 +114,7 @@ Page({
   /**
    * 删除分类
    */
-  delClass: function (e) {
+  delClass: function(e) {
     console.log(e)
     let that = this;
     let shop_class = that.data.shop_class;
@@ -155,11 +125,10 @@ Page({
       wx.showModal({
         title: '提示',
         content: '确定要删除此分类吗?',
-        success: function (res) {
+        success: function(res) {
           if (res.confirm) {
             // 分类下有商品不能删除
-            funData.getFoodGoods(
-              {
+            funData.getFoodGoods({
                 shopCode: that.data.shop_code,
                 page: 1,
                 pageSize: 1,
@@ -167,7 +136,6 @@ Page({
                 foodsClassId: classId
               },
               that, (data) => {
-                console.log(data);
                 if (!util.isEmpty(data.PageInfo.list)) {
                   wx.showModal({
                     title: '此分类下有商品,不能删除'
@@ -206,15 +174,18 @@ Page({
   /**
    * 添加分类
    */
-  addClass: function () {
+  addClass: function() {
     let that = this;
     let shop_class = that.data.shop_class;
-
     // 添加分类
     if (util.isEmpty(shop_class)) {
       shop_class = [];
     }
-    shop_class.push({ shop_code: that.data.shop_code, classId: '', className: '' });
+    shop_class.push({
+      shop_code: that.data.shop_code,
+      classId: '',
+      className: ''
+    });
     that.setData({
       shop_class: shop_class
     });

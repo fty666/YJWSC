@@ -41,6 +41,14 @@ Page({
   },
 
   /**
+   *查看路线 
+   */ 
+  path(){
+    wx.navigateTo({
+      url: '/pages/map/map',
+    })
+  },
+  /**
    *再来一单跳转 
    */
   again: function(e) {

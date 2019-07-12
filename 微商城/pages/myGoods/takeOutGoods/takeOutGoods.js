@@ -172,7 +172,14 @@ Page({
       });
       return;
     }
-
+    if (!util.checkReg(6,goods.goodsName)){
+      wx.showToast({
+        title: '商品名称输入有误',
+        icon: 'none',
+        duration: 1000,
+      });
+      return;
+    }
     // 商品价格
     if (goods.price == '') {
       wx.showToast({

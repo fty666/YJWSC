@@ -35,14 +35,14 @@ Page({
       type_spec_value: [],
       taste_spec_value: []
     },
-
+    px2rpxHeight:'',
+    px2rpxWidth:''
   },
 
   /**
    * 生命周期函数--监听页面加载
    */
   onLoad: function(options) {
-    console.log(options)
     this.setData({
       code: options.scode
     })
@@ -53,6 +53,16 @@ Page({
    */
   onReady: function() {
     let that = this;
+    //获取缓存
+    wx.getStorage({
+      key: 'PX_TO_RPX',
+      success: function (res) {
+        that.setData({
+          px2rpxHeight: res.data.px2rpxHeight,
+          px2rpxWidth: res.data.px2rpxWidth,
+        })
+      }
+    })
     let user_id = app.globalData.user_id;
     funData.getShopByCode(user_id, that, (data) => {
       that.setData({
@@ -216,18 +226,6 @@ Page({
       urls: arr // 需要预览的图片http链接列表
     })
   },
-
-  bigImg2(e) {
-    var imgs = e.currentTarget.dataset.imgsrc;
-    var arr = [];
-    arr.push(imgs)
-    //图片预览
-    wx.previewImage({
-      current: imgs, // 当前显示图片的http链接
-      urls: arr // 需要预览的图片http链接列表
-    })
-  },
-
   /**
    * 轮播图排序
    */
@@ -310,7 +308,19 @@ Page({
     }
 
   },
-
+  /**
+   *查看大图片 
+   */
+  bigImg(e) {
+    var imgs = e.currentTarget.dataset.imgsrc;
+    var arr = [];
+    arr.push(imgs)
+    //图片预览
+    wx.previewImage({
+      current: imgs, // 当前显示图片的http链接
+      urls: arr // 需要预览的图片http链接列表
+    })
+  },
 
   /**
    * 获取表单提交的值

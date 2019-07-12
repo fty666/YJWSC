@@ -17,7 +17,7 @@
 }
 .map_box{
   position:absolute;
-  top: 35px;
+  top: 15px;
   bottom: 90px;
   left: 0px;
   right: 0px;
@@ -35,6 +35,9 @@
 }
 .text_box .text{
   margin: 15px;
+}
+.text{
+  font-size: 18px
 }
 .detail_button{
   position:absolute;

@@ -1,6 +1,5 @@
 .content {
     width: 100%;
-    height: 1200rpx;
 }
 
 .big-title {

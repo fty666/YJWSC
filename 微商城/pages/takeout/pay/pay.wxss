@@ -113,7 +113,8 @@ page {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  width: 100%;
+  width: 90%;
+  background: white;
   padding-right: 50rpx;
   /* border-bottom:1rpx solid #aaa;  */
 }
@@ -139,16 +140,16 @@ page {
 }
 
 .money {
-  margin-left: 125rpx;
-  margin-top: 50rpx;
   color: #333;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  text-align: right;
 }
 
 /*具体费用  */
 
 .wai4 {
   width: 90%;
-  margin-left: 35rpx;
   background: #fff;
 }
 

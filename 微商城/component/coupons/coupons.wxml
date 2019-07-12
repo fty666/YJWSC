@@ -14,24 +14,35 @@
     <!--暂无内容提示 end-->
   </block>
   <block wx:else>
-    <view class="contenter">
-      <block wx:for="{{quan_list}}" wx:key="{{item.couponId}}">
-        <view class="dollar-list" style="width:{{px2rpxWidth*690}}px;">
-          <view class="top write {{item.sta == '1' ? 'overdue' : 'used' }}" catchtap='useCoupon' data-index='{{index}}' data-res='{{item}}' style="height:{{px2rpxHeight*160}}px;display:flex">
-            <view class="money-msg f16" style='display:flex'>¥
-              <view class="money">{{item.couponPrice}}</view>
-              <view class='f12'>优惠劵(满{{item.conditions}}使用)</view>
+    <view class="contenter" style='width:100%;'>
+      <radio-group>
+        <label class='flex' wx:for="{{quan_list}}" wx:key="{{index}}">
+          <view class='radios' style='margin:{{px2rpxHeight*140}}px {{px2rpxWidth*10}}px'>
+            <radio value='{{item}}' data-index='{{item}}' data-res='{{item}}' catchtap='useCoupon'></radio>
+          </view>
+          <view class="dollar-list" style="width:90%;height:{{px2rpxHeight*300}}px">
+            <view class="top write overdue" style="height:{{px2rpxHeight*160}}px;display:flex">
+              <view class="money-msg f16" style='display:flex'>¥
+                <view class="money">{{item.couponPrice}}</view>
+                <view class='f12'>优惠劵(满{{item.conditions}}使用)</view>
+              </view>
+              <view class="status SName" style="width:{{px2rpxWidth*140}}px;margin-left:{{px2rpxWidth*50}}px;line-height:{{100*px2rpxHeight}}px">{{item.shop_name}}</view>
             </view>
-            <view class="status tc fr" style="width:{{px2rpxWidth*140}}px;margin-left:{{px2rpxWidth*50}}px">{{item.shop_name}}</view>
+            <view class="bottom grey">
+              <view>
+                <text class="iconfont icon-time mr10 linght"></text>开始日期：{{item.couponCreateTime}}</view>
+              <view>
+                <text class="iconfont icon-info mr10 linght"></text>结束日期：{{item.endTime}}</view>
+            </view>
           </view>
-          <view class="bottom grey">
-            <view>
-              <text class="iconfont icon-time mr10 linght"></text>开始日期：{{item.couponCreateTime}}</view>
-            <view>
-              <text class="iconfont icon-info mr10 linght"></text>结束日期：{{item.endTime}}</view>
+        </label>
+        <label class='flex'>
+          <view style='margin:{{px2rpxHeight*60}}px {{px2rpxWidth*20}}px'>
+            <radio catchtap='useCoupon' data-res='' data-index=''></radio>
           </view>
-        </view>
-      </block>
+          <view style='margin-top:{{px2rpxHeight*60}}px;color:red;'>不使用优惠券</view>
+        </label>
+      </radio-group>
     </view>
   </block>
 </block>

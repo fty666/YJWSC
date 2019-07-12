@@ -1,9 +1,7 @@
-<view class="content">
+<view class="content" style='height:{{px2rpxHeight*1300}}px;'>
   <scroll-view scroll-y style='width:100%;height:100%'>
     <form bindsubmit="formSubmit">
       <view>
-        <!-- <view>上架新商品</view> -->
-        <!-- <view>添加套餐</view> -->
       </view>
       <view hidden='{{newGoods}}'>
         <view>
@@ -132,7 +130,7 @@
                 <!-- <block wx:if="{{swiper_img_hidden}}"> -->
                 <block wx:for="{{swiper_img}}" wx:key="{{item.index}}">
                   <view class="img swiper-img">
-                    <image src="{{aliyunUrl + item}}" catchtap='bigImg' data-imgsrc='{{aliyunUrl + item}}' />
+                    <image src="{{aliyunUrl + item}}" catchtap='bigImg' data-imgSrc='{{aliyunUrl + item}}' />
                     <view catchtap='cancleImg' data-status='2' data-index='{{index}}' class='cancle-img'>x</view>
                     <view class='sort'>
                       <input value='{{index}}' data-sort="{{item}}" data-index="{{index}}" bindblur="swiperSort" placeholder='排序' />
@@ -147,7 +145,7 @@
               <view class='sm-content'>
                 <block wx:for="{{goodsDetail_img}}" wx:key="{{item.index}}">
                   <view class="img detail-img">
-                    <image src="{{aliyunUrl + item}}" catchtap='bigImg2' data-imgsrc='{{aliyunUrl + item}}' />
+                    <image src="{{aliyunUrl + item}}" catchtap='bigImg' data-imgSrc='{{aliyunUrl + item}}' />
                     <view catchtap='cancleImg' data-status='3' data-index='{{index}}' class='cancle-img'>x</view>
                     <view class='sort'>
                       <input value='{{index}}' data-sort="{{item}}" data-index="{{index}}" bindblur="detailSort" placeholder='排序' />

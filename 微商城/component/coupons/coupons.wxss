@@ -40,3 +40,12 @@
 .overdue.top {
     background: #f66;
 }
+
+.flex{
+  display: flex;
+}
+.SName{
+  text-align: center;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}

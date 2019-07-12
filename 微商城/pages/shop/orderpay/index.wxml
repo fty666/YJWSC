@@ -70,14 +70,9 @@
         </view>
         <view class='xia' style="height:{{px2rpxHeight*10}}px;"></view>
 
-        <view class="weui-media-box weui-media-box_text " data-shop_code='{{item.shop_code}}' bindtap='goToCoupon'>
+        <view class="weui-media-box weui-media-box_text " data-shop_code='{{item.shop_code}}' data-index='{{index}}' data-item='{{item}}' bindtap='goToCoupon'>
           <view class="weui-media-box__desc coupon">优惠劵：
-            <block wx:if="{{arrCoupon.length>0}}">
-              <block wx:for="{{arrCoupon}}" wx:for-item="Carr" wx:key="{{index}}">
-                <view wx:if="{{arrCoupon[index].shop_code == item.shop_code}}">满{{Carr.conditions}}减{{Carr.couponPrice}}</view>
-              </block>
-            </block>
-            <block wx:else>无</block>
+            <view>{{item.yhqIn}}</view>
             <text class="iconfont icon-youjiantou lef"></text>
           </view>
         </view>

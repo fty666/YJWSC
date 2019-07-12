@@ -53,7 +53,7 @@
           </view>
 
           <view class='goods' style='height:{{760*px2rpxHeight}}px'>
-            <scroll-view scroll-y bindscrolltoupper='scrollToUpper' bindscrolltolower='scrollToLower'>
+            <scroll-view scroll-y bindscrolltolower='scrollToLower'>
               <block wx:for="{{goods_list}}" wx:for-item="goods" wx:key="{{goods.id}}">
                 <view class='flex'>
                   <view>

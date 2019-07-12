@@ -36,7 +36,7 @@
         </view>
       </block>
       <view class='lingquan'>
-        <view catchtap='addCoupon' class='button button-caution button-rounded'>添加优惠券</view>
+        <view catchtap='addCoupon' class='button button-caution button-rounded' style='margin-bottom:{{px2rpxHeight*100}}px'>添加优惠券</view>
       </view>
     </view>
   </view>

@@ -64,6 +64,12 @@ Component({
           icon: 'none'
         });
         this.triggerEvent('onMyEvent', '');
+      } else if (e.currentTarget.dataset.res.conditions==undefined){
+        wx.showToast({
+          title: '取消使用优惠券',
+          icon: 'none'
+        });
+        this.triggerEvent('onMyEvent', '');
       } else {
         this.triggerEvent('onMyEvent', e.currentTarget.dataset.res);
       }

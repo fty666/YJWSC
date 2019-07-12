@@ -100,10 +100,25 @@ Page({
     let that = this;
     let coupon = e.detail.value;
     coupon.shopCode = that.data.shop_code;
-    console.log(that.data.shop_code)
     coupon.goodsId = that.data.gid;
     coupon.startTime = that.data.start +' '+ that.data.stime;
     coupon.endTime = that.data.date +' '+that.data.time;
+    // 检测时间前后
+    if (util.CompareDate(that.data.start, that.data.date) == true) {
+      wx.showToast({
+        title: '时间填写不正确',
+        icon: 'none',
+      })
+      return false;
+    } else {
+      if (util.CompareHour(that.data.stime, that.data.time) == false) {
+        wx.showToast({
+          title: '时间填写不正确',
+          icon: 'none',
+        })
+        return false;
+      }
+    }
     funData.insertReductionInGoods(coupon, that, () => {
       wx.showToast({
         title: '添加成功',

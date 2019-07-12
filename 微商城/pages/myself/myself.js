@@ -311,7 +311,7 @@ Page({
    */
   goShopping: function () {
     wx.navigateTo({
-      url: '/pages/shop/mall/mall',
+    url: '/pages/shop/mall/mall',
     })
   }
 

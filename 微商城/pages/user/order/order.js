@@ -70,6 +70,7 @@ Page({
           orders: orders,
           glo_is_load: false,
           hasData: false,
+          status: statu
         });
       } else {
         that.setData({
@@ -139,6 +140,7 @@ Page({
   selectStatus: function(e) {
     let that = this;
     let status = parseInt(e.currentTarget.dataset.status);
+    console.log(status)
     if (status == -1) {
       that.setData({
         every: true,

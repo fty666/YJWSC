@@ -81,7 +81,7 @@
           <view class="cate-name {{listId==item.classId?'cate-name-active':''}} gridXb" catchtap="cate_item_bind" data-cid="{{item.classId}}">{{item.className}}</view>
         </block>
       </scroll-view>
-      <view class='showgoods' style="height:{{px2rpxHeight*690}}px;">
+      <view class='showgoods' style="height:{{px2rpxHeight*800}}px;">
         <scroll-view scroll-y="true" class="cate-con" scroll-into-view="{{classifyViewed}}" bindscrolltolower='scrollToLower'>
           <view class=" flex">
             <block wx:if="{{have}}">
