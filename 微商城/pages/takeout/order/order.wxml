@@ -54,9 +54,9 @@
               <button type='warn' data-oid='{{item.order_uuid}}' catchtap='comment' style='margin-top:{{px2rpxHeight*40}}px;font-size:12px;width:{{px2rpxWidth*170}}px;height:{{px2rpxHeight*70}}px;margin-right:{{px2rpxWidth*60}}px;line-height:{{px2rpxHeight*70}}px;'>去评论</button>
             </block>
             <!-- 查看路线 -->
-            <block wx:if="{{item.status==3}}">
+            <!-- <block wx:if="{{item.status==3}}">
               <button type='primary' catchtap='path' style='margin-left:{{px2rpxWidth*500}}px;margin-top:{{px2rpxHeight*40}}px;font-size:12px;width:{{px2rpxWidth*170}}px;height:{{px2rpxHeight*70}}px;line-height:{{px2rpxHeight*70}}px;'>查看路线</button>
-            </block>
+            </block> -->
           </view>
           <view class='xia2' style='height:{{px2rpxHeight*8}}px'></view>
         </view>

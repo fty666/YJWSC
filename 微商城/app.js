@@ -16,8 +16,6 @@ App({
     screenHight: 0,
     // 订单号
     orderUUID: '',
-    // weChat
-    weChat: '',
     // 商品ID,地址跳转商品详情
     goodsId: '',
     //订单跳转
@@ -33,6 +31,7 @@ App({
     //商家code优惠券时使用
     couponCode: '',
     prcirCounp: '', //优惠券使用前价格
+    weChat:''
   },
 
   onLaunch: function() {
@@ -59,8 +58,10 @@ App({
               }
             })
           }
+          console.log(data)
           that.globalData.user_id = data.data.data.user_id;
           that.globalData.level = data.data.data.level;
+          that.globalData.weChat = data.data.data.weChat;
           if (utils.isEmpty(that.globalData.user_id)) {
             return;
           } else {}

@@ -133,4 +133,12 @@ module.exports = {
   UploadFiles: config.host + 'MicroPlatform/shop/UploadFiles',
   // 测试支付
   huidiaorelevanceUUID: config.host + 'MicroPlatform/shop/huidiao',
+  // 满赠满减停止活动
+  updateTime: config.host + 'MicroPlatform/coupon/updateTime',
+  // 获取模板
+  getTemplate: config.host + 'MicroPlatform/user/TSXiaoxi',
+  // 获取打印数据
+  getDatatemplate: config.host +'MicroPlatform/user/getOrderDetail',
+  // 获取外卖满赠
+  getReductionList: config.host +'/MicroPlatform/order/getReduction'
 }

@@ -105,7 +105,7 @@ Page({
       let moneyInfo = data.PageInfo.list;
       let len = moneyInfo.length;
       for (let i = 0; i < len; i++) {
-        moneyInfo[i].createTime = util.formatDate(moneyInfo[i].createTime, 'YY-MM-DD hh:mm:ss');
+        moneyInfo[i].createTime = util.formatDate(moneyInfo[i].createTime, 'YY/MM/DD hh:mm:ss');
       }
       that.setData({
         moneyInfo: moneyInfo,

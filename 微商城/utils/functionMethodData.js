@@ -325,7 +325,7 @@ module.exports = {
   mylogin: function(mycode, sufun) {
     wx.login({
       success: function(res) {
-        console.log(res)
+        // console.log(res)
         if (res.code) {
           //发起网络请求
           wx.request({
@@ -1008,7 +1008,7 @@ module.exports = {
   // 根据shop_code获取商品
   getGoodsByCodeUrl: function(shop_code, pageobj, calback) {
     let data = {
-      shop_code: shop_code,
+      shopCode: shop_code,
     }
     this.requestUrl(data, urlData.getGoodsByCodeUrl, pageobj, calback);
   },
@@ -1090,5 +1090,28 @@ module.exports = {
 
     };
     this.requestUrl(data, urlData.getCompany, pageobj, calbacks);
+  },
+
+    //查询物流公司
+  getupdateTime: function (id,pageobj, calbacks) {
+    let data = {
+        id:id
+    };
+    this.requestUrl(data, urlDatas.updateTime, pageobj, calbacks);
+  },
+  // 发送模板
+  goTemplate: function (datas, pageobj, calbacks){
+    let data =datas;
+    this.requestUrl(data, urlDatas.getTemplate, pageobj, calbacks);
+  },
+  // 获取模板数据
+  goTemplatedata: function (datas, pageobj, calbacks) {
+    let data = datas;
+    this.requestUrl(data, urlDatas.getDatatemplate, pageobj, calbacks);
+  },
+  // 获取满赠
+  getReductions:function(datas,pageobj,calbacks){
+    let data=datas;
+    this.requestUrl(data, urlDatas.getReductionList, pageobj, calbacks);
   }
 }

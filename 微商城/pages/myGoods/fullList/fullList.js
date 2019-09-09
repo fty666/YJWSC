@@ -32,7 +32,6 @@ Page({
     }
     utilFunctions.getReductionUrl(options.shopcode, calback, this);
   },
-
   /**
    * 生命周期函数--监听页面初次渲染完成
    */
@@ -49,22 +48,16 @@ Page({
       }
     })
   },
-
-  /**
-   *加载数据
-   */
-  scrollToLower: function() {
-
-  },
-
-
   /**
    * 修改
    */
   editCoupon: function(e) {
     console.log(e)
+    let index = e.currentTarget.dataset.index;
+    let coupon = this.data.coupon;
+    let datas=JSON.stringify(coupon[index])
     wx.navigateTo({
-      url: '/pages/myGoods/updataFull/updataFull?couponId=' + e.currentTarget.dataset.couponid
+      url: '/pages/myGoods/updataFull/updataFull?datas='+datas
     })
   },
 
@@ -88,7 +81,6 @@ Page({
               icon: 'success',
               duration: 1000
             });
-
             that.huo();
           });
         } else if (res.cancel) {}
@@ -96,11 +88,42 @@ Page({
     })
 
   },
+  // 下架
+  sold(e) {
+    let that = this;
+    let couponId = e.currentTarget.dataset.couponid;
+    let index = e.currentTarget.dataset.index;
+    let coupon = that.data.coupon;
+    let shopcode = '';
+    if (coupon[index].flag == 0) {
+      wx.showToast({
+        title: '已下架满减',
+        icon:'none'
+      })
+    } else {
+      wx.showModal({
+        title: '提示',
+        content: '是否要下架',
+        success: function(res) {
+          if (res.confirm) {
+            funData.getupdateTime(couponId, that, () => {
+              wx.showToast({
+                title: '下架成功',
+                icon: 'success',
+                duration: 1000
+              });
 
+              that.huo();
+            });
+          } else if (res.cancel) {}
+        }
+      })
+    }
+
+  },
   // 获取数据
   huo: function() {
     let that = this;
-
     function calbacks(res) {
       that.setData({
         coupon: res,

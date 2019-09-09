@@ -1,7 +1,7 @@
 module.exports = {
   // 域名
   // host: 'https://wx.dadaogz.xyz/',
-  // host: 'http://192.168.1.155:8080//',
+  // host: 'http://192.168.1.153:8080//',
   host: 'https://www.yjwsch.com/',
   // host:'https://www.xing-ya.cn/',
   // webScocket

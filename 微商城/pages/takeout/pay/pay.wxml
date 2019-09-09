@@ -52,7 +52,7 @@
       </view>
     </block>
     <!--具体费用  -->
-    <view class='wai4' style="height:{{px2rpxHeight*590}}px;margin-left:{{px2rpxWidth*30}}px">
+    <view class='wai4' style="height:{{px2rpxHeight*720}}px;margin-left:{{px2rpxWidth*30}}px">
       <view class='flex'>
         <view class='bao' style="width:{{px2rpxWidth*180}}px;">配送费</view>
         <view class='fei'>￥{{userMoney}}</view>
@@ -62,6 +62,12 @@
       <view class='flex'>
         <view class='bao' style="width:{{px2rpxWidth*180}}px;">满减优惠</view>
         <view class='fei3' style='color:red;'>-￥{{full_subtraction}}</view>
+      </view>
+      <view class='xia2'></view>
+      <!-- 满赠 -->
+      <view class='flex' v-if="{{ReductionID.length>0}}">
+        <view class='bao' style="width:{{px2rpxWidth*180}}px;">满赠商品</view>
+        <view class='fei3' style='color:red;'>{{ReductionName}}</view>
       </view>
       <view class='xia2'></view>
       <view class='flex'>
@@ -96,7 +102,11 @@
         </picker>
       </view>
     </view>
-
-    <view class='wechat' bindtap='pay' style="height:{{px2rpxHeight*100}}px;">支付</view>
+    <form bindsubmit="submitInfo" report-submit='true'>
+      <!-- <view class='wechat' bindtap='pay' style="height:{{px2rpxHeight*100}}px;">支付</view> -->
+      <button form-type="submit" class='wechat' style="height:{{px2rpxHeight*100}}px;">
+        支付
+      </button>
+    </form>
   </view>
 </block>

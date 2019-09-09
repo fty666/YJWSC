@@ -1,12 +1,12 @@
 {
   "extEnable": true,
-  "pages": [    
+  "pages": [
     "pages/shop/mall/mall",
+    "pages/shop/print/print",
     "pages/orderManage/sendGoods/sendGoods",
     "pages/user/order/order",
     "pages/apply/apply",
     "pages/kefu/kefu",
-    "pages/map/map",
     "pages/shop/malldetail/malldetail",
     "pages/shop/onepay/onepay",
     "pages/myGoods/CouponList/CouponList",

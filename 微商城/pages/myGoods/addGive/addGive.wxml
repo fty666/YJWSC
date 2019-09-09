@@ -1,62 +1,74 @@
-<view class="container">
+<view class="container" style='margin-top:{{px2rpxHeight*20}}px;height:auto'>
   <form bindsubmit="addCoupon">
-    <view class="coupon-list">
-      <!-- <block wx:for="{{coupon}}" wx:for-item="{{coupon}}" wx:key="{{coupon.id}}"> -->
-      <view class="item yhqbj">
-        <!--满足金额  -->
-        <view class="content">
-          <view class="left">
-            <input type='number' name="full" class="name" placeholder='请输入满赠的金额'></input>
-          </view>
-        </view>
-        <!--满足数量  -->
-        <view class="content">
-          <view class="left">
-            <input type='number' name="nums" class="name" placeholder='请填写满赠数量'></input>
-          </view>
-        </view>
-
-        <view class='left' style='margin-left:{{40*px2rpxWidth}}px'>
-          <!--开始时间  -->
-          <picker mode="date" value="{{start}}" start="2015-09-01" bindchange="bindStartChange">
-            <view class="time">开始日期: {{start}}</view>
-          </picker>
-          <picker mode="time" value="{{stime}}" start="00:00" end="23:59" bindchange="bindTime">
-            <view class="time">
-              开始具体时间: {{stime}}
-            </view>
-          </picker>
-
-          <!--结束时间  -->
-          <picker mode="date" value="{{date}}" start="2015-09-01" bindchange="bindDateChange">
-            <view class="time">截止日期: {{date}}</view>
-          </picker>
-          <picker mode="time" value="{{time}}" start="00:00" end="23:59" bindchange="bindTimeChange">
-            <view class="time">
-              结束具体时间: {{time}}
-            </view>
-          </picker>
-        </view>
-
-        <!--满赠商品  -->
-        <view>
-          <view class='font'>请选择满赠商品</view>
-          <view class='gid'>
-            <radio-group class="radio-group" bindchange="radioChange">
-              <label class="check" wx:for="{{goods}}" wx:key="index">
-                <radio value="{{item.goodsId}}" name="goodsId" checked="{{item.checked}}" />{{item.goods_name}}
-              </label>
-            </radio-group>
-          </view>
-        </view>
+    <!--满足 -->
+    <view class='dis'>
+      <view class='title' style='margin-top:{{px2rpxHeight*30}}px;margin-left:{{px2rpxWidth*30}}px;'>满赠门槛：</view>
+      <view class='content' style='margin-top:{{px2rpxHeight*30}}px;margin-left:{{px2rpxWidth*30}}px;'>
+        <input placeholder="请输入满足使用金额" type='number' name="full" />
       </view>
-      <!-- </block> -->
-      <view class='lingquan' style='top:{{px2rpxHeight*1000}}px;'>
-        <button formType="submit" data-shop_code='' class='button button-caution button-rounded'>添加该满赠</button>
+      <view class='unit' style='margin-top:{{px2rpxHeight*30}}px;margin-left:{{px2rpxWidth*30}}px;'>元</view>
+    </view>
+    <!-- 优惠 -->
+    <view class='dis'>
+      <view class='title' style='margin-top:{{px2rpxHeight*30}}px;margin-left:{{px2rpxWidth*30}}px;'>满赠数量：</view>
+      <view class='content' style='margin-top:{{px2rpxHeight*30}}px;margin-left:{{px2rpxWidth*22}}px;'>
+        <input placeholder="请输入满赠数量" type='number' name="nums" />
+      </view>
+      <!-- <view class='unit' style='margin-top:{{px2rpxHeight*30}}px;margin-left:{{px2rpxWidth*30}}px;'></view> -->
+    </view>
+    <!-- 开始时间 -->
+    <view class='dis'>
+      <view class='title' style='margin-top:{{px2rpxHeight*30}}px;margin-left:{{px2rpxWidth*30}}px;'>开始日期：</view>
+      <view class='content' style='margin-top:{{px2rpxHeight*30}}px;margin-left:{{px2rpxWidth*7}}px;'>
+        <picker mode="date" value="{{start}}" start="2015-09-01" bindchange="bindStartChange">
+          <input type='text' value='{{start}}' disabled/>
+        </picker>
       </view>
     </view>
-
-    <!--  -->
-
+    <view class='dis'>
+      <view class='title' style='margin-top:{{px2rpxHeight*30}}px;margin-left:{{px2rpxWidth*30}}px;'>具体时间：</view>
+      <view class='content' style='margin-top:{{px2rpxHeight*30}}px;margin-left:{{px2rpxWidth*7}}px;'>
+        <picker mode="time" value="{{stime}}" start="00:00" end="23:59" bindchange="bindTime">
+          <input value='{{stime}}' disabled />
+        </picker>
+      </view>
+    </view>
+    <!-- 结束日期 -->
+    <!-- 开始时间 -->
+    <view class='dis'>
+      <view class='title' style='margin-top:{{px2rpxHeight*30}}px;margin-left:{{px2rpxWidth*30}}px;'>结束日期：</view>
+      <view class='content' style='margin-top:{{px2rpxHeight*30}}px;margin-left:{{px2rpxWidth*7}}px;'>
+        <picker mode="date" value="{{date}}" start="2015-09-01" bindchange="bindDateChange">
+          <input type='text' value='{{date}}' disabled/>
+        </picker>
+      </view>
+    </view>
+    <view class='dis'>
+      <view class='title' style='margin-top:{{px2rpxHeight*30}}px;margin-left:{{px2rpxWidth*30}}px;'>具体时间：</view>
+      <view class='content' style='margin-top:{{px2rpxHeight*30}}px;margin-left:{{px2rpxWidth*7}}px;'>
+        <picker mode="time" value="{{time}}" start="00:00" end="23:59" bindchange="bindTimeChange">
+          <input value='{{time}}' disabled />
+        </picker>
+      </view>
+    </view>
+    <view class='dis'>
+      <view class='title' style='margin-top:{{px2rpxHeight*30}}px;margin-left:{{px2rpxWidth*30}}px;'>满赠商品：</view>
+      <view class='content' style='margin-top:{{px2rpxHeight*30}}px;margin-left:{{px2rpxWidth*7}}px;border-bottom:0px solid #f4f4f4'>
+        <radio-group class="radio-group" bindchange="radioChange">
+          <label class="check" wx:for="{{goods}}" wx:key="index">
+            <view class='dis'>
+              <view style='margin-top:{{px2rpxHeight*20}}px'>
+                <radio value="{{item.goodsId}}" name="goodsId" checked="{{item.checked}}" />
+              </view>
+              <view style='margin-top:{{px2rpxHeight*20}}px;margin-left:{{px2rpxWidth*30}}px'> {{item.goods_name}}</view>
+            </view>
+          </label>
+        </radio-group>
+      </view>
+    </view>
+    <!-- 请求 -->
+    <view class='lingquan' style='margin-top:{{px2rpxHeight*200}}px;margin-left:{{px2rpxWidth*80}}px'>
+      <button class='lingquan' formType="submit" data-shop_code=''>添加满赠</button>
+    </view>
   </form>
 </view>

@@ -1,39 +1,59 @@
-<view class="container">
+<view class="container" style='margin-top:{{px2rpxHeight*20}}px;height:{{px2rpxHeight*600}}px'>
   <form bindsubmit="addCoupon">
-    <view class="coupon-list">
-      <!-- <block wx:for="{{coupon}}" wx:for-item="{{coupon}}" wx:key="{{coupon.id}}"> -->
-      <view class="item yhqbj" style="height:{{px2rpxHeight*460}}px;">
-        <view class="content">
-          <view class="left">
-            <input type='number' name="reductionPrice" class="name" placeholder='输入要减的价格'></input>
-            <!--开始日期  -->
-            <picker mode="date" value="{{start}}" start="2015-09-01" bindchange="bindStartChange">
-              <view class="time">开始日期: {{start}}</view>
-            </picker>
-            <picker mode="time" value="{{stime}}" start="00:00" end="23:59" bindchange="bindTime">
-              <view class="time">
-                开始具体时间: {{stime}}
-              </view>
-            </picker>
-            <!--结束日期  -->
-            <picker mode="date" value="{{date}}" start="2015-09-01" bindchange="bindDateChange">
-              <view class="time">截止日期: {{date}}</view>
-            </picker>
-            <picker mode="time" value="{{time}}" start="00:00" end="23:59" bindchange="bindTimeChange">
-              <view class="time">
-                结束具体时间: {{time}}
-              </view>
-            </picker>
-          </view>
-        </view>
-        <view class="condition" style="height:{{px2rpxHeight*90}}px;">
-          <input type='number' name="full" class="txt" placeholder='请输入满多少金额使用' style="height:{{px2rpxHeight*60}}px;"></input>
-        </view>
+    <!--满足 -->
+    <view class='dis'>
+      <view class='title' style='margin-top:{{px2rpxHeight*30}}px;margin-left:{{px2rpxWidth*30}}px;'>满减门槛：</view>
+      <view class='content' style='margin-top:{{px2rpxHeight*30}}px;margin-left:{{px2rpxWidth*30}}px;'>
+        <input placeholder="请输入满足使用金额" type='number' name="full" />
       </view>
-      <!-- </block> -->
-      <view class='lingquan' style='top:{{px2rpxHeight*1000}}px;'>
-        <button formType="submit" data-shop_code='' class='button button-primary button-rounded'>添加满减</button>
+      <view class='unit' style='margin-top:{{px2rpxHeight*30}}px;margin-left:{{px2rpxWidth*30}}px;'>元</view>
+    </view>
+    <!-- 优惠 -->
+    <view class='dis'>
+      <view class='title' style='margin-top:{{px2rpxHeight*30}}px;margin-left:{{px2rpxWidth*30}}px;'>满减金额：</view>
+      <view class='content' style='margin-top:{{px2rpxHeight*30}}px;margin-left:{{px2rpxWidth*30}}px;'>
+        <input placeholder="请输入优惠金额" type='number' name="reductionPrice" />
+      </view>
+      <view class='unit' style='margin-top:{{px2rpxHeight*30}}px;margin-left:{{px2rpxWidth*30}}px;'>元</view>
+    </view>
+    <!-- 开始时间 -->
+    <view class='dis'>
+      <view class='title' style='margin-top:{{px2rpxHeight*30}}px;margin-left:{{px2rpxWidth*30}}px;'>开始日期：</view>
+      <view class='content' style='margin-top:{{px2rpxHeight*30}}px;margin-left:{{px2rpxWidth*7}}px;'>
+        <picker mode="date" value="{{start}}" start="2015-09-01" bindchange="bindStartChange">
+          <input type='text' value='{{start}}' disabled/>
+        </picker>
       </view>
     </view>
+    <view class='dis'>
+      <view class='title' style='margin-top:{{px2rpxHeight*30}}px;margin-left:{{px2rpxWidth*30}}px;'>具体时间：</view>
+      <view class='content' style='margin-top:{{px2rpxHeight*30}}px;margin-left:{{px2rpxWidth*7}}px;'>
+        <picker mode="time" value="{{stime}}" start="00:00" end="23:59" bindchange="bindTime">
+          <input value='{{stime}}' disabled />
+        </picker>
+      </view>
+    </view>
+    <!-- 结束日期 -->
+    <!-- 开始时间 -->
+    <view class='dis'>
+      <view class='title' style='margin-top:{{px2rpxHeight*30}}px;margin-left:{{px2rpxWidth*30}}px;'>结束日期：</view>
+      <view class='content' style='margin-top:{{px2rpxHeight*30}}px;margin-left:{{px2rpxWidth*7}}px;'>
+        <picker mode="date" value="{{date}}" start="2015-09-01" bindchange="bindDateChange">
+          <input type='text' value='{{date}}' disabled/>
+        </picker>
+      </view>
+    </view>
+    <view class='dis'>
+      <view class='title' style='margin-top:{{px2rpxHeight*30}}px;margin-left:{{px2rpxWidth*30}}px;'>具体时间：</view>
+      <view class='content' style='margin-top:{{px2rpxHeight*30}}px;margin-left:{{px2rpxWidth*7}}px;'>
+        <picker mode="time" value="{{time}}" start="00:00" end="23:59" bindchange="bindTimeChange">
+          <input value='{{time}}' disabled />
+        </picker>
+      </view>
+    </view>
+    <!-- 请求 -->
+      <view class='lingquan' style='margin-top:{{px2rpxHeight*200}}px;margin-left:{{px2rpxWidth*80}}px'>
+        <button class='lingquan'  formType="submit"  data-shop_code=''>添加满减</button>
+      </view>
   </form>
 </view>

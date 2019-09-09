@@ -174,7 +174,13 @@ Page({
       order: order
     });
   },
-
+  // 打印
+  goTemplate:function(e){
+    console.log(e.currentTarget.dataset.order_uuid)
+    wx.navigateTo({
+      url: '/pages/shop/print/print?datas=' + e.currentTarget.dataset.order_uuid,
+    })
+  },
   /**
    * 查询订单详情
    */

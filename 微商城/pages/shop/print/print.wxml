@@ -1,0 +1,29 @@
+<wxs module="utils">
+  module.exports.max = function(n1, n2) {
+    return Math.max(n1, n2)
+  }
+  module.exports.len = function(arr) {
+    arr = arr || [];
+    return arr.length;
+  }
+</wxs>
+<view class="container">
+  <view class="page-section" style='margin-left:{{px2rpxWidth*30}}px'>
+    <view class="devices-summary">已发现 {{devices.length}} 个外围设备：</view>
+    <scroll-view class="device-list" scroll-y scroll-with-animation>
+      <view wx:for="{{devices}}" wx:key="index"  class="device-item flex-between" hover-class="device-item-hover" style='margin-top:{{px2rpxHeight*40}}px'>
+        <view style="font-size: 16px; color: #333;">连接到设备：{{item.name}}</view>
+        <view class='feed' style='height:{px2rpxHeight*100}px;line-height:{{px2rpxHeight*50}}px' bindtap="createBLEConnection" data-device-id="{{item.deviceId}}" data-name="{{item.name || item.localName}}"style='margin-right:{{px2rpxWidth*30}}px' >打印</view>
+      </view>
+    </scroll-view>
+  </view>
+  <!-- <view class="page-section connected-area" wx:if="{{connected}}" style='margin-left:{{px2rpxWidth*30}}px'>
+    <view class="connected-info">
+      <text style="font-size: 30rpx" bindtap="writeBLECharacteristicValue">已连接到 {{name}}点击进行打印</text>
+      <view wx:for="{{chs}}" wx:key="index">
+        <view>特性UUID: {{item.uuid}}</view>
+        <view>特性值: {{item.value}}</view>
+      </view>
+    </view>
+  </view> -->
+</view>

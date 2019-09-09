@@ -10,25 +10,23 @@ Page({
    */
   data: {
     shop_code: '',
-    start: '',//开始
-    date: '',//结束
-    stime: '',//开始具体时间
-    time: '',//具体时间
+    start: '', //开始
+    date: '', //结束
+    stime: '', //开始具体时间
+    time: '', //具体时间
     px2rpxWidth: '',
     px2rpxHeight: '',
   },
-
   /**
    * 生命周期函数--监听页面加载
    */
-  onLoad: function (options) {
+  onLoad: function(options) {
     let that = this;
   },
-
   /**
    * 生命周期函数--监听页面初次渲染完成
    */
-  onReady: function () {
+  onReady: function() {
     let that = this;
     let user_id = app.globalData.user_id;
     funData.getShopCode(user_id, that, (data) => {
@@ -40,8 +38,7 @@ Page({
     //获取缓存
     wx.getStorage({
       key: 'PX_TO_RPX',
-      success: function (res) {
-        console.log(res)
+      success: function(res) {
         that.setData({
           px2rpxHeight: res.data.px2rpxHeight,
           px2rpxWidth: res.data.px2rpxWidth,
@@ -49,43 +46,38 @@ Page({
       }
     })
   },
-
-
   /**
    * 开始日期
    */
-  bindStartChange: function (e) {
-    console.log('picker发送选择改变，携带值为', e.detail.value)
+  bindStartChange: function(e) {
+    // console.log('picker发送选择改变，携带值为', e.detail.value)
     this.setData({
       start: e.detail.value
     })
   },
-
   /**
    *具体时间 
    */
-  bindTime: function (e) {
-    console.log('picker发送选择改变，携带值为', e.detail.value)
+  bindTime: function(e) {
+    // console.log('picker发送选择改变，携带值为', e.detail.value)
     this.setData({
       stime: e.detail.value
     })
   },
-
   /**
    * 日期 
    */
-  bindDateChange: function (e) {
-    console.log('picker发送选择改变，携带值为', e.detail.value)
+  bindDateChange: function(e) {
+    // console.log('picker发送选择改变，携带值为', e.detail.value)
     this.setData({
       date: e.detail.value
     })
   },
-
   /**
    * 时间
    */
-  bindTimeChange: function (e) {
-    console.log('picker发送选择改变，携带值为', e.detail.value)
+  bindTimeChange: function(e) {
+    // console.log('picker发送选择改变，携带值为', e.detail.value)
     this.setData({
       time: e.detail.value
     })
@@ -94,10 +86,10 @@ Page({
   /**
    * 添加满减
    */
-  addCoupon: function (e) {
+  addCoupon: function(e) {
     let that = this;
     let coupon = e.detail.value;
-    console.log(e.detail.value)
+    // console.log(e.detail.value)
 
     // 检测优惠后金额
     if (!util.checkReg(4, coupon.reductionPrice)) {
@@ -128,26 +120,28 @@ Page({
     coupon.startTime = that.data.start + ' ' + that.data.stime;
     coupon.shop_code = that.data.shop_code;
     // 检测时间前后
-    if (util.CompareDate(that.data.start, that.data.date)==true){
+    if (util.CompareDate(that.data.start, that.data.date) == true) {
       wx.showToast({
         title: '时间填写不正确',
         icon: 'none',
       })
       return false;
-    }else{
-      if (util.CompareHour(that.data.stime, that.data.time) == false){
-        wx.showToast({
-          title: '时间填写不正确',
-          icon: 'none',
-        })
-        return false;
+    } else {
+      if (that.data.start == that.data.date) {
+        if (util.CompareHour(that.data.stime, that.data.time) == false) {
+          wx.showToast({
+            title: '时间填写不正确',
+            icon: 'none',
+          })
+          return false;
+        }
       }
     }
     functionData.insertReduction(coupon, that, () => {
       wx.showModal({
         title: '提示',
         content: '添加满减成功',
-        success: function (res) {
+        success: function(res) {
           if (res.confirm) {
             wx.navigateTo({
               url: '/pages/myself/myself',

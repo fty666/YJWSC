@@ -21,10 +21,12 @@ Page({
    */
   onLoad: function(options) {
     let that = this;
+    that.setData({
+      shop_code: options.shop_code
+    })
     funData.getCoupon(app.globalData.user_id, options.shop_code, page, pageSize, that, (res) => {
       that.setData({
-        coupon: res.PageInfo.list,
-        shop_code: options.shop_code
+        coupon: res.PageInfo.list
       });
     });
   },
@@ -49,7 +51,6 @@ Page({
    * 删除
    */
   delCoupon: function(e) {
-    console.log(e)
     let that = this;
     let couponId = e.currentTarget.dataset.couponid;
     let index = e.currentTarget.dataset.index;
@@ -91,10 +92,9 @@ Page({
   scrollToLower: function() {
     pageSize += 10;
     let that = this;
-    funData.getCoupon(app.globalData.user_id, options.shop_code, page, pageSize, that, (res) => {
+    funData.getCoupon(app.globalData.user_id, that.data.shop_code, page, pageSize, that, (res) => {
       that.setData({
         coupon: res.PageInfo.list,
-        shop_code: options.shop_code
       });
     });
   }

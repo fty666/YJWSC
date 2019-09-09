@@ -28,7 +28,6 @@ Page({
       shop_code: options.shop_code
     };
     funData.getReductionInGoods(datas, that, (res) => {
-      // console.log(res);
       that.setData({
         coupon: res
       })
@@ -80,21 +79,61 @@ Page({
       }
     })
   },
+  huo() {
+    let that = this;
+    let datas = {
+      shop_code: that.data.shop_code
+    };
+    funData.getReductionInGoods(datas, that, (res) => {
+      that.setData({
+        coupon: res
+      })
+    });
+  },
+  // 下架
+  sold(e) {
+    let that = this;
+    let couponId = e.currentTarget.dataset.couponid;
+    let index = e.currentTarget.dataset.index;
+    let coupon = that.data.coupon;
+    let shopcode = '';
+    if (coupon[index].flag == 0) {
+      wx.showToast({
+        title: '已下架满赠',
+        icon:'none'
+      })
+    } else {
+      wx.showModal({
+        title: '提示',
+        content: '是否要下架',
+        success: function(res) {
+          if (res.confirm) {
+            funData.getupdateTime(couponId, that, () => {
+              wx.showToast({
+                title: '下架成功',
+                icon: 'success',
+                duration: 1000
+              });
+              that.huo();
+            });
+          } else if (res.cancel) {}
+        }
+      })
+    }
 
+  },
   /**
    *修改 
    */
   updtaCoupon: function(e) {
-    // console.log(e)
     let that = this;
     let couponId = e.currentTarget.dataset.couponid;
     let shopcode = e.currentTarget.dataset.shopcode;
-    let reductionId = e.currentTarget.dataset.reductionid;
     let index = e.currentTarget.dataset.index;
     let coupon = that.data.coupon[index];
     let start = 1;
     wx.navigateTo({
-      url: '/pages/myGoods/updataGive/updataGive?reductionId=' + reductionId + '&shop_code=' + shopcode,
+      url: '/pages/myGoods/updataGive/updataGive?reductionId=' + couponId + '&shop_code=' + shopcode,
     })
   },
 

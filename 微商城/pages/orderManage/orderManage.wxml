@@ -36,6 +36,12 @@
             <label class="color54 fontSize12 ml10">
               <text class="iconfont icon-iconfontcolor36"></text> 订单时间: {{order.createTime}}</label>
           </view>
+          <view class="flexItem rowStyle tableViewCellHeader" catchtap='goTemplate' style='border-bottom: solid #ccc 1px;display:flex' data-order_uuid='{{order.order_uuid}}' style="height:{{px2rpxHeight*70}}px;">
+            <view>
+              <image src='../../images/template.png' style='width:{{px2rpxWidth*30}}px;height:{{px2rpxHeight*30}}px;margin-left:{{px2rpxWidth*20}}px'></image>
+            </view>
+            <view style='margin-left:{{px2rpxWidth*30}}px;margin-top:{{px2rpxHeight*10}}px;'>打印</view>
+          </view>
           <view class="flexItem rowStyle  personInfo" style="height:{{px2rpxHeight*88}}px;">
             <view class="flexItem rowStyle marginLeft12 centers" style='width:{{px2rpxWidth*400}}px'>
               <label class="color54 fontSize12">收货人：{{ order.orderReceiver }}</label>

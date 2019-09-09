@@ -1,4 +1,5 @@
 const utilFunctions = require('../../../utils/functionData.js');
+const funData = require('../../../utils/functionMethodData.js');
 const URLData = require('../../../utils/data.js');
 const calculate = require('../../../utils/calculate.js');
 const template = require('../../../template/template.js');
@@ -100,7 +101,7 @@ Page({
       // 在没有 open-type=getUserInfo 版本的兼容处理
       wx.getUserInfo({
         success: res => {
-          console.log(res);
+          // console.log(res);
           app.globalData.userInfo = res.userInfo
           this.setData({
             userInfo: res.userInfo,
@@ -112,7 +113,7 @@ Page({
   },
 
   getUserInfoBtn: function(e) {
-    console.log(e)
+    // console.log(e)
     app.globalData.userInfo = e.detail.userInfo
     this.setData({
       userInfo: e.detail.userInfo,
@@ -121,14 +122,19 @@ Page({
   },
   onReady: function() {
     let that = this;
-    setTimeout(function() {
-      // if (app.globalData.level == '1' || !app.globalData.level) {
-      if (app.globalData.level == '1') {
-        template.tabbar("tabBar", 0, that, 1);
-      } else if (app.globalData.level == '2' || app.globalData.level == '3') {
-        template.tabbar("tabBar", 0, that, 3);
+    wx.login({
+      success: res => {
+        // 发送 res.code 到后台换取 openId, sessionKey, unionId
+        funData.mylogin(res.code, function(data) {
+          if (data.data.data.level == '1') {
+            // if (app.globalData.level == '1') {
+            template.tabbar("tabBar", 0, that, 1);
+          } else if (data.data.data.level == '2' || data.data.data.level == '3') {
+            template.tabbar("tabBar", 0, that, 3);
+          }
+        });
       }
-    }, 1000);
+    });
 
     // 获取外卖
     let data = {

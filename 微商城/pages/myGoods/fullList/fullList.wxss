@@ -2,170 +2,21 @@ page {
     background: #f4f4f4;
     min-height: 100%;
 }
-
+.dis{
+  display: flex
+}
 .container {
     position: relative;
     background: #f4f4f4;
     min-height: 100%;
     padding-top: 30rpx;
 }
-
-.coupon-form {
-    height: 110rpx;
-    width: 100%;
-    background: #fff;
-    padding-left: 30rpx;
-    padding-right: 30rpx;
-    padding-top: 20rpx;
-    display: flex;
-}
-
-.input-box {
-    flex: 1;
-    height: 70rpx;
-    color: #333;
-    font-size: 24rpx;
-    background: #fff;
-    position: relative;
-    border: 1px solid rgba(0, 0, 0, 0.15);
-    border-radius: 4rpx;
-    margin-right: 30rpx;
-}
-
-.input-box .coupon-sn {
-    position: absolute;
-    top: 10rpx;
-    left: 30rpx;
-    height: 50rpx;
-    width: 100%;
-    color: #000;
-    line-height: 50rpx;
-    font-size: 24rpx;
-}
-
-.clear-icon {
-    position: absolute;
-    top: 21rpx;
-    right: 30rpx;
-    width: 28rpx;
-    height: 28rpx;
-}
-
-.add-btn {
-    height: 70rpx;
-    border: none;
-    width: 168rpx;
-    background: #b4282d;
-    border-radius: 0;
-    line-height: 70rpx;
-    color: #fff;
-    font-size: 28rpx;
-}
-
-.add-btn.disabled {
-    background: #ccc;
-}
-
-.help {
-    height: 72rpx;
-    line-height: 72rpx;
-    text-align: right;
-    padding-right: 30rpx;
-    background: url(https://yanxuan.nosdn.127.net/hxm/yanxuan-wap/p/20161201/style/img/icon-normal/couponHelp-4768607555.png) 590rpx center no-repeat;
-    background-size: 28rpx;
-    color: #999;
-    font-size: 24rpx;
-}
-
 .coupon-list {
     width: 100%;
     overflow: hidden;
     padding-left: 30rpx;
     padding-right: 30rpx;
 }
-
-.item {
-    position: relative;
-    width: 100%;
-    /* background: linear-gradient(to right, #cfa568, #e3bf79); */
-    margin-bottom: 30rpx;
-    padding-top: 52rpx;
-}
-
-.tag {
-    height: 32rpx;
-    background: #a48143;
-    padding-left: 16rpx;
-    padding-right: 16rpx;
-    position: absolute;
-    left: 20rpx;
-    color: #fff;
-    top: 20rpx;
-    font-size: 20rpx;
-    text-align: center;
-    line-height: 32rpx;
-}
-
-.content {
-    margin-top: -30rpx;
-    margin-left: 40rpx;
-    display: flex;
-    margin-right: 40rpx;
-    flex-direction: row;
-    align-items: center;
-}
-
-.content .left {
-    flex: 1;
-}
-
-.name {
-    font-size: 44rpx;
-    color: #fff;
-    margin-bottom: 14rpx;
-}
-
-.time {
-    font-size: 24rpx;
-    color: rgba(255, 255, 255, 0.8);
-    line-height: 30rpx;
-}
-
-.go {
-    border: none;
-    background: rgba(255, 255, 255, 0.8);
-    border-radius: 4rpx;
-    line-height: 48rpx;
-    color: #b69150;
-    font-size: 24rpx;
-}
-
-.condition {
-    position: absolute;
-    width: 100%;
-    bottom: 0;
-    left: 0;
-    background: rgba(0, 0, 0, 0.08);
-    padding: 24rpx 40rpx;
-    display: flex;
-    flex-direction: row;
-}
-
-.condition .txt {
-    display: block;
-    flex: 1;
-    overflow: hidden;
-    font-size: 24rpx;
-    line-height: 30rpx;
-    color: #fff;
-}
-
-.condition .icon {
-    margin-left: 30rpx;
-    width: 24rpx;
-    height: 24rpx;
-}
-
 .lingquan {
     position: fixed;
     left: 0;
@@ -187,4 +38,47 @@ page {
     text-align: center;
     margin-top: 100rpx;
     font-size: 35rpx;
+}
+.go {
+    border: none;
+    background: rgba(255, 255, 255, 0.8);
+    border-radius: 4rpx;
+    line-height: 48rpx;
+    color: #b69150;
+    font-size: 24rpx;
+}
+
+/* 优惠券样式 */
+
+.dollar-list {
+    background: #fff;
+    margin: 30rpx auto 0;
+    border-radius: 10rpx;
+    overflow: hidden;
+}
+
+.top {
+    padding: 50rpx 50rpx 0;
+    background: #f66;
+    position: relative;
+    border-bottom: 2rpx dashed #fff;
+}
+
+.money-msg, .status {
+    display: inline-block;
+}
+
+.money {
+    font-size: 80rpx;
+}
+
+.status {
+    border: 2rpx solid #fff;
+    line-height: 60rpx;
+    border-radius: 4rpx;
+}
+
+.bottom {
+    padding: 30rpx;
+    line-height: 50rpx;
 }

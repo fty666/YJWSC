@@ -15,20 +15,31 @@
         <view style='width:100%;height:{{px2rpxHeight*1000}}px'>
           <scroll-view scroll-y>
             <block wx:for="{{coupon}}" wx:for-item="coupon" wx:key="{{coupon.couponId}}">
-              <view class="item yhqbj" style="height:{{px2rpxHeight*290}}px;">
-                <view class="content">
-                  <view class="left">
-                    <view class="name">优惠：￥{{coupon.reductionPrice}}</view>
-                    <view class="time">开始时间 {{coupon.startTime}}</view>
-                    <view class="time">结束时间 {{coupon.endTime}}</view>
+              <view class="dollar-list" style="width:{{px2rpxWidth*690}}px;">
+                <view class="top write overdue dis" style="height:{{px2rpxHeight*200}}px;margin-top:{{px2rpxHeight*15}}px">
+                  <!-- 内容 -->
+                  <view class="money-msg f16" style='width:70%'>¥
+                    <text class="money">{{coupon.reductionPrice}}</text>
+                    <text class='f12'>(满{{coupon.full}}使用)</text>
                   </view>
-                  <view class="right" style="width:{{px2rpxWidth*162}}px;">
-                    <button catchtap='editCoupon' class="go" data-couponId='{{coupon.reductionId}}' style="width:{{px2rpxWidth*162}}px;height:{{px2rpxHeight*48}}px;line-height:{{px2rpxHeight*50}}px">修改</button>
-                    <button catchtap='delCoupon' class="go mt5" data-index='{{index}}' data-couponid='{{coupon.reductionId}}' style="width:{{px2rpxWidth*162}}px;height:{{px2rpxHeight*48}}px;line-height:{{px2rpxHeight*50}}px">删除</button>
+                  <!-- 操作 -->
+                  <view style='margin-top:{{px2rpxHeight*(-30)}}px'>
+                    <view class="right" style="width:{{px2rpxWidth*162}}px;height:{{px2rpxHeight*50}}px">
+                      <button catchtap='editCoupon' class="go" data-index='{{index}}' data-couponId='{{coupon.reductionId}}' style="width:{{px2rpxWidth*162}}px;height:{{px2rpxHeight*48}}px;line-height:{{px2rpxHeight*50}}px">修改</button>
+                    </view>
+                    <view class="right" style="width:{{px2rpxWidth*162}}px;height:{{px2rpxHeight*50}}px">
+                      <button catchtap='delCoupon' class="go mt5" data-index='{{index}}' data-couponid='{{coupon.reductionId}}' style="width:{{px2rpxWidth*162}}px;height:{{px2rpxHeight*48}}px;line-height:{{px2rpxHeight*50}}px">删除</button>
+                    </view>
+                    <view class="right" style="width:{{px2rpxWidth*162}}px;height:{{px2rpxHeight*50}}px">
+                      <button catchtap='sold' class="go mt5" data-index='{{index}}' data-couponid='{{coupon.reductionId}}' style="width:{{px2rpxWidth*162}}px;height:{{px2rpxHeight*48}}px;line-height:{{px2rpxHeight*50}}px">下架</button>
+                    </view>
                   </view>
                 </view>
-                <view class="condition" style="height:{{px2rpxHeight*78}}px;">
-                  <text class="txt" style="height:{{px2rpxHeight*30}}px;">满¥{{coupon.full}}使用满减</text>
+                <view class="bottom grey">
+                  <view>
+                    <text class="iconfont icon-time mr10 linght"></text>开始日期：{{coupon.startTime}}</view>
+                  <view>
+                    <text class="iconfont icon-info mr10 linght"></text>结束日期：{{coupon.endTime}}</view>
                 </view>
               </view>
             </block>

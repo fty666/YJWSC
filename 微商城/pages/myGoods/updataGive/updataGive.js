@@ -25,7 +25,6 @@ Page({
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
-    // console.log(options)
     let shop_code = options.shop_code;
     let reductionId = options.reductionId;
     this.setData({
@@ -38,21 +37,18 @@ Page({
     }
     // 获取满赠信息
     funData.getReductionInGoodsById(datas, that, (data) => {
-      console.log(data)
       that.setData({
         gift: data,
         gid: data.goodsId,
-        start: data.startDay,//开始
-        date: data.endDay,//结束
-        stime: data.startTime,//开始具体时间
-        time: data.endTime,//具体时间
+        start: data.startTime.slice(0,10),//开始
+        date: data.endTime.slice(0,10),//结束
+        stime: data.startTime.slice(10),//开始具体时间
+        time: data.endTime.slice(10),//具体时间
       });
     });
     // 获取商品
     // let shop_code = options.shop_code
     funData.getGoodsByCodeUrl(shop_code, that, (data) => {
-      console.log(data)
-
       that.setData({
         goods: data,
       });
@@ -62,7 +58,6 @@ Page({
     wx.getStorage({
       key: 'PX_TO_RPX',
       success: function (res) {
-        console.log(res)
         that.setData({
           px2rpxHeight: res.data.px2rpxHeight,
           px2rpxWidth: res.data.px2rpxWidth,
@@ -75,7 +70,6 @@ Page({
    * 开始日期
    */
   bindStartChange: function (e) {
-    console.log('picker发送选择改变，携带值为', e.detail.value)
     this.setData({
       start: e.detail.value
     })
@@ -85,7 +79,6 @@ Page({
    *具体时间 
    */
   bindTime: function (e) {
-    console.log('picker发送选择改变，携带值为', e.detail.value)
     this.setData({
       stime: e.detail.value
     })
@@ -95,7 +88,6 @@ Page({
    * 日期 
    */
   bindDateChange: function (e) {
-    console.log('picker发送选择改变，携带值为', e.detail.value)
     this.setData({
       date: e.detail.value
     })
@@ -105,59 +97,9 @@ Page({
    * 时间
    */
   bindTimeChange: function (e) {
-    console.log('picker发送选择改变，携带值为', e.detail.value)
     this.setData({
       time: e.detail.value
     })
-  },
-
-
-  /**
-   * 生命周期函数--监听页面初次渲染完成
-   */
-  onReady: function () {
-  },
-
-  /**
-   * 生命周期函数--监听页面显示
-   */
-  onShow: function () {
-
-  },
-
-  /**
-   * 生命周期函数--监听页面隐藏
-   */
-  onHide: function () {
-
-  },
-
-  /**
-   * 生命周期函数--监听页面卸载
-   */
-  onUnload: function () {
-
-  },
-
-  /**
-   * 页面相关事件处理函数--监听用户下拉动作
-   */
-  onPullDownRefresh: function () {
-
-  },
-
-  /**
-   * 页面上拉触底事件的处理函数
-   */
-  onReachBottom: function (e) {
-
-  },
-
-  /**
-   * 用户点击右上角分享
-   */
-  onShareAppMessage: function (e) {
-
   },
 
   /**
@@ -177,7 +119,6 @@ Page({
   addCoupon: function (e) {
     let that = this;
     let coupon = e.detail.value;
-    console.log(coupon)
     coupon.shopCode = that.data.shop_code;
     coupon.goodsId = that.data.gid;
     coupon.reductionId = that.data.reductionId;

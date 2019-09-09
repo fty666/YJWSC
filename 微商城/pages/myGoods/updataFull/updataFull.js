@@ -10,53 +10,43 @@ Page({
    */
   data: {
     shop_code: '',
-    fulls:'',
-    start: '',//开始
-    date: '',//结束
-    stime: '',//开始具体时间
-    time: '',//具体时间
+    fulls: '',
+    start: '', //开始
+    date: '', //结束
+    stime: '', //开始具体时间
+    time: '', //具体时间
     px2rpxWidth: '',
     px2rpxHeight: '',
-    reductionId:'',
+    reductionId: '',
   },
 
   /**
    * 生命周期函数--监听页面加载
    */
-  onLoad: function (options) {
-    console.log(options)
+  onLoad: function(options) {
     let that = this;
-   let couponid=options.couponId;
-   console.log(couponid)
-    let data={
-      reductionId:couponid,
-    }
+    let datas = JSON.parse(options.datas);
+    console.log(datas);
+    let couponid = datas.reductionId;
     that.setData({
-      reductionId: couponid
+      reductionId: couponid,
+      fulls: datas,
+      start: datas.startTime.slice(0,10), //开始
+      date: datas.endTime.slice(0,10), //结束
+      stime: datas.startTime.slice(10), //开始具体时间
+      time: datas.endTime.slice(10), //具体时间
     })
-    funData.getReductionInGoodsById(data, that, (data) => {
-      console.log(data)
-      // 获取店铺里
-      that.setData({
-        fulls: data,
-        start: data.startDay,//开始
-        date: data.endDay,//结束
-        stime: data.startTime,//开始具体时间
-        time: data.endTime,//具体时间
-      });
-    });
   },
 
   /**
    * 生命周期函数--监听页面初次渲染完成
    */
-  onReady: function () {
+  onReady: function() {
     let that = this;
     //获取缓存
     wx.getStorage({
       key: 'PX_TO_RPX',
-      success: function (res) {
-        console.log(res)
+      success: function(res) {
         that.setData({
           px2rpxHeight: res.data.px2rpxHeight,
           px2rpxWidth: res.data.px2rpxWidth,
@@ -64,53 +54,10 @@ Page({
       }
     })
   },
-
-  /**
-   * 生命周期函数--监听页面显示
-   */
-  onShow: function () {
-
-  },
-
-  /**
-   * 生命周期函数--监听页面隐藏
-   */
-  onHide: function () {
-
-  },
-
-  /**
-   * 生命周期函数--监听页面卸载
-   */
-  onUnload: function () {
-
-  },
-
-  /**
-   * 页面相关事件处理函数--监听用户下拉动作
-   */
-  onPullDownRefresh: function () {
-
-  },
-
-  /**
-   * 页面上拉触底事件的处理函数
-   */
-  onReachBottom: function (e) {
-
-  },
-
-  /**
-   * 用户点击右上角分享
-   */
-  onShareAppMessage: function (e) {
-
-  },
-
   /**
    * 开始日期
    */
-  bindStartChange: function (e) {
+  bindStartChange: function(e) {
     console.log('picker发送选择改变，携带值为', e.detail.value)
     this.setData({
       start: e.detail.value
@@ -120,7 +67,7 @@ Page({
   /**
    *具体时间 
    */
-  bindTime: function (e) {
+  bindTime: function(e) {
     console.log('picker发送选择改变，携带值为', e.detail.value)
     this.setData({
       stime: e.detail.value
@@ -130,7 +77,7 @@ Page({
   /**
    * 日期 
    */
-  bindDateChange: function (e) {
+  bindDateChange: function(e) {
     console.log('picker发送选择改变，携带值为', e.detail.value)
     this.setData({
       date: e.detail.value
@@ -140,7 +87,7 @@ Page({
   /**
    * 时间
    */
-  bindTimeChange: function (e) {
+  bindTimeChange: function(e) {
     console.log('picker发送选择改变，携带值为', e.detail.value)
     this.setData({
       time: e.detail.value
@@ -150,11 +97,9 @@ Page({
   /**
    * 添加满减
    */
-  addCoupon: function (e) {
+  addCoupon: function(e) {
     let that = this;
     let coupon = e.detail.value;
-    console.log(e.detail.value)
-
     // 检测优惠后金额
     if (!util.checkReg(4, coupon.reductionPrice)) {
       wx.showToast({
@@ -188,7 +133,7 @@ Page({
       wx.showModal({
         title: '提示',
         content: '添加满减成功',
-        success: function (res) {
+        success: function(res) {
           if (res.confirm) {
             wx.navigateTo({
               url: '/pages/myself/myself',

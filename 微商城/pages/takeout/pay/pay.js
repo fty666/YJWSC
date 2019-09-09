@@ -36,7 +36,10 @@ Page({
     px2rpxHeight: '',
     // 显示优惠券
     couponShow: true,
-    couponList: {}, //要使用的优惠券
+    couponList: {}, //要使用的优惠券，
+    // 满赠ID传递
+    ReductionID:'',
+    ReductionName:'暂无'
   },
 
   /**
@@ -48,6 +51,7 @@ Page({
       shop_code: options.shop_code,
       options: options.shop_code,
     });
+    this.getReduction(options.shop_code);
   },
   /**
    * 生命周期函数--监听页面初次渲染完成
@@ -75,7 +79,33 @@ Page({
     })
 
   },
-
+  // 查看满赠
+  getReduction: function(code) {
+    let that=this;
+    let data = {
+      shopCode: code
+    }
+    funDta.getReductions(data, that, (data) => {
+      let reData=data;
+      // 获取商品信息
+      let totalPrice=0;
+      wx.getStorage({
+        key: that.data.shop_code,
+        success: function (res) {
+         totalPrice = res.data.totalPrice;
+          console.log(that.data.ReductionID.length)
+          for (let i = 0; i < reData.length;i++){
+            if (totalPrice > reData[i].full){
+                that.setData({
+                  ReductionID: reData[i].id,
+                  ReductionName: reData[i].goods_name
+                })
+            }
+          }
+        }
+      });
+    })
+  },
   /**
    * 选择地址
    */
@@ -158,7 +188,9 @@ Page({
   /**
    * 支付
    */
-  pay: function() {
+  submitInfo: function(e) {
+    var formId = e.detail.formId;
+    console.log(e.detail.formId);
     // console.log(this.data.goods_list)
     let goodsNmae = null;
     let that = this;
@@ -247,6 +279,7 @@ Page({
       taste: taste,
       couponId: couponId + ',',
       reductionId: that.data.full_subtraction_id,
+      reductionIds: that.data.ReductionID,
       order_remarks: order_remarks,
       status: 1, // 付款待发货
       // shop_code: that.data.shop_code,
@@ -269,6 +302,15 @@ Page({
         }
       }
       app.globalData.orderUUID = orderUUID;
+      //发送模板信息
+      let templat = {
+        order_uuid: orderUUID,
+        formid: formId,
+        weChat: app.globalData.weChat
+      }
+      funDta.goTemplate(templat, that, (res) => {
+        console.log(res)
+      })
       // // 微信支付，正式relevanceUUID
       // 测试支付
       function ce(res) {
@@ -396,7 +438,7 @@ function orderinfo(that) {
 
 // 添加配送费
 function distribution(totalPrice, transMoney) {
-  let newTotalPrice = 0;
+  var newTotalPrice = 0;
   if (util.isEmpty(transMoney)) {
     newTotalPrice = totalPrice;
   } else {
@@ -424,10 +466,10 @@ function reductions(reduction, totalPrice, that) {
         full_subtraction_id = reduction[i].reductionId;
       }
     }
-    newTotalPrice = calculate.calcReduce(totalPrice, reductionPrice);
+    var newTotalPrice = calculate.calcReduce(totalPrice, reductionPrice);
     if (newTotalPrice < 0) {
       newTotalPrice = totalPrice;
-      reductionPrice='0';
+      reductionPrice = '0';
     }
   } else {
     newTotalPrice = totalPrice;

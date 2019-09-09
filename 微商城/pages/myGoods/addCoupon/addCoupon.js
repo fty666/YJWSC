@@ -9,10 +9,10 @@ Page({
    */
   data: {
     shop_code: '',
-    start: '',//开始
-    date: '',//结束
-    stime: '',//开始具体时间
-    time: '',//具体时间
+    start: '', //开始
+    date: '', //结束
+    stime: '', //开始具体时间
+    time: '', //具体时间
     px2rpxWidth: '',
     px2rpxHeight: '',
   },
@@ -20,14 +20,14 @@ Page({
   /**
    * 生命周期函数--监听页面加载
    */
-  onLoad: function (options) {
+  onLoad: function(options) {
     let that = this;
   },
 
   /**
    * 生命周期函数--监听页面初次渲染完成
    */
-  onReady: function () {
+  onReady: function() {
     let that = this;
     let user_id = app.globalData.user_id;
     funData.getShopCode(user_id, that, (data) => {
@@ -39,7 +39,7 @@ Page({
     //获取缓存
     wx.getStorage({
       key: 'PX_TO_RPX',
-      success: function (res) {
+      success: function(res) {
         console.log(res)
         that.setData({
           px2rpxHeight: res.data.px2rpxHeight,
@@ -51,7 +51,7 @@ Page({
   /**
    * 开始日期
    */
-  bindStartChange: function (e) {
+  bindStartChange: function(e) {
     console.log('picker发送选择改变，携带值为', e.detail.value)
     this.setData({
       start: e.detail.value
@@ -61,7 +61,7 @@ Page({
   /**
    *具体时间 
    */
-  bindTime: function (e) {
+  bindTime: function(e) {
     console.log('picker发送选择改变，携带值为', e.detail.value)
     this.setData({
       stime: e.detail.value
@@ -71,7 +71,7 @@ Page({
   /**
    * 日期 
    */
-  bindDateChange: function (e) {
+  bindDateChange: function(e) {
     console.log('picker发送选择改变，携带值为', e.detail.value)
     this.setData({
       date: e.detail.value
@@ -81,7 +81,7 @@ Page({
   /**
    * 时间
    */
-  bindTimeChange: function (e) {
+  bindTimeChange: function(e) {
     console.log('picker发送选择改变，携带值为', e.detail.value)
     this.setData({
       time: e.detail.value
@@ -91,7 +91,7 @@ Page({
   /**
    * 添加优惠券
    */
-  addCoupon: function (e) {
+  addCoupon: function(e) {
     let that = this;
     let coupon = e.detail.value;
     console.log(e.detail.value)
@@ -129,12 +129,14 @@ Page({
       })
       return false;
     } else {
-      if (util.CompareHour(that.data.stime, that.data.time) == false) {
-        wx.showToast({
-          title: '时间填写不正确',
-          icon: 'none',
-        })
-        return false;
+      if (that.data.start == that.data.date) {
+        if (util.CompareHour(that.data.stime, that.data.time) == false) {
+          wx.showToast({
+            title: '时间填写不正确',
+            icon: 'none',
+          })
+          return false;
+        }
       }
     }
     coupon.endTime = that.data.date + ' ' + that.data.time;
@@ -146,7 +148,7 @@ Page({
       wx.showModal({
         title: '提示',
         content: '添加优惠券成功',
-        success: function (res) {
+        success: function(res) {
           if (res.confirm) {
             wx.navigateTo({
               url: '/pages/myself/myself',
