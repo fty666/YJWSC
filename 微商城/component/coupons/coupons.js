@@ -58,6 +58,8 @@ Component({
   methods: {
     // 使用优惠券
     useCoupon(e) {
+      console.log(e.currentTarget.dataset.res.conditions);
+      console.log(app.globalData.prcirCounp)
       if (e.currentTarget.dataset.res.conditions > app.globalData.prcirCounp) {
         wx.showToast({
           title: '该优惠券不满足',

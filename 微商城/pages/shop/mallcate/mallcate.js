@@ -98,7 +98,7 @@ Page({
    * 收藏店铺
    */
   show: function(e) {
-    shopcode = e.currentTarget.dataset.shop_code
+    let shopcode = e.currentTarget.dataset.shop_code
     let that = this
     function collect(res) {
       // 获取所有店铺

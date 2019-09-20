@@ -138,7 +138,7 @@ Page({
           discount: res.discount
         })
       }
-      picke = calculate.calcReduce(nums, di);
+      let picke = calculate.calcReduce(nums, di);
       nums = calculate.dealMoney(nums);
       picke = calculate.dealMoney(picke)
       di = calculate.dealMoney(di);
@@ -382,7 +382,7 @@ Page({
     // 商品详情
     let ishop = this.data.firstinfo
     // 商品价格
-    psum = (this.data.gnum) * (ishop.price);
+    let psum = (this.data.gnum) * (ishop.price);
     goodsId.push(ishop.goodsId);
     num = this.data.gnum;
     price.push(ishop.price);
@@ -393,19 +393,53 @@ Page({
     //生成订单函数和
     function orders(res) {
       // 微信支付
-      console.log(res)
+      // console.log(res)
       app.globalData.orderUUID = res[1].relevanceUUID;
       // -----------------------------------------------------------------------正式支付
-      //正式支付完
-      // ---------------------------------------------------测试支付
-      function ce(res) {
-        console.log(res);
-        console.log('支付成功')
+      utilFunctions.weixinPay({
+        body: res[0].goods_name,
+        orderUUID: res[1].relevanceUUID,
+        money: that.data.pocket,
+        openid: that.data.weChat
+      }, that, () => {
+        let now = util.formatDate(new Date().getTime());
+        // 支付成功通知商家
+        // weixin.sendSocket((now + ' 订单号：' + res[0].order_uuid), that.data.shop_code);
+        // weixin.sendSocket((now + ' 订单号：' + res[0].order_uuid), '111');
+
+        wx.removeStorage({
+          key: that.data.shop_code,
+          success: function(res) {
+            wx.showToast({
+              title: '下单成功',
+              icon: 'success',
+              duration: 1000
+            });
+          }
+        })
+
+        // 订单传递
+        app.globalData.ZKprice = '';
+        app.globalData.color = '';
+        app.globalData.shcode = '';
+        app.globalData.size = '';
+        app.globalData.tastes = '';
+        app.globalData.typee = '';
+        app.globalData.volume = '';
         wx.redirectTo({
           url: '/pages/user/pay_success/pay_success?addid=' + that.data.address.id + '&totalPrice=' + that.data.sums,
         })
-      }
-      utilFunctions.cezhifu(res[1].relevanceUUID, ce, this);
+
+      });
+      // ---------------------------------------------------测试支付
+      // function ce(res) {
+      //   console.log(res);
+      //   console.log('支付成功')
+      //   wx.redirectTo({
+      //     url: '/pages/user/pay_success/pay_success?addid=' + that.data.address.id + '&totalPrice=' + that.data.sums,
+      //   })
+      // }
+      // utilFunctions.cezhifu(res[1].relevanceUUID, ce, this);
     }
     utilFunctions.insertOrder(goodsId, num, price, carts_price, color, size, typee, volume, taste, mytotal_money, myreal_money, addid, status, shopcode, discount, couponId, reductionIds, orders, this)
   }

@@ -38,8 +38,8 @@ Page({
     couponShow: true,
     couponList: {}, //要使用的优惠券，
     // 满赠ID传递
-    ReductionID:'',
-    ReductionName:'暂无'
+    ReductionID: '',
+    ReductionName: '暂无'
   },
 
   /**
@@ -81,25 +81,25 @@ Page({
   },
   // 查看满赠
   getReduction: function(code) {
-    let that=this;
+    let that = this;
     let data = {
       shopCode: code
     }
     funDta.getReductions(data, that, (data) => {
-      let reData=data;
+      let reData = data;
       // 获取商品信息
-      let totalPrice=0;
+      let totalPrice = 0;
       wx.getStorage({
         key: that.data.shop_code,
-        success: function (res) {
-         totalPrice = res.data.totalPrice;
+        success: function(res) {
+          totalPrice = res.data.totalPrice;
           console.log(that.data.ReductionID.length)
-          for (let i = 0; i < reData.length;i++){
-            if (totalPrice > reData[i].full){
-                that.setData({
-                  ReductionID: reData[i].id,
-                  ReductionName: reData[i].goods_name
-                })
+          for (let i = 0; i < reData.length; i++) {
+            if (totalPrice > reData[i].full) {
+              that.setData({
+                ReductionID: reData[i].id,
+                ReductionName: reData[i].goods_name
+              })
             }
           }
         }
@@ -279,7 +279,6 @@ Page({
       taste: taste,
       couponId: couponId + ',',
       reductionId: that.data.full_subtraction_id,
-      reductionIds: that.data.ReductionID,
       order_remarks: order_remarks,
       status: 1, // 付款待发货
       // shop_code: that.data.shop_code,
@@ -287,7 +286,11 @@ Page({
       reception: 0, //判断商家是否接单，外卖传0微商城传空
       horseMoney: that.data.horseMoney, //骑手的费用
       reachTime: that.data.reachTime
+    };
+    if (that.data.ReductionID!=''){
+      data.reductionIds=that.data.ReductionID;
     }
+    // 调取添加订单
     funDta.insertOrder(data, that, (res) => {
       // 清空这个缓存
       let lengs = parseInt(res.length);
@@ -302,31 +305,60 @@ Page({
         }
       }
       app.globalData.orderUUID = orderUUID;
-      //发送模板信息
-      let templat = {
-        order_uuid: orderUUID,
-        formid: formId,
-        weChat: app.globalData.weChat
-      }
-      funDta.goTemplate(templat, that, (res) => {
-        console.log(res)
-      })
-      // // 微信支付，正式relevanceUUID
-      // 测试支付
-      function ce(res) {
-        console.log(res);
+      // 正式支付-------------------------------------------------
+      utilFunctions.weixinPay({
+        body: goodsNmae,
+        orderUUID: relevanceUUID,
+        money: that.data.totalPrice,
+        openid: that.data.userInfo.weChat
+      }, that, () => {
+        // 发送模板信息
+        let templat = {
+          order_uuid: orderUUID,
+          formid: formId,
+          weChat: app.globalData.weChat
+        }
+        funDta.goTemplate(templat, that, (res) => {
+          console.log(res)
+        })
+        // 发送模板信息完
+        let now = util.formatDate(new Date().getTime());
+        // 支付成功通知商家
+        that.sendSocket((now + ' 订单号：' + orderUUID), that.data.shop_code);
         wx.removeStorage({
           key: that.data.shop_code,
           success: function(res) {}
         })
         // 去除订单shopcode
         app.globalData.shop_code = '';
-        wx.redirectTo({
-          url: '/pages/takeout/order/order',
-        })
-      }
-      utilFunctions.cezhifu(relevanceUUID, ce, this);
+        //支付成功发送短信通知商家
+        funDta.getOrderSms(that.data.shop_info.mobile, that, () => {
+          // setTimeout(function () {
+          wx.redirectTo({
+            url: '/pages/takeout/order/order',
+          })
+          // }, 1000);
+        });
+      });
+      //正式支付完------------------------------------------------
+      // // 微信支付，正式relevanceUUID
+      // 测试支付开始-------------------------------------
+      // function ce(res) {
+      //   console.log(res);
+      //   wx.removeStorage({
+      //     key: that.data.shop_code,
+      //     success: function(res) {}
+      //   })
+      //   // 去除订单shopcode
+      //   app.globalData.shop_code = '';
+      //   wx.redirectTo({
+      //     url: '/pages/takeout/order/order',
+      //   })
+      // }
+      // utilFunctions.cezhifu(relevanceUUID, ce, this);
+      // 测试支付完------------------------------------
     });
+    // 添加订单完
   },
 
   // 商品规格的处理

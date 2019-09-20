@@ -23,7 +23,7 @@
             <view class="info-each">
               <view class='sm-title'>商品名称</view>
               <view class='sm-content'>
-                <input name="goodsName" placeholder='请输入商品名称' style="width:{{px2rpxWidth*700}}px;height:{{px2rpxHeight*70}}px;" />
+                <input name="goodsName" placeholder='请输入商品名称不超过10个字符' style="width:{{px2rpxWidth*700}}px;height:{{px2rpxHeight*70}}px;" />
               </view>
             </view>
             <view class="info-each">

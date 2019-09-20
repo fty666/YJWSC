@@ -337,6 +337,15 @@ Page({
       });
       return;
     }
+    // 价格只能为数字
+    if (goods.goods_name>10) {
+      wx.showToast({
+        title: '商品名称过大',
+        icon: 'none',
+        duration: 1000,
+      });
+      return;
+    }
 
     // 价格只能为数字
     if (!util.checkReg(4, goods.price)) {

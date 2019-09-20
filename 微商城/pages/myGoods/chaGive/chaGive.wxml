@@ -7,7 +7,7 @@
 <block wx:else>
   <view class="container">
     <view class="coupon-list" style="height:{{px2rpxHeight*1000}}px;">
-      <block wx:if="{{coupon==null}}">
+      <block wx:if="{{coupon.length==0}}">
         <view class='fav1'>你的店铺没有优惠活动</view>
         <view class='fav2'>快去添加吧</view>
       </block>

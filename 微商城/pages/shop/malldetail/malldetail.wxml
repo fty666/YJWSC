@@ -19,7 +19,7 @@
   <!--商品幻灯片 end-->
   <!--goods start-->
   <view class="goods-info">
-    <view class="title f16">
+    <view class="title f16 hfont">
       {{goods_info.goodsName}}
     </view>
     <view style='display:flex;'>

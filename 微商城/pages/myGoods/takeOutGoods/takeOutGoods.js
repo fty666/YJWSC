@@ -172,6 +172,14 @@ Page({
       });
       return;
     }
+    if (goods.goodsName.length>10) {
+      wx.showToast({
+        title: '商品名称字数过大',
+        icon: 'none',
+        duration: 1000,
+      });
+      return;
+    }
     if (!util.checkReg(6,goods.goodsName)){
       wx.showToast({
         title: '商品名称输入有误',

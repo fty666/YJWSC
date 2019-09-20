@@ -11,7 +11,7 @@
         <view wx:for="{{orderinfo}}" wx:key="{{index}}">
           <view class='xia2' style='height:{{px2rpxHeight*8}}px'></view>
           <!--订单  -->
-          <view class='wai' catchtap='oinfo' data-oids='{{item.order_uuid}}' style="height:{{px2rpxHeight*200}}px;display:flex;">
+          <view class='wai'  data-oids='{{item.order_uuid}}' style="height:{{px2rpxHeight*200}}px;display:flex;">
             <view>
               <image src='{{uploadFileUrl+item.logo}}' class='photo' style="width:{{px2rpxWidth*120}}px;height:{{px2rpxWidth*120}}px;"></image>
             </view>
@@ -20,17 +20,18 @@
               <view style='margin-left:{{px2rpxWidth*16}}px;width:{{px2rpxWidth*300}}px'>{{item.createTime}}</view>
             </view>
             <view style='width:60%;'>
-              <block wx:if="{{item.reception==0}}">
-                <view class='Fstat' style='margin-left:{{px2rpxWidth*80}}px;margin-top:{{px2rpxHeight*40}}px'>商家未接单</view>
+              <block wx:if="{{item.status==1}}">
+                <view class='Fstat'  catchtap="again"  data-shop_code='{{item.shop_code}}' style='margin-left:{{px2rpxWidth*80}}px;margin-top:{{px2rpxHeight*40}}px'>未支付</view>
               </block>
-              <block wx:if="{{item.reception!=0}}">
-                <view class='Fstat' style='margin-left:{{px2rpxWidth*80}}px;margin-top:{{px2rpxHeight*40}}px'>商家已接单</view>
+              <block wx:if="{{item.status==2}}">
+                <view class='Fstat' catchtap="again"  data-shop_code='{{item.shop_code}}' wx:if="{{item.reception==0}}" data-oids='{{item.order_uuid}}' style='margin-left:{{px2rpxWidth*80}}px;margin-top:{{px2rpxHeight*40}}px'>商家未接单</view>
+                <view class='Fstat' catchtap='oinfo' wx:if="{{item.reception!=0}}" data-oids='item.order_uuid' style='margin-left:{{px2rpxWidth*80}}px;margin-top:{{px2rpxHeight*40}}px'>商家已接单</view>
               </block>
               <block wx:if="{{item.status==3}}">
-                <view class='Fstat' style='margin-left:{{px2rpxWidth*80}}px;margin-top:{{px2rpxHeight*40}}px'>骑手送货中</view>
+                <view class='Fstat' catchtap='oinfo' data-oids='{{item.order_uuid}}' style='margin-left:{{px2rpxWidth*80}}px;margin-top:{{px2rpxHeight*40}}px'>骑手送货中</view>
               </block>
               <block wx:if="{{item.status==4 || item.status==5}}">
-                <view class='Fstat' style='margin-left:{{px2rpxWidth*80}}px;margin-top:{{px2rpxHeight*40}}px'>订单已完成</view>
+                <view class='Fstat' catchtap='oinfo' data-oids='{{item.order_uuid}}' style='margin-left:{{px2rpxWidth*80}}px;margin-top:{{px2rpxHeight*40}}px'>订单已完成</view>
               </block>
             </view>
           </view>

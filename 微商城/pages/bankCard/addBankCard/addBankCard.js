@@ -64,21 +64,21 @@ Page({
       return;
     }
     // 验证身份证和银行卡号
-    if ((!util.checkReg(2, cardInfo.ID_card)) || (!util.checkReg(3, cardInfo.card_no))) {
-      wx.showToast({
-        title: '请填写正确信息',
-        icon: 'none',
-        duration: 1000
-      })
-      return;
-    } else if (that.data.bank == '') {
-      wx.showToast({
-        title: '请选择正确开户行',
-        icon: 'none',
-        duration: 1000
-      })
-      return;
-    }
+    // if ((!util.checkReg(2, cardInfo.ID_card)) || (!util.checkReg(3, cardInfo.card_no))) {
+    //   wx.showToast({
+    //     title: '身份证号或卡号有问题',
+    //     icon: 'none',
+    //     duration: 1000
+    //   })
+    //   return;
+    // } else if (that.data.bank == '') {
+    //   wx.showToast({
+    //     title: '请选择正确开户行',
+    //     icon: 'none',
+    //     duration: 1000
+    //   })
+    //   return;
+    // }
 
     // 添加银行卡
     funData.insertCard(

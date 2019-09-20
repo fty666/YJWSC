@@ -201,7 +201,7 @@ Page({
       if (util.isEmpty(this.data.couponList)) {
         newTotalPrice = pocket;
       } else {
-      //使用过优惠券加上优惠价格 
+        //使用过优惠券加上优惠价格 
         newTotalPrice = calculate.calcAdd(pocket, yhqPrice);
       }
     } else {
@@ -379,16 +379,41 @@ Page({
         }
       }
       // 正式支付
-      // 正式支付完
-      // 测试支付
-      function ce(res) {
-        console.log(res);
-        console.log('支付成功')
+      utilFunctions.weixinPay({
+        body: goodsname,
+        orderUUID: order_uuid,
+        money: that.data.pocket,
+        openid: that.data.weChat
+      }, that, () => {
+        let now = util.formatDate(new Date().getTime());
+        // 支付成功通知商家
+        let cha = shop_code.length;
+        wx.removeStorage({
+          key: that.data.shop_code,
+          success: function() {
+            wx.showToast({
+              title: '下单成功',
+              icon: 'success',
+              duration: 1000
+            });
+          }
+        })
+
         wx.redirectTo({
           url: '/pages/user/pay_success/pay_success?addid=' + that.data.address.id + '&totalPrice=' + that.data.pocket,
         })
-      }
-      utilFunctions.cezhifu(order_uuid, ce, this);
+
+      });
+      // 正式支付完
+      // 测试支付
+      // function ce(res) {
+      //   console.log(res);
+      //   console.log('支付成功')
+      //   wx.redirectTo({
+      //     url: '/pages/user/pay_success/pay_success?addid=' + that.data.address.id + '&totalPrice=' + that.data.pocket,
+      //   })
+      // }
+      // utilFunctions.cezhifu(order_uuid, ce, this);
     }, that);
   },
 });

@@ -144,6 +144,8 @@ Page({
     }
 
     function calback(res) {
+      console.log(res)
+
       that.setData({
         takeout: res.PageInfo.list
       })

@@ -56,7 +56,6 @@ Page({
       url: '/pages/takeout/shopDetails/shopDetails?shop_code=' + e.currentTarget.dataset.shop_code
     })
   },
-
   /**
    *去评论 
    */

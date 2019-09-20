@@ -177,7 +177,6 @@ Page({
     let goodsId = '';
     let grade = '';
     let comment = this.data.comments;
-    console.log(comment)
     let goods = this.data.orderInfo[0].goods;
     let len = goods.length;
     // 商品参数
@@ -241,19 +240,22 @@ Page({
       grade: this.data.rider_grade,
       mold: 3,
     }
-
+    // 上传图片
+    let cimgs = this.data.photo+'/@/'+'@/';
+    for(let i=0;i<len;i++){
+      cimgs+='@/'
+    }
     //总参数传递
     let datas = {
-      goodsId: data.goodsId + shop.goodsId + ',' + horseman.goodsId,
-      detail: data.detail + shop.detail + horseman.detail,
+      goodsId: shop.goodsId+','+ data.goodsId  + horseman.goodsId,
+      detail: shop.detail + data.detail + horseman.detail,
       user_id: app.globalData.user_id,
-      img: data.img + shop.img + horseman.img,
+      img: cimgs,
       order_mainid: data.order_mainid,
       status: data.status,
-      grade: data.grade + shop.grade + ',' + horseman.grade,
-      mold: data.mold + shop.mold + ',' + horseman.mold,
+      grade: shop.grade+',' +  data.grade + horseman.grade,
+      mold: shop.mold+',' +data.mold  + horseman.mold,
     }
-    console.log(datas)
     let that = this;
     function calback(res) {
       wx.showToast({

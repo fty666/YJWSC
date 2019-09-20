@@ -1,8 +1,8 @@
 module.exports = {
   // 域名
-  // host: 'https://wx.dadaogz.xyz/',
-  // host: 'http://192.168.1.153:8080//',
-  host: 'https://www.yjwsch.com/',
+  host: 'https://www.youjiayj.com/',
+  // host: 'http://192.168.1.124:8080//',
+  // host: 'https://www.yjwsch.com/',
   // host:'https://www.xing-ya.cn/',
   // webScocket
   // wshost: 'ws://wx.dadaogz.xyz/MicroPlatform/websocket/',

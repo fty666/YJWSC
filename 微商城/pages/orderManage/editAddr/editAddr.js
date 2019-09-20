@@ -107,7 +107,8 @@ Page({
         city: res[0].orderPath,
         maild: res[0].order_mainid,
         Receiver: res[0].addr_receiver,
-        Detail: res[0].orderPathDetail
+        Detail: res[0].orderPathDetail,
+        mobile: res[0].orderMobile
       });
     }
     utilFunctions.getOrderDetail(oid, odetail, this);
@@ -119,7 +120,7 @@ Page({
     wx.getStorage({
       key: 'PX_TO_RPX',
       success: function (res) {
-        console.log(res)
+        // console.log(res)
         that.setData({
           px2rpxHeight: res.data.px2rpxHeight,
           px2rpxWidth: res.data.px2rpxWidth,

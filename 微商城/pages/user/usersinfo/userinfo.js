@@ -128,16 +128,24 @@ Page({
 
   //拍摄照片
   photo: function () {
-    wx.chooseImage({
-      count: 1, // 默认9
-      sizeType: ['original', 'compressed'], // 可以指定是原图还是压缩图，默认二者都有
-      sourceType: ['camera'], // 可以指定来源是相册还是相机，默认二者都有
-      success: function (res) {
-        // 返回选定照片的本地文件路径列表，tempFilePath可以作为img标签的src属性显示图片
-        var tempFilePaths = res.tempFilePaths
+    let that = this;
+    utilFunctions.myUpload(function (fileNmae) {
+      that.setData({
+        mimg: fileNmae,
+        img: fileNmae
+      })
+      function datas(res) {
+        wx.showToast({
+          title: '修改成功'
+        });
       }
+      let uname = {
+        photo: fileNmae,
+        user_id: app.globalData.user_id
+      }
+      utilFunctions.updateUserInfo(datas, uname, that)
     })
-    this.setData({
+    that.setData({
       immediate_sale_hidden: true
     });
   },

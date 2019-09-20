@@ -48,7 +48,7 @@
         </view>
         <swiper autoplay="true" interval="2000">
           <swiper-item>
-            <view style='width:600rpx;height:50rpx;display:inline-block;text-align:left;color:red;margin-top:14rpx;margin-left:13rpx;'>满{{gift.full}}赠{{gift.goodsName}}X{{gift.nums}};</view>
+            <view style='width:600rpx;height:80rpx;display:inline-block;text-align:left;color:red;margin-top:14rpx;margin-left:13rpx;'>满{{gift.full}}赠{{gift.goodsName}}X{{gift.nums}};</view>
           </swiper-item>
         </swiper>
       </view>

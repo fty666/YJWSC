@@ -31,7 +31,8 @@ App({
     //商家code优惠券时使用
     couponCode: '',
     prcirCounp: '', //优惠券使用前价格
-    weChat:''
+    weChat:'',
+    locationName:'',//外卖定位店铺
   },
 
   onLaunch: function() {
@@ -58,7 +59,7 @@ App({
               }
             })
           }
-          console.log(data)
+          // console.log(data)
           that.globalData.user_id = data.data.data.user_id;
           that.globalData.level = data.data.data.level;
           that.globalData.weChat = data.data.data.weChat;

@@ -58,9 +58,9 @@ function calcSub(arg1, arg2){
  *  @return { string} 
  */
 function dealMoney(money){
-    res = money.toString();
-    res = res.split('.');
-    if( typeof(res[1]) === 'undefined' ){
+    let res = money.toString();
+     res = res.split('.');
+    if(typeof(res[1]) === 'undefined' ){
         // 没有小数
         res.push('00');
     } else if(res[1].length == 1){

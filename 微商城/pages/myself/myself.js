@@ -109,6 +109,10 @@ Page({
 
   onShow: function () {
     let that = this;
+    // console.log(app.globalData.level)
+    this.setData({
+      level: app.globalData.level
+    })
   },
 
   onReady: function () {
@@ -150,7 +154,10 @@ Page({
       }
       let card = data.card;
       // 银行卡号用*替换
-      card.card_no = util.bankCardByStar(card.card_no);
+      if (card.card_no){
+        card.card_no = util.bankCardByStar(card.card_no);
+      }
+      // console.log(app.globalData.level)
       that.setData({
         shopInfo: data.shop,
         card: card,

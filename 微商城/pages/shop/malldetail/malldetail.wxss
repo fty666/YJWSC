@@ -6,6 +6,10 @@
   padding-bottom: 75%;
 }
 
+.hfont{
+  word-break: break-all
+}
+
 .swiper swiper {
   position: absolute;
   left: 0;

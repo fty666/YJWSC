@@ -3,6 +3,7 @@ const utilFunctions = require('../../../utils/functionData.js');
 const urlData = require('../../../utils/urlData.js');
 const template = require('../../../template/template.js');
 const util = require('../../../utils/util.js');
+const app = getApp();
 var page = 1;
 var pageSize = 20;
 Page({
@@ -28,11 +29,16 @@ Page({
    * 生命周期函数--监听页面加载
    */
   onLoad: function(options) {
-    // console.log(options)
+    console.log(options)
     let that = this;
     if (!util.isEmpty(options)) {
       that.setData({
         options: options.locationName
+      });
+      app.globalData.locationName=options.locationName;
+    }else{
+      that.setData({
+        options: app.globalData.locationName
       });
     }
   },
